@@ -34,6 +34,7 @@ has_children: true
 - https://www.buddhanet.net/
 - [Pali Commentaries in english](https://archive.org/details/PaliCommentariesCollection/00%20Vinaya%20Commentary%2C%20Samantapasadika%2C%20Shan-Chien-P%27i-P%27o-Sha%2C%20Sanghabhadra%27s%20Chinese%20Samantapasadika%20%28tr.%20by%20Prof.%20P.V.%20Bapat%20and%20Prof.%20A.%20Hirakawa%29%20%28652p%29/page/472/mode/2up)
 - [nissarana.lk](https://www.nissarana.lk/audio-and-publications/publications-english/)
+- <https://www.budsas.org/ebud/ebidx.htm>
 
 more : 
 - [reddit.com](https://www.reddit.com/r/theravada/wiki/index/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
