@@ -16,4 +16,5 @@ has_children: true
 - [Buddhist Dictionary Manual of Buddhist Terms and Doctrines, by NYANATILOKA](https://fractalcitta.github.io/Buddhist-Dictionary/dic_idx.html) (another version [here](https://www.palikanon.com/english/wtb/dic_idx.html))
 - <https://www.budsas.org/ebud/ebidx.htm>
 - <https://www.palikanon.com/english/english_web.htm>
+- Jain VS Hindu VS Buddhist scultpure evolution and the 32 marks of a great man
 
