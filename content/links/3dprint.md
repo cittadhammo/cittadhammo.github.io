@@ -20,3 +20,7 @@ parent: Links
     - [reddit discussion](https://www.reddit.com/r/CR10/comments/k6mf6w/allmetal_hotend_for_cr10_v3/)
  - https://www.thingiverse.com/thing:3508682/files
  - https://www.thingiverse.com/thing:4357538
+ - https://cults3d.com/en/3d-model/gadget/geared-spinning-doors-box-print-in-place
+ - https://www.thingiverse.com/thing:6437944
+ - https://www.thingiverse.com/thing:6449412
+ - https://www.thingiverse.com/thing:4357538
