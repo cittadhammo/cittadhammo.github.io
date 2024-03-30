@@ -97,6 +97,7 @@ This site is build on GitHub
 - [simsapa.github.io](vpnry.github.io) : Simsapa Dhamma Reader
 - [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/) 
 - [Beautifier JS](https://beautifier.io/) : select text -> right click -> print
+- <https://online.rapidresizer.com/tracer.php>
 
 ## Chanting
 
