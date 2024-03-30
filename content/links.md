@@ -98,6 +98,7 @@ This site is build on GitHub
 - [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/) 
 - [Beautifier JS](https://beautifier.io/) : select text -> right click -> print
 - <https://online.rapidresizer.com/tracer.php>
+- <https://cloudconvert.com/svg-to-png>
 
 ## Chanting
 
