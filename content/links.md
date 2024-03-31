@@ -99,6 +99,7 @@ This site is build on GitHub
 - [Beautifier JS](https://beautifier.io/) : select text -> right click -> print
 - <https://online.rapidresizer.com/tracer.php>
 - <https://cloudconvert.com/svg-to-png>
+- <https://tools.simonwillison.net/ocr>
 
 ## Chanting
 
