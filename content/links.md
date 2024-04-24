@@ -103,9 +103,16 @@ This site is build on GitHub
 
 ## Chanting
 
-- https://www.charlottebuddhistvihara.org/audio-talks-and-chants/
-- https://bhanterahula.blogspot.com/p/chanting.html
-- https://archive.org/download/Venerable.Kiribathgoda.Gnanananda.Thero
+- <https://www.charlottebuddhistvihara.org/audio-talks-and-chants/>
+- <https://bhanterahula.blogspot.com/p/chanting.html>
+- <https://drive.google.com/drive/u/0/folders/0B8KoNHIGWPESfkIzMkxBLXVtekljVjd0ODdnQjktTC1wZ1dtaTFFOERfVHdyencxaDVsZGc?resourcekey=0-XTtFCC0-SBJH2GSnX0ba1Q>
+- <https://archive.org/download/Venerable.Kiribathgoda.Gnanananda.Thero>
+- <https://www.youtube.com/watch?v=QPsUto2RhZg>
+- <https://www.youtube.com/watch?v=-jAYO2ChJD0>
+- <https://www.youtube.com/watch?v=1ecigMqlQjE>
+- <https://www.youtube.com/watch?v=Bpmmg1w0I0A>    -   28 Buddhas
+- caleb rap
+- chanting folder
 
 ## Poster
 
