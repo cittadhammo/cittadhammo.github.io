@@ -34,3 +34,8 @@ parent: About
 - confession of dukkhata
 - what count as an extra robe
 - Pr 2
+
+## Meditation en français
+
+- [Guide de méditation](https://docs.google.com/document/d/1BvwXfQSPBx8x-hIQb9_MMjAOUtk7BstpNhFO1_PtBI8/edit?tab=t.0#heading=h.nj23sjpj5u97)
+
