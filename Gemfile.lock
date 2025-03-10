@@ -51,7 +51,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    just-the-docs (0.6.2)
+    just-the-docs (0.10.0)
       jekyll (>= 3.8.5)
       jekyll-include-cache
       jekyll-seo-tag (>= 2.0)
@@ -105,7 +105,7 @@ DEPENDENCIES
   jekyll-default-layout
   jekyll-target-blank
   jekyll-toc
-  just-the-docs (= 0.6.2)
+  just-the-docs (= 0.10.0)
 
 BUNDLED WITH
    2.3.26

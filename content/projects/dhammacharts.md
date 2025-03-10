@@ -11,6 +11,7 @@ has_children: true
 
 ## Charts
   - Nibbana
+  - [History of Buddhism](https://docs.google.com/spreadsheets/d/1wYO7Q8cy_VIiAV8M703PpDEt-_aekah87He24rrl2_c/edit?gid=0#gid=0)
   - 4 Noble Truths
   - Patimokkha 227
   - Patimokkha relationship
