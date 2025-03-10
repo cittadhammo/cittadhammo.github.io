@@ -1,0 +1,43 @@
+// Print-only styles.
+.nav-list-link {
+    color: white;}
+.site-title {
+    color: white;}
+.nav-list .nav-list-item .nav-list-link:hover, .nav-list .nav-list-item .nav-list-link.active {
+    background-image: linear-gradient(-90deg, #ffffff 0%, rgba(235, 237, 245, 0.8) 40%, rgba(235, 237, 245, 0) 80%);}
+.site-footer {
+    display: none;}
+.main-content h1, .main-content h2{
+        border-bottom: 1px solid;
+        border-bottom-color: #818181;
+}
+.site-title:hover {
+    background-image: linear-gradient(-90deg, #ffffff 0%, rgba(235, 237, 245, 0.8) 20%, rgba(235, 237, 245, 0) 60%);}
+.nav-list .nav-list-item > .nav-list .nav-list-item .nav-list-link {
+    color: #e5e5e5;
+}
+.icon {
+    color: #fff;
+}
+
+.site-header {
+    flex-direction: column;
+}
+
+@media screen and (max-width: 800px) {
+    .site-header {
+        flex-direction: row;
+    }
+}
+
+.side-toc * {
+    color: #bfa6a6;
+    list-style-type: none;
+    &:hover {
+        background-image: none !important;
+    }
+}
+
+.toc-sub{
+    padding-left: 1em;
+}

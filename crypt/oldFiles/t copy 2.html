@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literature-Inspired Markdown Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="encryptedContent.js"></script> <!-- Include the generated JS file -->
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #content-wrapper {
+            background-color: #fff;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+            color: #222;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        blockquote {
+            font-style: italic;
+            color: #555;
+            margin: 1.5em 10px;
+            padding-left: 20px;
+            border-left: 4px solid #ddd;
+        }
+
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+
+        /* Custom divider styling */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #333;
+            margin: 40px 0;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 24px;
+            color: #000000;
+        }
+        /* Print styles */
+        @media print {
+            body {
+                background-color: #fff; /* Change background to white for printing */
+                color: #000; /* Ensure text color is black */
+                margin: 0; /* Remove margins */
+                padding: 0; /* Remove padding */
+            }
+
+            #content-wrapper {
+                box-shadow: none; /* Remove box-shadow */
+                padding: 0; /* Remove padding */
+                margin: 0; /* Remove margin */
+                border-radius: 0; /* Remove border-radius */
+            }
+
+            /* .divider,
+            hr {
+                display: none; /* Hide dividers and horizontal rules */
+            }
+
+            /* Hide TOC for printing */
+            #toc {
+                display: none;
+            } */
+
+            img {
+                max-width: 100%; /* Ensure images fit within the page width */
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="content-wrapper">
+        <div id="content">Enter the correct password in the URL to view the content.</div>
+    </div>
+    
+    <script>
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function decryptContent(encrypted, password) {
+            try {
+                const decrypted = CryptoJS.AES.decrypt(encrypted, password);
+                return decrypted.toString(CryptoJS.enc.Utf8);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function displayDecryptedContent() {
+            const password = getUrlParam('password');
+
+            if (password && typeof encryptedContent !== 'undefined') {
+                const decryptedMarkdown = decryptContent(encryptedContent, password);
+
+                if (decryptedMarkdown) {
+                    // Custom divider replacement for better styling
+                    const contentWithCustomDivider = decryptedMarkdown.replace(/\*\*\*/g, '<div class="divider">§</div>');
+                    document.getElementById('content').innerHTML = marked.parse(contentWithCustomDivider);
+                } else {
+                    document.getElementById('content').innerHTML = 'Invalid password or failed to decrypt.';
+                }
+            } else {
+                document.getElementById('content').innerHTML = 'No content to display.';
+            }
+        }
+
+        displayDecryptedContent();
+    </script>
+</body>
+</html>
