@@ -1,37 +1,35 @@
 ---
 title: Home
-nav_order: 1
+layout: home
 ---
- 
 
-This is a personal website. Please do not share publicly.
+This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
 
-![Screenshot 2023-09-30 at 08 41 52](https://github.com/cittadhammo/cittadhammo.github.io/assets/82962905/90cf5b45-9f0d-4bda-954a-682618e4d264)
+If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^1] And you will be able to deploy your local build to a different platform than GitHub Pages.
 
-<!--
-<pre style="line-height: 1; font-size: x-small;">
- ______     __     ______   ______   ______     _____     __  __     ______     __    __     __    __     ______    
-/\  ___\   /\ \   /\__  _\ /\__  _\ /\  __ \   /\  __-.  /\ \_\ \   /\  __ \   /\ "-./  \   /\ "-./  \   /\  __ \   
-\ \ \____  \ \ \  \/_/\ \/ \/_/\ \/ \ \  __ \  \ \ \/\ \ \ \  __ \  \ \  __ \  \ \ \-./\ \  \ \ \-./\ \  \ \ \/\ \  
- \ \_____\  \ \_\    \ \_\    \ \_\  \ \_\ \_\  \ \____-  \ \_\ \_\  \ \_\ \_\  \ \_\ \ \_\  \ \_\ \ \_\  \ \_____\ 
-  \/_____/   \/_/     \/_/     \/_/   \/_/\/_/   \/____/   \/_/\/_/   \/_/\/_/   \/_/  \/_/   \/_/  \/_/   \/_____/ 
-</pre>
--->
+More specifically, the created site:
 
-Link to [md content of this site](https://github.com/cittadhammo/cittadhammo.github.io/tree/main/content)                                                                       
+- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
+- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
 
-## Quick Links
+Other than that, you're free to customize sites that you create with this template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
 
-- [bitwarden.com](https://vault.bitwarden.com/#/login) : Password Manager
-- [gmail.com](https://mail.google.com/mail/u/0/) : Email Provider
-- [drive.google.com](https://drive.google.com/drive/my-drive) : Cloud Storage
-- [hotmail.com](https://outlook.live.com/) : Email Provider
-- [proton.me](https://account.proton.me/login?language=en) : Email Provider
-- [observablehq.com](https://observablehq.com/) : Coding Online
-- [discord.com](https://discord.com/login) : Forum
-  -  [Dhamma en francais](https://discord.gg/U2T48jzCFZ) : French Dhamma Chat
-  -  [DhammaCharts](https://discord.gg/MkyKZh8ANy) : Dhamma Charts Chat
+[Browse our documentation][Just the Docs] to learn more about how to use this theme.
 
+To get started with creating a site, simply:
 
+1. click "[use this template]" to create a GitHub repository
+2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
 
+If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
 
+----
+
+[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
+
+[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
+[GitHub Pages]: https://docs.github.com/en/pages
+[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
+[Jekyll]: https://jekyllrb.com
+[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
+[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate

@@ -1,4 +1,0 @@
----
-title: Emails
-parent: About
----

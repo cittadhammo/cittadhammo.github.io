@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "crypto-js": "^4.2.0",
-    "markdown-toc": "^1.2.0"
-  }
-}
