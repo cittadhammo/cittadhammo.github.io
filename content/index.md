@@ -5,8 +5,6 @@ title: Home
 
 This is a personal website. Please do not share publicly.
 
-![Screenshot 2023-09-30 at 08 41 52](https://github.com/cittadhammo/cittadhammo.github.io/assets/82962905/90cf5b45-9f0d-4bda-954a-682618e4d264)
-
 <!--
 <pre style="line-height: 1; font-size: x-small;">
  ______     __     ______   ______   ______     _____     __  __     ______     __    __     __    __     ______    
