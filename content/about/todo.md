@@ -148,7 +148,7 @@ parent: About
   - Brahmi Script
   - Northen Script gandhari
 - 37 W2A 
-  - #787c82
+  - `#787c82`
 - Patimokkha
   - move NP title
 - Sutta pitaka     

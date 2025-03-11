@@ -1,6 +1,5 @@
 ---
 title: Code
-nav_order: 5
 ---
 
 ## SFTP with VScode
