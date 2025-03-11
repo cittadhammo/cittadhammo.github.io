@@ -15,8 +15,8 @@ rl.stdoutMuted = true;
 // Prompt the user for the password
 rl.question('Enter the password to encrypt the file: ', (password) => {
     // Specify the input Markdown file and the output JavaScript file paths
-    const inputFilePath = 'input.md';  // Replace with your Markdown file path
-    const outputJsFilePath = 'output.txt'; // Output JS file for encrypted content
+    const inputFilePath = './input.md';  // Replace with your Markdown file path
+    const outputJsFilePath = './output.txt'; // Output JS file for encrypted content
 
     // Read the Markdown file
     fs.readFile(inputFilePath, 'utf8', (err, data) => {
@@ -52,7 +52,15 @@ rl.question('Enter the password to encrypt the file: ', (password) => {
             } else {
                 console.log('\nEncrypted content saved to', outputJsFilePath);
             }
-            rl.close();
+            // Erase the content of the input file
+            fs.writeFile(inputFilePath, '', (err) => {
+                if (err) {
+                    console.error('Error erasing the input file:', err);
+                } else {
+                    console.log('Input file content erased.');
+                }
+                rl.close();
+            });
         });
     });
 });
