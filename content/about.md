@@ -40,4 +40,8 @@ Buddhist monk in the UK
 - [SanghaDeLaForet](https://github.com/SanghaDeLaForet)
 - [Yyatiko](https://github.com/Yyatiko)
 
-This site uses [Just the Docs](https://just-the-docs.com/), a documentation theme for Jekyll.
+## Other consideration
+
+- https://github.com/Enveloppe/obsidian-enveloppe
+- https://github.com/KosmosisDire/obsidian-webpage-export
+- https://docs.obsidianweb.net/
