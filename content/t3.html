@@ -220,7 +220,6 @@
             const footnotes = {};
             const footnoteRegex = /\[\^(\w+)\]: (.+)/g;
             const refRegex = /\[\^(\w+)\]/g;
-            let counter = 1;
 
             let match;
 
@@ -234,8 +233,7 @@
 
             // Replace references with anchor links
             content = content.replace(refRegex, (match, id) => {
-                return `<a href="#footnote-${id}" class="footnote-ref" id="ref-${id}">[${counter}]</a>`;
-                counter ++;
+                return `<a href="#footnote-${id}" class="footnote-ref" id="ref-${id}">[${id}]</a>`;
             });
 
             return { content, footnotes };
@@ -255,8 +253,8 @@
 
         async function displayDecryptedContent() {
             const password = getUrlParam('p');
-            const filePath = getUrlParam('f'); // Fetch the file path from the URL
-
+            let filePath = getUrlParam('f'); // Fetch the file path from the URL
+            filePath = `static/` + filePath;
             if (password && filePath) {
                 const encryptedContent = await fetchEncryptedContent(filePath);
                 
