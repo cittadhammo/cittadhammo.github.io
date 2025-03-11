@@ -1,13 +1,18 @@
-# Cittadhammo.github.io
+# Quartz v4
 
-This is a personal website. Please do not share publicly.
+> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
 
-<pre style="line-height: 1; font-size: x-small;">
- ______     __     ______   ______   ______     _____     __  __     ______     __    __     __    __     ______    
-/\  ___\   /\ \   /\__  _\ /\__  _\ /\  __ \   /\  __-.  /\ \_\ \   /\  __ \   /\ "-./  \   /\ "-./  \   /\  __ \   
-\ \ \____  \ \ \  \/_/\ \/ \/_/\ \/ \ \  __ \  \ \ \/\ \ \ \  __ \  \ \  __ \  \ \ \-./\ \  \ \ \-./\ \  \ \ \/\ \  
- \ \_____\  \ \_\    \ \_\    \ \_\  \ \_\ \_\  \ \____-  \ \_\ \_\  \ \_\ \_\  \ \_\ \ \_\  \ \_\ \ \_\  \ \_____\ 
-  \/_____/   \/_/     \/_/     \/_/   \/_/\/_/   \/____/   \/_/\/_/   \/_/\/_/   \/_/  \/_/   \/_/  \/_/   \/_____/ 
-</pre>
+Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
 
-Build with [Just the Docs](https://just-the-docs.github.io/just-the-docs/)
+🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+
+[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+
+## Sponsors
+
+<p align="center">
+  <a href="https://github.com/sponsors/jackyzha0">
+    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
+  </a>
+</p>
