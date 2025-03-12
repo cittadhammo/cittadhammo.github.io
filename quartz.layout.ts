@@ -8,7 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
+      GitHub: "https://github.com/cittadhammo/cittadhammo.github.io",
       "Discord Community": "https://discord.gg/cRFFHYye7t",
     },
   }),
@@ -27,7 +27,9 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer(),
+    Component.Explorer({
+      filterFn: (node) => node.data?.title !== "crypt"
+    }),
   ],
   right: [
     Component.Graph(),
