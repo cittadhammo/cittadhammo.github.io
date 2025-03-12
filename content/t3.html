@@ -254,7 +254,7 @@
         async function displayDecryptedContent() {
             const password = getUrlParam('p');
             let filePath = getUrlParam('f'); // Fetch the file path from the URL
-            filePath = `static/` + filePath;
+            // filePath = `static/` + filePath;
             if (password && filePath) {
                 const encryptedContent = await fetchEncryptedContent(filePath);
                 

@@ -1,7 +1,7 @@
 In this folder,
 
 ```
-node generateOutput.js
+node generateOutput.cjs
 ```
 
 will generate ouput based on input.txt asking for a password (for AES encoding)

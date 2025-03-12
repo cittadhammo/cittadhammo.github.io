@@ -28,7 +28,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     Component.Explorer({
-      filterFn: (node) => node.data?.title !== "crypt"
+      filterFn: (node) => node.data.title != "crypt"
     }),
   ],
   right: [
