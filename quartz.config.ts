@@ -17,7 +17,7 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "cittadhammo.github.io",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "crypt", "templates", ".obsidian"],
     defaultDateType: "created",
     generateSocialImages: true,
     theme: {
