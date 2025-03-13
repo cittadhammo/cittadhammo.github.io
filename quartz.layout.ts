@@ -46,7 +46,9 @@ export const defaultListPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer(),
+    Component.Explorer({
+      filterFn: (node) => node.data.title != "crypt"
+    }),
   ],
   right: [],
 }
