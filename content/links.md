@@ -153,3 +153,7 @@ This site is build on GitHub
 
 - https://anyasreviews.com/why-birkenstocks-arent-long-term-solution-foot-pain/?ssp_iabi=1683746986428
 
+## Architecture
+
+- https://highrises.hythacg.com/building/terminal-tower-graham-anderson-probst-white/
+
