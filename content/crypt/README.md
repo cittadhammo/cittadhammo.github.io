@@ -1,3 +1,7 @@
+---
+tag: graph-exclude, search-exclude
+---
+
 In this folder,
 
 ```

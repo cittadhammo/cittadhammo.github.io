@@ -1,4 +1,5 @@
 ---
+tag: graph-exclude, search-exclude
 title: crypt
 ---
 
