@@ -1,5 +1,7 @@
 ---
-tag: graph-exclude, search-exclude
+tag: 
+ - graph-exclude
+ - search-exclude
 ---
 
 In this folder,
