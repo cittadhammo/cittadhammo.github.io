@@ -129,3 +129,8 @@ If you want to maximize your zoom wihle scaling and keeping the same coordinates
 
     rsvg-convert -w 1024 -h 1024 infile.svg -o outfile.png	
     rsvg-convert -h 1024 suttapitaka.svg -o sutapitaka1024.png
+
+## Gostscript
+
+	gs -sDEVICE=png16m -r600 -o output.png input.pdf
+
