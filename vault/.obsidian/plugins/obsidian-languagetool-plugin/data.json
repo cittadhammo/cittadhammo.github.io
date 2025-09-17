@@ -2,7 +2,7 @@
   "serverUrl": "https://api.languagetool.org",
   "urlMode": "standard",
   "glassBg": false,
-  "shouldAutoCheck": true,
+  "shouldAutoCheck": false,
   "autoCheckDelay": 3400,
   "pickyMode": false,
   "username": "Cittadhammo.bhikkhu@gmail.com",

@@ -1,52 +1,44 @@
 {
   "recentFiles": [
     {
-      "basename": "vinaya-pitaka",
-      "path": "content/_charts/digital/vinaya-pitaka.md"
-    },
-    {
-      "basename": "sutta-pitaka",
-      "path": "content/_charts/digital/sutta-pitaka.md"
-    },
-    {
-      "basename": "sutta-parallels",
-      "path": "content/_charts/digital/sutta-parallels.md"
-    },
-    {
-      "basename": "patimokkha-structure",
-      "path": "content/_charts/digital/patimokkha-structure.md"
-    },
-    {
-      "basename": "patimokkha-categories",
-      "path": "content/_charts/digital/patimokkha-categories.md"
-    },
-    {
-      "basename": "path-to-nibbana",
-      "path": "content/_charts/digital/path-to-nibbana.md"
-    },
-    {
-      "basename": "Parivara",
-      "path": "content/_charts/digital/Parivara.md"
-    },
-    {
-      "basename": "manual-buddhist-terms",
-      "path": "content/_charts/digital/manual-buddhist-terms.md"
+      "basename": "CHECK",
+      "path": "CHECK.md"
     },
     {
       "basename": "magga-vibhanga-stupa",
       "path": "content/_charts/digital/magga-vibhanga-stupa.md"
     },
     {
-      "basename": "Khundaka",
-      "path": "content/_charts/digital/Khundaka.md"
+      "basename": "buddha-brain",
+      "path": "content/_charts/digital/buddha-brain.md"
     },
     {
       "basename": "dhamma-citadel",
       "path": "content/_charts/digital/dhamma-citadel.md"
     },
     {
-      "basename": "buddha-brain",
-      "path": "content/_charts/digital/buddha-brain.md"
+      "basename": "Khundaka",
+      "path": "content/_charts/digital/Khundaka.md"
+    },
+    {
+      "basename": "manual-buddhist-terms",
+      "path": "content/_charts/digital/manual-buddhist-terms.md"
+    },
+    {
+      "basename": "path-to-nibbana",
+      "path": "content/_charts/digital/path-to-nibbana.md"
+    },
+    {
+      "basename": "patimokkha-structure",
+      "path": "content/_charts/digital/patimokkha-structure.md"
+    },
+    {
+      "basename": "sutta-parallels",
+      "path": "content/_charts/digital/sutta-parallels.md"
+    },
+    {
+      "basename": "patimokkha-categories",
+      "path": "content/_charts/digital/patimokkha-categories.md"
     },
     {
       "basename": "37-wings-to-awakenings",
@@ -55,6 +47,50 @@
     {
       "basename": "31-planes-of-existence",
       "path": "content/_charts/digital/31-planes-of-existence.md"
+    },
+    {
+      "basename": "sutta-pitaka",
+      "path": "content/_charts/digital/sutta-pitaka.md"
+    },
+    {
+      "basename": "prompt",
+      "path": "content/_charts/prompt.md"
+    },
+    {
+      "basename": "Why the chosen always walks alone!",
+      "path": "Why the chosen always walks alone!.md"
+    },
+    {
+      "basename": "Pourquoi les élus marchent toujours seuls",
+      "path": "Pourquoi les élus marchent toujours seuls.md"
+    },
+    {
+      "basename": "Template Item",
+      "path": "templates/Template Item.md"
+    },
+    {
+      "basename": "pali-parsing",
+      "path": "content/_projects/algorithms/pali-parsing.md"
+    },
+    {
+      "basename": "Drawing 2025-09-03 15.50.45.excalidraw",
+      "path": "assets/drawings/Drawing 2025-09-03 15.50.45.excalidraw.md"
+    },
+    {
+      "basename": "Advanced.excalidraw",
+      "path": "assets/drawings/Advanced.excalidraw.md"
+    },
+    {
+      "basename": "Charts.excalidraw",
+      "path": "assets/drawings/Charts.excalidraw.md"
+    },
+    {
+      "basename": "vinaya-pitaka",
+      "path": "content/_charts/digital/vinaya-pitaka.md"
+    },
+    {
+      "basename": "Parivara",
+      "path": "content/_charts/digital/Parivara.md"
     },
     {
       "basename": "A0VM-SuttaPitaka",
@@ -77,24 +113,12 @@
       "path": "assets/images/A1SM-PatiCat.png"
     },
     {
-      "basename": "CHECK",
-      "path": "CHECK.md"
-    },
-    {
       "basename": "manual-buddhist-termsPali Parsing Algorithm",
       "path": "content/_charts/digital/manual-buddhist-termsPali Parsing Algorithm.md"
     },
     {
-      "basename": "pali-parsing",
-      "path": "content/_projects/algorithms/pali-parsing.md"
-    },
-    {
       "basename": "paper-laptop",
       "path": "content/_projects/craft/paper-laptop.md"
-    },
-    {
-      "basename": "Advanced.excalidraw",
-      "path": "assets/drawings/Advanced.excalidraw.md"
     },
     {
       "basename": "AreaOne.excalidraw",
@@ -103,10 +127,6 @@
     {
       "basename": "Areas.excalidraw",
       "path": "assets/drawings/Areas.excalidraw.md"
-    },
-    {
-      "basename": "Charts.excalidraw",
-      "path": "assets/drawings/Charts.excalidraw.md"
     },
     {
       "basename": "Cover.excalidraw",
@@ -169,10 +189,6 @@
       "path": "content/_charts/hand-made/third-jhana.md"
     },
     {
-      "basename": "Template Item",
-      "path": "templates/Template Item.md"
-    },
-    {
       "basename": "Paper Laptop",
       "path": "content/Projects/Paper Laptop.md"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "Sans titre",
       "path": "content/Links/Sans titre.md"
-    },
-    {
-      "basename": "E-ink",
-      "path": "content/Links/E-ink.md"
-    },
-    {
-      "basename": "Stupa Concrete 3D Printing",
-      "path": "content/3D Prints/Stupa Concrete 3D Printing.md"
-    },
-    {
-      "basename": "Dhamma Citadel 3D",
-      "path": "content/3D Prints/Dhamma Citadel 3D.md"
-    },
-    {
-      "basename": "Stupa Slip Casting",
-      "path": "content/Projects/Data/Stupa Slip Casting.md"
     }
   ],
   "omittedPaths": [],

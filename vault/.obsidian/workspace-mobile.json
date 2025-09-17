@@ -4,24 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "123e11d0f795d35f",
+        "id": "7553f10dd319e93a",
         "type": "tabs",
         "children": [
           {
-            "id": "b0d8d4dd484f8b91",
+            "id": "2e03ffdbbfa9c4c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/_charts/digital/manual-buddhist-terms.md",
+                "file": "content/_charts/digital/buddha-brain.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "manual-buddhist-terms"
+              "title": "buddha-brain"
+            }
+          },
+          {
+            "id": "27cdd05dcbd049be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/_charts/digital/magga-vibhanga-stupa.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "magga-vibhanga-stupa"
+            }
+          },
+          {
+            "id": "89544028f3f19033",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CHECK.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CHECK"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -112,7 +141,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "content/Links/Publishing.md",
+            "file": "content/_charts/digital/sutta-parallels.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -153,12 +182,23 @@
           "icon": "lucide-list",
           "title": "Plan"
         }
+      },
+      {
+        "id": "4438165b20987efe",
+        "type": "leaf",
+        "state": {
+          "type": "advanced-tables-toolbar",
+          "state": {},
+          "icon": "spreadsheet",
+          "title": "Advanced Tables"
+        }
       }
     ],
-    "currentTab": 0
+    "currentTab": 3
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Ouvrir le sélecteur rapide": false,
       "graph:Ouvrir la vue graphique": false,
       "templates:Insérer le modèle": false,
@@ -168,20 +208,39 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "b0d8d4dd484f8b91",
+  "active": "89544028f3f19033",
   "lastOpenFiles": [
+    "data/licenses.yml",
+    "content/_charts/digital/magga-vibhanga-stupa.md",
+    "content/_charts/digital/buddha-brain.md",
+    "content/_charts/digital/dhamma-citadel.md",
+    "content/_charts/digital/Khundaka.md",
+    "content/_charts/digital/manual-buddhist-terms.md",
+    "content/_charts/digital/path-to-nibbana.md",
+    "content/_charts/digital/patimokkha-structure.md",
+    "content/_charts/digital/sutta-parallels.md",
+    "content/_charts/digital/patimokkha-categories.md",
+    "content/_charts/digital/37-wings-to-awakenings.md",
+    "content/_charts/digital/31-planes-of-existence.md",
+    "content/_charts/digital/sutta-pitaka.md",
+    "content/_charts/prompt.md",
+    "CHECK.md",
+    "Alan Watts.md",
+    "Pourquoi les élus marchent toujours seuls.md",
+    "Why the chosen always walks alone!.md",
+    "templates/Template Item.md",
+    "content/_projects/algorithms/pali-parsing.md",
+    "assets/drawings/Drawing 2025-09-03 15.50.45.excalidraw.md",
+    "assets/drawings/Advanced.excalidraw.md",
+    "assets/drawings/Charts.excalidraw.md",
     "Attachments/manual.jpeg",
     "Attachments",
     "Attachments/Pasted image 20250809085018.jpeg",
-    "content/_projects/algorithms/pali-parsing.md",
-    "content/_charts/digital/manual-buddhist-terms.md",
     "Attachments/Pasted image 20250809084949.jpeg",
     "Attachments/Pasted image 20250809084922.jpeg",
     "Attachments/Pasted image 20250809084837.jpeg",
     "content/_projects/craft/paper-laptop.md",
     "content/_projects/algorithms",
-    "CHECK.md",
-    "content/_charts/digital/37-wings-to-awakenings.md",
     "README.md",
     "scripts",
     "assets/images/png/A1S-Manual.png",
@@ -189,32 +248,13 @@
     "assets/images/png/A0H-SuttaPitaka.png",
     "content/_charts/digital/Parivara.md",
     "assets/images/png/A0SM-DhammaCitadel.png",
-    "content/_charts/hand-made/second-jhana.md",
-    "content/_3d-printing/stupas/stupa-concrete-3d.md",
-    "content/_3d-printing/other/dhamma-citadel-3d.md",
     "content/_3d-printing/stupas",
     "content/_3d-printing/monks",
     "content/_3d-printing/other",
     "content/_3d-printing",
-    "content/_3dprinting/stupas/stupa-concrete-3d.md",
-    "content/_3dprinting/other/dhamma-citadel-3d.md",
     "content/_3dprinting/stupas",
     "content/_3dprinting/monks",
     "content/_3dprinting/other",
-    "content/_charts/hand-made/first-jhana.md",
-    "content/_charts/hand-made/fourth-jhana.md",
-    "content/_charts/hand-made/third-jhana.md",
-    "templates/Template Item.md",
-    "content/3dprints/Stupa Concrete 3D Printing.md",
-    "content/3dprints/Dhamma Citadel 3D.md",
-    "jekyll/content/_charts/by-others/joe.md",
-    "jekyll/content/_charts/digital/DhammaCitadel.md",
-    "jekyll/content/_charts/digital/BuddhaBrain.md",
-    "jekyll/content/_charts/hand-made/patimokkha152.md",
-    "jekyll/content/_charts/prints.md",
-    "jekyll/content/_charts/links.md",
-    "jekyll/_archive/nav.md",
-    "assets/images/DhammaCitadel.png",
-    "assets/images/BuddhaBrain.png"
+    "assets/images/DhammaCitadel.png"
   ]
 }
