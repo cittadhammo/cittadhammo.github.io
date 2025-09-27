@@ -38,5 +38,3 @@ This project  explore the graph created by mapping the links and references of t
 The chart explore the connections of the different entries in the dictionary. The text size is according to the number of entries the entry quotes or get quoted. The structure is revealed via the Hierarchical Edge Bundles for General Graphs Method. This approach extracts the community structure of the network and organizes it into a more balanced and meaningful hierarchy so that its edge bundle rendering better indicates its structure. 
 
 Via the original notebook, you can create different colors schemes and have access to different options. 
-
-![[manual.jpeg]]

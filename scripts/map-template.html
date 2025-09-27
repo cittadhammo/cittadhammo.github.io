@@ -40,7 +40,22 @@ layout: none
         }
         .ol-control button {
             color: black !important;
-            // border: 1px solid #b8b8b8;
+        }        
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            .cross {
+                top: 0.5em;
+                left: 0.5em;
+                transform: scale(0.8); /* smaller button */
+            }
+            .cross button img {
+                width: 17px;
+                height: 17px;
+            }
+            .ol-zoom {
+                top: 3em !important;  /* push zoom buttons further down */
+                transform: scale(0.8); /* smaller button */
+            }
         }
     </style>
 </head>
@@ -50,7 +65,9 @@ layout: none
     <script>
         const width = __WIDTH__;
         const height = __HEIGHT__;
-        const extent = [0, 0, width, height];
+        const extent = [0, 0, width, width];
+        // const extent = [0, 0, 1, 1]; would work as well, 
+        // google layour create a square map all the time ,sorry
 
         // previous button with image
         const button = document.createElement("button");
@@ -59,17 +76,15 @@ layout: none
         img.alt = "Previous";
         button.appendChild(img);
 
-
-        {% assign cols = site.collections %}
-        {% for col in cols %}
-            {% assign docs = col.docs %}
-            {% for doc in docs %}
-                {% if doc.path == "__PATHMD__" %}
-                    console.log("{{doc.path}}")
-                    {% assign link = doc.url | prepend: site.baseurl %}
-                {% endif %}
-            {% endfor %}    
-        {% endfor %}
+        {%- assign cols = site.collections -%}
+        {%- for col in cols -%}
+            {%- assign docs = col.docs -%}
+            {%- for doc in docs -%}
+                {%- if doc.path == "__PATHMD__" -%}
+                    {%- assign link = doc.url | prepend: site.baseurl -%}
+                {%- endif -%}
+            {%- endfor -%}    
+        {%- endfor -%}
         {% assign cols = site.collections %}
 
         const handle = function (e) {
@@ -96,6 +111,7 @@ layout: none
         const overlay = new ol.Overlay({
             element: document.createElement("div"),
         });
+        const isMobile = window.innerWidth <= 480; // or 768 adjust breakpoint as needed
 
         const map = new ol.Map({
             layers: [
@@ -112,9 +128,18 @@ layout: none
             view: new ol.View({
                 projection: projection,
                 center: ol.extent.getCenter(extent),
-                zoom: 2,
+                zoom: isMobile ? 1 : 2,   // zoom 1 on mobile, 2 on desktop
                 maxZoom: 6
             }),
+            interactions: [
+                new ol.interaction.DragPan(),
+                new ol.interaction.MouseWheelZoom(),
+                new ol.interaction.DoubleClickZoom(),
+                new ol.interaction.KeyboardPan(),
+                new ol.interaction.KeyboardZoom(),
+                new ol.interaction.PinchZoom()
+                // no DragRotate, no PinchRotate
+            ],
         });
             map.addControl(OneControl);
         // cursor

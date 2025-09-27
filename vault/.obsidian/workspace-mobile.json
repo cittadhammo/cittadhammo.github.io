@@ -1,66 +1,51 @@
 {
   "main": {
-    "id": "b60fec1ec7d25cbe",
+    "id": "abc8da7262f9fff4",
     "type": "split",
     "children": [
       {
-        "id": "7553f10dd319e93a",
+        "id": "05f208d33da369cd",
         "type": "tabs",
         "children": [
           {
-            "id": "2e03ffdbbfa9c4c0",
+            "id": "d3957eb2bce80d0f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/_charts/digital/buddha-brain.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "buddha-brain"
+              "title": "README"
             }
           },
           {
-            "id": "27cdd05dcbd049be",
+            "id": "1db1812c080daa1e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/_charts/digital/magga-vibhanga-stupa.md",
+                "file": "Alan Watts.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "magga-vibhanga-stupa"
-            }
-          },
-          {
-            "id": "89544028f3f19033",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CHECK.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CHECK"
+              "title": "Alan Watts"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "2e59ab94c94f149e",
+    "id": "82e18ee55de47e9f",
     "type": "mobile-drawer",
     "children": [
       {
-        "id": "7d1d96c95a9adc52",
+        "id": "7539cc8d113c231a",
         "type": "leaf",
         "state": {
           "type": "file-explorer",
@@ -73,7 +58,7 @@
         }
       },
       {
-        "id": "a04679241ad07090",
+        "id": "088b1c8023c116c3",
         "type": "leaf",
         "state": {
           "type": "search",
@@ -90,7 +75,7 @@
         }
       },
       {
-        "id": "195437f0f6d7691e",
+        "id": "5eab884131be598b",
         "type": "leaf",
         "state": {
           "type": "tag",
@@ -105,43 +90,29 @@
         }
       },
       {
-        "id": "2a9d6326e6fb9d3c",
+        "id": "0ef42092a1d47682",
         "type": "leaf",
         "state": {
           "type": "bookmarks",
           "state": {},
           "icon": "lucide-bookmark",
-          "title": "Signet"
-        }
-      },
-      {
-        "id": "5b41e2930cf87cd0",
-        "type": "leaf",
-        "state": {
-          "type": "all-properties",
-          "state": {
-            "sortOrder": "frequency",
-            "showSearch": false,
-            "searchQuery": ""
-          },
-          "icon": "lucide-archive",
-          "title": "Toutes les propriétés"
+          "title": "Signets"
         }
       }
     ],
     "currentTab": 0
   },
   "right": {
-    "id": "14d72ab766dff7ec",
+    "id": "7bb7d403a1dc48d9",
     "type": "mobile-drawer",
     "children": [
       {
-        "id": "9ab3889be789a394",
+        "id": "3e168ec8f358aa9f",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "content/_charts/digital/sutta-parallels.md",
+            "file": "tritam 0001.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -155,12 +126,12 @@
         }
       },
       {
-        "id": "75c5495cacbbae93",
+        "id": "a2ab18792c939382",
         "type": "leaf",
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "Cover Page.md",
+            "file": "tritam 0001.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           },
@@ -169,12 +140,12 @@
         }
       },
       {
-        "id": "5e63e5ef261b5557",
+        "id": "b1920f372d67b155",
         "type": "leaf",
         "state": {
           "type": "outline",
           "state": {
-            "file": "Cover Page.md",
+            "file": "tritam 0001.md",
             "followCursor": false,
             "showSearch": false,
             "searchQuery": ""
@@ -182,79 +153,36 @@
           "icon": "lucide-list",
           "title": "Plan"
         }
-      },
-      {
-        "id": "4438165b20987efe",
-        "type": "leaf",
-        "state": {
-          "type": "advanced-tables-toolbar",
-          "state": {},
-          "icon": "spreadsheet",
-          "title": "Advanced Tables"
-        }
       }
     ],
-    "currentTab": 3
+    "currentTab": 0
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:Create new base": false,
       "switcher:Ouvrir le sélecteur rapide": false,
       "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
       "templates:Insérer le modèle": false,
       "command-palette:Ouvrir la palette de commandes": false,
+      "bases:Create new base": false,
       "omnisearch:Omnisearch": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "89544028f3f19033",
+  "active": "d3957eb2bce80d0f",
   "lastOpenFiles": [
-    "data/licenses.yml",
-    "content/_charts/digital/magga-vibhanga-stupa.md",
-    "content/_charts/digital/buddha-brain.md",
-    "content/_charts/digital/dhamma-citadel.md",
     "content/_charts/digital/Khundaka.md",
-    "content/_charts/digital/manual-buddhist-terms.md",
-    "content/_charts/digital/path-to-nibbana.md",
-    "content/_charts/digital/patimokkha-structure.md",
-    "content/_charts/digital/sutta-parallels.md",
-    "content/_charts/digital/patimokkha-categories.md",
-    "content/_charts/digital/37-wings-to-awakenings.md",
-    "content/_charts/digital/31-planes-of-existence.md",
-    "content/_charts/digital/sutta-pitaka.md",
-    "content/_charts/prompt.md",
-    "CHECK.md",
-    "Alan Watts.md",
-    "Pourquoi les élus marchent toujours seuls.md",
-    "Why the chosen always walks alone!.md",
-    "templates/Template Item.md",
-    "content/_projects/algorithms/pali-parsing.md",
-    "assets/drawings/Drawing 2025-09-03 15.50.45.excalidraw.md",
-    "assets/drawings/Advanced.excalidraw.md",
-    "assets/drawings/Charts.excalidraw.md",
-    "Attachments/manual.jpeg",
-    "Attachments",
-    "Attachments/Pasted image 20250809085018.jpeg",
-    "Attachments/Pasted image 20250809084949.jpeg",
-    "Attachments/Pasted image 20250809084922.jpeg",
-    "Attachments/Pasted image 20250809084837.jpeg",
-    "content/_projects/craft/paper-laptop.md",
-    "content/_projects/algorithms",
     "README.md",
-    "scripts",
-    "assets/images/png/A1S-Manual.png",
-    "assets/images/png/A2S-37Wings.png",
-    "assets/images/png/A0H-SuttaPitaka.png",
-    "content/_charts/digital/Parivara.md",
-    "assets/images/png/A0SM-DhammaCitadel.png",
-    "content/_3d-printing/stupas",
-    "content/_3d-printing/monks",
-    "content/_3d-printing/other",
-    "content/_3d-printing",
-    "content/_3dprinting/stupas",
-    "content/_3dprinting/monks",
-    "content/_3dprinting/other",
-    "assets/images/DhammaCitadel.png"
+    "Alan Watts.md",
+    "tritam 0001.md",
+    "Attachments/Pasted image 20250917151457.undefined",
+    "Attachments/Pasted image 20250917151446.undefined",
+    "Attachments/Pasted image 20250917151438.undefined",
+    "Attachments/Pasted image 20250917151416.undefined",
+    "Attachments/Pasted image 20250917151411.undefined",
+    "Attachments/Pasted image 20250917151349.undefined",
+    "Attachments"
   ]
 }

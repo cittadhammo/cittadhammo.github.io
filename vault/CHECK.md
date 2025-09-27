@@ -15,8 +15,11 @@
  - [ ] `files: `  frontmatter for available downloads, (by default maps are included) 
  - [ ] License and Tech data for hyperlinks.
  - [ ] Images structure without items? Move up the other one, one level.
+<<<<<<< HEAD
  - [ ] If (license.name == "CC0") add url in data
  - [ ] check the need for colon in yaml
+=======
+>>>>>>> origin/master
 
  ## Old To Do
 
@@ -29,6 +32,7 @@
     - links to image, fullscreen, etc.
 - change email image
 - Fix high res files, SVG etc.
+<<<<<<< HEAD
 - Div sources linklinkss
 
 ---
@@ -76,3 +80,6 @@ _(all available in good Cleary translations)_
 9. **Zen Letters (Yunmen, Fayan, and others)** – pithy, practice-oriented letters and talks.
 
 ---
+=======
+- Div sources links
+>>>>>>> origin/master

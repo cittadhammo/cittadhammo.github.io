@@ -11,6 +11,7 @@ description:
 tags:
 ---
 
+<<<<<<< HEAD
 ## AI Prompt
 
 I want to transform the lines of pali chanting in an external file by adding rhythmic symbols below the vowels. The line should remain intact in terms of case and punctuation, appart from adding rhythmic mark. Produce a node script that will:
@@ -48,3 +49,5 @@ I want to transform the lines of pali chanting in an external file by adding rhy
 			3. Else -> add a breve under the vowel
 5. Output all the tokens joined together
 6. Repeat for each line.
+=======
+>>>>>>> origin/master
