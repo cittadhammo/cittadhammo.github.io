@@ -17,7 +17,7 @@ techs:
     url: "https://d3js.org/"
   - name: "Observable"
     url: "https://observablehq.com/"
-images:
+images1:
   - name: "A0VM-SuttaPitaka.png"
 notebook:
   - name: "SuttaPitaka"

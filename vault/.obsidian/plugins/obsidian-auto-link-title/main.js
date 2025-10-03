@@ -313,7 +313,7 @@ function electronGetPageTitle(url) {
                 webPreferences: {
                     webSecurity: false,
                     nodeIntegration: true,
-                    images: false,
+                    images1: false,
                 },
                 show: false,
             });

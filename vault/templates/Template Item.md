@@ -1,23 +1,10 @@
 ---
 title: "{{title}}"
 published: false
-<<<<<<< HEAD
 year:
 license:
 sources:
 techs:
-images:
+images1:
 ---
 
-
-=======
-draft: false
-date: 
-license: 
-sources: 
-images: 
-tech: 
-description: 
-tags:
----
->>>>>>> origin/master

@@ -15,7 +15,7 @@ techs:
     url: "https://d3js.org/"
   - name: "Observable"
     url: "https://observablehq.com/"
-images:
+images1:
   - name: "A1S-31Planes.png"
 notebook:
   - name: "31 Planes of Existence"

@@ -6,7 +6,7 @@ tech:
 description: 
 
 sources: 
-images: 
+images1: 
 tags:
   - tech
 ---

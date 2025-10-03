@@ -204,13 +204,13 @@
 		margin: 3rem 0 0;
 
 		@media (min-width: variables.$breakpoint-medium) {
-			margin: 5rem 0 0;
+			margin: 3rem 0 0;
 			max-width: 70%;
 		}
 	}
 
 	.h2 {
-		margin: 3rem 0 .5rem;
+		margin: 1rem 0 .5rem;
 
 		&:first-of-type {
 			margin-top: 0;

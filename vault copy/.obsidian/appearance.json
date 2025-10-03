@@ -1,0 +1,14 @@
+{
+  "theme": "moonstone",
+  "cssTheme": "",
+  "interfaceFontFamily": "Lato,open sans,segoe2,Source Sans Pro",
+  "textFontFamily": "Lato,open sans,segoe2,source pro",
+  "enabledCssSnippets": [
+    "font"
+  ],
+  "baseFontSize": 17,
+  "baseFontSizeAction": false,
+  "monospaceFontFamily": "",
+  "accentColor": "#000000",
+  "showRibbon": true
+}

@@ -243,3 +243,9 @@ a.bigger {
   html.sr .load-hidden {
     visibility: hidden;
 }
+
+.map-header {
+	@media (max-width: 900px) {
+	display: none;
+  }
+}

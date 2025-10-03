@@ -10,7 +10,7 @@ assets:
 
 # Generate PDF and PNG by running Python script in the vault directory
 images:
-	cd vault && python ./scripts/generate_pdf_png.py
+	cd vault && python3 ./scripts/generate_pdf_png2.py
 
 clean:
 	rm -rf assets/images/*

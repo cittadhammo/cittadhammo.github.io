@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DhammaCharts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Unified sticky header */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      padding: 15px 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .header-top {
+      font-size: 2rem;
+      font-weight: 700;
+      background: black;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .header-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      color: #666;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    /* Independent highlight effect (doesn’t push neighbors) */
+    .nav-center a::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: black;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .nav-center a.active {
+      color: transparent; /* hide base text */
+    }
+    .nav-center a.active::after {
+      opacity: 1;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: #999;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      color: #333;
+    }
+
+    /* Sections */
+    .section {
+      min-height: 100vh;
+      padding: 60px 20px;
+    }
+
+    .section:nth-child(odd) {
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Unified Header -->
+  <header class="main-header">
+    <div class="header-top">Dhammacharts</div>
+    <div class="header-bottom">
+      <nav class="nav-center">
+        <a href="#charts" class="active" data-text="Charts">Charts</a>
+        <a href="#printing" data-text="3D Printing">3D Printing</a>
+        <a href="#projects" data-text="Projects">Projects</a>
+        <a href="#writings" data-text="Writings">Writings</a>
+      </nav>
+      <nav class="nav-right" id="subnav">
+        <!-- Default sub-links (Charts) -->
+        <a href="#gallery">Gallery</a>
+        <a href="#techniques">Techniques</a>
+        <a href="#equipment">Equipment</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sections -->
+  <section id="charts" class="section">
+    <h2>Charts Section</h2>
+    <p>Charts content…</p>
+  </section>
+
+  <section id="printing" class="section">
+    <h2>3D Printing Section</h2>
+    <p>3D Printing content…</p>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects Section</h2>
+    <p>Projects content…</p>
+  </section>
+
+  <section id="writings" class="section">
+    <h2>Writings Section</h2>
+    <p>Writings content…</p>
+  </section>
+
+  <script>
+    // Subnav links per section
+    const subnavData = {
+      charts: [
+        { text: "Gallery", href: "#gallery" },
+        { text: "Techniques", href: "#techniques" },
+        { text: "Equipment", href: "#equipment" }
+      ],
+      printing: [
+        { text: "Portfolio", href: "#portfolio" },
+        { text: "Process", href: "#process" },
+        { text: "Tools", href: "#tools" }
+      ],
+      projects: [
+        { text: "Catalog", href: "#catalog" },
+        { text: "Specs", href: "#specs" },
+        { text: "Reviews", href: "#reviews" }
+      ],
+      writings: [
+        { text: "Case Studies", href: "#case-studies" },
+        { text: "References", href: "#references" },
+        { text: "Hire Me", href: "#hire" }
+      ]
+    };
+
+    const navLinks = document.querySelectorAll('.nav-center a');
+    const subnav = document.getElementById('subnav');
+
+    function updateSubnav(sectionId) {
+      subnav.innerHTML = '';
+      subnavData[sectionId].forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.text;
+        subnav.appendChild(a);
+      });
+    }
+
+    // Highlight active section + update subnav
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section').forEach(sec => {
+        const top = window.scrollY;
+        const offset = sec.offsetTop - 120;
+        const height = sec.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = sec.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+          link.classList.add('active');
+          updateSubnav(current);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

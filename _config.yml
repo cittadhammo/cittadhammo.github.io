@@ -66,3 +66,4 @@ exclude:
   - Makefile
   - build.sh
   - scripts/
+#  - assets/images/
