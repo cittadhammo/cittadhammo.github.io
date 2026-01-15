@@ -1,4 +1,4 @@
-## Add a new area
+# Add a new area
 
 (could be made automatic based on folder structure of content)
 
@@ -24,7 +24,7 @@ make clean      # Cleans up the build folder
 ## Generating assets
 
 - Every original images in the assets that are listed in the frontmatter `images` of the pages
-    should be processed into thumbnail of different size, map moisaic, lightbox depending 
+    should be processed into thumbnail of different size, map moisaic, lightbox depending
     on the layout chosen.
 
 ### searchAndMaps script
@@ -35,12 +35,11 @@ This script scans all markdown files in your content folder to find images liste
 bash ./scripts/searchAndMap.sh
 ```
 
-
 ## Obsidian
 
 THe content folder can be edited via Obsidian. Actually, a vault containing content is stored on another repo that when a commit is pushed it get sync with this one.
 
-## install 
+## install
 
 Pineaple Jekyll template for this website
 
@@ -50,9 +49,9 @@ Run: `jekyll serve` no need to `bundle install` or `bundle exec jekyll serve` on
 
 Change `baseurl` in `_confilg.yml` to: `` if it is the root folder for the website.
 
-# Dhamma Charts
+## Dhamma Charts
 
-Site for displaying and storing Dhamma Charts and Art. 
+Site for displaying and storing Dhamma Charts and Art.
 
 Using the [Pinaple](https://github.com/DhammaCharts/pineapple) template
 
@@ -68,3 +67,51 @@ wget \
   http://localhost:4000/
 ```
 
+## Dependencies for script generate_assets
+
+- **vips** (libvips)
+- **go-yq** (mikefarah/yq)
+- **gawk** (awk)
+- **findutils** (find)
+- **sed**
+
+## Installation
+
+Run the following command to install all required dependencies on Arch Linux:
+
+```bash
+sudo pacman -S vips go-yq gawk findutils
+```
+
+---
+
+## Jekyll Local Development Setup
+
+To ensure consistent Jekyll development across different environments, this project now uses Bundler to manage Ruby dependencies.
+
+### Initial Setup (One-time)
+
+1.  **Install Bundler (if you haven't already):**
+    ```bash
+    gem install bundler
+    ```
+2.  **Install Project Dependencies:**
+    Navigate to the project root and run:
+    ```bash
+    bundle install
+    ```
+    This will install all necessary Ruby gems, including Jekyll, into a local `vendor/bundle` directory within the project. The `vendor/bundle` directory is automatically ignored by Git.
+
+### Running the Jekyll Server
+
+You can now serve the Jekyll site using the following command:
+
+```bash
+bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml
+```
+
+Alternatively, a new `make` command has been added for convenience:
+
+```bash
+make serve-local
+```

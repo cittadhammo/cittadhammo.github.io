@@ -15,3 +15,6 @@ images:
 clean:
 	rm -rf assets/images/*
 	rm -rf maps/*
+
+serve-local:
+	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml

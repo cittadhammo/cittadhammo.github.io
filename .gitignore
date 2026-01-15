@@ -19,3 +19,4 @@ _site/
 assets/images/
 maps/
 # Ignore all images in the items directory
+vendor/bundle
