@@ -79,8 +79,11 @@ wget \
 
 Run the following command to install all required dependencies on Arch Linux:
 
+make sure to remove yq
+
 ```bash
-sudo pacman -S vips go-yq gawk findutils
+sudo pacman -S libvips go-yq gawk findutils
+sudo pacman -S openslide
 ```
 
 ---
