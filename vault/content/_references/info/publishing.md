@@ -6,7 +6,7 @@ tech:
 description: 
 
 sources: 
-images1: 
+images: 
 tags:
 ---
 mdbook

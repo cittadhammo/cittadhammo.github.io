@@ -1,3 +1,4 @@
+
 <header class="header">
 	<div class="container blackhead">
 		<div class="logo-and-title-container">
@@ -5,10 +6,12 @@
 				<img src="{{ site.baseurl }}/assets/icons/logoR.png" alt="{{ site.author }}" style="max-height: 50px;">
 			</a> -->
 			<div class="title-group">
-				<h1 class="logo rouge-first">
+				
+        <h1 class="logo rouge-first">
 					<a  title="{{ site.author }}" href="{{ site.baseurl | append: '/' }}">{{ site.author }}</a>
 				</h1>
-				{% if page.layout == "item" or page.layout == "map" %}
+				
+        {% if page.layout == "item" or page.layout == "map" or page.layout == "single-page" %}
 				<h2>
 					<a href="{{ site.baseurl }}/{{page.collection}}.html" >
 						{% assign area = site.data.areas | where: name, page.collection | first %}
@@ -16,20 +19,28 @@
 					</a>
 				</h2>
 				{% endif %}
-				{% if page.layout == "page" %}
-				<h2 >
-						{{ page.title }}
-				</h2>
+				
+        {% if page.layout == "page" %}
+				  <h2 >
+					  {{ page.title }}
+				  </h2>
+
+          {% assign pages = site[page.area] | where: "type", "page" %}
+          {% for page in pages %}
+            <a href="{{ page.url | prepend: site.baseurl }}"> {{ page.title }} </a>
+          {% endfor %}
 				{% endif %}
-			</div>
-		</div>
-			<br>
 			
-			{% if page.layout == "item" or page.layout == "map" %}
-			<a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/{{page.collection}}.html" class="bigger">
-				<i class="arrow left"></i>
-			</a>
-			{% endif %}
+      </div>
+		</div>
+		
+    <br>
+		
+    {% if page.layout == "item" or page.layout == "map" %}
+		  <a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/{{page.collection}}.html" class="bigger">
+			  <i class="arrow left"></i>
+		  </a>
+		{% endif %}
 
 	</div>
 </header>

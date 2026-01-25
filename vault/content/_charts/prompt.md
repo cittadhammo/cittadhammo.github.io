@@ -14,7 +14,7 @@ sources:
 techs:
   - name: 
     url: 
-images1:
+images:
   - name: 
 code:
   - name:

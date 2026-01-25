@@ -16,5 +16,15 @@ clean:
 	rm -rf assets/images/*
 	rm -rf maps/*
 
+build-local:
+	bundle exec jekyll build --config _config.yml,_config_local.yml
+
+change-images-assets-to-symlink:
+	rm -rf ./_site/assets/images
+	ln -sr ./assets/images ./_site/assets/images
+
+remove-symlink:
+	rm _site/assets/images
+
 serve-local:
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml

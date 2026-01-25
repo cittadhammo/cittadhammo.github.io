@@ -3,13 +3,12 @@ layout: home
 title: Home
 ---
 
-<h1 class="cover-title rouge-first" > DhammaCharts </h1>
- 
-<img class= "cover load-hidden" src="{{ site.baseurl }}/assets/icons/logoR.png" alt="Cover">
-
 {% for area in site.data.areas %}
-<div style="text-align: center; font-size: larger;">
-  <a class= "black-under" href='{{ site.baseurl | append: "/" | append: area.name | append: ".html"}}'>{{ area.title }}</a>
-</div>
+  {% if forloop.first %}
+    {% include headerCustom.html subTitle=area.title inverted=true is_first=true area_name=area.name %}
+  {% else %}
+    {% include headerCustom.html subTitle=area.title inverted=true area_name=area.name %}
+  {% endif %}
+  {% include itemsList.md area = area.name %}
 {% endfor %}
 

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: single-page
 title: Prints
 type: page
 order: 1

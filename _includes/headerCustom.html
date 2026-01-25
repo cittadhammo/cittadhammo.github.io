@@ -1,0 +1,46 @@
+
+<header id="{{ include.area_name | slugify }}" class="header {% if include.inverted %}inverted{% endif %}">
+	<div class="container" >
+		<div class="logo-and-title-container">
+			<!-- <a href="{{ site.baseurl | append: '/' }}">
+				<img src="{{ site.baseurl }}/assets/icons/logoR.png" alt="{{ site.author }}" style="max-height: 50px;">
+			</a> -->
+			<div class="title-group">
+				
+        <h1 class="logo rouge-first">
+					<a  title="{{ site.author }}" href="{{ site.baseurl | append: '/' }}">{{ site.author }}</a>
+				</h1>
+				
+				<h2>
+						{{ include.subTitle }}
+						{% if include.is_first %}
+						<span class="other-areas">
+								{% for area in site.data.areas %}
+										{% unless forloop.first %}
+										<a href="#{{ area.name | slugify }}" class="greyed-out">{{ area.title }}</a>
+										{% endunless %}
+								{% endfor %}
+						</span>
+						{% endif %}
+				</h2>
+      </div>
+      <div class="header-links">
+        {% assign pages = site[area.name] | where: "type", "page" %}
+        
+        {% for page in pages %}
+					{% unless forloop.first %}
+          _ |
+          {% endunless %}
+          <a href="{{ page.url | prepend: site.baseurl }}" class="rouge-first"> {{ page.title }} </a>
+        {% endfor %}
+      </div>
+		</div>
+		
+    {% if page.layout == "item" or page.layout == "map" %}
+		  <a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/{{page.collection}}.html" class="bigger">
+			  <i class="arrow left"></i>
+		  </a>
+		{% endif %}
+
+	</div>
+</header>

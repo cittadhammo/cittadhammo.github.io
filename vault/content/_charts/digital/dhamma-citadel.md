@@ -18,9 +18,8 @@ techs:
 images:
   - name: A0SM-DhammaCitadel.png
     map: true
-  - name: A0SM-DhammaCitadel.png
 code:
-  - name: Observable Notebook
+  - name: Notebook
     url: https://observablehq.com/@cittadhammo/the-dhamma-citadel?collection=@cittadhammo/finished
 ---
 

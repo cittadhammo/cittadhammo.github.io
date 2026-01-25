@@ -4,7 +4,7 @@ license:
 tech: 
 description: 
 year:
-images1: 
+images: 
   - name: A1SM-PatiCat.png
     map: true
 code: 

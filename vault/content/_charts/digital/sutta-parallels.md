@@ -11,7 +11,7 @@ sources:
 techs:
   - name: D3
     url: http://d3js.org
-images1:
+images:
   - name: A0S-Parallels.png
     map: true
 code:

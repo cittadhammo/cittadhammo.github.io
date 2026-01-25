@@ -15,7 +15,7 @@ techs:
 code:
   - name: Notebook
     url: https://observablehq.com/d/55007aa88eda28cd
-images1:
+images:
   - name:
 ---
 

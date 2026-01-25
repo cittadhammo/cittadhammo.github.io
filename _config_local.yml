@@ -1,2 +1,11 @@
 baseurl: ""
 url: "http://localhost:4000"
+
+# Prevent Jekyll from wiping the symlink during builds
+keep_files:
+  - assets/images
+
+# (Optional) Prevents Jekyll from processing the source folder
+# since the symlink handles the connection
+exclude:
+  - assets/images

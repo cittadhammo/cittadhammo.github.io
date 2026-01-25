@@ -10,7 +10,7 @@ techs:
     url:  http://d3js.org
   - name: NetworkX.py
   - name: ChatGPT
-images1:
+images:
   - name: A1S-Manual.png
     map: true
 sources:

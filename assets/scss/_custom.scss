@@ -181,8 +181,17 @@ a.bigger {
 
 .logo-and-title-container {
 	display: flex;
-	align-items: flex-start; /* Vertically align logo and text block */
+	align-items: center;
+	justify-content: space-between;
 	gap: 10px;
+}
+
+.header-links {
+  text-align: right;
+
+  a {
+    margin-left: 15px;
+  }
 }
 
 .title-group {
@@ -248,4 +257,28 @@ a.bigger {
 	@media (max-width: 900px) {
 	display: none;
   }
+}
+
+.inverted {
+	background-color: black;
+	color: white;
+	padding: 3rem 0;
+	margin-bottom: 2rem;
+
+	h1, h2, h3, h4, p, a {
+		color: white !important;
+	}
+}
+
+.other-areas {
+  font-size: 0.8em;
+}
+
+.greyed-out {
+  color: grey !important;
+  word-spacing: -6px;
+}
+
+.inverted .greyed-out {
+  color: lightgrey !important;
 }

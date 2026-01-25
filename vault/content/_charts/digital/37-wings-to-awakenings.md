@@ -14,7 +14,7 @@ techs:
     url: http://d3js.org
   - name: Observable
     url: https://observablehq.com/
-images1:
+images:
   - name: A2S-37Wings.png
     map: true
     pdf: true

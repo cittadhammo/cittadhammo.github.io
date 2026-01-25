@@ -2,7 +2,6 @@
 email: "dhammacharts@protonmail.com"
 author: "DhammaCharts"
 keywords: "Dhamma, Chart"
-email: "dhammacharts@protonmail.com"
 
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
@@ -49,7 +48,8 @@ defaults:
     values:
       layout: "default"
 
-exclude: 
+# Add any folder that need not to be included in the build website.
+exclude:
   - README.md
   - .sass-cache
   - .jekyll-cache
@@ -66,4 +66,3 @@ exclude:
   - Makefile
   - build.sh
   - scripts/
-#  - assets/images/

@@ -25,7 +25,7 @@ techs:
     url: http://d3js.org
   - name: Observable
     url: https://observablehq.com/
-images1:
+images:
   - name: A1S-Pati.png
     map: true
 code:
