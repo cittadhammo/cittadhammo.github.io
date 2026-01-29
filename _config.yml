@@ -45,6 +45,26 @@ defaults:
       layout: "item"
   - scope:
       path: ""
+      type: "3d-printing"
+    values:
+      layout: "item"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "item"
+  - scope:
+      path: ""
+      type: "writtings"
+    values:
+      layout: "item"
+  - scope:
+      path: ""
+      type: "references"
+    values:
+      layout: "item"
+  - scope:
+      path: ""
     values:
       layout: "default"
 

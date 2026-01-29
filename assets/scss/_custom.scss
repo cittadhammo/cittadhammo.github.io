@@ -81,6 +81,11 @@ a.blackclair:hover {
 	color: variables.$color-red;
 }
 
+/* Specific rule for email's first letter in footer */
+.footer .obfuscate-email .rouge-first::first-letter {
+  color: variables.$color-red !important;
+}
+
 .arrow {
 	// border: solid grey;
 	border: solid black;
@@ -281,4 +286,8 @@ a.bigger {
 
 .inverted .greyed-out {
   color: lightgrey !important;
+}
+
+.email-first-letter-rouge {
+  color: variables.$color-red !important;
 }

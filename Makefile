@@ -26,5 +26,5 @@ change-images-assets-to-symlink:
 remove-symlink:
 	rm _site/assets/images
 
-serve-local:
+serve-local: # Run change-images-assets-to-symlink for faster reload time
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml

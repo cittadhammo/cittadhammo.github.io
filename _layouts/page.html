@@ -10,7 +10,10 @@
 </head>
 
 <body class="black">
-  {% include header.html %}
+  {% assign area_name = page.collection %}
+  {% assign area = site.data.areas | where: "name", area_name | first %}
+  {% assign area_title = area.title %}
+  {% include headerCustom.html subTitle=area_title inverted=true area_name=area_name %}
   <main class="home">
 
         {{ content }}

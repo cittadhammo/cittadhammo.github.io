@@ -179,8 +179,10 @@
 			width: 35%;
 			position: absolute;
 			right: 10%;
-			text-align: justify;
-
+			// text-align: justify;
+      p {
+        max-width: 45rem;
+      }
 		}
 	}
 
@@ -240,7 +242,7 @@
 	padding: 5rem 0;
 
 	a {
-		color: variables.$color-white;
+		color: variables.$color-black-light;
 		display: inline-block;
 		text-decoration: none;
 
@@ -354,17 +356,30 @@
 
 
 .footer {
-	background: variables.$color-alabaster;
+	background: variables.$color-black;
 	bottom: 0;
 	left: 0;
 	padding: 5rem 0;
 	//position: fixed;
 	right: 0;
 	z-index: -1;
+
+	h2, p {
+		color: variables.$color-white;
+	}
+}
+
+.obfuscate-email {
+  direction: rtl;
+  unicode-bidi: bidi-override;
 }
 
 .contact,
 .follow {
+  font-size: 1.8rem;
+  h2 {
+    margin-bottom: 0.8rem;
+  }
 	@media (min-width: variables.$breakpoint-medium) {
 		float: left;
 		margin-bottom: 0;
@@ -376,3 +391,46 @@
 .follow {
 	margin-bottom: 3rem;
 }
+
+/* Area Page Links in Header */
+.header-links {
+  display: flex;
+  align-items: center;
+  // gap: 1.5rem; /* Overall spacing between link groups */
+}
+
+.header-links a {
+  position: relative; /* Needed for positioning the pseudo-element */
+  font-size: 1.8rem; /* Slightly larger font */
+  white-space: nowrap; /* Prevent wrapping */
+  padding: 5px; /* Remove any default padding that might affect sizing */
+  margin: 0; /* Remove any default margin */
+  /* Ensure a specific color for the links, if not already set by .rouge-first */
+  /* color: variables.$color-text; */ 
+}
+
+.header-links a:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: -0.75rem; /* Half of gap (1.5rem) to center it */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5px; /* Bar width */
+  height: 1.2em; /* Bar height, relative to font-size of parent a */
+  background-color: rgba(255, 255, 255); /* Vertical bar color */
+}
+
+.arrow-div {
+  margin-bottom: 0.5rem;
+}
+
+/* Constrain image width in project aside for large screens */
+@media (min-width: variables.$breakpoint-large) {
+  .project aside .img-wrapper-2 {
+    max-width: 50em; /* Example: limit to 35em, adjust as needed */
+    margin-left: auto; /* Center the image wrapper if it's smaller than parent */
+    margin-right: 0;
+  }
+}
+
+

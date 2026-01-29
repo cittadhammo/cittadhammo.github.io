@@ -17,30 +17,59 @@
 						<span class="other-areas">
 								{% for area in site.data.areas %}
 										{% unless forloop.first %}
-										<a href="#{{ area.name | slugify }}" class="greyed-out">{{ area.title }}</a>
+										{% assign anchor_id = area.name | slugify %}
+										{% assign base_url_prefix = "" %}
+										{% if page.layout != "home" %}
+										  {% assign base_url_prefix = site.baseurl | append: "/index.html" %}
+										{% endif %}
+										{% assign final_link_path = base_url_prefix | append: "#" | append: anchor_id %}
+										<a href="{{ final_link_path }}" class="greyed-out">{{ area.title }}</a>
 										{% endunless %}
+								{% endfor %}
+						</span>
+						{% else %}
+						<span class="other-areas">
+								{% assign all_areas = site.data.areas %}
+								{% assign current_area_name = include.area_name %}
+
+								{% assign areas_after = "" | split: "" %}
+								{% assign areas_before = "" | split: "" %}
+								{% assign found_current = false %}
+
+								{% for area in all_areas %}
+										{% if area.name == current_area_name %}
+												{% assign found_current = true %}
+										{% elsif found_current %}
+												{% assign areas_after = areas_after | push: area %}
+										{% else %}
+												{% assign areas_before = areas_before | push: area %}
+										{% endif %}
+								{% endfor %}
+
+								{% assign reordered_other_areas = areas_after | concat: areas_before %}
+
+								{% for area in reordered_other_areas %}
+										{% assign anchor_id = area.name | slugify %}
+										{% assign base_url_prefix = "" %}
+										{% if page.layout != "home" %}
+										  {% assign base_url_prefix = site.baseurl | append: "/index.html" %}
+										{% endif %}
+										{% assign final_link_path = base_url_prefix | append: "#" | append: anchor_id %}
+										<a href="{{ final_link_path }}" class="greyed-out">{{ area.title }}</a>
 								{% endfor %}
 						</span>
 						{% endif %}
 				</h2>
       </div>
-      <div class="header-links">
+      <div class="header-links black-under">
         {% assign pages = site[area.name] | where: "type", "page" %}
         
         {% for page in pages %}
-					{% unless forloop.first %}
-          _ |
-          {% endunless %}
           <a href="{{ page.url | prepend: site.baseurl }}" class="rouge-first"> {{ page.title }} </a>
         {% endfor %}
       </div>
 		</div>
 		
-    {% if page.layout == "item" or page.layout == "map" %}
-		  <a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/{{page.collection}}.html" class="bigger">
-			  <i class="arrow left"></i>
-		  </a>
-		{% endif %}
 
 	</div>
 </header>
