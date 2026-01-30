@@ -12,7 +12,13 @@
 				</h1>
 				
 				<h2>
-						{{ include.subTitle }}
+						{% if page.layout != 'home' %}
+							<a href="{{ site.baseurl }}/index.html#{{ include.area_name | slugify }}">
+								<span class="main-area-title">{{ include.subTitle }}</span>
+							</a>
+						{% else %}
+							<span class="main-area-title">{{ include.subTitle }}</span>
+						{% endif %}
 						{% if include.is_first %}
 						<span class="other-areas">
 								{% for area in site.data.areas %}
@@ -23,7 +29,7 @@
 										  {% assign base_url_prefix = site.baseurl | append: "/index.html" %}
 										{% endif %}
 										{% assign final_link_path = base_url_prefix | append: "#" | append: anchor_id %}
-										<a href="{{ final_link_path }}" class="greyed-out">{{ area.title }}</a>
+										<a href="{{ final_link_path }}" class="nav-other-area-link"><span>{{ area.title }}</span></a>
 										{% endunless %}
 								{% endfor %}
 						</span>
@@ -55,13 +61,13 @@
 										  {% assign base_url_prefix = site.baseurl | append: "/index.html" %}
 										{% endif %}
 										{% assign final_link_path = base_url_prefix | append: "#" | append: anchor_id %}
-										<a href="{{ final_link_path }}" class="greyed-out">{{ area.title }}</a>
+										<a href="{{ final_link_path }}" class="nav-other-area-link"><span>{{ area.title }}</span></a>
 								{% endfor %}
 						</span>
 						{% endif %}
 				</h2>
       </div>
-      <div class="header-links white-under" >
+      <div class="header-links" >
         {% assign pages = site[area.name] | where: "type", "page" %}
         
         {% for page in pages %}

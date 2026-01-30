@@ -8,8 +8,13 @@
 // 	text-decoration: underline;
 // }
 
-.rouge, .black-under, .white-under {
+.rouge, .black-under {
 	text-decoration: underline 0.09em rgba(255, 255, 255, 0);
+	transition: text-decoration-color 300ms;
+}
+.white-under {
+	text-decoration: underline rgba(255, 255, 255, 0);
+  text-underline-offset: 0.3em;
 	transition: text-decoration-color 300ms;
 }
 
@@ -212,6 +217,11 @@ a.bigger {
 	color: black;
     margin: 0; // optional: to reduce spacing
   }
+
+  .main-area-title {
+    font-size: 1.7rem; // Increased font size
+    // sfont-weight: bold; // Added font weight
+  }
 }
 
 .cover{
@@ -293,4 +303,49 @@ a.bigger {
 
 .email-first-letter-rouge {
   color: variables.$color-red !important;
+}
+
+// Custom styles for nav-other-area-link for the white underline effect
+.other-areas {
+  a.nav-other-area-link {
+    text-decoration: none; // Remove default underline
+    color: grey !important; // Mimic greyed-out initial color
+    word-spacing: -6px;
+    transition: color 300ms ease-in-out; // Smooth color transition
+
+    // &:hover {
+    //   span:after {
+    //     visibility: visible;
+    //     -webkit-transform: scaleX(1);
+    //     transform: scaleX(1);
+    //   }
+    // }
+
+    span {
+      display: inline-block;
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -4px; // Adjust as needed
+        left: 0;
+        background-color: variables.$color-white; // White underline
+        visibility: hidden;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transition: all .3s ease-in-out 0s;
+        transition: all .3s ease-in-out 0s;
+      }
+    }
+  }
+}
+
+.inverted .other-areas a.nav-other-area-link {
+  color: lightgrey !important; // For inverted header
+  &:hover {
+    color: variables.$color-white !important; // On hover, make it white in inverted mode
+  }
 }
