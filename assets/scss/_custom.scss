@@ -8,7 +8,7 @@
 // 	text-decoration: underline;
 // }
 
-.rouge, .black-under {
+.rouge, .black-under, .white-under {
 	text-decoration: underline 0.09em rgba(255, 255, 255, 0);
 	transition: text-decoration-color 300ms;
 }
@@ -19,6 +19,9 @@
 
 .black-under:hover  {
 	text-decoration-color: variables.$color-black;
+}
+.white-under:hover  {
+	text-decoration-color: variables.$color-white;
 }
 
 

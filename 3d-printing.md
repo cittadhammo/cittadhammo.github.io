@@ -5,4 +5,3 @@ layout: page
 ---
 
 {% include areaList.md %}
-

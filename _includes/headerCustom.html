@@ -61,11 +61,11 @@
 						{% endif %}
 				</h2>
       </div>
-      <div class="header-links black-under">
+      <div class="header-links white-under" >
         {% assign pages = site[area.name] | where: "type", "page" %}
         
         {% for page in pages %}
-          <a href="{{ page.url | prepend: site.baseurl }}" class="rouge-first"> {{ page.title }} </a>
+          <a href="{{ page.url | prepend: site.baseurl }}" class="rouge-first white-under"> {{ page.title }} </a>
         {% endfor %}
       </div>
 		</div>

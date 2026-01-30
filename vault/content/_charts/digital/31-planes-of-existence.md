@@ -17,6 +17,7 @@ techs:
     url: "https://observablehq.com/"
 images:
   - name: "A1S-31Planes.png"
+    map: true
 notebook:
   - name: "31 Planes of Existence"
     url: "https://observablehq.com/d/2efec0e29fe3e7f9"
