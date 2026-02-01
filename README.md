@@ -118,3 +118,7 @@ Alternatively, a new `make` command has been added for convenience:
 ```bash
 make serve-local
 ```
+
+### Publishing
+
+Add "gh-pages"" or "cf-pages" key words in the commit for the github action to push to the relevant hosting. 
