@@ -13,3 +13,5 @@
  - [ ] grid for item propreties 
  - [ ] add modify in github on item pages and how to add new items, categories, etc.j
  - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
+ - [ ] check jekyll errors
+ - [ ] include head in map ?
