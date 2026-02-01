@@ -1,9 +1,5 @@
 .PHONY: assets
 
-# Run Jekyll local server with livereload and local config
-serve:
-	jekyll serve --livereload --config _config.yml,_config_local.yml
-
 # Run the search and mapping script
 assets:
 	bash ./scripts/generate_assets.sh
@@ -16,7 +12,11 @@ clean:
 	rm -rf assets/images/*
 	rm -rf maps/*
 
-build-local:
+# Updates _config_local.yml's exclude list with _config.yml's exclude list, and adds "assets/images"
+sync-config:
+	yq -i '.exclude = (load("_config.yml").exclude + ["assets/images"])' _config_local.yml
+
+build: # careful with the keep file in config_local
 	bundle exec jekyll build --config _config.yml,_config_local.yml
 
 change-images-assets-to-symlink:
@@ -26,5 +26,7 @@ change-images-assets-to-symlink:
 remove-symlink:
 	rm _site/assets/images
 
-serve-local: # Run change-images-assets-to-symlink for faster reload time
+serve: # there is a keep file in _config local that will take care of the assets images
+	rm -rf ./_site/assets/images
+	ln -sr ./assets/images ./_site/assets/images
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml

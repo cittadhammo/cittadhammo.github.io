@@ -37,11 +37,13 @@ bash ./scripts/searchAndMap.sh
 
 ## Obsidian
 
-THe content folder can be edited via Obsidian. Actually, a vault containing content is stored on another repo that when a commit is pushed it get sync with this one.
+THe content folder can be edited via Obsidian. Actually, a vault containing content is stored on another repo that when a commit is pushed it get sync with this one. (not sure this is true)
 
 ## install
 
 Pineaple Jekyll template for this website
+
+The following is true with old version of Ruby that had gems preinstalled, please use bundle in that new project. For reference: 
 
 Run: `jekyll serve` no need to `bundle install` or `bundle exec jekyll serve` on this repo.
 
@@ -122,3 +124,26 @@ make serve-local
 ### Publishing
 
 Add "gh-pages"" or "cf-pages" key words in the commit for the github action to push to the relevant hosting. 
+
+Could use a container in the workflow at some point for more stability, something like :
+
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.2-bookworm  # or ruby:3.0-bullseye
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install libvips
+        run: apt-get update && apt-get install -y libvips-tools
+
+      - name: Install Bundler (optional but recommended)
+        run: gem install bundler
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --config _config.yml,_config_gh.yml
+
+```

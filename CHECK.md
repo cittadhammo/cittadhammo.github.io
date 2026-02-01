@@ -15,3 +15,4 @@
  - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
  - [ ] check jekyll errors
  - [ ] include head in map ?
+ - [ ] there is script and vendor in the assets, shoudl be one only ?

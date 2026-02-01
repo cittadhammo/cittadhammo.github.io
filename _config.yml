@@ -82,7 +82,9 @@ exclude:
   - vendor/gems
   - vendor/ruby
   - script/
-  - vault/
+  - vault
   - Makefile
   - build.sh
   - scripts/
+  - GEMINI.md
+  - CHECK.md
