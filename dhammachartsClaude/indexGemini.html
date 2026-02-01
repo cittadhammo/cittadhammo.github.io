@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DhammaCharts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Unified Header */
+        .unified-header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            padding: 25px 40px;
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease; /* Smooth transition for background/padding */
+        }
+
+        .unified-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .site-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: black;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: font-size 0.3s ease;
+        }
+
+        .site-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            color: #666;
+            font-style: italic;
+            font-weight: 300;
+            transition: opacity 0.3s ease, font-size 0.3s ease;
+        }
+
+        .header-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end; /* Align links to the right */
+            gap: 30px; /* Space between primary nav items */
+        }
+
+        .header-nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 0;
+            position: relative;
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap; /* Prevent wrapping */
+            display: inline-block; /* Allow padding and margin to work independently */
+        }
+
+        .header-nav a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .header-nav a:hover:before {
+            width: 100%;
+        }
+
+        /* Active Navigation Link */
+        .header-nav a.active {
+            font-weight: 700;
+            color: #764ba2; /* Highlight color */
+            transform: translateY(-3px);
+            font-size: 1.1rem; /* Slightly larger when active */
+        }
+
+        .header-nav a.active:before {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Responsive unified header */
+        @media (max-width: 768px) {
+            .unified-header {
+                padding: 15px 20px;
+            }
+            
+            .site-title {
+                font-size: 2.2rem;
+            }
+            
+            .site-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .header-nav {
+                gap: 20px;
+                justify-content: center; /* Center nav items on smaller screens */
+            }
+            
+            .header-nav a {
+                font-size: 0.9rem;
+                padding: 10px 0;
+            }
+
+            .header-nav a.active {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .unified-header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-title {
+                font-size: 1.8rem;
+            }
+            
+            .site-subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .header-nav {
+                gap: 15px;
+                width: 100%; /* Take full width */
+                justify-content: space-around; /* Distribute items evenly */
+            }
+            
+            .header-nav a {
+                font-size: 0.8rem;
+                padding: 8px 0;
+            }
+
+            .header-nav a.active {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Section container - remove section-header specific styling */
+        .section {
+            min-height: 100vh;
+            padding-top: 20px; /* Add padding to prevent content from going under sticky header */
+        }
+
+        /* Masonry container */
+        .masonry-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        /* Responsive columns */
+        @media (max-width: 768px) {
+            .masonry-container {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-container {
+                column-count: 1;
+            }
+        }
+
+        /* Masonry items */
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 25px;
+            border-radius: 0;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Card title under image */
+        .card-title {
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #333;
+            background: white;
+            border-radius: 0;
+        }
+
+        .card-subtitle {
+            padding: 0 20px 15px 20px;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: -10px;
+        }
+
+        /* Different image heights for masonry effect */
+        .masonry-item:nth-child(9n+1) img {
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+2) img {
+            aspect-ratio: 4/6;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+3) img {
+            aspect-ratio: 3/3;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+4) img {
+            aspect-ratio: 5/7;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+5) img {
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+6) img {
+            aspect-ratio: 3/5;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+7) img {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+8) img {
+            aspect-ratio: 3/4.5;
+            object-fit: cover;
+        }
+
+        .masonry-item:nth-child(9n+9) img {
+            aspect-ratio: 5/6;
+            object-fit: cover;
+        }
+
+        /* Background gradients for sections */
+        .section:nth-child(1) { /* First section */
+            background: linear-gradient(45deg, #f8f9ff 0%, #e8ecff 100%);
+        }
+
+        .section:nth-child(2) {
+            background: linear-gradient(45deg, #fff8f8 0%, #ffe8f0 100%);
+        }
+
+        .section:nth-child(3) {
+            background: linear-gradient(45deg, #f8fdff 0%, #e8f8ff 100%);
+        }
+
+        .section:nth-child(4) {
+            background: linear-gradient(45deg, #f8fff9 0%, #e8ffe8 100%);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Unified Header -->
+    <div class="unified-header">
+        <div class="unified-header-content">
+            <div class="site-info">
+                <div class="site-title">DhammaCharts</div>
+                <div class="site-subtitle">Exploring the Dhamma with charts and art.</div>
+            </div>
+            <nav class="header-nav">
+                <a href="#charts" data-section="charts">Charts</a>
+                <a href="#3d-printing" data-section="3d-printing">3D Printing</a>
+                <a href="#projects" data-section="projects">Projects</a>
+                <a href="#writings" data-section="writings">Writings</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section" id="charts">
+        <div class="masonry-container">
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/500?random=1" alt="Item 1">
+                <div class="card-title">Mountain Sunrise</div>
+                <div class="card-subtitle">Breathtaking sunrise over misty mountains</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/600?random=2" alt="Item 2">
+                <div class="card-title">Ocean Waves</div>
+                <div class="card-subtitle">Powerful waves crashing on rocky shore</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/450?random=3" alt="Item 3">
+                <div class="card-title">Forest Path</div>
+                <div class="card-subtitle">Mysterious path through ancient forest</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/550?random=4" alt="Item 4">
+                <div class="card-title">City Lights</div>
+                <div class="card-subtitle">Urban skyline illuminated at night</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/400?random=5" alt="Item 5">
+                <div class="card-title">Desert Dunes</div>
+                <div class="card-subtitle">Golden sand dunes under clear sky</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/650?random=6" alt="Item 6">
+                <div class="card-title">Waterfall</div>
+                <div class="card-subtitle">Cascading water in tropical paradise</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/480?random=7" alt="Item 7">
+                <div class="card-title">Autumn Leaves</div>
+                <div class="card-subtitle">Colorful fall foliage carpet</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/520?random=8" alt="Item 8">
+                <div class="card-title">Snow Peak</div>
+                <div class="card-subtitle">Majestic snow-capped mountain peak</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/580?random=9" alt="Item 9">
+                <div class="card-title">Lake Reflection</div>
+                <div class="card-subtitle">Perfect mirror reflection in calm lake</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section" id="3d-printing">
+        <div class="masonry-container">
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/500?random=10" alt="Art 1">
+                <div class="card-title">Abstract Dreams</div>
+                <div class="card-subtitle">Surreal digital composition</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/600?random=11" alt="Art 2">
+                <div class="card-title">Neon Nights</div>
+                <div class="card-subtitle">Cyberpunk inspired artwork</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/450?random=12" alt="Art 3">
+                <div class="card-title">Geometric Flow</div>
+                <div class="card-subtitle">Mathematical beauty in motion</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/550?random=13" alt="Art 4">
+                <div class="card-title">Color Burst</div>
+                <div class="card-subtitle">Explosive digital color palette</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/400?random=14" alt="Art 5">
+                <div class="card-title">Minimalist Space</div>
+                <div class="card-subtitle">Clean lines and negative space</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/650?random=15" alt="Art 6">
+                <div class="card-title">Fractal Universe</div>
+                <div class="card-subtitle">Infinite patterns and recursion</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/480?random=16" alt="Art 7">
+                <div class="card-title">Liquid Motion</div>
+                <div class="card-subtitle">Fluid dynamics visualization</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/520?random=17" alt="Art 8">
+                <div class="card-title">Neural Network</div>
+                <div class="card-subtitle">AI-inspired neural connections</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/580?random=18" alt="Art 9">
+                <div class="card-title">Digital Dreamscape</div>
+                <div class="card-subtitle">Ethereal digital landscape</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section" id="projects">
+        <div class="masonry-container">
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/500?random=19" alt="Product 1">
+                <div class="card-title">Smart Watch</div>
+                <div class="card-subtitle">Next-generation wearable technology</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/600?random=20" alt="Product 2">
+                <div class="card-title">Wireless Headphones</div>
+                <div class="card-subtitle">Premium audio experience</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/450?random=21" alt="Product 3">
+                <div class="card-title">Smartphone</div>
+                <div class="card-subtitle">Latest flagship mobile device</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/550?random=22" alt="Product 4">
+                <div class="card-title">Laptop</div>
+                <div class="card-subtitle">Ultra-thin professional laptop</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/400?random=23" alt="Product 5">
+                <div class="card-title">Tablet</div>
+                <div class="card-subtitle">Versatile touch-screen device</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/650?random=24" alt="Product 6">
+                <div class="card-title">Camera</div>
+                <div class="card-subtitle">Professional photography equipment</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/480?random=25" alt="Product 7">
+                <div class="card-title">Gaming Console</div>
+                <div class="card-subtitle">Next-gen gaming experience</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/520?random=26" alt="Product 8">
+                <div class="card-title">Smart Speaker</div>
+                <div class="card-subtitle">Voice-controlled home assistant</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/580?random=27" alt="Product 9">
+                <div class="card-title">VR Headset</div>
+                <div class="card-subtitle">Immersive virtual reality device</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section" id="writings">
+        <div class="masonry-container">
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/500?random=28" alt="Project 1">
+                <div class="card-title">E-commerce Platform</div>
+                <div class="card-subtitle">Full-stack online shopping solution</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/600?random=29" alt="Project 2">
+                <div class="card-title">Mobile App UI</div>
+                <div class="card-subtitle">Modern mobile interface design</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/450?random=30" alt="Project 3">
+                <div class="card-title">Brand Identity</div>
+                <div class="card-subtitle">Complete corporate branding package</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/550?random=31" alt="Project 4">
+                <div class="card-title">Web Dashboard</div>
+                <div class="card-subtitle">Analytics and data visualization</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/400?random=32" alt="Project 5">
+                <div class="card-title">Landing Page</div>
+                <div class="card-subtitle">High-conversion marketing page</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/650?random=33" alt="Project 6">
+                <div class="card-title">Database System</div>
+                <div class="card-subtitle">Scalable data management solution</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/480?random=34" alt="Project 7">
+                <div class="card-title">API Integration</div>
+                <div class="card-subtitle">Third-party service connections</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/520?random=35" alt="Project 8">
+                <div class="card-title">Social Platform</div>
+                <div class="card-subtitle">Community-driven social network</div>
+            </div>
+            <div class="masonry-item">
+                <img src="https://picsum.photos/400/580?random=36" alt="Project 9">
+                <div class="card-title">Machine Learning</div>
+                <div class="card-subtitle">AI-powered prediction model</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.header-nav a');
+            const unifiedHeader = document.querySelector('.unified-header');
+            const siteTitle = document.querySelector('.site-title');
+            const siteSubtitle = document.querySelector('.site-subtitle');
+
+            // Function to update active navigation link
+            const updateActiveLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === id) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // Intersection Observer to detect current section
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '-50% 0px -50% 0px', // When the middle of the section is in the middle of the viewport
+                threshold: 0 // As soon as any part of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateActiveLink(entry.target.id);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-section');
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Manually update active link immediately for better UX
+                        updateActiveLink(targetId);
+                    }
+                });
+            });
+
+            // Initial active link setting (for when page loads at the top)
+            if (sections.length > 0) {
+                updateActiveLink(sections[0].id);
+            }
+        });
+    </script>
+</body>
+</html>
