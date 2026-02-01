@@ -9,6 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, 'gh-pages') || contains(github.event.head_commit.message, 'cf-pages')
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,14 +33,13 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'  # or latest stable
-
-      - name: Install Jekyll
-        run: gem install jekyll
+          ruby-version: "3.2"
+          bundler-cache: true # 👈 important
 
       - name: Build Jekyll site
         run: |
-          jekyll build --config _config.yml,_config_${{ contains(github.event.head_commit.message, 'cf-pages') && 'cdn' || 'gh' }}.yml
+          bundle exec jekyll build \
+            --config _config.yml,_config_${{ contains(github.event.head_commit.message, 'cf-pages') && 'cdn' || 'gh' }}.yml
 
       - name: Deploy to GitHub Pages
         if: contains(github.event.head_commit.message, 'gh-pages')
@@ -47,9 +47,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          publish_branch: gh-pages  # default: gh-pages
-
-
+          publish_branch: gh-pages
 
       - name: Push to cf-pages branch
         if: contains(github.event.head_commit.message, 'cf-pages')
@@ -57,4 +55,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          publish_branch: cf-pages  # default: gh-pages
+          publish_branch: cf-pages
