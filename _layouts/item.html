@@ -87,22 +87,7 @@
                 {% endfor %}
               {% endif %}
 
-              {% if page.files %}
-                <span class="h2">Files</span>
-                {% for file in page.files %}
-                  <p class="rouge-first">
-                    <a
-                      class="black-under"
-                      href="{{ site.baseurl }}/assets/images/{{ file.name | split: '.' | first }}/{{ file.name }}"
-                      download="{{ file.name | split: '.' | first }}"
-                      target="_blank"
-                      rel="nofollow"
-                    >
-                      {{ file.title }}
-                    </a>
-                  </p>
-                {% endfor %}
-              {% endif %}
+
 
               {% if page.code %}
                 <span class="h2">Code</span>
@@ -121,6 +106,30 @@
                 {% endfor %}
               {% endif %}
 
+              {% assign files_to_display = "" | split: "," %}
+              {% for item in page.images %}
+                {% if item.file %}
+                  {% assign files_to_display = files_to_display | push: item %}
+                {% endif %}
+              {% endfor %}
+
+              {% if files_to_display.size > 0 %}
+                <span class="h2">Files</span>
+                {% for file_item in files_to_display %}
+                  <p class="rouge-first">
+                    <a
+                      class="black-under"
+                      href="{{ site.baseurl }}/assets/images/{{ file_item.name | split: '.' | first }}/{{ file_item.name }}"
+                      download="{{ file_item.name | split: '.' | first }}"
+                      target="_blank"
+                      rel="nofollow"
+                    >
+                      {{ file_item.title }}
+                    </a>
+                  </p>
+                {% endfor %}
+              {% endif %}
+
               <!-- <span class="h2">Description</span> -->
               <!-- {{ page.content }} -->
             </div>
@@ -128,42 +137,35 @@
           <aside>
             <ul>
               {% for image in page.images %}
-                {% assign img = image.name | split: '.' | first %}
-                <li>
-                  {% if image.map %}
-                    <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                      <a
-                        class="black-under"
-                        style="position: relative; top: 0; left: 0;"
-                        href="{{site.baseurl}}/maps/{{img}}.html"
-                      >
+                {% if image.display != false %}
+                  {% assign img = image.name | split: '.' | first %}
+                  <li>
+                    {% if image.map %}
+                      <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
+                        <a
+                          class="black-under"
+                          style="position: relative; top: 0; left: 0;"
+                          href="{{site.baseurl}}/maps/{{img}}.html"
+                        >
+                          <img
+                            class="load-hidden"
+                            src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
+                            style="aspect-ratio: {{ site.data.size[img].medium }};"
+                            alt="{{ image.alt }}"
+                          >
+                        </a>
+                      </div>
+                    {% else %}
+                      <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
                         <img
                           class="load-hidden"
-                          src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
-                          style="aspect-ratio: {{ site.data.size[img].medium }};"
-                          alt="{{ image.name }}"
+                          src="/assets/images/{{ img }}/medium.{{site.img_ext}}"
+                          alt="{{ image.alt }}"
                         >
-                      </a>
-                      <!-- code below add little button fullscreen -->
-                      <!--
-                        <a class="black-under" style="position: absolute; top: 0; right: 0;"
-                        href='{{site.baseurl}}/maps/{{img}}.html'>
-                        	<img class="load-hidden" style="width:20px"
-                        		src="{{ '/assets/icons/fullscreen.png' | prepend: site.baseurl }}"
-                        		alt="{{ image.alt }}" />
-                        </a>
-                      -->
-                    </div>
-                  {% else %}
-                    <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                      <img
-                        class="load-hidden"
-                        src="/assets/images/{{ img }}/medium.{{site.img_ext}}"
-                        alt="{{ image.alt }}"
-                      >
-                    </div>
-                  {% endif %}
-                </li>
+                      </div>
+                    {% endif %}
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
           </aside>
