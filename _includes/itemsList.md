@@ -25,8 +25,8 @@
                     style="aspect-ratio: {{ site.data.size[img].small }};"
                   >
                 </div>
-                <span class="h2">{{ item.type }}</span>
                 <h3>{{ item.title }}</h3>
+                <span class="h2">{{ item.subtitle }}</span>
               </a>
             </li>
           {% endif %}
