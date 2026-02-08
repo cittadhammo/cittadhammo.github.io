@@ -143,26 +143,15 @@
                     {% if image.map %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
                         <a
-                          class="black-under"
-                          style="position: relative; top: 0; left: 0;"
-                          href="{{site.baseurl}}/maps/{{img}}.html"
+                          class="mfp-image"
+                          href="/assets/images/{{ img }}/large.{{site.img_ext}}"
+                          data-map-url="{{site.baseurl}}/maps/{{img}}.html"
                         >
                           <img
                             class="load-hidden"
                             src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
                             style="aspect-ratio: {{ site.data.size[img].medium }};"
                             alt="{{ image.alt }}"
-                          >
-                        </a>
-                        <a
-                          class="map-icon-overlay load-hidden"
-                          href="{{site.baseurl}}/maps/{{img}}.html"
-                          style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; opacity: 1 !important;"
-                        >
-                          <img
-                            src="{{ '/assets/icons/fullscreen.png' | prepend: site.baseurl }}"
-                            alt="View Map"
-                            style="width: 24px; height: 24px;"
                           >
                         </a>
                       </div>

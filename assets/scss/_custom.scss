@@ -366,7 +366,42 @@ a.bigger {
   cursor: default !important;
 }
 
+/* Ensure .mfp-img is relative for absolute positioning of its children */
+.mfp-img {
+  position: relative; /* This is Magnific Popup's default; removed !important */
+}
 
+/* Ensure figure is relative for absolute positioning of its children */
+.mfp-figure figure {
+  position: relative !important; /* Added to ensure absolute positioning of icon works */
+}
+
+.fullscreen-map-icon-in-lightbox {
+  position: absolute;
+  top: 60px; /* Positioned at the top */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for icon's own width to truly center it */
+  width: 159px;
+  height: 32px;
+  z-index: 9999; /* High z-index to be on top */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: rgba(255,255,255,0.6); /* Initial more opaque background */
+  // border-radius: 5px; /* Slight rounding for square look */
+  // border: 2px solid black; /* Added black border */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  cursor: pointer; /* Indicate it's clickable */
+  
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.fullscreen-map-icon-in-lightbox:hover {
+  // background-color: rgba(255,255,255,0.9); /* Even more opaque on hover */
+}
 
 .source-author-h2-style {
   color: black;
