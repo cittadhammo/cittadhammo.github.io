@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SRC_IMAGE_DIR="./vault/assets/images/"
+SRC_IMAGE_DIR="./vault/assets/images"
 DEST_IMAGE_DIR="./assets/images"
 MD_DIR="./vault/content" 
 MAPS_HTML_DIR="./maps"

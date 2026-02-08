@@ -24,13 +24,13 @@ images:
     map: true
     file: true
     title: A0 Square
-  - name: A0VM-DhammaCitadeli.png
+  - name: A0VM-DhammaCitadel.png
     display: true
     file: true
     title: A0 Vertical
   - name: A0VBM-DhammaCitadel.png
+    display: true
     file: true
-    title: A0 Vertical (Black Background) 
     title: A0 Vertical (Black Background) 
 ---
 

@@ -355,6 +355,19 @@ a.bigger {
   }
 }
 
+
+.mfp-close {
+  cursor: pointer !important;
+}
+
+.mfp-wrap.mfp-zoom-out-cur,
+.mfp-bg,
+.mfp-zoom-out-cur { /* New rule for general zoom-out state */
+  cursor: default !important;
+}
+
+
+
 .source-author-h2-style {
   color: black;
   font-family: variables.$font-lekton; /* Added font-family */
