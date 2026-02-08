@@ -27,6 +27,7 @@ remove-symlink:
 	rm _site/assets/images
 
 serve: # there is a keep file in _config local that will take care of the assets images
+	# You might need to build the site first to get the assets folder in _site
 	rm -rf ./_site/assets/images
 	ln -sr ./assets/images ./_site/assets/images
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml

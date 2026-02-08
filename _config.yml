@@ -88,3 +88,4 @@ exclude:
   - scripts/
   - GEMINI.md
   - CHECK.md
+  - QUOTE.md

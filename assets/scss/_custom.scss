@@ -1,5 +1,10 @@
 @use "variables";
 
+.subtitle {
+  color: black;
+  font-size: smaller;
+}
+
 .rouge {
 	color: variables.$color-red;
 }
@@ -348,4 +353,15 @@ a.bigger {
   &:hover {
     color: variables.$color-white !important; // On hover, make it white in inverted mode
   }
+}
+
+.source-author-h2-style {
+  color: black;
+  font-family: variables.$font-lekton; /* Added font-family */
+  font-size: 1rem; /* Changed to 1rem */
+  font-weight: bold;
+  letter-spacing: .2rem; /* Added letter-spacing */
+  text-transform: uppercase; /* Added text-transform */
+  display: inline; /* Ensure it stays inline */
+  margin-left: 0.5em; /* Added space to the left */
 }

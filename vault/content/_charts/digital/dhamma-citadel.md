@@ -15,12 +15,23 @@ techs:
     url: http://d3js.org
   - name: Observable
     url: https://observablehq.com/
-images:
-  - name: A0SM-DhammaCitadel.png
-    map: true
 code:
   - name: Notebook
     url: https://observablehq.com/@cittadhammo/the-dhamma-citadel?collection=@cittadhammo/finished
+images:
+  - name: A0SM-DhammaCitadel.png
+    display: true
+    map: true
+    file: true
+    title: A0 Square
+  - name: A0VM-DhammaCitadeli.png
+    display: true
+    file: true
+    title: A0 Vertical
+  - name: A0VBM-DhammaCitadel.png
+    file: true
+    title: A0 Vertical (Black Background) 
+    title: A0 Vertical (Black Background) 
 ---
 
 The Dhamma Citadel is an interactive visualization that helps in navigating the Four Noble Truths. This project by Cittadhammo is a data visualization and interactive notebook related to Buddhist concepts.

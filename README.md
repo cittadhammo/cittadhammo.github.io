@@ -90,6 +90,14 @@ sudo pacman -S openslide
 
 ---
 
+You might need:
+
+```
+
+echo 'export PATH="$PATH:$(ruby -e "puts Gem.user_dir")/bin"' >> ~/.$(basename $SHELL)rc
+
+```
+
 ## Jekyll Local Development Setup
 
 To ensure consistent Jekyll development across different environments, this project now uses Bundler to manage Ruby dependencies.

@@ -1,20 +1,24 @@
 {
   "main": {
-    "id": "d23fc48e65ea8ff9",
+    "id": "21ad011423640ff7",
     "type": "split",
     "children": [
       {
-        "id": "352d81952d455b4a",
+        "id": "64b3be19935af12c",
         "type": "tabs",
         "children": [
           {
-            "id": "6d3a9a4840feaac4",
+            "id": "c4b3a6bb0e2989e8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "CHECK.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "CHECK"
             }
           }
         ]
@@ -23,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "2b3f784652e37fd1",
+    "id": "0b1b91d681ff10af",
     "type": "split",
     "children": [
       {
-        "id": "5e306a1f0245b72c",
+        "id": "d7e4bb3b071d7e66",
         "type": "tabs",
         "children": [
           {
-            "id": "3f34646b823e7cfc",
+            "id": "7df974a876f8d550",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,7 +48,7 @@
             }
           },
           {
-            "id": "54f52581fb8eab3d",
+            "id": "4f061f53ee674f10",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,7 +65,7 @@
             }
           },
           {
-            "id": "263e7c82004760a8",
+            "id": "b80691b7b4445338",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -77,15 +81,15 @@
     "width": 300
   },
   "right": {
-    "id": "369a1d14a12560a9",
+    "id": "776b49d884d99eab",
     "type": "split",
     "children": [
       {
-        "id": "92fa4dd8f3fd3135",
+        "id": "0f05163d34480010",
         "type": "tabs",
         "children": [
           {
-            "id": "ae50b1dc31e2bd76",
+            "id": "e09090ba9c8ba849",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -104,7 +108,7 @@
             }
           },
           {
-            "id": "5263a5d38ab2f8e2",
+            "id": "54d8e7627f80cfbc",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -118,7 +122,7 @@
             }
           },
           {
-            "id": "4b57ddad48424f4d",
+            "id": "79e6322f94feade0",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -133,7 +137,7 @@
             }
           },
           {
-            "id": "2fcc4fc87069fc02",
+            "id": "52aaa2f345e04ecf",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -142,12 +146,12 @@
                 "showSearch": false,
                 "searchQuery": ""
               },
-              "icon": "lucide-ghost",
-              "title": "all-properties"
+              "icon": "lucide-archive",
+              "title": "All properties"
             }
           },
           {
-            "id": "194c3fcb87feddb0",
+            "id": "5ab0cb219512346d",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -170,64 +174,27 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "omnisearch:Omnisearch": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "bases:Create new base": false
     }
   },
-  "active": "6d3a9a4840feaac4",
+  "active": "c4b3a6bb0e2989e8",
   "lastOpenFiles": [
-    "content/_3d-printing/other/dhamma-citadel-3d.md",
-    "content/_charts/digital/dhamma-citadel.md",
-    "content/_charts/digital/Khundaka.md",
-    "assets/images/A0VM-DhammaCitadel.png",
-    "assets/images/A0VBM-DhammaCitadel.png",
-    "assets/images/manual.jpeg",
-    "assets/images2/an2p.jpg",
-    "assets/images2/untitled.png",
-    "assets/images2/untitled.svg",
-    "assets/images2/sn26p.jpg",
-    "assets/images2/sn22p (1).png",
-    "assets/images2/sn22p.png",
-    "assets/images2/sn8p.png",
-    "content/_3d-printing/monk/bowl-stands.md",
-    "content/_charts/digital/vinaya-pitaka.md",
-    "content/_3d-printing/monk",
-    "content/_charts/digital/sutta-pitaka.md",
-    "content/_charts/digital/sutta-parallels.md",
-    "content/_charts/digital/patimokkha-structure.md",
-    "content/_charts/digital/patimokkha-categories.md",
-    "content/_charts/digital/path-to-nibbana.md",
-    "content/_charts/digital/Parivara.md",
-    "content/_charts/digital/manual-buddhist-terms.md",
-    "content/_3d-printing/stupas/magga-vibhanga-stupa.md",
-    "content/_charts/digital/buddha-brain.md",
-    "content/_charts/digital/37-wings-to-awakenings.md",
-    "content/_charts/digital/31-planes-of-existence.md",
-    "CHECK.md",
-    "assets/drawings/Advanced.excalidraw.md",
-    "assets/drawings/AreaOne.excalidraw.md",
-    "assets/drawings/Areas.excalidraw.md",
-    "assets/drawings/Charts.excalidraw.md",
-    "assets/drawings/Cover.excalidraw.md",
-    "assets/drawings/Logo.excalidraw.md",
-    "content/_projects/Websites/DhammaCharts.org.md",
-    "README.md",
-    "content/_3d-printing/fractals",
-    "script/token.rtf",
-    "script/tilingReadme.rtf",
-    "script/tiling.sh.rtf",
-    "script/sync-to-jekyll.yml.rtf",
-    "script/scriptaction.rtf",
-    "script/script.rtf",
-    "script/process-images2.sh.rtf",
-    "script/process-images.sh.rtf"
+    "_layouts/item.html~",
+    "index.md~",
+    "_includes/footer.html~",
+    "_includes/head.html~",
+    "_includes/itemsList.md~",
+    "_includes/headerCustom.html~",
+    "_layouts/single-page.html~",
+    "vault/data/size.yml.tmp",
+    "_layouts/page.html~",
+    "_layouts/default.html~",
+    "_layouts/home.html~"
   ]
 }

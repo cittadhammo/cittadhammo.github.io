@@ -1,7 +1,7 @@
 ---
 title: "31 Planes of Existence"
-author: "Cittadhammo"
-year: "2025"
+author: "Tan Cittadhammo & Tan Karunno"
+year: "2024"
 license:
   - name: "CC BY-NC-SA 4.0"
     url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
