@@ -23,9 +23,11 @@ $(document).ready(function() {
 
         // Add fullscreen button if mapUrl exists (PRESERVED FROM YOUR ADJUSTMENTS)
         if (mapUrl) {
-          var fullscreenIcon = $('<a class="fullscreen-map-icon-in-lightbox" href="' + mapUrl + '"></a>');
+          // Set explicit width and height on the <a> tag
+          // Calculated width: 500px height * (658/258 aspect ratio) = ~1270px
+          var fullscreenIcon = $('<a class="fullscreen-map-icon-in-lightbox" href="' + mapUrl + '" style="display: inline-block; top: 40px; width: 300px; height: 80px;"></a>');
           // Use only fs-off.png and control opacity/shadow via CSS transitions
-          var iconImage = $('<img src="/assets/icons/fs-off.png" alt="View Fullscreen Map" style="height: 500px !important; width: auto; object-fit: contain; object-position: center; opacity: 0.85; transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));">');
+          var iconImage = $('<img src="/assets/icons/fs-off.png" alt="View Fullscreen Map" style="height: 100%; width: 100%; object-fit: contain; object-position: center; opacity: 0.85; transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));">');
           
           fullscreenIcon.append(iconImage);
           
@@ -43,8 +45,7 @@ $(document).ready(function() {
           });
 
           this.content.find('figure').append(fullscreenIcon);
-        }
-      }
+        }      }
     }
   });
 });
