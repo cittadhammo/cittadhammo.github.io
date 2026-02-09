@@ -8,77 +8,615 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
-   sodipodi:docname="drawing2.svg"
+   sodipodi:docname="fs.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#ffffff"
+     pagecolor="#d6d6d6"
      bordercolor="#000000"
      borderopacity="0.25"
-     inkscape:showpageshadow="2"
+     inkscape:showpageshadow="false"
      inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
+     inkscape:pagecheckerboard="true"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2.6156778"
-     inkscape:cx="199.94818"
-     inkscape:cy="363.00343"
+     inkscape:cx="-427.23152"
+     inkscape:cy="318.4643"
      inkscape:window-width="1676"
      inkscape:window-height="1020"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="false"
+     borderlayer="false"
+     labelstyle="default" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter35"
+       x="-0.11834537"
+       y="-0.59812385"
+       width="1.3205825"
+       height="2.6215716">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         id="feFlood34" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.039418"
+         id="feGaussianBlur34" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="1.768355"
+         dy="1.773904"
+         id="feOffset34" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite34" />
+      <feComposite
+         result="fbSourceGraphic"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite35" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix35" />
+      <feFlood
+         id="feFlood35"
+         result="flood"
+         in="fbSourceGraphic"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)" />
+      <feGaussianBlur
+         id="feGaussianBlur35"
+         result="blur"
+         in="fbSourceGraphic"
+         stdDeviation="1.039418" />
+      <feOffset
+         id="feOffset35"
+         result="offset"
+         in="blur"
+         dx="1.768355"
+         dy="1.773904" />
+      <feComposite
+         id="feComposite36"
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset" />
+      <feComposite
+         id="feComposite37"
+         result="comp2"
+         operator="over"
+         in="fbSourceGraphic"
+         in2="comp1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter117"
+       x="-0.20494321"
+       y="-1.035794"
+       width="1.4937782"
+       height="3.4969118">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="1.000000"
+         flood-color="rgb(0,0,0)"
+         id="feFlood116" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="1.800000"
+         id="feGaussianBlur116" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="1.768355"
+         dy="1.773904"
+         id="feOffset116" />
+      <feComposite
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset"
+         id="feComposite116" />
+      <feComposite
+         result="fbSourceGraphic"
+         operator="over"
+         in="SourceGraphic"
+         in2="comp1"
+         id="feComposite117" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix120" />
+      <feFlood
+         id="feFlood120"
+         result="flood"
+         in="fbSourceGraphic"
+         flood-opacity="0.490196"
+         flood-color="rgb(0,0,0)" />
+      <feGaussianBlur
+         id="feGaussianBlur120"
+         result="blur"
+         in="fbSourceGraphic"
+         stdDeviation="1.800000" />
+      <feOffset
+         id="feOffset120"
+         result="offset"
+         in="blur"
+         dx="1.768355"
+         dy="1.773904" />
+      <feComposite
+         id="feComposite120"
+         result="comp1"
+         operator="in"
+         in="flood"
+         in2="offset" />
+      <feComposite
+         id="feComposite121"
+         result="comp2"
+         operator="over"
+         in="fbSourceGraphic"
+         in2="comp1" />
+    </filter>
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4"
-       width="42.15802"
-       height="8.3414268"
-       x="27.95505"
-       y="93.85984"
-       ry="3.0810676"
-       inkscape:export-filename="fs300.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
-       x="30.125776"
-       y="99.46328"
-       id="text1"><tspan
-         sodipodi:role="line"
-         id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+       style="opacity:0.717877;fill:none;stroke-width:0.1;stroke:#000000;stroke-opacity:1;stroke-dasharray:none"
+       id="rect55"
+       width="55.673"
+       height="21.868"
+       x="-132.85692"
+       y="85.713112" />
+    <g
+       id="g9"
+       style="opacity:0.717877"
+       transform="translate(-89.819156,11.082152)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="93.85984"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
          x="30.125776"
-         y="99.46328">See Fullscreen</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
-       d="m 63.16621,97.928913 v -2.019231 h 2.014672"
-       id="path1"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
-       d="m 65.583536,95.911961 h 2.019231 v 2.014672"
-       id="path2"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
-       d="m 67.602767,98.269702 v 2.019228 h -2.014672"
-       id="path3"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
-       d="M 65.185441,100.28665 H 63.16621 v -2.014668"
-       id="path4"
-       sodipodi:nodetypes="ccc" />
+         y="99.46328"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="99.46328">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,97.928913 v -2.019231 h 2.014672"
+         id="path1"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,95.911961 h 2.019231 v 2.014672"
+         id="path2"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,98.269702 v 2.019228 h -2.014672"
+         id="path3"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,100.28665 H 63.16621 v -2.014668"
+         id="path4"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g14"
+       transform="translate(-89.264304)"
+       style="filter:url(#filter35)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect11"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text11"><tspan
+           sodipodi:role="line"
+           id="tspan11"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path11"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path12"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path13"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path14"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g43"
+       transform="translate(-155.8229)"
+       style="filter:url(#filter35)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect40"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text40"><tspan
+           sodipodi:role="line"
+           id="tspan40"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path40"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path41"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path42"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path43"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g51"
+       transform="translate(-155.8229)"
+       style="filter:url(#filter35)"
+       inkscape:export-filename="fs-on.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect47"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text47"><tspan
+           sodipodi:role="line"
+           id="tspan47"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path48"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path49"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path50"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path51"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g10"
+       transform="translate(-155.8229,23.164009)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect1"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text2"><tspan
+           sodipodi:role="line"
+           id="tspan2"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path5"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path6"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path7"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path8"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g55"
+       transform="translate(-90.312645,23.165453)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect51"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text51"><tspan
+           sodipodi:role="line"
+           id="tspan51"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path52"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path53"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path54"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path55"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g65"
+       style="opacity:0.717877"
+       transform="translate(-133.33523,33.298097)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect62"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="93.85984"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="99.46328"
+         id="text62"><tspan
+           sodipodi:role="line"
+           id="tspan62"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="99.46328">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,97.928913 v -2.019231 h 2.014672"
+         id="path62"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,95.911961 h 2.019231 v 2.014672"
+         id="path63"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,98.269702 v 2.019228 h -2.014672"
+         id="path64"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,100.28665 H 63.16621 v -2.014668"
+         id="path65"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g77"
+       style="opacity:0.717877"
+       transform="translate(-10.282372,31.96771)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect74"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="93.85984"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="99.46328"
+         id="text74"><tspan
+           sodipodi:role="line"
+           id="tspan74"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="99.46328">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,97.928913 v -2.019231 h 2.014672"
+         id="path74"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,95.911961 h 2.019231 v 2.014672"
+         id="path75"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,98.269702 v 2.019228 h -2.014672"
+         id="path76"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,100.28665 H 63.16621 v -2.014668"
+         id="path77"
+         sodipodi:nodetypes="ccc" />
+    </g>
+    <g
+       id="g81"
+       transform="translate(-10.489757,14.86845)"
+       style="filter:url(#filter117)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.712164;stroke-dasharray:none;stroke-opacity:1"
+         id="rect77"
+         width="42.15802"
+         height="8.3414268"
+         x="27.95505"
+         y="67.538315"
+         ry="3.0810676"
+         inkscape:export-filename="fs300.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke-width:4.68126"
+         x="30.125776"
+         y="73.141754"
+         id="text77"><tspan
+           sodipodi:role="line"
+           id="tspan77"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:4.33169px;font-family:Poppins;-inkscape-font-specification:'Poppins, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:4.68125"
+           x="30.125776"
+           y="73.141754">See Fullscreen</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 63.16621,71.607387 v -2.019231 h 2.014672"
+         id="path78"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 65.583536,69.590435 h 2.019231 v 2.014672"
+         id="path79"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="m 67.602767,71.948176 v 2.019228 h -2.014672"
+         id="path80"
+         sodipodi:nodetypes="ccc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-dasharray:none;stroke-opacity:1"
+         d="M 65.185441,73.965124 H 63.16621 v -2.014668"
+         id="path81"
+         sodipodi:nodetypes="ccc" />
+    </g>
   </g>
 </svg>
