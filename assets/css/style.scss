@@ -3,8 +3,14 @@
 
 @charset "UTF-8";
 
+/* Inject Jekyll → Sass */
+$baseurl: "{{ site.baseurl }}";
 
-@use "variables";
+/* Global config module */
+@use "variables" with (
+  $baseurl: $baseurl
+);
+
 @use "mixins";
 @use "normalize";
 @use "fonts";

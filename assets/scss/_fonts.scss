@@ -1,9 +1,14 @@
+@use "variables";
+
+.hero {
+  background-image: url("#{variables.$baseurl}/images/foo.png");
+}
 /* latin-ext */
 @font-face {
 	font-family: 'Lekton';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Lekton'), local('Lekton-Regular'), url({{site.baseurl}}/assets/fonts/SZc43FDmLaWmWpBuVh3pv0Db6AtO.woff2) format('woff2');
+	src: local('Lekton'), local('Lekton-Regular'), url(#{variables.$baseurl}/assets/fonts/SZc43FDmLaWmWpBuVh3pv0Db6AtO.woff2) format('woff2');
 	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -11,7 +16,7 @@
 	font-family: 'Lekton';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Lekton'), local('Lekton-Regular'), url({{site.baseurl}}/assets/fonts/SZc43FDmLaWmWpBuWB3pv0Db6A.woff2) format('woff2');
+	src: local('Lekton'), local('Lekton-Regular'), url(#{variables.$baseurl}/assets/fonts/SZc43FDmLaWmWpBuWB3pv0Db6A.woff2) format('woff2');
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 /* devanagari */
@@ -22,7 +27,7 @@
     font-family: 'Poppins Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Regular'), url({{site.baseurl}}/assets/fonts/Poppins-Regular.woff) format('woff');
+    src: local('Poppins Regular'), url(#{variables.$baseurl}/assets/fonts/Poppins-Regular.woff) format('woff');
     }
     
 
@@ -30,7 +35,7 @@
     font-family: 'Poppins Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Italic'), url({{site.baseurl}}/assets/fonts/Poppins-Italic.woff) format('woff');
+    src: local('Poppins Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-Italic.woff) format('woff');
     }
     
 
@@ -38,7 +43,7 @@
     font-family: 'Poppins Thin';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Thin'), url({{site.baseurl}}/assets/fonts/Poppins-Thin.woff) format('woff');
+    src: local('Poppins Thin'), url(#{variables.$baseurl}/assets/fonts/Poppins-Thin.woff) format('woff');
     }
     
 
@@ -46,7 +51,7 @@
     font-family: 'Poppins Thin Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Thin Italic'), url({{site.baseurl}}/assets/fonts/Poppins-ThinItalic.woff) format('woff');
+    src: local('Poppins Thin Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-ThinItalic.woff) format('woff');
     }
     
 
@@ -54,7 +59,7 @@
     font-family: 'Poppins ExtraLight';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins ExtraLight'), url({{site.baseurl}}/assets/fonts/Poppins-ExtraLight.woff) format('woff');
+    src: local('Poppins ExtraLight'), url(#{variables.$baseurl}/assets/fonts/Poppins-ExtraLight.woff) format('woff');
     }
     
 
@@ -62,7 +67,7 @@
     font-family: 'Poppins ExtraLight Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins ExtraLight Italic'), url({{site.baseurl}}/assets/fonts/Poppins-ExtraLightItalic.woff) format('woff');
+    src: local('Poppins ExtraLight Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-ExtraLightItalic.woff) format('woff');
     }
     
 
@@ -70,7 +75,7 @@
     font-family: 'Poppins Light';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Light'), url({{site.baseurl}}/assets/fonts/Poppins-Light.woff) format('woff');
+    src: local('Poppins Light'), url(#{variables.$baseurl}/assets/fonts/Poppins-Light.woff) format('woff');
     }
     
 
@@ -78,7 +83,7 @@
     font-family: 'Poppins Light Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Light Italic'), url({{site.baseurl}}/assets/fonts/Poppins-LightItalic.woff) format('woff');
+    src: local('Poppins Light Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-LightItalic.woff) format('woff');
     }
     
 
@@ -86,7 +91,7 @@
     font-family: 'Poppins Medium';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Medium'), url({{site.baseurl}}/assets/fonts/Poppins-Medium.woff) format('woff');
+    src: local('Poppins Medium'), url(#{variables.$baseurl}/assets/fonts/Poppins-Medium.woff) format('woff');
     }
     
 
@@ -94,7 +99,7 @@
     font-family: 'Poppins Medium Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Medium Italic'), url({{site.baseurl}}/assets/fonts/Poppins-MediumItalic.woff) format('woff');
+    src: local('Poppins Medium Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-MediumItalic.woff) format('woff');
     }
     
 
@@ -102,7 +107,7 @@
     font-family: 'Poppins SemiBold';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins SemiBold'), url({{site.baseurl}}/assets/fonts/Poppins-SemiBold.woff) format('woff');
+    src: local('Poppins SemiBold'), url(#{variables.$baseurl}/assets/fonts/Poppins-SemiBold.woff) format('woff');
     }
     
 
@@ -110,7 +115,7 @@
     font-family: 'Poppins SemiBold Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins SemiBold Italic'), url({{site.baseurl}}/assets/fonts/Poppins-SemiBoldItalic.woff) format('woff');
+    src: local('Poppins SemiBold Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-SemiBoldItalic.woff) format('woff');
     }
     
 
@@ -118,7 +123,7 @@
     font-family: 'Poppins Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Bold'), url({{site.baseurl}}/assets/fonts/Poppins-Bold.woff) format('woff');
+    src: local('Poppins Bold'), url(#{variables.$baseurl}/assets/fonts/Poppins-Bold.woff) format('woff');
     }
     
 
@@ -126,7 +131,7 @@
     font-family: 'Poppins Bold Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Bold Italic'), url({{site.baseurl}}/assets/fonts/Poppins-BoldItalic.woff) format('woff');
+    src: local('Poppins Bold Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-BoldItalic.woff) format('woff');
     }
     
 
@@ -134,7 +139,7 @@
     font-family: 'Poppins ExtraBold';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins ExtraBold'), url({{site.baseurl}}/assets/fonts/Poppins-ExtraBold.woff) format('woff');
+    src: local('Poppins ExtraBold'), url(#{variables.$baseurl}/assets/fonts/Poppins-ExtraBold.woff) format('woff');
     }
     
 
@@ -142,7 +147,7 @@
     font-family: 'Poppins ExtraBold Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins ExtraBold Italic'), url({{site.baseurl}}/assets/fonts/Poppins-ExtraBoldItalic.woff) format('woff');
+    src: local('Poppins ExtraBold Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-ExtraBoldItalic.woff) format('woff');
     }
     
 
@@ -150,7 +155,7 @@
     font-family: 'Poppins Black';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Black'), url({{site.baseurl}}/assets/fonts/Poppins-Black.woff) format('woff');
+    src: local('Poppins Black'), url(#{variables.$baseurl}/assets/fonts/Poppins-Black.woff) format('woff');
     }
     
 
@@ -158,5 +163,5 @@
     font-family: 'Poppins Black Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Poppins Black Italic'), url({{site.baseurl}}/assets/fonts/Poppins-BlackItalic.woff) format('woff');
+    src: local('Poppins Black Italic'), url(#{variables.$baseurl}/assets/fonts/Poppins-BlackItalic.woff) format('woff');
     }
