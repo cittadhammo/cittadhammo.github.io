@@ -74,6 +74,6 @@
         delay    : 0,
         scale    : 1
     });
-    sr.reveal('.project img');
+    sr.reveal('.project img.load-hidden, .map-icon.load-hidden');
 
 }(jQuery));
