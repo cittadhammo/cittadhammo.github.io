@@ -402,7 +402,7 @@
 .header-links a {
   position: relative; /* Needed for positioning the pseudo-element */
   font-size: 1.8rem; /* Slightly larger font */
-  white-space: nowrap; /* Prevent wrapping */
+  /* white-space: nowrap; */ /* Prevent wrapping */
   padding: 5px; /* Remove any default padding that might affect sizing */
   margin: 0; /* Remove any default margin */
   /* Ensure a specific color for the links, if not already set by .rouge-first */
@@ -433,4 +433,10 @@
   }
 }
 
-
+@media (max-width: variables.$breakpoint-xsmall) {
+  .logo-and-title-container {
+    flex-direction: column; /* Stack logo/title and links vertically */
+    align-items: flex-start; /* Align items to the start when stacked */
+    gap: 10px; /* Add some space between stacked items */
+  }
+}

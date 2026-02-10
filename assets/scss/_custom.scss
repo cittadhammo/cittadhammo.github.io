@@ -205,10 +205,16 @@ a.bigger {
 }
 
 .header-links {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; // Added for vertical alignment of items in the flex container
 
   a {
     margin-left: 15px;
+  }
+
+  @media (max-width: variables.$breakpoint-xsmall) {
+    align-self: flex-end;
   }
 }
 
@@ -442,5 +448,34 @@ a.bigger {
   &:hover {
     opacity: 1;
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8)); /* More intense drop shadow on hover */
+  }
+}
+
+// Magnific Popup Responsive adjustments
+.mfp-wrap .mfp-content {
+  width: auto; /* Allow content to size naturally */
+  max-width: 100%; /* Ensure content doesn't exceed viewport width */
+}
+
+.mfp-img { /* This directly targets the image element */
+  max-width: 100%;
+  height: auto; /* Ensure aspect ratio is maintained */
+  display: block;
+  margin: 0 auto; /* Center the image */
+  padding: 0; /* Remove any default padding */
+  box-sizing: border-box; /* Include padding in element's total width/height */
+  max-height: 100vh; /* Constrain max height to viewport height */
+}
+
+/* Adjustments for mobile viewports */
+@media screen and (max-width: 768px) {
+  .mfp-wrap .mfp-container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .mfp-img { /* Directly target the image element */
+    max-width: calc(100% - 10px);
+    max-height: calc(100vh - 100px); /* Adjusted for general scenario */
   }
 }
