@@ -41,6 +41,10 @@
 	left: 0;
 	z-index: 1;
 
+	@media (max-width: variables.$breakpoint-medium - 1) { // Apply when width is less than breakpoint-medium
+		padding: 1rem 0 0; // Reduce padding for smaller screens
+	}
+
 	@media (min-width: variables.$breakpoint-medium) {
 		padding: 21rem 0 0;
 		//margin-bottom: 23.42rem;
