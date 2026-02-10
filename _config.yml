@@ -69,6 +69,7 @@ defaults:
       layout: "default"
 
 # Add any folder that need not to be included in the build website.
+include: ['well-known']
 exclude:
   - README.md
   - .sass-cache
