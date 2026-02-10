@@ -14,6 +14,7 @@ $(document).ready(function() {
 
         var mapUrl = this.currItem.el.attr('data-map-url');
         var mfpImg = this.content.find('.mfp-img'); // Get the image element
+        const { baseurl } = window.SITE;
 
         // Ensure clicking the image does nothing, regardless of map status
         mfpImg.off('click').on('click.mfpMap', function(e) {
@@ -27,7 +28,7 @@ $(document).ready(function() {
           // Calculated width: 500px height * (658/258 aspect ratio) = ~1270px
           var fullscreenIcon = $('<a class="fullscreen-map-icon-in-lightbox" href="' + mapUrl + '" style="display: inline-block; top: 40px; width: 300px; height: 80px;"></a>');
           // Use only fs-off.png and control opacity/shadow via CSS transitions
-          var iconImage = $('<img src="/assets/icons/fs-off.png" alt="View Fullscreen Map" style="height: 100%; width: 100%; object-fit: contain; object-position: center; opacity: 0.85; transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));">');
+          var iconImage = $(`<img src="${baseurl}/assets/icons/fs-off.png" alt="View Fullscreen Map" style="height: 100%; width: 100%; object-fit: contain; object-position: center; opacity: 0.85; transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out; filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));">`);
           
           fullscreenIcon.append(iconImage);
           
