@@ -11,10 +11,26 @@
             "id": "6d3a9a4840feaac4",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "image",
+              "state": {
+                "file": "assets/images/A1S-Manual.png"
+              },
+              "icon": "lucide-image",
+              "title": "A1S-Manual"
+            }
+          },
+          {
+            "id": "1c4c20bb3a2d8824",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/_charts/digital/dhamma-citadel.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "dhamma-citadel"
             }
           }
         ]
@@ -182,21 +198,28 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "6d3a9a4840feaac4",
+  "active": "3f34646b823e7cfc",
   "lastOpenFiles": [
-    "content/_3d-printing/other/dhamma-citadel-3d.md",
-    "content/_charts/digital/dhamma-citadel.md",
-    "content/_charts/digital/Khundaka.md",
-    "assets/images/A0VM-DhammaCitadel.png",
-    "assets/images/A0VBM-DhammaCitadel.png",
-    "assets/images/manual.jpeg",
+    "assets/images2/DOChart 2.png",
+    "assets/images2/DOChart.png",
+    "assets/images/A2S-37Wings.png",
     "assets/images2/an2p.jpg",
-    "assets/images2/untitled.png",
-    "assets/images2/untitled.svg",
-    "assets/images2/sn26p.jpg",
-    "assets/images2/sn22p (1).png",
-    "assets/images2/sn22p.png",
-    "assets/images2/sn8p.png",
+    "content/_charts/by-others/dependent-origination.md",
+    "data/size.yml.tmp",
+    "content/_charts/digital/dhamma-citadel.md",
+    "content/_charts/by-others/core-topics-of-buddhism.md",
+    "content/_charts/by-others/combined-dependant-origination.md",
+    "assets/images2/DOChart 1.png",
+    "assets/images2/sn1252.jpg",
+    "assets/images2/sn123.jpg",
+    "assets/images2/paticcasamuppadaJayarava.jpg",
+    "assets/images2/sn12t.svg",
+    "assets/images2/sn12.png",
+    "assets/images2/09_11_Retreat_Big_Picture.pdf",
+    "assets/images2/09_11_Retreat_Big_Picture-1.png",
+    "assets/images2/DOChart.pdf",
+    "content/_3d-printing/other/dhamma-citadel-3d.md",
+    "content/_charts/digital/Khundaka.md",
     "content/_3d-printing/monk/bowl-stands.md",
     "content/_charts/digital/vinaya-pitaka.md",
     "content/_3d-printing/monk",
@@ -217,17 +240,11 @@
     "assets/drawings/Areas.excalidraw.md",
     "assets/drawings/Charts.excalidraw.md",
     "assets/drawings/Cover.excalidraw.md",
-    "assets/drawings/Logo.excalidraw.md",
-    "content/_projects/Websites/DhammaCharts.org.md",
-    "README.md",
     "content/_3d-printing/fractals",
     "script/token.rtf",
     "script/tilingReadme.rtf",
     "script/tiling.sh.rtf",
     "script/sync-to-jekyll.yml.rtf",
-    "script/scriptaction.rtf",
-    "script/script.rtf",
-    "script/process-images2.sh.rtf",
-    "script/process-images.sh.rtf"
+    "script/scriptaction.rtf"
   ]
 }

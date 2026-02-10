@@ -42,3 +42,11 @@ This document outlines key information about the Dhammacharts project for the Ge
 
 ## Configuration Notes
 *   The `baseurl` in `_config.yml` might need to be set to `''` if the website is deployed to the root folder of a domain.
+
+## No Comment in Liquid Language
+
+* Comment made inside the page code with liquid syntax {# #} are breaking the code. DO NOT USE THEM
+
+## Gemini CLI Specific Notes
+*   **CSS Location:** Custom styles are located in `assets/scss/_custom.scss` and are imported via `assets/css/style.scss`.
+*   **Git Usage:** The Gemini CLI should **not** run git commands. The user will manage git operations manually.

@@ -413,3 +413,34 @@ a.bigger {
   display: inline; /* Ensure it stays inline */
   margin-left: 0.5em; /* Added space to the left */
 }
+
+.map-icon {
+  position: absolute;
+  top: 20px; /* Adjust as needed for top-right positioning */
+  right: 20px; /* Adjust as needed for top-right positioning */
+  z-index: 10; /* Ensure it's above the image */
+  opacity: 0.8;
+  transition: opacity 0.3s ease, filter 0.3s ease; /* Smooth transition for opacity and shadow */
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5)); /* Initial drop shadow */
+
+  img {
+    width: 32px; /* Adjust icon size as needed */
+    height: 32px; /* Adjust icon size as needed */
+  }
+
+  &::before { /* Add a larger clickable area */
+    content: "";
+    position: absolute;
+    top: -15px; /* 15px extension upwards */
+    left: -15px; /* 15px extension to the left */
+    right: -15px; /* 15px extension to the right */
+    bottom: -15px; /* 15px extension downwards */
+    background-color: transparent; /* Make it invisible */
+    z-index: -1; /* Ensure it's behind the image but still captures clicks */
+  }
+
+  &:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8)); /* More intense drop shadow on hover */
+  }
+}
