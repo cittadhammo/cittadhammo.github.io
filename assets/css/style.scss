@@ -1,7 +1,10 @@
 ---
 ---
 
+$: "{{ site. }}";
+
 @charset "UTF-8";
+
 
 @use "variables";
 @use "mixins";
