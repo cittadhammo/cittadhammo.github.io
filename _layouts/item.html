@@ -62,7 +62,9 @@
                 <span class="h2">Sources</span>
                 {% for source in page.sources %}
                   <p class="rouge-first">
-                    <a class="black-under" href="{{ source.url }}" target="_blank" rel="nofollow">{{ source.name }}</a> {% if source.author %}<span class="source-author-h2-style">
+                    <a class="black-under" href="{{ source.url }}" target="_blank" rel="nofollow">{{ source.name }}</a>
+                    {% if source.author -%}
+                      <span class="source-author-h2-style">
                         {{ source.author }}
                       </span>
                       {% if source.license -%}
@@ -87,8 +89,6 @@
                 {% endfor %}
               {% endif %}
 
-
-
               {% if page.code %}
                 <span class="h2">Code</span>
                 {% for item in page.code %}
@@ -106,7 +106,7 @@
                 {% endfor %}
               {% endif %}
 
-              {% assign files_to_display = "" | split: "," %}
+              {% assign files_to_display = '' | split: ',' %}
               {% for item in page.images %}
                 {% if item.file %}
                   {% assign files_to_display = files_to_display | push: item %}
@@ -144,7 +144,7 @@
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
                         <a
                           class="mfp-image"
-                          href="/assets/images/{{ img }}/large.{{site.img_ext}}"
+                          href="{{site.baseurl}}/assets/images/{{ img }}/large.{{site.img_ext}}"
                           data-map-url="{{site.baseurl}}/maps/{{img}}.html"
                         >
                           <img
@@ -155,15 +155,15 @@
                           >
                         </a>
                         <a class="map-icon load-hidden" href="{{site.baseurl}}/maps/{{img}}.html">
-                            <img src="{{site.baseurl}}/assets/icons/fs-s.png" alt="Map Icon">
+                          <img src="{{site.baseurl}}/assets/icons/fs-s.png" alt="Map Icon">
                         </a>
                       </div>
                     {% else %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a class="mfp-image" href="/assets/images/{{ img }}/large.{{site.img_ext}}">
+                        <a class="mfp-image" href="{{site.baseurl}}/assets/images/{{ img }}/large.{{site.img_ext}}">
                           <img
                             class="load-hidden"
-                            src="/assets/images/{{ img }}/medium.{{site.img_ext}}"
+                            src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
                             alt="{{ image.alt }}"
                           >
                         </a>
@@ -336,9 +336,9 @@
     </main>
     {% include footer.html %}
     <script>
-    window.SITE = {
-      baseurl: "{{ site.baseurl }}"
-    };
+      window.SITE = {
+        baseurl: '{{ site.baseurl }}',
+      };
     </script>
     <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | prepend: site.baseurl }}"></script>
@@ -348,4 +348,3 @@
     <script src="{{ '/assets/scripts/project.js' | prepend: site.baseurl }}"></script>
   </body>
 </html>
-
