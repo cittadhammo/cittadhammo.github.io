@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>
+      {{ site.author }}
+      /
+      {{ page.title }}
+    </title>
+    <meta name="author" content="{{ site.author }}">
+    <meta name="description" content="{{ page.content | strip_html | strip_newlines }}">
+    <meta name="keywords" content="{{ page.meta.keywords }}">
+    {% include head.html %}
+  </head>
+
+  <body class="black">
+    {% assign area_name = page.collection %}
+    {% assign area = site.data.areas | where: 'name', area_name | first %}
+    {% assign area_title = area.title %}
+    <main class="home">
+      {% include headerCustom.html subTitle=area_title inverted=true area_name=area_name %}
+
+      <div class="container arrow-div">
+        <a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/index.html" class="bigger">
+          <i class="arrow left"></i>
+        </a>
+      </div>
+
+      <section class="project">
+        <div class="container">
+          {{ content }}
+        </div>
+      </section>
+    </main>
+    {% include footer.html %}
+    <script>
+      window.SITE = {
+        baseurl: '{{ site.baseurl }}',
+      };
+    </script>
+    <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/lightbox.js' | prepend: site.baseurl }}"></script>
+    <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | prepend: site.baseurl }}"></script> -->
+    <script src="{{ '/assets/scripts/vendor/sticky-kit.min.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/project.js' | prepend: site.baseurl }}"></script>
+  </body>
+</html>

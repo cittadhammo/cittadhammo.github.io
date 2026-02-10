@@ -9,17 +9,12 @@
   </head>
 
   <body class="black">
-    <main class="home">
     {% assign area_name = page.collection %}
     {% assign area = site.data.areas | where: 'name', area_name | first %}
     {% assign area_title = area.title %}
-      {% include headerCustom.html subTitle=area.title inverted=true area_name=area.name %}
-      <section class="projects">
-        <div class="container">
-          <h1 class="cat-title projects">{{ page.title }}</h1>
-          {{ content }} 
-        </div>
-      </section>
+    {% include headerCustom.html subTitle=area_title inverted=true area_name=area_name %}
+    <main class="home">
+      {{ content }}
     </main>
     {% include footer.html %}
     <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | prepend: site.baseurl }}"></script> -->

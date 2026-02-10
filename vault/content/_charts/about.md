@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Prints
+title: About
 type: page
-order: 1
+order: 2
 ---
 
 This is a page to explain how to print chart

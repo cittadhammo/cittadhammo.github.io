@@ -1,6 +1,6 @@
 <div style="clear: both; height: 195px; display:flex">
     <div width="200px" style="float: left; margin-right: 2rem; margin-bottom: 5rem"><a href="{{include.link}}">
-        <img  src="{{ include.image_path }}" alt="" style="width:130px"></a>
+        <img  src="{{ include.image_path | prepend: site.baseurl }}" alt="" style="width:130px"></a>
     </div>
     <div>
       <h2>{{ include.title }}</h2>
