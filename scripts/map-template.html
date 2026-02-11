@@ -34,10 +34,15 @@ layout: none
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+      cursor: pointer;
     }
     .cross button:hover,
     .cross button:focus {
       opacity: 1;
+      background-color: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
     }
     .cross button img {
       width: 13px;
@@ -50,6 +55,14 @@ layout: none
     }
     .ol-control button {
       color: black !important;
+      transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+      cursor: pointer;
+    }
+    .ol-control button:hover,
+    .ol-control button:focus {
+      background-color: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
     }
     /* Mobile adjustments */
     @media (max-width: 480px) {

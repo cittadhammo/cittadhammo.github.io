@@ -4,6 +4,10 @@
 assets:
 	bash ./scripts/generate_assets.sh
 
+# Regenerate map HTML only (no tiles or thumbnails)
+maps-html:
+	MAPS_HTML_ONLY=true bash ./scripts/generate_assets.sh
+
 # Generate PDF and PNG by running Python script in the vault directory
 images:
 	cd vault && python3 ./scripts/generate_pdf_png2.py

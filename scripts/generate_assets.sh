@@ -7,6 +7,7 @@ MD_DIR="./vault/content"
 MAPS_HTML_DIR="./maps"
 SIZE_DATA_FILE="./vault/data/size.yml"
 TEMPLATE_FILE="./scripts/map-template.html"
+MAPS_HTML_ONLY="${MAPS_HTML_ONLY:-false}"
 
 # Check if a background value should be treated as black
 is_black_bg() {
@@ -102,9 +103,11 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         fi
 
         mkdir -p "$DEST_FOLDER"
-        cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME" # Always copy original image/file
+        if [ "$MAPS_HTML_ONLY" != "true" ]; then
+            cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME" # Always copy original image/file
+        fi
 
-        if [ "$DISPLAY" = "true" ]; then
+        if [ "$DISPLAY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
             echo "Processing displayable asset: $IMG_NAME (generating thumbnails)"
 
             # Get aspect ratio to determine appropriate sizing
@@ -163,7 +166,9 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             WIDTH=$(vipsheader -f width "$SRC_IMG_PATH")
             HEIGHT=$(vipsheader -f height "$SRC_IMG_PATH")
 
-            if [[ -d "$TILE_PATH" ]]; then
+            if [ "$MAPS_HTML_ONLY" = "true" ]; then
+                echo "Skipping tile generation (MAPS_HTML_ONLY=true)."
+            elif [[ -d "$TILE_PATH" ]]; then
                 echo "Skipping $IMG_NAME light tiles, already exist."
             else
                 vips dzsave "$SRC_IMG_PATH" "$TILE_PATH" \
@@ -174,7 +179,9 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             HAS_DARK_TILES="false"
             if ! is_black_bg "$BG"; then
                 HAS_DARK_TILES="true"
-                if [[ -d "$TILE_DARK_PATH" ]]; then
+                if [ "$MAPS_HTML_ONLY" = "true" ]; then
+                    echo "Skipping dark tile generation (MAPS_HTML_ONLY=true)."
+                elif [[ -d "$TILE_DARK_PATH" ]]; then
                     echo "Skipping $IMG_NAME dark tiles, already exist."
                 else
                     vips dzsave "$SRC_IMG_PATH" "$TILE_DARK_PATH" \
