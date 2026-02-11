@@ -12,14 +12,22 @@
         </h1>
 
         <h2>
+          {% capture main_area_title %}
+            {% if include.subTitle and include.subTitle != '' %}
+              {{ include.subTitle }}
+            {% else %}
+              {% include humanize_name.html value=include.area_name %}
+            {% endif %}
+          {% endcapture %}
+          {% assign main_area_title = main_area_title | strip %}
           {% assign area_anchor = include.area_name | slugify %}
           {% assign index_url = '/index.html' | relative_url %}
           {% if page.layout != 'home' %}
             <a href="{{ index_url }}#{{ area_anchor }}">
-              <span class="main-area-title">{{ include.subTitle }}</span>
+              <span class="main-area-title">{{ main_area_title }}</span>
             </a>
           {% else %}
-            <span class="main-area-title">{{ include.subTitle }}</span>
+            <span class="main-area-title">{{ main_area_title }}</span>
           {% endif %}
           <span class="other-areas">
             {% assign all_areas = site.data.areas %}

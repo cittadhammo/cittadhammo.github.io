@@ -3,6 +3,14 @@ layout: home
 title: Home
 ---
 {% for area in site.data.areas %}
-  {% include header.html subTitle=area.title inverted=true area_name=area.name %}
+  {% capture area_title %}
+    {% if area.title %}
+      {{ area.title }}
+    {% else %}
+      {% include humanize_name.html value=area.name %}
+    {% endif %}
+  {% endcapture %}
+  {% assign area_title = area_title | strip %}
+  {% include header.html subTitle=area_title inverted=true area_name=area.name %}
   {% include itemsList.md area = area.name %}
 {% endfor %}
