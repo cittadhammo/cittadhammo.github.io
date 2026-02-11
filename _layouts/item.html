@@ -45,18 +45,75 @@
 
               {% if page.license %}
                 <span class="h2">License</span>
-                {% for license in page.license %}
-                  <p class="rouge-first">
-                    <a class="black-under" href="{{ license.url }}">{{ license.name }}</a>
-                  </p>
+                {% assign license_json = page.license | jsonify | strip %}
+                {% if license_json contains '[' %}
+                  {% assign license_items = page.license %}
+                {% else %}
+                  {% assign license_items = '' | split: '' %}
+                  {% assign license_items = license_items | push: page.license %}
+                {% endif %}
+
+                {% for license in license_items %}
+                  {% assign license_name = '' %}
+                  {% assign license_url = '' %}
+                  {% assign license_key = '' %}
+                  {% assign fallback_license = nil %}
+
+                  {% if license.name %}
+                    {% assign license_name = license.name | to_s | strip %}
+                    {% assign license_url = license.url | to_s | strip %}
+                    {% assign license_key = license.key | default: license.name | slugify %}
+                  {% else %}
+                    {% assign license_name = license | to_s | strip %}
+                    {% assign license_key = license | slugify %}
+                  {% endif %}
+
+                  {% if license_key != '' %}
+                    {% assign fallback_license = site.data.links[license_key] %}
+                  {% endif %}
+
+                  {% if license_url == '' and fallback_license and fallback_license.url %}
+                    {% assign license_url = fallback_license.url | to_s | strip %}
+                  {% endif %}
+                  {% if license_name == '' and fallback_license and fallback_license.name %}
+                    {% assign license_name = fallback_license.name | to_s | strip %}
+                  {% endif %}
+
+                  {% if license_name != '' %}
+                    <p class="rouge-first">
+                      {% if license_url != '' %}
+                        <a class="black-under" href="{{ license_url }}" target="_blank" rel="nofollow">{{ license_name }}</a>
+                      {% else %}
+                        {{ license_name }}
+                      {% endif %}
+                    </p>
+                  {% endif %}
                 {% endfor %}
               {% endif %}
 
               {% if page.sources %}
                 <span class="h2">Sources</span>
                 {% for source in page.sources %}
+                  {% assign source_name = source.name | to_s | strip %}
+                  {% assign source_url = source.url | to_s | strip %}
+                  {% assign source_key = source.key | default: source.name | slugify %}
+                  {% assign fallback_source = nil %}
+                  {% if source_key != '' %}
+                    {% assign fallback_source = site.data.links[source_key] %}
+                  {% endif %}
+                  {% if source_url == '' and fallback_source and fallback_source.url %}
+                    {% assign source_url = fallback_source.url | to_s | strip %}
+                  {% endif %}
+                  {% if source_name == '' and fallback_source and fallback_source.name %}
+                    {% assign source_name = fallback_source.name | to_s | strip %}
+                  {% endif %}
+
                   <p class="rouge-first">
-                    <a class="black-under" href="{{ source.url }}" target="_blank" rel="nofollow">{{ source.name }}</a>
+                    {% if source_url != '' %}
+                      <a class="black-under" href="{{ source_url }}" target="_blank" rel="nofollow">{{ source_name }}</a>
+                    {% else %}
+                      {{ source_name }}
+                    {% endif %}
                     {% if source.author -%}
                       <span class="source-author-h2-style">
                         {{ source.author }}
@@ -73,11 +130,25 @@
               {% if page.techs %}
                 <span class="h2">Technologies</span>
                 {% for tech in page.techs %}
+                  {% assign tech_name = tech.name | to_s | strip %}
+                  {% assign tech_url = tech.url | to_s | strip %}
+                  {% assign tech_key = tech.key | default: tech.name | slugify %}
+                  {% assign fallback_tech = nil %}
+                  {% if tech_key != '' %}
+                    {% assign fallback_tech = site.data.links[tech_key] %}
+                  {% endif %}
+                  {% if tech_url == '' and fallback_tech and fallback_tech.url %}
+                    {% assign tech_url = fallback_tech.url | to_s | strip %}
+                  {% endif %}
+                  {% if tech_name == '' and fallback_tech and fallback_tech.name %}
+                    {% assign tech_name = fallback_tech.name | to_s | strip %}
+                  {% endif %}
+
                   <p class="rouge-first">
-                    {% if tech.url %}
-                      <a class="black-under" href="{{ tech.url }}" target="_blank" rel="nofollow">{{ tech.name }}</a>
+                    {% if tech_url != '' %}
+                      <a class="black-under" href="{{ tech_url }}" target="_blank" rel="nofollow">{{ tech_name }}</a>
                     {% else %}
-                      {{ tech.name }}
+                      {{ tech_name }}
                     {% endif %}
                   </p>
                 {% endfor %}
@@ -86,16 +157,34 @@
               {% if page.code %}
                 <span class="h2">Code</span>
                 {% for item in page.code %}
+                  {% assign code_name = item.name | to_s | strip %}
+                  {% assign code_url = item.url | to_s | strip %}
+                  {% assign code_key = item.key | default: item.name | slugify %}
+                  {% assign fallback_code = nil %}
+                  {% if code_key != '' %}
+                    {% assign fallback_code = site.data.links[code_key] %}
+                  {% endif %}
+                  {% if code_url == '' and fallback_code and fallback_code.url %}
+                    {% assign code_url = fallback_code.url | to_s | strip %}
+                  {% endif %}
+                  {% if code_name == '' and fallback_code and fallback_code.name %}
+                    {% assign code_name = fallback_code.name | to_s | strip %}
+                  {% endif %}
+
                   <p class="rouge-first">
-                    <a
-                      class="black-under"
-                      title="{{ item.name }}"
-                      href="{{ item.url }}"
-                      target="_blank"
-                      rel="nofollow"
-                    >
-                      {{ item.name }}
-                    </a>
+                    {% if code_url != '' %}
+                      <a
+                        class="black-under"
+                        title="{{ code_name }}"
+                        href="{{ code_url }}"
+                        target="_blank"
+                        rel="nofollow"
+                      >
+                        {{ code_name }}
+                      </a>
+                    {% else %}
+                      {{ code_name }}
+                    {% endif %}
                   </p>
                 {% endfor %}
               {% endif %}

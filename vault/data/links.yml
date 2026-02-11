@@ -1,0 +1,23 @@
+d3:
+  name: D3
+  url: https://d3js.org/
+
+observable:
+  name: Observable
+  url: https://observablehq.com/
+
+suttacentral:
+  name: SuttaCentral
+  url: https://suttacentral.net/
+
+cc0:
+  name: CC0
+  url: https://creativecommons.org/publicdomain/zero/1.0/
+
+cc-by-nc-sa-4-0:
+  name: CC BY-NC-SA 4.0
+  url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+cc-by-nc-4-0:
+  name: CC BY-NC 4.0
+  url: https://creativecommons.org/licenses/by-nc/4.0/
