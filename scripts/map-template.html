@@ -5,8 +5,8 @@ layout: none
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>__TITLE__</title>
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/lib/ol/ol.css">
-  <script src="{{ site.baseurl }}/assets/lib/ol/ol.js"></script>
+  <link rel="stylesheet" href="{{ "/assets/lib/ol/ol.css" | relative_url }}">
+  <script src="{{ "/assets/lib/ol/ol.js" | relative_url }}"></script>
 
   <style>
     html,
@@ -82,7 +82,7 @@ layout: none
           // previous button with image
           const button = document.createElement("button");
           const img = document.createElement("img");
-          img.src = "{{ site.baseurl }}/assets/icons/previous.png";
+          img.src = "{{ "/assets/icons/previous.png" | relative_url }}";
           img.alt = "Previous";
           button.appendChild(img);
 
@@ -91,7 +91,7 @@ layout: none
               {%- assign docs = col.docs -%}
               {%- for doc in docs -%}
                   {%- if doc.path == "__PATHMD__" -%}
-                      {%- assign link = doc.url | prepend: site.baseurl -%}
+                      {%- assign link = doc.url | relative_url -%}
                   {%- endif -%}
               {%- endfor -%}
           {%- endfor -%}
@@ -129,7 +129,7 @@ layout: none
                       preload: Infinity,
                       extent: extent,
                       source: new ol.source.TileImage({
-                          url: "{{ site.baseurl }}/assets/images/__IMG_NAME__/tiles/{z}/{y}/{x}.webp",
+                          url: "{{ "/assets/images/__IMG_NAME__/tiles/{z}/{y}/{x}.webp" | relative_url }}",
                       })
                   })
               ],

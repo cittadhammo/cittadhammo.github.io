@@ -14,6 +14,13 @@
     {% assign area = site.data.areas | where: 'name', area_name | first %}
     {% assign area_title = area.title %}
       {% include headerCustom.html subTitle=area.title inverted=true area_name=area.name %}
+      {% assign area_anchor = area_name | slugify %}
+      {% assign back_href = '/index.html' | relative_url %}
+      <div class="container arrow-div">
+        <a style="padding: 10px;" class="black-under" href="{{ back_href }}#{{ area_anchor }}" class="bigger">
+          <i class="arrow left"></i>
+        </a>
+      </div>
       <section class="projects">
         <div class="container">
           <h1 class="cat-title projects">{{ page.title }}</h1>
