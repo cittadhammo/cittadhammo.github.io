@@ -1,16 +1,22 @@
 # User config
 email: "dhammacharts@protonmail.com"
 author: "DhammaCharts"
-keywords: "Dhamma, Chart"
+title: "DhammaCharts"
+description: "Dhamma Charts and Art."
+logo: "/assets/icons/logo300.png"
 
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
-baseurl: "http://127.0.0.1:5500/_site"
+baseurl: ""
 url: "https://cittadhammo.github.io"
 highlighter: rouge
 sass:
   sass_dir: assets/scss
   style: compressed
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Config file
 collections_dir: vault/content
@@ -71,9 +77,22 @@ defaults:
 # Add any folder that need not to be included in the build website.
 include: ['well-known']
 exclude:
+  - _config_cdn.yml
+  - _config_gh.yml
+  - _config_local.yml
+  - AGENTS.md
   - README.md
+  - LICENSE.md
+  - .bundle
+  - .devcontainer
+  - .github
+  - .obsidian
   - .sass-cache
   - .jekyll-cache
+  - .gitignore
+  - _site
+  - "*.swp"
+  - ".DS_Store"
   - gemfiles
   - Gemfile
   - Gemfile.lock

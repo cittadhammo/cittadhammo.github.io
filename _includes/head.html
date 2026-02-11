@@ -2,6 +2,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="robots" content="index,follow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+{% assign seo_description = page.description | to_s | strip %}
+{% if seo_description == '' %}
+  {% assign seo_description = page.excerpt | default: site.description %}
+  {% assign seo_description = seo_description | markdownify | strip_html | normalize_whitespace | strip | truncate: 160 %}
+  <meta name="description" content="{{ seo_description }}">
+  <meta property="og:description" content="{{ seo_description }}">
+  <meta name="twitter:description" content="{{ seo_description }}">
+{% endif %}
+
+{% assign seo_image_path = '' %}
+{% if page.image == nil and page.images and page.images.size > 0 and page.images[0].name %}
+  {% assign first_image_base = page.images[0].name | split: '.' | first %}
+  {% assign seo_image_path = '/assets/images/' | append: first_image_base | append: '/large.' | append: site.img_ext %}
+{% endif %}
+{% if seo_image_path != '' %}
+  {% assign seo_image_url = seo_image_path | absolute_url %}
+  <meta property="og:image" content="{{ seo_image_url }}">
+  <meta name="twitter:image" content="{{ seo_image_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+{% endif %}
 <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
 <link rel="icon" type="image/png" href="{{ '/favicon-32x32.png' | relative_url }}" sizes="32x32">
 <link rel="icon" type="image/png" href="{{ '/favicon-16x16.png' | relative_url }}" sizes="16x16">
