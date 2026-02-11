@@ -7,6 +7,13 @@ logo: "/assets/icons/logo300.png"
 discord_url: "https://discord.gg/MkyKZh8ANy"
 contribute_url: "/references/info/contribute.html"
 
+# Theme config
+theme:
+  default: "light" # "light" | "dark"
+  allow_user_toggle: true
+  respect_prefers_color_scheme: false
+  toggle_show_auto_label: false
+
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""

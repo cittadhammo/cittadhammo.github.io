@@ -11,17 +11,18 @@ $baseurl: "" !default;
  /* Colors
   ****************************************************************/
  
- $color-white: #fff;
- $color-black: #000;
- $color-black-light: #4a4a4a;
+ $color-white: var(--color-bg);
+ $color-black: var(--color-text);
+ $color-black-light: var(--color-text-muted);
  $color-red: #8b2c2c;
  // $color-red: #702424;
  $color-red-light: #b05151;
- $color-gray: grey;
- $color-silver-chalice: #7c7c7c; //aaa
- $color-alabaster: #fafafa;
+ $color-gray: var(--color-text-muted);
+ $color-silver-chalice: var(--color-muted); //aaa
+ $color-alabaster: var(--color-surface);
  $color-tango: #f46f25;
- $color-white-sand: #f6f6f6;
+ $color-white-sand: var(--color-surface-alt);
+ $color-border: var(--color-border);
  
  /* Breakpoint
   ****************************************************************/

@@ -28,7 +28,117 @@
 <link rel="icon" type="image/png" href="{{ '/favicon-16x16.png' | relative_url }}" sizes="16x16">
 <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
 <link rel="mask-icon" href="{{ '/safari-pinned-tab.svg' | relative_url }}" color="#5bbad5">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#000000" id="meta-theme-color">
+<script>
+  (function () {
+    var config = {
+      defaultMode: {{ site.theme.default | default: "auto" | jsonify }},
+      allowUserToggle: {{ site.theme.allow_user_toggle | default: true | jsonify }},
+      respectPrefers: {{ site.theme.respect_prefers_color_scheme | default: true | jsonify }},
+      toggleShowAutoLabel: {{ site.theme.toggle_show_auto_label | default: true | jsonify }},
+      metaThemeLight: "#000000",
+      metaThemeDark: "#3a0a0a"
+    };
+
+    var storageKey = "theme";
+    var mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+    function getPreferredTheme() {
+      if (!config.respectPrefers || !mediaQuery) return null;
+      return mediaQuery.matches ? "dark" : "light";
+    }
+
+    function getStoredTheme() {
+      if (!config.allowUserToggle) return null;
+      try {
+        var value = localStorage.getItem(storageKey);
+        return value === "light" || value === "dark" ? value : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function resolveTheme(mode) {
+      if (mode === "dark" || mode === "light") return mode;
+      if (mode === "auto") return getPreferredTheme() || "light";
+      return "light";
+    }
+
+    function applyTheme(theme, mode) {
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.setAttribute("data-theme-mode", mode);
+
+      var meta = document.getElementById("meta-theme-color");
+      if (meta) {
+        meta.setAttribute("content", theme === "dark" ? config.metaThemeDark : config.metaThemeLight);
+      }
+    }
+
+    var storedMode = getStoredTheme();
+    var initialMode = storedMode || config.defaultMode || "light";
+    if (initialMode !== "light" && initialMode !== "dark" && initialMode !== "auto") {
+      initialMode = "light";
+    }
+    var initialTheme = resolveTheme(initialMode);
+    applyTheme(initialTheme, initialMode);
+
+    window.__themeConfig = config;
+    window.__themeStorageKey = storageKey;
+    window.__applyTheme = applyTheme;
+    window.__resolveTheme = resolveTheme;
+
+    if (mediaQuery && config.respectPrefers) {
+      mediaQuery.addEventListener("change", function () {
+        var currentMode = document.documentElement.getAttribute("data-theme-mode") || config.defaultMode;
+        if (currentMode === "auto") {
+          applyTheme(resolveTheme("auto"), "auto");
+        }
+      });
+    }
+  })();
+</script>
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/vendor/magnific-popup.min.css' | relative_url }}">
 <script src="{{ '/assets/scripts/scrollreveal.js' | relative_url }}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector("[data-theme-toggle]");
+    if (!toggle || !window.__themeConfig) return;
+
+    var config = window.__themeConfig;
+    var storageKey = window.__themeStorageKey || "theme";
+    var cycleModes = ["light", "dark"];
+
+    function currentMode() {
+      return document.documentElement.getAttribute("data-theme-mode") || config.defaultMode || "auto";
+    }
+
+    function setMode(mode) {
+      var resolved = window.__resolveTheme ? window.__resolveTheme(mode) : mode;
+      if (window.__applyTheme) window.__applyTheme(resolved, mode);
+      try {
+        localStorage.setItem(storageKey, mode);
+      } catch (e) {}
+      updateToggleLabel();
+    }
+
+    function updateToggleLabel() {
+      var mode = currentMode();
+      var label = mode === "auto" ? "Auto" : mode === "dark" ? "Dark" : "Light";
+      toggle.classList.add("label-hidden");
+      toggle.setAttribute("data-theme-mode", mode);
+      toggle.setAttribute("title", "Theme: " + label);
+      toggle.setAttribute("aria-label", "Theme: " + label);
+      toggle.setAttribute("aria-pressed", mode === "dark");
+    }
+
+    toggle.addEventListener("click", function () {
+      var mode = currentMode();
+      var index = cycleModes.indexOf(mode);
+      var next = cycleModes[(index + 1) % cycleModes.length];
+      setMode(next);
+    });
+
+    updateToggleLabel();
+  });
+</script>

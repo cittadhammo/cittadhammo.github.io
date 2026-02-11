@@ -1,5 +1,35 @@
 @use "variables";
 
+:root {
+	color-scheme: light;
+	--color-bg: #ffffff;
+	--color-text: #000000;
+	--color-text-muted: #4a4a4a;
+	--color-muted: #7c7c7c;
+	--color-border: #000000;
+	--color-surface: #fafafa;
+	--color-surface-alt: #f6f6f6;
+	--color-header-bg: #000000;
+	--color-footer-bg: #000000;
+	--color-on-header-text: #ffffff;
+	--color-on-header-muted: #d0d0d0;
+}
+
+[data-theme="dark"] {
+	color-scheme: dark;
+	--color-bg: #000000;
+	--color-text: #f2f2f2;
+	--color-text-muted: #b3b3b3;
+	--color-muted: #b0b0b0;
+	--color-border: #b3b3b3;
+	--color-surface: #0b0b0b;
+	--color-surface-alt: #111111;
+	--color-header-bg: #3a0a0a;
+	--color-footer-bg: #000000;
+	--color-on-header-text: #ffffff;
+	--color-on-header-muted: #d0d0d0;
+}
+
 html {
 	font-size: 62.5%;
 }
@@ -85,7 +115,7 @@ hr {
 }
 
 abbr[title] {
-	border-bottom: 1px dotted variables.$color-black;
+	border-bottom: 1px dotted variables.$color-border;
 	text-decoration: none;
 }
 
@@ -160,7 +190,7 @@ table {
 }
 
 blockquote {
-	border-left: .6rem solid variables.$color-black;
+	border-left: .6rem solid variables.$color-border;
 	padding-left: 2rem;
 	margin: 0 0 3rem;
 

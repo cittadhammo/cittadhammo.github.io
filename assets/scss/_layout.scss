@@ -113,7 +113,7 @@
 
     &:before {
       content: "View Chart";
-      color: variables.$color-white;
+      color: var(--color-on-header-text);
       @extend .h2;
       font-weight: 800;
       position: absolute;
@@ -242,7 +242,7 @@
 	}
 }
 .project-navigation {
-	background: white;
+	background: variables.$color-white;
 	padding: 5rem 0;
 
 	a {
@@ -348,7 +348,7 @@
 			height: 1px;
 			bottom: -4px;
 			left: 0;
-			background-color: black;
+			background-color: variables.$color-border;
 			visibility: hidden;
 			-webkit-transform: scaleX(0);
 			transform: scaleX(0);
@@ -360,7 +360,7 @@
 
 
 .footer {
-	background: variables.$color-black;
+	background: var(--color-footer-bg);
 	bottom: 0;
 	left: 0;
 	padding: 5rem 0;
@@ -369,14 +369,14 @@
 	z-index: -1;
 
 	h2, p {
-		color: variables.$color-white;
+		color: var(--color-on-header-text);
 	}
 
 	a,
 	a:visited,
 	a:hover,
 	a:active {
-		color: variables.$color-white;
+		color: var(--color-on-header-text);
 	}
 }
 
@@ -428,7 +428,7 @@
   transform: translateY(-50%);
   width: 1.5px; /* Bar width */
   height: 1.2em; /* Bar height, relative to font-size of parent a */
-  background-color: rgba(255, 255, 255); /* Vertical bar color */
+  background-color: var(--color-on-header-text); /* Vertical bar color */
 }
 
 .arrow-div {

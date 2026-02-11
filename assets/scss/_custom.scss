@@ -1,7 +1,7 @@
 @use "variables";
 
 .subtitle {
-  color: black;
+  color: variables.$color-black;
   font-size: smaller;
 }
 
@@ -31,7 +31,7 @@
 	text-decoration-color: variables.$color-black;
 }
 .white-under:hover  {
-	text-decoration-color: variables.$color-white;
+	text-decoration-color: var(--color-on-header-text);
 }
 
 
@@ -48,7 +48,7 @@ a.rougeclair:hover {
 }
 
 a.blackclair:hover {
-	color: black;
+	color: variables.$color-black;
 }
 
 .rouge h1 {
@@ -79,7 +79,7 @@ a.blackclair:hover {
 }
 
 .black {
-	color: black !important;
+	color: variables.$color-black !important;
 }
 
 .rouge a {
@@ -101,7 +101,7 @@ a.blackclair:hover {
 
 .arrow {
 	// border: solid grey;
-	border: solid black;
+	border: solid variables.$color-black;
 	border-width: 0 3px 3px 0;
 	display: inline-block;
 	padding: 5px;
@@ -218,6 +218,67 @@ a.bigger {
   }
 }
 
+.theme-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: variables.$font-lekton;
+  font-size: 1.1rem;
+  gap: 0;
+  letter-spacing: 0.12rem;
+  margin-left: 15px;
+  padding: 0.2rem;
+  text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.theme-toggle .theme-icons {
+  display: inline-flex;
+  gap: 0;
+  align-items: center;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.header .theme-toggle {
+  color: #ffffff;
+}
+
+.header:not(.inverted) .theme-toggle {
+  color: #ffffff;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background-color: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+[data-theme="dark"] .theme-toggle:hover,
+[data-theme="dark"] .theme-toggle:focus-visible {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="light"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+.theme-toggle svg path {
+  fill: currentColor;
+}
+
 .title-group {
   display: flex;
   flex-direction: column;
@@ -225,7 +286,7 @@ a.bigger {
 
   h2 {
     font-size: 1.7rem; // or 20px, or any unit you prefer
-	color: black;
+	color: variables.$color-black;
     margin: 0; // optional: to reduce spacing
   }
 
@@ -244,7 +305,7 @@ a.bigger {
 .cover-title {
   text-align: center;
   font-size: 3rem; // Adjust as needed
-  color: black; // or any color you prefer
+  color: variables.$color-black; // or any color you prefer
   margin-top: 16rem;
   margin-bottom: 2rem; // Optional: to add some space above the title
 }
@@ -262,7 +323,7 @@ a.bigger {
     display: block;
     margin-bottom: 1rem;
     border-radius: 6px;    /* Rounded corners */
-    background: #ddd;      /* Placeholder background */
+    background: variables.$color-white-sand;      /* Placeholder background */
   }
 
   /* Responsive: fewer columns on smaller screens */
@@ -289,13 +350,13 @@ a.bigger {
 }
 
 .inverted {
-	background-color: black;
-	color: white;
+	background-color: var(--color-header-bg);
+	color: var(--color-on-header-text);
 	padding: 3rem 0;
 	margin-bottom: 2rem;
 
 	h1, h2, h3, h4, p, a {
-		color: white !important;
+		color: var(--color-on-header-text) !important;
 	}
 }
 
@@ -304,12 +365,12 @@ a.bigger {
 }
 
 .greyed-out {
-  color: grey !important;
+  color: variables.$color-gray !important;
   word-spacing: -6px;
 }
 
 .inverted .greyed-out {
-  color: lightgrey !important;
+  color: var(--color-on-header-muted) !important;
 }
 
 .email-first-letter-rouge {
@@ -320,7 +381,7 @@ a.bigger {
 .other-areas {
   a.nav-other-area-link {
     text-decoration: none; // Remove default underline
-    color: grey !important; // Mimic greyed-out initial color
+    color: variables.$color-gray !important; // Mimic greyed-out initial color
     word-spacing: -6px;
     transition: color 300ms ease-in-out; // Smooth color transition
 
@@ -343,7 +404,7 @@ a.bigger {
         height: 1px;
         bottom: -4px; // Adjust as needed
         left: 0;
-        background-color: variables.$color-white; // White underline
+        background-color: var(--color-on-header-text); // White underline
         visibility: hidden;
         -webkit-transform: scaleX(0);
         transform: scaleX(0);
@@ -355,9 +416,9 @@ a.bigger {
 }
 
 .inverted .other-areas a.nav-other-area-link {
-  color: lightgrey !important; // For inverted header
+  color: var(--color-on-header-muted) !important; // For inverted header
   &:hover {
-    color: variables.$color-white !important; // On hover, make it white in inverted mode
+    color: var(--color-on-header-text) !important; // On hover, make it white in inverted mode
   }
 }
 
@@ -410,7 +471,7 @@ a.bigger {
 }
 
 .source-author-h2-style {
-  color: black;
+  color: variables.$color-black;
   font-family: variables.$font-lekton; /* Added font-family */
   font-size: 1rem; /* Changed to 1rem */
   font-weight: bold;

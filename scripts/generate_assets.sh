@@ -8,6 +8,20 @@ MAPS_HTML_DIR="./maps"
 SIZE_DATA_FILE="./vault/data/size.yml"
 TEMPLATE_FILE="./scripts/map-template.html"
 
+# Check if a background value should be treated as black
+is_black_bg() {
+    local bg
+    bg=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    case "$bg" in
+        black|\#000|\#000000|rgb\(0,0,0\))
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
 # Read the template file
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "Template file not found: $TEMPLATE_FILE"
@@ -141,35 +155,48 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
 
         if [ "$MAP" = "true" ]; then
             TILE_PATH="$DEST_FOLDER/tiles"
+            TILE_DARK_PATH="$DEST_FOLDER/tiles-dark"
+
+            echo "Processing $IMG_NAME..."
+
+            # read WIDTH HEIGHT <<< $(identify -format "%w %h" "$SRC_IMG_PATH")
+            WIDTH=$(vipsheader -f width "$SRC_IMG_PATH")
+            HEIGHT=$(vipsheader -f height "$SRC_IMG_PATH")
 
             if [[ -d "$TILE_PATH" ]]; then
-                echo "Skipping $IMG_NAME, tiles already exist."
+                echo "Skipping $IMG_NAME light tiles, already exist."
             else
-                echo "Processing $IMG_NAME..."
-
-                # read WIDTH HEIGHT <<< $(identify -format "%w %h" "$SRC_IMG_PATH")
-                WIDTH=$(vipsheader -f width "$SRC_IMG_PATH")
-                HEIGHT=$(vipsheader -f height "$SRC_IMG_PATH")
-
                 vips dzsave "$SRC_IMG_PATH" "$TILE_PATH" \
                     --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
                     --tile-size 256 --vips-progress
-
-                HTML_FILE="$MAPS_HTML_DIR/${IMG_BASE}.md"
-
-                echo "Creating HTML viewer for $IMG_NAME at $HTML_FILE"
-
-                # Use printf instead of echo to avoid quote issues
-                printf '%s' "$TEMPLATE_HTML" \
-                    | sed "s/__IMG_NAME__/$IMG_BASE/g" \
-                    | sed "s/__WIDTH__/$WIDTH/g" \
-                    | sed "s/__HEIGHT__/$HEIGHT/g" \
-                    | sed "s/__BG__/$BG/g" \
-                    | sed "s/__TITLE__/$(printf '%s\n' "$PAGE_TITLE" | sed 's/[&/\]/\\&/g')/g" \
-                    | sed "s|__PATHMD__|$PATHMD|g" \
-                    > "$HTML_FILE"
-
             fi
+
+            HAS_DARK_TILES="false"
+            if ! is_black_bg "$BG"; then
+                HAS_DARK_TILES="true"
+                if [[ -d "$TILE_DARK_PATH" ]]; then
+                    echo "Skipping $IMG_NAME dark tiles, already exist."
+                else
+                    vips dzsave "$SRC_IMG_PATH" "$TILE_DARK_PATH" \
+                        --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
+                        --tile-size 256 --background 0,0,0 --vips-progress
+                fi
+            fi
+
+            HTML_FILE="$MAPS_HTML_DIR/${IMG_BASE}.md"
+
+            echo "Creating HTML viewer for $IMG_NAME at $HTML_FILE"
+
+            # Use printf instead of echo to avoid quote issues
+            printf '%s' "$TEMPLATE_HTML" \
+                | sed "s/__IMG_NAME__/$IMG_BASE/g" \
+                | sed "s/__WIDTH__/$WIDTH/g" \
+                | sed "s/__HEIGHT__/$HEIGHT/g" \
+                | sed "s/__BG__/$BG/g" \
+                | sed "s/__HAS_DARK_TILES__/$HAS_DARK_TILES/g" \
+                | sed "s/__TITLE__/$(printf '%s\n' "$PAGE_TITLE" | sed 's/[&/\]/\\&/g')/g" \
+                | sed "s|__PATHMD__|$PATHMD|g" \
+                > "$HTML_FILE"
         fi
 
         echo "Processed: $IMG_NAME (map: $MAP)"

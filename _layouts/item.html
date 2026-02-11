@@ -15,7 +15,7 @@
       {% endif %}
     {% endcapture %}
     {% assign area_title = area_title | strip %}
-    {% include header.html subTitle=area_title inverted=true area_name=area_name %}
+    {% include header.html subTitle=area_title inverted=true area_name=area_name show_theme_toggle=true %}
 
     <div class="container arrow-div">
       {% assign area_anchor = area_name | slugify %}

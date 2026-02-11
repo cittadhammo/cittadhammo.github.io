@@ -19,7 +19,7 @@ layout: none
     #map {
       width: 100%;
       height: 100%;
-      background-color: __BG__;
+      background-color: var(--map-bg);
     }
     .ol-control {
       font-size: 17px;
@@ -73,6 +73,50 @@ layout: none
 <body>
   <div id="map" class="map"></div>
   <script>
+          const themeConfig = {
+              defaultMode: {{ site.theme.default | default: "auto" | jsonify }},
+              allowUserToggle: {{ site.theme.allow_user_toggle | default: true | jsonify }},
+              respectPrefers: {{ site.theme.respect_prefers_color_scheme | default: true | jsonify }}
+          };
+          const storageKey = "theme";
+          const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+          function getPreferredTheme() {
+              if (!themeConfig.respectPrefers || !mediaQuery) return null;
+              return mediaQuery.matches ? "dark" : "light";
+          }
+
+          function getStoredTheme() {
+              if (!themeConfig.allowUserToggle) return null;
+              try {
+                  const value = localStorage.getItem(storageKey);
+                  return value === "light" || value === "dark" ? value : null;
+              } catch (e) {
+                  return null;
+              }
+          }
+
+          function resolveTheme(mode) {
+              if (mode === "dark" || mode === "light") return mode;
+              if (mode === "auto") return getPreferredTheme() || "light";
+              return "light";
+          }
+
+          const storedMode = getStoredTheme();
+          let initialMode = storedMode || themeConfig.defaultMode || "light";
+          if (initialMode !== "light" && initialMode !== "dark" && initialMode !== "auto") {
+              initialMode = "light";
+          }
+          const theme = resolveTheme(initialMode);
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.setAttribute("data-theme-mode", initialMode);
+
+          const hasDarkTiles = __HAS_DARK_TILES__;
+          const tilesDir = (theme === "dark" && hasDarkTiles) ? "tiles-dark" : "tiles";
+          const lightBg = "__BG__";
+          const mapBg = theme === "dark" ? "black" : lightBg;
+          document.documentElement.style.setProperty("--map-bg", mapBg);
+
           const width = __WIDTH__;
           const height = __HEIGHT__;
           const extent = [0, 0, width, width];
@@ -123,13 +167,16 @@ layout: none
           });
           const isMobile = window.innerWidth <= 480; // or 768 adjust breakpoint as needed
 
+          const tileBase = "{{ "/assets/images/__IMG_NAME__/" | relative_url }}";
+          const tileUrl = tileBase + tilesDir + "/{z}/{y}/{x}.webp";
+
           const map = new ol.Map({
               layers: [
                   new ol.layer.Tile({
                       preload: Infinity,
                       extent: extent,
                       source: new ol.source.TileImage({
-                          url: "{{ "/assets/images/__IMG_NAME__/tiles/{z}/{y}/{x}.webp" | relative_url }}",
+                          url: tileUrl,
                       })
                   })
               ],
