@@ -71,6 +71,10 @@
 	padding: 0 0 5rem;
 }
 
+.page-layout .projects {
+  padding: 0 0 2rem;
+}
+
 .intro {
 	@media (min-width: variables.$breakpoint-medium) {
 		p {
@@ -433,6 +437,18 @@
 
 .arrow-div {
   margin-bottom: 1rem;
+}
+
+.page-layout .arrow-div {
+  margin-bottom: 2.5rem;
+}
+
+.item-layout .arrow-div {
+  margin-bottom: 1.5rem;
+}
+
+.page-layout h1 {
+  margin-bottom: 0.6rem;
 }
 
 /* Constrain image width in project aside for large screens */

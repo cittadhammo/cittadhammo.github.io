@@ -4,7 +4,7 @@
     {% include head.html %}
   </head>
 
-  <body class="black">
+  <body class="black item-layout">
     {% assign area_name = page.collection %}
     {% assign area = site.data.areas | where: 'name', area_name | first %}
     {% capture area_title %}
