@@ -1,4 +1,4 @@
-.PHONY: assets
+.PHONY: assets sync-agent-docs
 
 # Run the search and mapping script
 assets:
@@ -31,3 +31,6 @@ serve: # there is a keep file in _config local that will take care of the assets
 	rm -rf ./_site/assets/images
 	ln -sr ./assets/images ./_site/assets/images
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml
+
+sync-agent-docs:
+	cp AGENTS.md GEMINI.md

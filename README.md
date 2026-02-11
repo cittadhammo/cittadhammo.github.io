@@ -1,65 +1,92 @@
-# Add a new area
+# DhammaCharts
 
-(could be made automatic based on folder structure of content)
+Jekyll site for publishing Dhamma charts, writings, references, and 3D printing resources.
 
-- Need an area_name.md file in the root (with title and area frontmatter)
-- Add collection to the `_config.yml` file
-- Adjust the `areas.yml` file in the `content/_data/` folder
+## Project Structure
 
-Note: pages are part of the collection and need a frontmatter "type: page" to be displayed
-at the top right of an area. (we could consider having a `_pages` collection and layout the pages
-in the areas.yml)
+- Content: `vault/content` (markdown with frontmatter)
+- Source images: `vault/assets/images`
+- Generated image assets: `assets/images`
+- Generated map viewer pages: `maps`
+- Area/site data: `vault/data`
+- Layouts/includes: `_layouts`, `_includes`
+- Main custom styles: `assets/scss/_custom.scss`
+- Asset/map pipeline script: `scripts/generate_assets.sh`
+- Map viewer template: `scripts/map-template.html`
 
-Categories of the items are extracted via their path.
+## Content Model
 
-## Scripts
+- Areas are configured in `vault/data/areas.yml`.
+- Each area maps to a Jekyll collection in `_config.yml`.
+- Category is inferred from content path.
+- Collection documents with `type: page` appear in the area header links.
 
-```
-make serve      # Starts Jekyll with livereload
-make assets     # Runs your searchAndMap.sh script
-make images     # Runs the Python script inside the vault directory
-make clean      # Cleans up the build folder
-```
+### Add a New Area
 
-## Generating assets
+1. Create a new collection folder in `vault/content` named `_<area-name>/`.
+2. Add the collection in `_config.yml`.
+3. Add the area and categories in `vault/data/areas.yml`.
+4. Add markdown files in the new folder with frontmatter (`title`, `images`, etc.).
+5. For area header links, set `type: page` on collection docs that should appear there.
 
-- Every original images in the assets that are listed in the frontmatter `images` of the pages
-    should be processed into thumbnail of different size, map moisaic, lightbox depending
-    on the layout chosen.
-
-### searchAndMaps script
-
-This script scans all markdown files in your content folder to find images listed in their frontmatter. For each image, it copies the original and creates three resized thumbnails. If the image is marked as a map, it generates map tiles and records the image’s dimensions in `maps.yml`, updating existing entries or adding new ones.
+## Commands
 
 ```bash
-bash ./scripts/searchAndMap.sh
+make assets       # Generate/copy image assets + map tiles/viewers
+make images       # Generate PDF/PNG assets from vault script
+make build        # Jekyll build with _config.yml + _config_local.yml
+make serve        # Local serve with livereload + assets symlink into _site
+make clean        # Remove generated assets/images and maps
+make sync-config  # Sync exclude list into _config_local.yml (+ assets/images)
 ```
 
-## Obsidian
+## Asset Pipeline
 
-THe content folder can be edited via Obsidian. Actually, a vault containing content is stored on another repo that when a commit is pushed it get sync with this one. (not sure this is true)
+`scripts/generate_assets.sh` scans markdown frontmatter `images` entries and:
 
-## install
+- copies original image files into `assets/images/<basename>/`
+- generates `small.webp`, `medium.webp`, `large.webp` when `display: true`
+- updates aspect ratios in `vault/data/size.yml`
+- if `map: true`, generates tiles (Google layout) and a viewer page in `maps`
 
-Pineaple Jekyll template for this website
+Re-run `make assets` after content/frontmatter/image changes.
 
-The following is true with old version of Ruby that had gems preinstalled, please use bundle in that new project. For reference: 
+## Dependencies
 
-Run: `jekyll serve` no need to `bundle install` or `bundle exec jekyll serve` on this repo.
+### Jekyll
 
-`jekyll serve --livereload --config _config.yml,_config_local.yml` for live reload.
+- Ruby
+- Bundler
 
-Change `baseurl` in `_confilg.yml` to: `` if it is the root folder for the website.
+Setup:
 
-## Dhamma Charts
-
-Site for displaying and storing Dhamma Charts and Art.
-
-Using the [Pinaple](https://github.com/DhammaCharts/pineapple) template
-
-## Local mirror
-
+```bash
+bundle install
 ```
+
+### Asset scripts
+
+- `vips` (libvips)
+- `yq` (mikefarah/go-yq)
+- `gawk`
+- `findutils`
+- `openslide`
+
+Example (Arch Linux):
+
+```bash
+sudo pacman -S libvips go-yq gawk findutils openslide
+```
+
+## Configuration Notes
+
+- Local build/serve uses `_config.yml,_config_local.yml`.
+- For root-domain deploys, set `baseurl: ""` in `_config.yml`.
+- Generated assets are preserved during serve via symlink logic in `make serve`.
+
+## Local Mirror
+
+```bash
 wget \
   --mirror \
   --convert-links \
@@ -69,78 +96,31 @@ wget \
   http://localhost:4000/
 ```
 
-## Dependencies for script generate_assets
+## Arch Ruby PATH Note
 
-- **vips** (libvips)
-- **go-yq** (mikefarah/yq)
-- **gawk** (awk)
-- **findutils** (find)
-- **sed**
-
-## Installation
-
-Run the following command to install all required dependencies on Arch Linux:
-
-make sure to remove yq
+If gem executables are not found on Arch, this can help:
 
 ```bash
-sudo pacman -S libvips go-yq gawk findutils
-sudo pacman -S openslide
-```
-
----
-
-You might need:
-
-```
-
 echo 'export PATH="$PATH:$(ruby -e "puts Gem.user_dir")/bin"' >> ~/.$(basename $SHELL)rc
-
 ```
 
-## Jekyll Local Development Setup
+## Notes
 
-To ensure consistent Jekyll development across different environments, this project now uses Bundler to manage Ruby dependencies.
+- Avoid Liquid comments using `{# #}` inside page code.
+- `_archive` is legacy.
 
-### Initial Setup (One-time)
+## Publishing Note
 
-1.  **Install Bundler (if you haven't already):**
-    ```bash
-    gem install bundler
-    ```
-2.  **Install Project Dependencies:**
-    Navigate to the project root and run:
-    ```bash
-    bundle install
-    ```
-    This will install all necessary Ruby gems, including Jekyll, into a local `vendor/bundle` directory within the project. The `vendor/bundle` directory is automatically ignored by Git.
+Add `"gh-pages"` or `"cf-pages"` keywords in the commit message to trigger the related GitHub Actions publishing workflow.
 
-### Running the Jekyll Server
+Could use a container in the workflow for more stable builds, for example:
 
-You can now serve the Jekyll site using the following command:
-
-```bash
-bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml
-```
-
-Alternatively, a new `make` command has been added for convenience:
-
-```bash
-make serve-local
-```
-
-### Publishing
-
-Add "gh-pages"" or "cf-pages" key words in the commit for the github action to push to the relevant hosting. 
-
-Could use a container in the workflow at some point for more stability, something like :
-
-```
+```yaml
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.2-bookworm  # or ruby:3.0-bullseye
+      image: ruby:3.2-bookworm
 
     steps:
       - uses: actions/checkout@v4
@@ -153,5 +133,4 @@ jobs:
 
       - name: Build Jekyll site
         run: bundle exec jekyll build --config _config.yml,_config_gh.yml
-
 ```
