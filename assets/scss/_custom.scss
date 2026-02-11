@@ -433,6 +433,26 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   cursor: default !important;
 }
 
+.mfp-bottom-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mfp-title {
+  flex: 1 1 auto;
+  font-size: 12px;
+  text-align: center !important;
+  padding-right: 36px;
+  padding-left: 36px;
+}
+
+.mfp-counter {
+  flex: 0 0 auto;
+  font-size: 12px;
+  text-align: right;
+}
+
 /* Ensure .mfp-img is relative for absolute positioning of its children */
 .mfp-img {
   position: relative; /* This is Magnific Popup's default; removed !important */
@@ -491,8 +511,8 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5)); /* Initial drop shadow */
 
   img {
-    width: 32px; /* Adjust icon size as needed */
-    height: 32px; /* Adjust icon size as needed */
+    width: 40px; /* Adjust icon size as needed */
+    height: 40px; /* Adjust icon size as needed */
   }
 
   &::before { /* Add a larger clickable area */
