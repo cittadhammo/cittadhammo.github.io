@@ -237,6 +237,7 @@
                           class="mfp-image"
                           href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
                           data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
+                          {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
                         >
                           <img
                             class="load-hidden"
@@ -251,7 +252,7 @@
                       </div>
                     {% else %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a class="mfp-image" href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}">
+                        <a class="mfp-image" href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}" {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}>
                           <img
                             class="load-hidden"
                             src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"

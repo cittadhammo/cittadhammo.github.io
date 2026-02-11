@@ -2,6 +2,11 @@ $(document).ready(function() {
   $('.lightbox-gallery').magnificPopup({
     delegate: 'a.mfp-image',
     type: 'image',
+    image: {
+      titleSrc: function(item) {
+        return item.el.attr('data-title') || '';
+      }
+    },
     gallery: {
       enabled: true,
       navigateByImgClick: false, // HERE: Changed to false globally
