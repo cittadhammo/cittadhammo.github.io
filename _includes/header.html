@@ -31,7 +31,15 @@
                 {% endif %}
                 {% assign anchor_id = area.name | slugify %}
                 {% assign final_link_path = index_url | append: '#' | append: anchor_id %}
-                <a href="{{ final_link_path }}" class="nav-other-area-link"><span>{{ area.title }}</span></a>
+                {% capture area_link_title %}
+                  {% if area.title %}
+                    {{ area.title }}
+                  {% else %}
+                    {% include humanize_name.html value=area.name %}
+                  {% endif %}
+                {% endcapture %}
+                {% assign area_link_title = area_link_title | strip %}
+                <a href="{{ final_link_path }}" class="nav-other-area-link"><span>{{ area_link_title }}</span></a>
               {% endif %}
             {% endfor %}
           </span>

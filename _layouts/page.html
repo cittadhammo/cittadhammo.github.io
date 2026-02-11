@@ -8,8 +8,15 @@
     <main class="home">
     {% assign area_name = page.collection %}
     {% assign area = site.data.areas | where: 'name', area_name | first %}
-    {% assign area_title = area.title %}
-      {% include header.html subTitle=area.title inverted=true area_name=area.name %}
+    {% capture area_title %}
+      {% if area.title %}
+        {{ area.title }}
+      {% else %}
+        {% include humanize_name.html value=area.name %}
+      {% endif %}
+    {% endcapture %}
+    {% assign area_title = area_title | strip %}
+      {% include header.html subTitle=area_title inverted=true area_name=area.name %}
       {% assign area_anchor = area_name | slugify %}
       {% assign back_href = '/index.html' | relative_url %}
       <div class="container arrow-div">

@@ -1,0 +1,16 @@
+{%- assign raw_value = include.value | to_s | strip -%}
+{%- assign normalized = raw_value | replace: '-', ' ' | replace: '_', ' ' | strip -%}
+{%- assign words = normalized | split: ' ' -%}
+{%- assign pretty = '' -%}
+{%- for word in words -%}
+  {%- assign trimmed = word | strip -%}
+  {%- if trimmed != '' -%}
+    {%- assign capped = trimmed | capitalize -%}
+    {%- if pretty == '' -%}
+      {%- assign pretty = capped -%}
+    {%- else -%}
+      {%- assign pretty = pretty | append: ' ' | append: capped -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- pretty -}}

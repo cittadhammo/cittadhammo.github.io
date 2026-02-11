@@ -6,9 +6,17 @@
 
 {% for category in area.categories %}
   {% assign category_name = category.name | remove: ' ' %}
+  {% capture category_title %}
+    {% if category.title %}
+      {{ category.title }}
+    {% else %}
+      {% include humanize_name.html value=category.name %}
+    {% endif %}
+  {% endcapture %}
+  {% assign category_title = category_title | strip %}
   <section class="projects">
     <div class="container">
-      <h1 class="cat-title projects">{{ category.title }}</h1>
+      <h1 class="cat-title projects">{{ category_title }}</h1>
       <ul class="projects-list">
         {% for item in items %}
           {% assign parent = item.url | split: '/' | pop | last %}
