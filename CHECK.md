@@ -6,7 +6,7 @@
   - [x] make everything local 
   - [x] testing eleventhy and/or make a branch
   - [x] Adding underline to title like in the home
-  - [ ] SEO
+  - [x] SEO
   - [x] Clean up
   - [x] Test for keep assets at build if no change detected in assets images 
   - [ ] Hero pages with links
