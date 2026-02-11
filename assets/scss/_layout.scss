@@ -371,6 +371,13 @@
 	h2, p {
 		color: variables.$color-white;
 	}
+
+	a,
+	a:visited,
+	a:hover,
+	a:active {
+		color: variables.$color-white;
+	}
 }
 
 .obfuscate-email {
