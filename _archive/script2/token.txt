@@ -1,8 +1,0 @@
-1. 🔐 Create a Personal Access Token
-	1	Go to https://github.com/settings/tokens and generate a fine-grained PAT:
-	◦	Scope: Allow access to jekyll-site-repo (content read/write).
-	◦	Permissions:
-	▪	Contents: Read and write
-	▪	Metadata: Read
-	2	Copy the token, and add it to vault-repo secrets as:
-	◦	JEKYLL_REPO_PAT

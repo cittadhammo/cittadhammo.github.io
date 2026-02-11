@@ -14,12 +14,12 @@
           {% assign parent = item.url | split: '/' | pop | last %}
           {% if parent == category.name %}
             <li class="load-hidden">
-              <a href="{{ item.url | prepend: site.baseurl }}">
+              <a href="{{ item.url | relative_url }}">
                 <div class="img-wrapper">
                   {% assign image = item.images | first %}
                   {% assign img = image.name | split: '.' | first %}
                   <img
-                    src="{{ site.baseurl }}/assets/images/{{ img }}/small.{{site.img_ext}}"
+                    src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
                     alt="{{ image.name }}"
                     loading="lazy"
                     style="aspect-ratio: {{ site.data.size[img].small }};"

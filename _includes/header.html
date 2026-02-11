@@ -1,46 +1,49 @@
-
-<header class="header">
-	<div class="container blackhead">
-		<div class="logo-and-title-container">
-			<!-- <a href="{{ site.baseurl | append: '/' }}">
-				<img src="{{ site.baseurl }}/assets/icons/logoR.png" alt="{{ site.author }}" style="max-height: 50px;">
-			</a> -->
-			<div class="title-group">
-				
+<header id="{{ include.area_name | slugify }}" class="header {% if include.inverted %}inverted{% endif %}">
+  <div class="container">
+    <div class="logo-and-title-container">
+      <!--
+        <a href="{{ site.baseurl | append: '/' }}">
+        	<img src="{{ site.baseurl }}/assets/icons/logoR.png" alt="{{ site.author }}" style="max-height: 50px;">
+        </a>
+      -->
+      <div class="title-group">
         <h1 class="logo rouge-first">
-					<a  title="{{ site.author }}" href="{{ site.baseurl | append: '/' }}">{{ site.author }}</a>
-				</h1>
-				
-        {% if page.layout == "item" or page.layout == "map" or page.layout == "single-page" %}
-				<h2>
-					<a href="{{ site.baseurl }}/{{page.collection}}.html" >
-						{% assign area = site.data.areas | where: name, page.collection | first %}
-						{{ area.title }}
-					</a>
-				</h2>
-				{% endif %}
-				
-        {% if page.layout == "page" %}
-				  <h2 >
-					  {{ page.title }}
-				  </h2>
+          <a title="{{ site.author }}" href="{{ '/' | relative_url }}">{{ site.author }}</a>
+        </h1>
 
-          {% assign pages = site[page.area] | where: "type", "page" %}
-          {% for page in pages %}
-            <a href="{{ page.url | prepend: site.baseurl }}"> {{ page.title }} </a>
-          {% endfor %}
-				{% endif %}
-			
+        <h2>
+          {% assign area_anchor = include.area_name | slugify %}
+          {% assign index_url = '/index.html' | relative_url %}
+          {% if page.layout != 'home' %}
+            <a href="{{ index_url }}#{{ area_anchor }}">
+              <span class="main-area-title">{{ include.subTitle }}</span>
+            </a>
+          {% else %}
+            <span class="main-area-title">{{ include.subTitle }}</span>
+          {% endif %}
+          <span class="other-areas">
+            {% assign all_areas = site.data.areas %}
+            {% assign current_area_name = include.area_name %}
+            {% for area in all_areas %}
+              {% if include.is_first or area.name != current_area_name %}
+                {% if include.is_first and forloop.first %}
+                  {% continue %}
+                {% endif %}
+                {% assign anchor_id = area.name | slugify %}
+                {% assign final_link_path = index_url | append: '#' | append: anchor_id %}
+                <a href="{{ final_link_path }}" class="nav-other-area-link"><span>{{ area.title }}</span></a>
+              {% endif %}
+            {% endfor %}
+          </span>
+        </h2>
       </div>
-		</div>
-		
-    <br>
-		
-    {% if page.layout == "item" or page.layout == "map" %}
-		  <a style="padding: 10px;" class="black-under" href="{{ site.baseurl }}/{{page.collection}}.html" class="bigger">
-			  <i class="arrow left"></i>
-		  </a>
-		{% endif %}
+      <div class="header-links">
+        {% assign pages = site[include.area_name] | where: 'type', 'page' %}
 
-	</div>
+        {% for page in pages %}
+          <a href="{{ page.url | relative_url }}" class="rouge-first white-under"> {{ page.title }} </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </header>
