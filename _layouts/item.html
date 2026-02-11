@@ -118,10 +118,11 @@
               {% if files_to_display.size > 0 %}
                 <span class="h2">Files</span>
                 {% for file_item in files_to_display %}
+                  {% assign file_base = file_item.name | split: '.' | first %}
                   <p class="rouge-first">
                     <a
                       class="black-under"
-                      href="{{ site.baseurl }}/assets/images/{{ file_item.name | split: '.' | first }}/{{ file_item.name }}"
+                      href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_item.name | relative_url }}"
                       download="{{ file_item.name | split: '.' | first }}"
                       target="_blank"
                       rel="nofollow"
@@ -146,26 +147,26 @@
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
                         <a
                           class="mfp-image"
-                          href="{{site.baseurl}}/assets/images/{{ img }}/large.{{site.img_ext}}"
-                          data-map-url="{{site.baseurl}}/maps/{{img}}.html"
+                          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+                          data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
                         >
                           <img
                             class="load-hidden"
-                            src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
+                            src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
                             style="aspect-ratio: {{ site.data.size[img].medium }};"
                             alt="{{ image.alt }}"
                           >
                         </a>
-                        <a class="map-icon load-hidden" href="{{site.baseurl}}/maps/{{img}}.html">
-                          <img src="{{site.baseurl}}/assets/icons/fs-s.png" alt="Map Icon">
+                        <a class="map-icon load-hidden" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
+                          <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
                         </a>
                       </div>
                     {% else %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a class="mfp-image" href="{{site.baseurl}}/assets/images/{{ img }}/large.{{site.img_ext}}">
+                        <a class="mfp-image" href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}">
                           <img
                             class="load-hidden"
-                            src="{{site.baseurl}}/assets/images/{{ img }}/medium.{{site.img_ext}}"
+                            src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
                             alt="{{ image.alt }}"
                           >
                         </a>
@@ -317,7 +318,7 @@
       <section class="project-navigation">
         <div class="container">
           {% if previousLink %}
-            <a class="prev" title="Previous {{ previousTitle }}" href="{{ previousLink | prepend: site.baseurl }}">
+            <a class="prev" title="Previous {{ previousTitle }}" href="{{ previousLink | relative_url }}">
               <span class="h2">Previous</span>
               <h2>{{ previousTitle }}</h2>
             </a>
@@ -326,7 +327,7 @@
           {% endif %}
 
           {% if nextLink %}
-            <a class="next" title="Next {{ nextTitle }}" href="{{ nextLink | prepend: site.baseurl }}">
+            <a class="next" title="Next {{ nextTitle }}" href="{{ nextLink | relative_url }}">
               <span class="h2">Next</span>
               <h2>{{ nextTitle }}</h2>
             </a>
@@ -339,14 +340,14 @@
     {% include footer.html %}
     <script>
       window.SITE = {
-        baseurl: '{{ site.baseurl }}',
+        baseurl: '{{ "/" | relative_url }}',
       };
     </script>
-    <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/lightbox.js' | prepend: site.baseurl }}"></script>
-    <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | prepend: site.baseurl }}"></script> -->
-    <script src="{{ '/assets/scripts/vendor/sticky-kit.min.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/project.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/scripts/lightbox.js' | relative_url }}"></script>
+    <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | relative_url }}"></script> -->
+    <script src="{{ '/assets/scripts/vendor/sticky-kit.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/scripts/project.js' | relative_url }}"></script>
   </body>
 </html>
