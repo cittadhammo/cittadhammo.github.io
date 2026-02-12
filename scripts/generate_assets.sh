@@ -79,6 +79,26 @@ darkify_image() {
     esac
 }
 
+darkify_tile_set() {
+    local light_tiles_dir="$1"
+    local dark_tiles_dir="$2"
+    local method="$3"
+    local tile_count=0
+
+    rm -rf "$dark_tiles_dir"
+    mkdir -p "$dark_tiles_dir"
+    cp -a "$light_tiles_dir"/. "$dark_tiles_dir"/
+
+    while IFS= read -r tile_file; do
+        local temp_file="${tile_file}.tmp.webp"
+        darkify_image "$tile_file" "$temp_file" "$method"
+        mv "$temp_file" "$tile_file"
+        tile_count=$((tile_count + 1))
+    done < <(find "$dark_tiles_dir" -type f -name "*.webp" | sort)
+
+    echo "Generated $tile_count dark tiles in $dark_tiles_dir"
+}
+
 to_vips_background() {
     local raw="$1"
     local color="${raw,,}"
@@ -326,7 +346,12 @@ EOF
         fi
     fi
 
-    if [ "$NEEDS_DARKIFY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
+    NEEDS_DARK_FILE="false"
+    if [ "$NEEDS_DARKIFY" = "true" ] && [ "$FILE" = "true" ]; then
+        NEEDS_DARK_FILE="true"
+    fi
+
+    if [ "$NEEDS_DARK_FILE" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
         if [ "$META_MATCH" = "true" ] && [ -f "$DARK_IMG_PATH" ]; then
             echo "Skipping dark version for $IMG_NAME (unchanged)"
         else
@@ -382,9 +407,10 @@ EOF
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+                ensure_magick
+                darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD"
+                darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD"
+                darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD"
             fi
         fi
 
@@ -451,11 +477,8 @@ EOF
                 if [ "$DARK_TILES_UP_TO_DATE" = "true" ]; then
                     echo "Skipping $IMG_NAME dark tiles (unchanged)."
                 else
-                    rm -rf "$TILE_DARK_PATH"
-                    mkdir -p "$TILE_DARK_PATH"
-                    vips dzsave "$DARK_IMG_PATH" "$TILE_DARK_PATH" \
-                        --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                        --tile-size 256 --background "0,0,0" --vips-progress
+                    ensure_magick
+                    darkify_tile_set "$TILE_PATH" "$TILE_DARK_PATH" "$DARKIFY_METHOD"
                 fi
             fi
         fi
