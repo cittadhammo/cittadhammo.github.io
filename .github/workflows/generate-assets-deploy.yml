@@ -9,15 +9,80 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, 'gh-pages') || contains(github.event.head_commit.message, 'cf-pages')
+    env:
+      FORCE_ASSETS: ${{ contains(github.event.head_commit.message, 'force-assets') }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Resolve target deploy branch
+        id: deploy_branch
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" == *"cf-pages"* ]]; then
+            echo "name=cf-pages" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=gh-pages" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Detect asset-related changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            assets:
+              - 'vault/content/**'
+              - 'vault/assets/images/**'
+              - 'scripts/generate_assets.sh'
+              - 'scripts/map-template.html'
+              - '_config.yml'
+              - '_config_local.yml'
+
+      - name: Restore generated assets from deploy branch
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: ${{ steps.deploy_branch.outputs.name }}
+          path: .deploy-cache
+          fetch-depth: 1
+
+      - name: Copy cached generated assets
+        run: |
+          mkdir -p assets/images
+          if [ -d ".deploy-cache/assets/images" ]; then
+            cp -a .deploy-cache/assets/images/. assets/images/
+            echo "Restored cached assets/images from ${{ steps.deploy_branch.outputs.name }} branch."
+          else
+            echo "No cached assets/images found on ${{ steps.deploy_branch.outputs.name }} branch."
+          fi
+
+      - name: Decide whether to generate assets
+        id: should_generate_assets
+        run: |
+          run_assets="false"
+          reason="No asset-related changes detected."
+
+          if [ "${FORCE_ASSETS}" = "true" ]; then
+            run_assets="true"
+            reason="Manual override via commit message contains force-assets."
+          elif [ "${{ steps.changes.outputs.assets }}" = "true" ]; then
+            run_assets="true"
+            reason="Asset-related files changed."
+          elif [ ! -d "assets/images" ] || [ -z "$(find assets/images -mindepth 1 -print -quit)" ]; then
+            run_assets="true"
+            reason="No cached generated assets available; forcing generation."
+          fi
+
+          echo "run=$run_assets" >> "$GITHUB_OUTPUT"
+          echo "reason=$reason" >> "$GITHUB_OUTPUT"
+          echo "$reason"
+
       - name: Install asset tooling
+        if: steps.should_generate_assets.outputs.run == 'true'
         run: sudo apt-get update && sudo apt-get install -y libvips-tools imagemagick
 
       - name: Install yq
+        if: steps.should_generate_assets.outputs.run == 'true'
         run: |
           YQ_VERSION=v4.43.1
           curl -L "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" -o yq
@@ -25,10 +90,16 @@ jobs:
           sudo mv yq /usr/local/bin/yq
 
       - name: Make script executable
+        if: steps.should_generate_assets.outputs.run == 'true'
         run: chmod +x scripts/generate_assets.sh
 
       - name: Generate thumbnails and tiles
+        if: steps.should_generate_assets.outputs.run == 'true'
         run: ./scripts/generate_assets.sh
+
+      - name: Skip asset generation
+        if: steps.should_generate_assets.outputs.run != 'true'
+        run: echo "Skipping asset generation. ${{ steps.should_generate_assets.outputs.reason }}"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -39,10 +110,10 @@ jobs:
       - name: Build Jekyll site
         run: |
           bundle exec jekyll build \
-            --config _config.yml,_config_${{ contains(github.event.head_commit.message, 'cf-pages') && 'cdn' || 'gh' }}.yml
+            --config _config.yml,_config_${{ steps.deploy_branch.outputs.name == 'cf-pages' && 'cdn' || 'gh' }}.yml
 
       - name: Deploy to GitHub Pages
-        if: contains(github.event.head_commit.message, 'gh-pages')
+        if: steps.deploy_branch.outputs.name == 'gh-pages'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +121,7 @@ jobs:
           publish_branch: gh-pages
 
       - name: Push to cf-pages branch
-        if: contains(github.event.head_commit.message, 'cf-pages')
+        if: steps.deploy_branch.outputs.name == 'cf-pages'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

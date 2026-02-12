@@ -9,6 +9,7 @@ SIZE_DATA_FILE="./vault/data/size.yml"
 TEMPLATE_FILE="./scripts/map-template.html"
 MAPS_HTML_ONLY="${MAPS_HTML_ONLY:-false}"
 CONFIG_FILE="./_config.yml"
+ASSET_META_VERSION="1"
 
 # Darkify config
 DARKIFY_METHOD=$(yq -r '.darkify.method // "replace"' "$CONFIG_FILE")
@@ -130,6 +131,32 @@ normalize_image_name() {
     echo "$name"
 }
 
+file_checksum() {
+    local file="$1"
+
+    if command -v sha256sum >/dev/null 2>&1; then
+        sha256sum "$file" | awk '{print $1}'
+        return
+    fi
+
+    if command -v shasum >/dev/null 2>&1; then
+        shasum -a 256 "$file" | awk '{print $1}'
+        return
+    fi
+
+    # Very portable fallback.
+    cksum "$file" | awk '{print $1 "-" $2}'
+}
+
+all_files_exist() {
+    for f in "$@"; do
+        if [ ! -f "$f" ]; then
+            return 1
+        fi
+    done
+    return 0
+}
+
 # Read the template file
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "Template file not found: $TEMPLATE_FILE"
@@ -213,6 +240,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         DEST_FOLDER="$DEST_IMAGE_DIR/$IMG_BASE"
         DARK_IMG_NAME="${IMG_BASE}-${DARKIFY_SUFFIX}.${EXT}"
         DARK_IMG_PATH="$DEST_FOLDER/$DARK_IMG_NAME"
+        ASSET_META_FILE="$DEST_FOLDER/asset-meta.txt"
         NEEDS_DARKIFY="false"
         if [ "$IMG_DARK" != "true" ]; then
             NEEDS_DARKIFY="true"
@@ -224,48 +252,100 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         fi
 
         mkdir -p "$DEST_FOLDER"
+        SRC_HASH=$(file_checksum "$SRC_IMG_PATH")
+        CURRENT_META=$(cat <<EOF
+meta_version=$ASSET_META_VERSION
+src_name=$IMG_NAME
+src_hash=$SRC_HASH
+map=$MAP
+display=$DISPLAY
+file=$FILE
+bg=$BG
+tile_light_bg=$TILE_LIGHT_BG
+img_dark=$IMG_DARK
+needs_darkify=$NEEDS_DARKIFY
+darkify_method=$DARKIFY_METHOD
+darkify_suffix=$DARKIFY_SUFFIX
+EOF
+)
+        META_MATCH="false"
+        if [ -f "$ASSET_META_FILE" ] && [ "$(cat "$ASSET_META_FILE")" = "$CURRENT_META" ]; then
+            META_MATCH="true"
+        fi
+
         if [ "$MAPS_HTML_ONLY" != "true" ]; then
-            cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME" # Always copy original image/file
+            if [ "$META_MATCH" = "true" ] && [ -f "$DEST_FOLDER/$IMG_NAME" ]; then
+                echo "Skipping original copy for $IMG_NAME (unchanged)"
+            else
+                cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME"
+            fi
         fi
 
         if [ "$NEEDS_DARKIFY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
-            echo "Generating dark version for $IMG_NAME (method: $DARKIFY_METHOD)"
-            ensure_magick
-            darkify_image "$SRC_IMG_PATH" "$DARK_IMG_PATH" "$DARKIFY_METHOD"
+            if [ "$META_MATCH" = "true" ] && [ -f "$DARK_IMG_PATH" ]; then
+                echo "Skipping dark version for $IMG_NAME (unchanged)"
+            else
+                echo "Generating dark version for $IMG_NAME (method: $DARKIFY_METHOD)"
+                ensure_magick
+                darkify_image "$SRC_IMG_PATH" "$DARK_IMG_PATH" "$DARKIFY_METHOD"
+            fi
         fi
 
         if [ "$DISPLAY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
-            echo "Processing displayable asset: $IMG_NAME (generating thumbnails)"
+            THUMB_SMALL="$DEST_FOLDER/small.webp"
+            THUMB_MEDIUM="$DEST_FOLDER/medium.webp"
+            THUMB_LARGE="$DEST_FOLDER/large.webp"
+            DARK_THUMB_SMALL="$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp"
+            DARK_THUMB_MEDIUM="$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp"
+            DARK_THUMB_LARGE="$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp"
 
-            # Get aspect ratio to determine appropriate sizing
-            ORIG_WIDTH=$(vipsheader -f width "$SRC_IMG_PATH")
-            ORIG_HEIGHT=$(vipsheader -f height "$SRC_IMG_PATH")
-            ASPECT_RATIO=$(awk "BEGIN {printf \"%.3f\", $ORIG_WIDTH / $ORIG_HEIGHT}")
-
-            # Use different sizes based on aspect ratio - A4 and taller images get more resolution
-            if [ $(awk "BEGIN {print ($ASPECT_RATIO <= 0.8)}") -eq 1 ]; then
-                # Tall images (A4 ratio and taller) - increase resolution to match visual space
-                SMALL_SIZE=565   # ~41% more than 400
-                MEDIUM_SIZE=1131 # ~41% more than 800  
-                LARGE_SIZE=2263  # ~41% more than 1600
-                echo "Tall image detected (ratio: $ASPECT_RATIO) - using increased resolution"
-            else
-                # Square and wide images - standard resolution
-                SMALL_SIZE=400
-                MEDIUM_SIZE=800
-                LARGE_SIZE=1600
-                echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
+            THUMBS_UP_TO_DATE="false"
+            if [ "$META_MATCH" = "true" ] \
+                && all_files_exist "$THUMB_SMALL" "$THUMB_MEDIUM" "$THUMB_LARGE"; then
+                if [ "$NEEDS_DARKIFY" = "true" ]; then
+                    if all_files_exist "$DARK_THUMB_SMALL" "$DARK_THUMB_MEDIUM" "$DARK_THUMB_LARGE"; then
+                        THUMBS_UP_TO_DATE="true"
+                    fi
+                else
+                    THUMBS_UP_TO_DATE="true"
+                fi
             fi
 
-            # Generate WebP thumbnails with appropriate sizing
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+            if [ "$THUMBS_UP_TO_DATE" = "true" ]; then
+                echo "Skipping thumbnails for $IMG_NAME (unchanged)"
+            else
+                echo "Processing displayable asset: $IMG_NAME (generating thumbnails)"
 
-            if [ "$NEEDS_DARKIFY" = "true" ]; then
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
-                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+                # Get aspect ratio to determine appropriate sizing
+                ORIG_WIDTH=$(vipsheader -f width "$SRC_IMG_PATH")
+                ORIG_HEIGHT=$(vipsheader -f height "$SRC_IMG_PATH")
+                ASPECT_RATIO=$(awk "BEGIN {printf \"%.3f\", $ORIG_WIDTH / $ORIG_HEIGHT}")
+
+                # Use different sizes based on aspect ratio - A4 and taller images get more resolution
+                if [ $(awk "BEGIN {print ($ASPECT_RATIO <= 0.8)}") -eq 1 ]; then
+                    # Tall images (A4 ratio and taller) - increase resolution to match visual space
+                    SMALL_SIZE=565   # ~41% more than 400
+                    MEDIUM_SIZE=1131 # ~41% more than 800  
+                    LARGE_SIZE=2263  # ~41% more than 1600
+                    echo "Tall image detected (ratio: $ASPECT_RATIO) - using increased resolution"
+                else
+                    # Square and wide images - standard resolution
+                    SMALL_SIZE=400
+                    MEDIUM_SIZE=800
+                    LARGE_SIZE=1600
+                    echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
+                fi
+
+                # Generate WebP thumbnails with appropriate sizing
+                vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
+                vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
+                vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+
+                if [ "$NEEDS_DARKIFY" = "true" ]; then
+                    vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
+                    vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
+                    vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+                fi
             fi
 
             # Get aspect ratios of generated thumbnails (width/height)
@@ -301,12 +381,21 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
 
             if [ "$MAPS_HTML_ONLY" = "true" ]; then
                 echo "Skipping tile generation (MAPS_HTML_ONLY=true)."
-            elif [[ -d "$TILE_PATH" ]]; then
-                echo "Skipping $IMG_NAME light tiles, already exist."
             else
+                LIGHT_TILES_UP_TO_DATE="false"
+                if [ "$META_MATCH" = "true" ] && [[ -d "$TILE_PATH" ]]; then
+                    LIGHT_TILES_UP_TO_DATE="true"
+                fi
+
+                if [ "$LIGHT_TILES_UP_TO_DATE" = "true" ]; then
+                    echo "Skipping $IMG_NAME light tiles (unchanged)."
+                else
+                    rm -rf "$TILE_PATH"
+                    mkdir -p "$TILE_PATH"
                 vips dzsave "$SRC_IMG_PATH" "$TILE_PATH" \
                     --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
                     --tile-size 256 --background "$TILE_LIGHT_BG" --vips-progress
+                fi
             fi
 
             HAS_DARK_TILES="false"
@@ -316,14 +405,22 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
                         HAS_DARK_TILES="true"
                     fi
                     echo "Skipping dark tile generation (MAPS_HTML_ONLY=true)."
-                elif [[ -d "$TILE_DARK_PATH" ]]; then
-                    HAS_DARK_TILES="true"
-                    echo "Skipping $IMG_NAME dark tiles, already exist."
                 else
                     HAS_DARK_TILES="true"
-                    vips dzsave "$DARK_IMG_PATH" "$TILE_DARK_PATH" \
-                        --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                        --tile-size 256 --background "0,0,0" --vips-progress
+                    DARK_TILES_UP_TO_DATE="false"
+                    if [ "$META_MATCH" = "true" ] && [[ -d "$TILE_DARK_PATH" ]]; then
+                        DARK_TILES_UP_TO_DATE="true"
+                    fi
+
+                    if [ "$DARK_TILES_UP_TO_DATE" = "true" ]; then
+                        echo "Skipping $IMG_NAME dark tiles (unchanged)."
+                    else
+                        rm -rf "$TILE_DARK_PATH"
+                        mkdir -p "$TILE_DARK_PATH"
+                        vips dzsave "$DARK_IMG_PATH" "$TILE_DARK_PATH" \
+                            --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
+                            --tile-size 256 --background "0,0,0" --vips-progress
+                    fi
                 fi
             fi
 
@@ -341,6 +438,10 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
                 | sed "s/__TITLE__/$(printf '%s\n' "$PAGE_TITLE" | sed 's/[&/\]/\\&/g')/g" \
                 | sed "s|__PATHMD__|$PATHMD|g" \
                 > "$HTML_FILE"
+        fi
+
+        if [ "$MAPS_HTML_ONLY" != "true" ]; then
+            printf '%s\n' "$CURRENT_META" > "$ASSET_META_FILE"
         fi
 
         echo "Processed: $IMG_NAME (map: $MAP)"
