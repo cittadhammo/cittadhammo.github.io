@@ -30,8 +30,9 @@ images:
     title: A0 Vertical
   - name: A0VBM-DhammaCitadel.png
     display: true
+    dark: true
     file: true
     title: A0 Vertical (Black Background) 
 ---
-
-The Dhamma Citadel is an interactive visualization that helps in navigating the Four Noble Truths. This project by Cittadhammo is a data visualization and interactive notebook related to Buddhist concepts.
+The Dhamma Citadel is an interactive visualization that helps in navigating the Four Noble Truths. This project by
+Cittadhammo is a data visualization and interactive notebook related to Buddhist concepts.

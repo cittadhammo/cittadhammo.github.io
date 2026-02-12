@@ -12,7 +12,7 @@
   - [ ] Hero pages with links
   - [x] page for normal content with image in content lightboxed
   - [ ] code pages
-  - [ ] Dark mode
+  - [x] Dark mode
   - [x] grid for item propreties 
   - [x] add modify in github on item pages and how to add new items, categories, etc.j
   - [ ] change footer with real links
@@ -40,6 +40,7 @@
   - [ ] Add grid-line during the year or use fallback to what it is download
   - [x] remove unused lib like masonry
   - [x] remove title name in data and make new logic
+  - [ ] add [[ ]] sustem wide image for frontmatter removal and in page as lightbox 
 
  ## Old To Do
 
