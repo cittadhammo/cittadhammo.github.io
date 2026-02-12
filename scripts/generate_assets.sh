@@ -16,16 +16,22 @@ DARKIFY_METHOD=$(yq -r '.darkify.method // "replace"' "$CONFIG_FILE")
 DARKIFY_SUFFIX=$(yq -r '.darkify.suffix // "dark"' "$CONFIG_FILE")
 
 MAGICK_AVAILABLE="unknown"
+IM_CMD=""
 ensure_magick() {
     if [ "$MAGICK_AVAILABLE" = "unknown" ]; then
         if command -v magick >/dev/null 2>&1; then
+            IM_CMD="magick"
+            MAGICK_AVAILABLE="true"
+        elif command -v convert >/dev/null 2>&1; then
+            # ImageMagick 6 commonly exposes `convert` instead of `magick`.
+            IM_CMD="convert"
             MAGICK_AVAILABLE="true"
         else
             MAGICK_AVAILABLE="false"
         fi
     fi
     if [ "$MAGICK_AVAILABLE" != "true" ]; then
-        echo "ImageMagick 'magick' not found in PATH. Install ImageMagick to enable darkify."
+        echo "ImageMagick binary not found in PATH (expected 'magick' or 'convert'). Install ImageMagick to enable darkify."
         exit 1
     fi
 }
@@ -37,21 +43,21 @@ darkify_image() {
 
     case "$method" in
         replace)
-            magick "$src" \
+            "$IM_CMD" "$src" \
                 -modulate 100,110,100 \
                 -fuzz 15% -fill "#121212" -opaque "#ffffff" \
                 -fuzz 15% -fill "#e6e6e6" -opaque "#000000" \
                 "$dest"
             ;;
         multiply)
-            magick "$src" \
+            "$IM_CMD" "$src" \
                 \( +clone -colorspace gray -threshold 90% -negate \) \
                 -compose Multiply -composite \
                 -brightness-contrast -5x20 \
                 "$dest"
             ;;
         invert_lightness)
-            magick "$src" \
+            "$IM_CMD" "$src" \
                 -colorspace HSL \
                 -channel Lightness -negate \
                 -channel RGB \
@@ -61,7 +67,7 @@ darkify_image() {
                 "$dest"
             ;;
         replace_only)
-            magick "$src" \
+            "$IM_CMD" "$src" \
                 -fuzz 10% -fill "#121212" -opaque white \
                 -fuzz 10% -fill "#e6e6e6" -opaque black \
                 "$dest"
