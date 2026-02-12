@@ -148,11 +148,20 @@
   img {
     width: 100%;
     display: block;
+    transition: filter .35s ease-in-out;
   }
 
   span {
     //margin: 1rem 0 .5rem;
     display: block;
+  }
+}
+
+html[data-theme="dark"] .module a:hover .img-wrapper {
+  &:after { opacity: .15; }
+
+  img {
+    filter: brightness(1.08) contrast(1.03);
   }
 }
 
