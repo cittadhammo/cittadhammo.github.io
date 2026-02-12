@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install VIPS
-        run: sudo apt-get update && sudo apt-get install -y libvips-tools
+      - name: Install asset tooling
+        run: sudo apt-get update && sudo apt-get install -y libvips-tools imagemagick
 
       - name: Install yq
         run: |
