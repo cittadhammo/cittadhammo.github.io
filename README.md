@@ -181,4 +181,3 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build --config _config.yml,_config_gh.yml
 ```
-
