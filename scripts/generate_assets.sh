@@ -107,11 +107,11 @@ to_vips_background() {
 
     case "$color" in
         ""|white|\#fff|\#ffffff)
-            echo "255,255,255"
+            echo "255 255 255"
             return
             ;;
         black|\#000|\#000000)
-            echo "0,0,0"
+            echo "0 0 0"
             return
             ;;
     esac
@@ -121,7 +121,7 @@ to_vips_background() {
         local r=$((16#${hex:0:2}))
         local g=$((16#${hex:2:2}))
         local b=$((16#${hex:4:2}))
-        echo "$r,$g,$b"
+        echo "$r $g $b"
         return
     fi
 
@@ -130,12 +130,12 @@ to_vips_background() {
         local r=$((16#${hex:0:1}${hex:0:1}))
         local g=$((16#${hex:1:1}${hex:1:1}))
         local b=$((16#${hex:2:1}${hex:2:1}))
-        echo "$r,$g,$b"
+        echo "$r $g $b"
         return
     fi
 
     # Fallback keeps old behavior if background is missing/unknown.
-    echo "255,255,255"
+    echo "255 255 255"
 }
 
 normalize_image_name() {
