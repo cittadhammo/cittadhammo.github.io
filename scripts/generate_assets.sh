@@ -72,6 +72,45 @@ darkify_image() {
     esac
 }
 
+to_vips_background() {
+    local raw="$1"
+    local color="${raw,,}"
+    color="${color// /}"
+    color="${color//\"/}"
+
+    case "$color" in
+        ""|white|\#fff|\#ffffff)
+            echo "255,255,255"
+            return
+            ;;
+        black|\#000|\#000000)
+            echo "0,0,0"
+            return
+            ;;
+    esac
+
+    if [[ "$color" =~ ^#([0-9a-f]{6})$ ]]; then
+        local hex="${BASH_REMATCH[1]}"
+        local r=$((16#${hex:0:2}))
+        local g=$((16#${hex:2:2}))
+        local b=$((16#${hex:4:2}))
+        echo "$r,$g,$b"
+        return
+    fi
+
+    if [[ "$color" =~ ^#([0-9a-f]{3})$ ]]; then
+        local hex="${BASH_REMATCH[1]}"
+        local r=$((16#${hex:0:1}${hex:0:1}))
+        local g=$((16#${hex:1:1}${hex:1:1}))
+        local b=$((16#${hex:2:1}${hex:2:1}))
+        echo "$r,$g,$b"
+        return
+    fi
+
+    # Fallback keeps old behavior if background is missing/unknown.
+    echo "255,255,255"
+}
+
 # Read the template file
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "Template file not found: $TEMPLATE_FILE"
@@ -134,6 +173,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name")
         MAP=$(echo "$YAML" | yq -r ".images[$i].map // false")
         BG=$(echo "$YAML" | yq -r ".images[$i].background // \"white\"")
+        TILE_LIGHT_BG=$(to_vips_background "$BG")
         IMG_DARK=$(echo "$YAML" | yq -r ".images[$i].dark // false")
         DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
         FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
@@ -241,7 +281,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             else
                 vips dzsave "$SRC_IMG_PATH" "$TILE_PATH" \
                     --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                    --tile-size 256 --vips-progress
+                    --tile-size 256 --background "$TILE_LIGHT_BG" --vips-progress
             fi
 
             HAS_DARK_TILES="false"
@@ -258,7 +298,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
                     HAS_DARK_TILES="true"
                     vips dzsave "$DARK_IMG_PATH" "$TILE_DARK_PATH" \
                         --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                        --tile-size 256 --vips-progress
+                        --tile-size 256 --background "0,0,0" --vips-progress
                 fi
             fi
 
