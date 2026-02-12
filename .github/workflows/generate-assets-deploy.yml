@@ -81,6 +81,36 @@ jobs:
         if: steps.should_generate_assets.outputs.run == 'true'
         run: sudo apt-get update && sudo apt-get install -y libvips-tools imagemagick
 
+      - name: Configure ImageMagick limits for large assets
+        if: steps.should_generate_assets.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          for policy in /etc/ImageMagick-6/policy.xml /etc/ImageMagick-7/policy.xml; do
+            if [ -f "$policy" ]; then
+              echo "Patching $policy"
+              sudo cp "$policy" "${policy}.bak"
+              sudo sed -Ei 's|(name="memory"[[:space:]]+value=")[^"]*(")|\14GiB\2|g' "$policy"
+              sudo sed -Ei 's|(name="map"[[:space:]]+value=")[^"]*(")|\18GiB\2|g' "$policy"
+              sudo sed -Ei 's|(name="disk"[[:space:]]+value=")[^"]*(")|\132GiB\2|g' "$policy"
+              sudo sed -Ei 's|(name="area"[[:space:]]+value=")[^"]*(")|\10\2|g' "$policy"
+              sudo sed -Ei 's|(name="width"[[:space:]]+value=")[^"]*(")|\132KP\2|g' "$policy"
+              sudo sed -Ei 's|(name="height"[[:space:]]+value=")[^"]*(")|\132KP\2|g' "$policy"
+            fi
+          done
+
+      - name: Show ImageMagick limits
+        if: steps.should_generate_assets.outputs.run == 'true'
+        run: |
+          set +e
+          echo "ImageMagick version:"
+          (magick -version || convert -version)
+          echo ""
+          echo "ImageMagick policy:"
+          (magick -list policy || convert -list policy)
+          echo ""
+          echo "ImageMagick resources:"
+          (magick -list resource || convert -list resource)
+
       - name: Install yq
         if: steps.should_generate_assets.outputs.run == 'true'
         run: |
@@ -95,6 +125,15 @@ jobs:
 
       - name: Generate thumbnails and tiles
         if: steps.should_generate_assets.outputs.run == 'true'
+        env:
+          MAGICK_MEMORY_LIMIT: 4GiB
+          MAGICK_MAP_LIMIT: 8GiB
+          MAGICK_DISK_LIMIT: 32GiB
+          MAGICK_AREA_LIMIT: 0
+          MAGICK_WIDTH_LIMIT: 32KP
+          MAGICK_HEIGHT_LIMIT: 32KP
+          MAGICK_THREAD_LIMIT: 2
+          MAGICK_TMPDIR: /tmp
         run: ./scripts/generate_assets.sh
 
       - name: Skip asset generation

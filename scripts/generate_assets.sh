@@ -357,7 +357,12 @@ EOF
         else
             echo "Generating dark version for $IMG_NAME (method: $DARKIFY_METHOD)"
             ensure_magick
-            darkify_image "$SRC_IMG_PATH" "$DARK_IMG_PATH" "$DARKIFY_METHOD"
+            if ! darkify_image "$SRC_IMG_PATH" "$DARK_IMG_PATH" "$DARKIFY_METHOD"; then
+                echo "Warning: dark generation failed for $IMG_NAME (likely ImageMagick resource limits)."
+                echo "Falling back to original image for dark download variant: $DARK_IMG_NAME"
+                rm -f "$DARK_IMG_PATH"
+                cp "$SRC_IMG_PATH" "$DARK_IMG_PATH"
+            fi
         fi
     fi
 
