@@ -589,6 +589,20 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     drop-shadow(0 0 12px rgba(255, 255, 255, 0.75));
 }
 
+#page-content .page-inline-image-link {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: min(100%, 980px);
+}
+
+#page-content .page-inline-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  cursor: zoom-in;
+}
+
 // Magnific Popup Responsive adjustments
 .mfp-wrap .mfp-content {
   width: auto; /* Allow content to size naturally */

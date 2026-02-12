@@ -42,3 +42,7 @@ A0VM-DhammaCitadel:
   small: 0.708
   medium: 0.707
   large: 0.707
+manual:
+  small: 0.662
+  medium: 0.661
+  large: 0.661

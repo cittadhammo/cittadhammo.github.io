@@ -25,23 +25,29 @@
               <a href="{{ item.url | relative_url }}">
                 <div class="img-wrapper">
                   {% assign image = item.images | first %}
-                  {% assign image_name = image.name | default: image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                  {% assign image_entry = image %}
+                  {% if image_entry == nil and item.image %}
+                    {% assign image_entry = item.image %}
+                  {% endif %}
+                  {% assign image_name = image_entry.name | default: image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
                   {% assign img = image_name | split: '.' | first %}
                   {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
                   {% assign has_dark_variant = true %}
-                  {% if image.dark == true %}
+                  {% if image and image.dark == true %}
                     {% assign has_dark_variant = false %}
                   {% endif %}
-                  <img
-                    src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
-                    data-light-src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
-                    {% if has_dark_variant %}
-                      data-dark-src="{{ '/assets/images/' | append: img | append: '/small-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
-                    {% endif %}
-                    alt="{{ image_name }}"
-                    loading="lazy"
-                    style="aspect-ratio: {{ site.data.size[img].small }};"
-                  >
+                  {% if image_name != '' %}
+                    <img
+                      src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                      data-light-src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                      {% if has_dark_variant %}
+                        data-dark-src="{{ '/assets/images/' | append: img | append: '/small-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                      {% endif %}
+                      alt="{{ image_name }}"
+                      loading="lazy"
+                      style="aspect-ratio: {{ site.data.size[img].small }};"
+                    >
+                  {% endif %}
                 </div>
                 <h3>{{ item.title }}</h3>
                 <span class="h2">{{ item.subtitle }}</span>

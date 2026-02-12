@@ -1,4 +1,4 @@
-.PHONY: assets sync-agent-docs
+.PHONY: assets maps-html images darkify-test clean sync-config build serve sync-agent-docs
 
 # Run the search and mapping script
 assets:
@@ -11,6 +11,10 @@ maps-html:
 # Generate PDF and PNG by running Python script in the vault directory
 images:
 	cd vault && python3 ./scripts/generate_pdf_png2.py
+
+# Compare all darkify methods on images in scripts/darkify-test/input
+darkify-test:
+	bash ./scripts/darkify-test/run.sh
 
 clean:
 	rm -rf assets/images/*

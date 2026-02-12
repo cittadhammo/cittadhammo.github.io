@@ -27,12 +27,21 @@
       <section class="projects">
         <div class="container">
           <h1 class="cat-title projects">{{ page.title }}</h1>
-          {{ content }} 
+          <div id="page-content">
+            {{ content }}
+          </div>
         </div>
       </section>
     </main>
     {% include footer.html %}
     <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | relative_url }}"></script> -->
+    <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | relative_url }}"></script>
+    <script>
+      window.PAGE_IMAGE_EXT = {{ site.img_ext | jsonify }};
+      window.PAGE_BASEURL = {{ '' | relative_url | jsonify }};
+    </script>
+    <script src="{{ '/assets/scripts/page-wikilink-lightbox.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/home.js' | relative_url }}"></script>
   </body>
 </html>

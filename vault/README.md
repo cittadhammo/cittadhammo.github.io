@@ -1,54 +1,117 @@
-> Going and coming freely, the substance of mind without blockage -- this is prajna. > > -- Huineng
+> Going and coming freely, the substance of mind without blockage: this is prajna.
+>
+> — Huineng
 
 ---
 
-This Vault is meant to be a base content for dhammacharts.org website using jekyll template pineapple modified. This
-Vault is used to store all information and easely updatable via Obsidian or GitHub Web UI.
+## Purpose
 
-- See [[DhammaCharts.org]] page for more information. - See [[CHECK]] for what needs attention. ## Jekyll and Bash
-script
+This vault is the content base for `dhammacharts.org`, built with Jekyll (Pineapple template, customized).
 
-- script generate thumbnails small and medium, tiled maps, and lightbox size. Original files can be download on the page
-itself via links. - Use: `published: false` to not publish the item on the website or `draft: true` (?)
+The goal is to keep content easy to maintain through:
+
+- Obsidian
+- GitHub Web UI
+
+Useful pages:
+
+- `[[DhammaCharts.org]]` for project/site context
+- `[[CHECK]]` for pending tasks and attention points
+
+## Publishing and Site Build Notes
+
+Main asset/build flow:
+
+- The Jekyll + Bash asset script generates:
+  - thumbnails (`small`, `medium`, `large`)
+  - tiled maps
+  - lightbox assets
+- Original files remain downloadable from item pages.
+
+Frontmatter publishing controls:
+
+- `published: false` to hide an item from the site
+- `draft: true` can also be used for work-in-progress content
 
 ## SVG to PDF/PNG Converter
 
-This script batch-converts SVG files into high-resolution PDF and PNG files using Chromium and PyMuPDF. It wraps each
-SVG in a margin-adjustable HTML template sized to standard A formats (e.g., A0S, A1V), renders the PDF using headless
-Chromium, and exports the PNG at 300 DPI with correct pixel dimensions. If no A-format is detected in the filename, it
-defaults to A1 vertical (`A1V`).
+The SVG converter batch-generates high-resolution PDF and PNG outputs using Chromium + PyMuPDF.
+
+Behavior:
+
+- Wraps each SVG in an HTML template
+- Supports margins and standard paper formats
+- Renders PDF via headless Chromium
+- Exports PNG at 300 DPI with matching pixel dimensions
+- If no A-format is found in filename, defaults to `A1V`
 
 ### Dependencies
 
-Install the required Python package:
+```bash
+pip3 install pymupdf
+sudo apt install chromium-browser
+```
 
-```bash pip3 install pymupdf sudo apt install chromium-browser ```
+### Filename Convention
 
-### 📄 Filename Convention
+Each SVG filename should start with a format code describing paper size, orientation, background, and margin.
 
-Each SVG filename should start with a format code to specify paper size, orientation, background, and margin:
+Format:
 
-**Format:** `A[0-2]x[B][M]-name.svg` or `2A0x[B][M]-name.svg`
+- `A[0-2]x[B][M]-name.svg`
+- `2A0x[B][M]-name.svg`
 
-- `A0`, `A1`, `A2`, `2A0`: Paper size - `V`, `H`, `S`: Orientation — Vertical, Horizontal, or Square - `B` (optional):
-Use **black background** - `M` (optional): Add **1 cm margin** all around
+Legend:
 
-**Examples:** - `A1V-map.svg` → A1 Vertical, white background, no margin - `A0HBM-graph.svg` → A0 Horizontal, black
-background, with margin - `2A0S-design.svg` → 2A0 Square, white background, no margin - `A2VBM-sketch.svg` → A2
-Vertical, black background, with margin
+- `A0`, `A1`, `A2`, `2A0`: paper size
+- `V`, `H`, `S`: Vertical / Horizontal / Square
+- `B` (optional): black background
+- `M` (optional): add 1 cm margin
 
-Usually name start with a capital and are camelcase. (maybe we should change)
+Examples:
 
-## Nested propreties
+- `A1V-map.svg` -> A1 vertical, white background, no margin
+- `A0HBM-graph.svg` -> A0 horizontal, black background, margin
+- `2A0S-design.svg` -> 2A0 square, white background, no margin
+- `A2VBM-sketch.svg` -> A2 vertical, black background, margin
 
-For the moment obsidian do not support nested proprieties or collection in the frontmatter in preview mode. It would be
-nice as we could input the images directly using `[[]]` shortcut. Maybe in the future Obsidian will support this, but we
-need that proprieties to build the website comfortably with options for every pages. ## Templates
+Naming note:
 
-- Home Page - Area Page - Item Page - Reference Page - Reference - Page from item list
+- Files usually start with a capital letter and CamelCase.
+
+## Frontmatter Notes
+
+Obsidian still has limitations with nested properties/collections in frontmatter preview, so structured frontmatter is kept for site generation.
+
+For images, you can use normal names or wikilink-style names in image fields (for example `image.png` or `[[image.png]]`), while keeping structured properties when options per image are needed.
+
+## Templates
+
+- Home Page
+- Area Page
+- Item Page
+- Reference Page
+- Reference
+- Page from item list
 
 ## Tree Structure
 
-### Charts #### Digital ```dataview list from "content/_charts/digital" ``` #### By Others ```dataview list from
-"content/_charts/by-others" ``` #### Hand Made ```dataview list from "content/Charts/Hand Made" ```
+### Charts
 
+#### Digital
+
+```dataview
+list from "content/_charts/digital"
+```
+
+#### By Others
+
+```dataview
+list from "content/_charts/by-others"
+```
+
+#### Hand Made
+
+```dataview
+list from "content/Charts/Hand Made"
+```

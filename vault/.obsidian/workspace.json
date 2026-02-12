@@ -11,12 +11,14 @@
             "id": "6d3a9a4840feaac4",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "assets/images/A1S-Manual.png"
+                "file": "content/_charts/digital/manual-buddhist-terms.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "A1S-Manual"
+              "icon": "lucide-file",
+              "title": "manual-buddhist-terms"
             }
           },
           {
@@ -198,14 +200,16 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "3f34646b823e7cfc",
+  "active": "6d3a9a4840feaac4",
   "lastOpenFiles": [
+    "data/size.yml.tmp",
+    "content/_charts/prints.md",
+    "assets/images/A1S-Manual.png",
     "assets/images2/DOChart 2.png",
     "assets/images2/DOChart.png",
     "assets/images/A2S-37Wings.png",
     "assets/images2/an2p.jpg",
     "content/_charts/by-others/dependent-origination.md",
-    "data/size.yml.tmp",
     "content/_charts/digital/dhamma-citadel.md",
     "content/_charts/by-others/core-topics-of-buddhism.md",
     "content/_charts/by-others/combined-dependant-origination.md",
@@ -214,9 +218,7 @@
     "assets/images2/sn123.jpg",
     "assets/images2/paticcasamuppadaJayarava.jpg",
     "assets/images2/sn12t.svg",
-    "assets/images2/sn12.png",
     "assets/images2/09_11_Retreat_Big_Picture.pdf",
-    "assets/images2/09_11_Retreat_Big_Picture-1.png",
     "assets/images2/DOChart.pdf",
     "content/_3d-printing/other/dhamma-citadel-3d.md",
     "content/_charts/digital/Khundaka.md",
@@ -239,7 +241,6 @@
     "assets/drawings/AreaOne.excalidraw.md",
     "assets/drawings/Areas.excalidraw.md",
     "assets/drawings/Charts.excalidraw.md",
-    "assets/drawings/Cover.excalidraw.md",
     "content/_3d-printing/fractals",
     "script/token.rtf",
     "script/tilingReadme.rtf",
