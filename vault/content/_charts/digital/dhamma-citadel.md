@@ -21,11 +21,13 @@ code:
 images:
   - name: A0SM-DhammaCitadel.png
     display: true
+    dark: true
     map: true
     file: true
     title: A0 Square
   - name: A0VM-DhammaCitadel.png
     display: true
+    dark: true
     file: true
     title: A0 Vertical
   - name: A0VBM-DhammaCitadel.png
