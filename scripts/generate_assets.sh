@@ -8,17 +8,66 @@ MAPS_HTML_DIR="./maps"
 SIZE_DATA_FILE="./vault/data/size.yml"
 TEMPLATE_FILE="./scripts/map-template.html"
 MAPS_HTML_ONLY="${MAPS_HTML_ONLY:-false}"
+CONFIG_FILE="./_config.yml"
 
-# Check if a background value should be treated as black
-is_black_bg() {
-    local bg
-    bg=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-    case "$bg" in
-        black|\#000|\#000000|rgb\(0,0,0\))
-            return 0
+# Darkify config
+DARKIFY_METHOD=$(yq -r '.darkify.method // "replace"' "$CONFIG_FILE")
+DARKIFY_SUFFIX=$(yq -r '.darkify.suffix // "dark"' "$CONFIG_FILE")
+
+MAGICK_AVAILABLE="unknown"
+ensure_magick() {
+    if [ "$MAGICK_AVAILABLE" = "unknown" ]; then
+        if command -v magick >/dev/null 2>&1; then
+            MAGICK_AVAILABLE="true"
+        else
+            MAGICK_AVAILABLE="false"
+        fi
+    fi
+    if [ "$MAGICK_AVAILABLE" != "true" ]; then
+        echo "ImageMagick 'magick' not found in PATH. Install ImageMagick to enable darkify."
+        exit 1
+    fi
+}
+
+darkify_image() {
+    local src="$1"
+    local dest="$2"
+    local method="$3"
+
+    case "$method" in
+        replace)
+            magick "$src" \
+                -modulate 100,110,100 \
+                -fuzz 15% -fill "#121212" -opaque "#ffffff" \
+                -fuzz 15% -fill "#e6e6e6" -opaque "#000000" \
+                "$dest"
+            ;;
+        multiply)
+            magick "$src" \
+                \( +clone -colorspace gray -threshold 90% -negate \) \
+                -compose Multiply -composite \
+                -brightness-contrast -5x20 \
+                "$dest"
+            ;;
+        invert_lightness)
+            magick "$src" \
+                -colorspace HSL \
+                -channel Lightness -negate \
+                -channel RGB \
+                -colorspace sRGB \
+                -brightness-contrast -5x15 \
+                -level 5%,95% \
+                "$dest"
+            ;;
+        replace_only)
+            magick "$src" \
+                -fuzz 10% -fill "#121212" -opaque white \
+                -fuzz 10% -fill "#e6e6e6" -opaque black \
+                "$dest"
             ;;
         *)
-            return 1
+            echo "Unknown darkify method: $method"
+            exit 1
             ;;
     esac
 }
@@ -85,6 +134,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name")
         MAP=$(echo "$YAML" | yq -r ".images[$i].map // false")
         BG=$(echo "$YAML" | yq -r ".images[$i].background // \"white\"")
+        IMG_DARK=$(echo "$YAML" | yq -r ".images[$i].dark // false")
         DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
         FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
         PATHMD="_${MD_FILE#*_}"
@@ -96,6 +146,12 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         EXT="${IMG_NAME##*.}"
         IMG_BASE="${IMG_NAME%.*}"
         DEST_FOLDER="$DEST_IMAGE_DIR/$IMG_BASE"
+        DARK_IMG_NAME="${IMG_BASE}-${DARKIFY_SUFFIX}.${EXT}"
+        DARK_IMG_PATH="$DEST_FOLDER/$DARK_IMG_NAME"
+        NEEDS_DARKIFY="false"
+        if [ "$IMG_DARK" != "true" ]; then
+            NEEDS_DARKIFY="true"
+        fi
 
         if [ ! -f "$SRC_IMG_PATH" ]; then
             echo "Image not found: $SRC_IMG_PATH"
@@ -105,6 +161,12 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         mkdir -p "$DEST_FOLDER"
         if [ "$MAPS_HTML_ONLY" != "true" ]; then
             cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME" # Always copy original image/file
+        fi
+
+        if [ "$NEEDS_DARKIFY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
+            echo "Generating dark version for $IMG_NAME (method: $DARKIFY_METHOD)"
+            ensure_magick
+            darkify_image "$SRC_IMG_PATH" "$DARK_IMG_PATH" "$DARKIFY_METHOD"
         fi
 
         if [ "$DISPLAY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
@@ -134,6 +196,12 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+
+            if [ "$NEEDS_DARKIFY" = "true" ]; then
+                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
+                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
+                vips thumbnail "$DARK_IMG_PATH" "$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+            fi
 
             # Get aspect ratios of generated thumbnails (width/height)
             SMALL_WIDTH=$(vipsheader -f width "$DEST_FOLDER/small.webp")
@@ -177,16 +245,20 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             fi
 
             HAS_DARK_TILES="false"
-            if ! is_black_bg "$BG"; then
-                HAS_DARK_TILES="true"
+            if [ "$NEEDS_DARKIFY" = "true" ]; then
                 if [ "$MAPS_HTML_ONLY" = "true" ]; then
+                    if [[ -d "$TILE_DARK_PATH" ]]; then
+                        HAS_DARK_TILES="true"
+                    fi
                     echo "Skipping dark tile generation (MAPS_HTML_ONLY=true)."
                 elif [[ -d "$TILE_DARK_PATH" ]]; then
+                    HAS_DARK_TILES="true"
                     echo "Skipping $IMG_NAME dark tiles, already exist."
                 else
-                    vips dzsave "$SRC_IMG_PATH" "$TILE_DARK_PATH" \
+                    HAS_DARK_TILES="true"
+                    vips dzsave "$DARK_IMG_PATH" "$TILE_DARK_PATH" \
                         --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                        --tile-size 256 --background 0,0,0 --vips-progress
+                        --tile-size 256 --vips-progress
                 fi
             fi
 

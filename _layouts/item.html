@@ -207,6 +207,12 @@
                 <span class="h2">Files</span>
                 {% for file_item in files_to_display %}
                   {% assign file_base = file_item.name | split: '.' | first %}
+                  {% assign file_ext = file_item.name | split: '.' | last %}
+                  {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
+                  {% assign has_dark_variant = true %}
+                  {% if file_item.dark == true %}
+                    {% assign has_dark_variant = false %}
+                  {% endif %}
                   <p class="rouge-first">
                     <a
                       class="black-under"
@@ -217,6 +223,19 @@
                     >
                       {{ file_item.title }}
                     </a>
+                    {% if has_dark_variant %}
+                      (
+                      <a
+                        class="black-under"
+                        href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_base | append: '-' | append: dark_suffix | append: '.' | append: file_ext | relative_url }}"
+                        download="{{ file_base | append: '-' | append: dark_suffix }}"
+                        target="_blank"
+                        rel="nofollow"
+                      >
+                        Dark
+                      </a>
+                      )
+                    {% endif %}
                   </p>
                 {% endfor %}
               {% endif %}
@@ -230,18 +249,31 @@
               {% for image in page.images %}
                 {% if image.display != false %}
                   {% assign img = image.name | split: '.' | first %}
+                  {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
+                  {% assign has_dark_variant = true %}
+                  {% if image.dark == true %}
+                    {% assign has_dark_variant = false %}
+                  {% endif %}
                   <li>
                     {% if image.map %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
                         <a
                           class="mfp-image"
                           href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+                          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+                          {% if has_dark_variant %}
+                            data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                          {% endif %}
                           data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
                           {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
                         >
                           <img
                             class="load-hidden"
                             src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                            data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                            {% if has_dark_variant %}
+                              data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                            {% endif %}
                             style="aspect-ratio: {{ site.data.size[img].medium }};"
                             alt="{{ image.alt }}"
                           >
@@ -252,10 +284,22 @@
                       </div>
                     {% else %}
                       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a class="mfp-image" href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}" {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}>
+                        <a
+                          class="mfp-image"
+                          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+                          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+                          {% if has_dark_variant %}
+                            data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                          {% endif %}
+                          {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+                        >
                           <img
                             class="load-hidden"
                             src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                            data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                            {% if has_dark_variant %}
+                              data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                            {% endif %}
                             alt="{{ image.alt }}"
                           >
                         </a>

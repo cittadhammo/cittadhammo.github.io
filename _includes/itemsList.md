@@ -26,8 +26,17 @@
                 <div class="img-wrapper">
                   {% assign image = item.images | first %}
                   {% assign img = image.name | split: '.' | first %}
+                  {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
+                  {% assign has_dark_variant = true %}
+                  {% if image.dark == true %}
+                    {% assign has_dark_variant = false %}
+                  {% endif %}
                   <img
                     src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                    data-light-src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                    {% if has_dark_variant %}
+                      data-dark-src="{{ '/assets/images/' | append: img | append: '/small-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                    {% endif %}
                     alt="{{ image.name }}"
                     loading="lazy"
                     style="aspect-ratio: {{ site.data.size[img].small }};"
