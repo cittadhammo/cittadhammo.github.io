@@ -111,6 +111,25 @@ to_vips_background() {
     echo "255,255,255"
 }
 
+normalize_image_name() {
+    local raw="$1"
+    local name="$raw"
+
+    # Trim surrounding whitespace.
+    name="$(echo "$name" | awk '{$1=$1; print}')"
+
+    # Support Obsidian wikilinks like [[image.png]] or [[image.png|Alias]].
+    name="${name#\[\[}"
+    name="${name%\]\]}"
+    name="${name#\!}"
+    name="${name%%|*}"
+
+    # Trim again after link normalization.
+    name="$(echo "$name" | awk '{$1=$1; print}')"
+
+    echo "$name"
+}
+
 # Read the template file
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "Template file not found: $TEMPLATE_FILE"
@@ -170,7 +189,8 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     IMG_COUNT=$(echo "$YAML" | yq '.images | length')
 
     for ((i=0; i<IMG_COUNT; i++)); do
-        IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name")
+        RAW_IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name // .images[$i] // \"\"")
+        IMG_NAME=$(normalize_image_name "$RAW_IMG_NAME")
         MAP=$(echo "$YAML" | yq -r ".images[$i].map // false")
         BG=$(echo "$YAML" | yq -r ".images[$i].background // \"white\"")
         TILE_LIGHT_BG=$(to_vips_background "$BG")
@@ -178,6 +198,11 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
         FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
         PATHMD="_${MD_FILE#*_}"
+
+        if [ -z "$IMG_NAME" ] || [ "$IMG_NAME" = "null" ]; then
+            echo "Skipping image entry with empty/invalid name in $MD_FILE"
+            continue
+        fi
 
         echo "Found image: $IMG_NAME (map: $MAP)"
         

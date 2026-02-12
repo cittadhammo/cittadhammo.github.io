@@ -25,7 +25,8 @@
               <a href="{{ item.url | relative_url }}">
                 <div class="img-wrapper">
                   {% assign image = item.images | first %}
-                  {% assign img = image.name | split: '.' | first %}
+                  {% assign image_name = image.name | default: image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                  {% assign img = image_name | split: '.' | first %}
                   {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
                   {% assign has_dark_variant = true %}
                   {% if image.dark == true %}
@@ -37,7 +38,7 @@
                     {% if has_dark_variant %}
                       data-dark-src="{{ '/assets/images/' | append: img | append: '/small-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
                     {% endif %}
-                    alt="{{ image.name }}"
+                    alt="{{ image_name }}"
                     loading="lazy"
                     style="aspect-ratio: {{ site.data.size[img].small }};"
                   >

@@ -13,9 +13,13 @@
 {% endif %}
 
 {% assign seo_image_path = '' %}
-{% if page.image == nil and page.images and page.images.size > 0 and page.images[0].name %}
-  {% assign first_image_base = page.images[0].name | split: '.' | first %}
-  {% assign seo_image_path = '/assets/images/' | append: first_image_base | append: '/large.' | append: site.img_ext %}
+{% if page.image == nil and page.images and page.images.size > 0 %}
+  {% assign first_image_entry = page.images[0] %}
+  {% assign first_image_name = first_image_entry.name | default: first_image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+  {% if first_image_name != '' %}
+    {% assign first_image_base = first_image_name | split: '.' | first %}
+    {% assign seo_image_path = '/assets/images/' | append: first_image_base | append: '/large.' | append: site.img_ext %}
+  {% endif %}
 {% endif %}
 {% if seo_image_path != '' %}
   {% assign seo_image_url = seo_image_path | absolute_url %}

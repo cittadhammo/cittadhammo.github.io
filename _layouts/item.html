@@ -206,8 +206,9 @@
               {% if files_to_display.size > 0 %}
                 <span class="h2">Files</span>
                 {% for file_item in files_to_display %}
-                  {% assign file_base = file_item.name | split: '.' | first %}
-                  {% assign file_ext = file_item.name | split: '.' | last %}
+                  {% assign file_name = file_item.name | default: file_item | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                  {% assign file_base = file_name | split: '.' | first %}
+                  {% assign file_ext = file_name | split: '.' | last %}
                   {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
                   {% assign has_dark_variant = true %}
                   {% if file_item.dark == true %}
@@ -216,8 +217,8 @@
                   <p class="rouge-first">
                     <a
                       class="black-under"
-                      href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_item.name | relative_url }}"
-                      download="{{ file_item.name | split: '.' | first }}"
+                      href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_name | relative_url }}"
+                      download="{{ file_name | split: '.' | first }}"
                       target="_blank"
                       rel="nofollow"
                     >
@@ -248,7 +249,8 @@
             <ul class="lightbox-gallery">
               {% for image in page.images %}
                 {% if image.display != false %}
-                  {% assign img = image.name | split: '.' | first %}
+                  {% assign image_name = image.name | default: image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                  {% assign img = image_name | split: '.' | first %}
                   {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
                   {% assign has_dark_variant = true %}
                   {% if image.dark == true %}
