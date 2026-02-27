@@ -62,7 +62,6 @@ darkify_image() {
                 -channel Lightness -negate \
                 -channel RGB \
                 -colorspace sRGB \
-                -brightness-contrast -5x15 \
                 -level 5%,95% \
                 "$dest"
             ;;
