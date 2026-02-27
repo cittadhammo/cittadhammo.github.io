@@ -15,7 +15,7 @@ techs:
   - name: Observable
     url: https://observablehq.com/
 images:
-  - name: A2S-37Wings.png
+  - name: 37Wings-A2S.png
     map: true
     pdf: true
     svg: true

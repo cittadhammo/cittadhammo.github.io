@@ -1,6 +1,7 @@
 ---
 title: The Dhamma Citadel
 subtitle: Navigating the Four Noble Truths
+descirption: Visualization that helps in navigating the Four Noble Truths and all the concepts related to their categories and sub-categories
 author: Cittadhammo
 year: 2025
 license:
@@ -17,24 +18,29 @@ techs:
     url: https://observablehq.com/
 code:
   - name: Notebook
-    url: https://observablehq.com/@cittadhammo/the-dhamma-citadel?collection=@cittadhammo/finished
+    url: https://observablehq.com/@cittadhammo/the-dhamma-citadel
 images:
-  - name: A0SM-DhammaCitadel.png
+  - name: DhammaCitadel-A0S.png
     display: true
     dark: true
     map: true
+    file: false
+    title: A0 Square
+  - name: DhammaCitadel-A0SM.png
+    display: false
+    dark: true
+    map: false
     file: true
     title: A0 Square
-  - name: A0VM-DhammaCitadel.png
+  - name: DhammaCitadel-A0VM.png
     display: true
     dark: true
     file: true
     title: A0 Vertical
-  - name: A0VBM-DhammaCitadel.png
+  - name: DhammaCitadel-A0VBM.png
     display: true
     dark: true
     file: true
     title: A0 Vertical (Black Background) 
 ---
-The Dhamma Citadel is an interactive visualization that helps in navigating the Four Noble Truths. This project by
-Cittadhammo is a data visualization and interactive notebook related to Buddhist concepts.
+

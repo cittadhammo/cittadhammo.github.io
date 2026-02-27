@@ -40,7 +40,7 @@
   - [ ] Add grid-line during the year or use fallback to what it is download
   - [x] remove unused lib like masonry
   - [x] remove title name in data and make new logic
-  - [ ] add [[ ]] sustem wide image for frontmatter removal and in page as lightbox 
+  - [x] add [[ ]] sustem wide image for frontmatter removal and in page as lightbox 
 
  ## Old To Do
 

@@ -18,7 +18,7 @@ techs:
   - name: "Observable"
     url: "https://observablehq.com/"
 images:
-  - name: "A0VM-SuttaPitaka.png"
+  - name: "SuttaPitaka-A0VM.png"
 notebook:
   - name: "SuttaPitaka"
     url: "https://observablehq.com/@cittadhammo/suttapitaka"

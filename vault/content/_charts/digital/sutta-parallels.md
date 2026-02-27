@@ -12,7 +12,7 @@ techs:
   - name: D3
     url: http://d3js.org
 images:
-  - name: A0S-Parallels.png
+  - name: Parallels-A0S.png
     map: true
 code:
   - name: Notebook

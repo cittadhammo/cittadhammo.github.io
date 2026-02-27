@@ -11,7 +11,7 @@ techs:
   - name: NetworkX.py
   - name: ChatGPT
 images:
-  - name: A1S-Manual.png
+  - name: Manual-A1S.png
     map: true
 sources:
   - name: The Manual of Buddhist Terms & Doctrines (PDF)

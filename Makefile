@@ -8,9 +8,18 @@ assets:
 maps-html:
 	MAPS_HTML_ONLY=true bash ./scripts/generate_assets.sh
 
-# Generate PDF and PNG by running Python script in the vault directory
+# Generate PDF and PNG by running Python script in the vault directory (default: lossy compression)
 images:
-	cd vault && python3 ./scripts/generate_pdf_png2.py
+	cd vault && python3 ./scripts/generate_pdf_png.py --compression lossy
+
+images-uncompressed:
+	cd vault && python3 ./scripts/generate_pdf_png.py
+
+images-uncompressed-lossless:
+	cd vault && python3 ./scripts/generate_pdf_png.py --compression lossless
+
+images-compressed-lossy:
+	cd vault && python3 ./scripts/generate_pdf_png.py --compression lossy
 
 # Compare all darkify methods on images in scripts/darkify-test/input
 darkify-test:

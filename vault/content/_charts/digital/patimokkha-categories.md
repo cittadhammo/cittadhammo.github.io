@@ -5,7 +5,7 @@ tech:
 description: 
 year:
 images: 
-  - name: A1SM-PatiCat.png
+  - name: PatimokkhaCat-A1SM.png
     map: true
 code: 
   - name: Notebook

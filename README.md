@@ -34,6 +34,8 @@ Jekyll site for publishing Dhamma charts, writings, references, and 3D printing 
 ```bash
 make assets       # Generate/copy image assets + map tiles/viewers
 make images       # Generate PDF/PNG assets from vault script
+make images-compressed       # Generate with lossless compression (quality=100)
+make images-compressed-lossy    # Generate with lossy compression (quality=70-90)
 make build        # Jekyll build with _config.yml + _config_local.yml
 make serve        # Local serve with livereload + assets symlink into _site
 make clean        # Remove generated assets/images and maps

@@ -22,7 +22,7 @@ techs:
   - name: Observable
     url: https://observablehq.com/
 images:
-  - name: A1SM-BuddhaBrain.png
+  - name: BuddhaBrain-A1SM.png
     map: true
 code:
   - name: Notebook

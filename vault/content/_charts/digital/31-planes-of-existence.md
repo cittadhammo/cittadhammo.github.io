@@ -16,7 +16,7 @@ techs:
   - name: "Observable"
     url: "https://observablehq.com/"
 images:
-  - name: "A1S-31Planes.png"
+  - name: "31Planes-A1S.png"
     map: true
 notebook:
   - name: "31 Planes of Existence"

@@ -7,6 +7,11 @@
 ehthumbs.db
 Thumbs.db
 
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
 # Compilation
 .sass-cache/
 _site/
@@ -23,3 +28,4 @@ vendor/bundle
 
 vault/.obsidian
 vault/.trash
+vault/scripts/__pycache__

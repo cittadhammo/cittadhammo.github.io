@@ -45,11 +45,41 @@ Behavior:
 - Exports PNG at 300 DPI with matching pixel dimensions
 - If no A-format is found in filename, defaults to `A1V`
 
-### Dependencies
+### Dependencies (Arch Linux)
 
 ```bash
-pip3 install pymupdf
-sudo apt install chromium-browser
+sudo pacman -S python-pymupdf chromium
+```
+
+### Optional Dependencies
+
+For PNG compression (optional):
+
+```bash
+# Arch Linux
+sudo pacman -S pngquant
+
+# Debian/Ubuntu
+sudo apt install pngquant
+
+# macOS
+brew install pngquant
+```
+
+### Make Commands
+
+```bash
+make images              # Generate PDF/PNG without compression
+make images-compressed   # Generate with lossless compression (quality=100)
+make images-compressed-lossy  # Generate with lossy compression (quality=70-90)
+```
+
+Or run directly:
+
+```bash
+cd vault && python3 ./scripts/generate_pdf_png.py
+cd vault && python3 ./scripts/generate_pdf_png.py --compression lossless
+cd vault && python3 ./scripts/generate_pdf_png.py --compression lossy
 ```
 
 ### Filename Convention

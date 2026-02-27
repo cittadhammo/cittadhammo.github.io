@@ -26,7 +26,7 @@ techs:
   - name: Observable
     url: https://observablehq.com/
 images:
-  - name: A1S-Pati.png
+  - name: Patimokkha-A1S.png
     map: true
 code:
   - name: Notebook

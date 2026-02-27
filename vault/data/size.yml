@@ -46,3 +46,51 @@ manual:
   small: 0.662
   medium: 0.661
   large: 0.661
+37Wings-A2S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+BuddhaBrain-A1SM:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+Manual-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+PatimokkhaCat-A1SM:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+Patimokkha-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+Parallels-A0S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+SuttaPitaka-A0VM:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+31Planes-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+DhammaCitadel-A0SM:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+DhammaCitadel-A0VM:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+DhammaCitadel-A0VBM:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+DhammaCitadel-A0S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
