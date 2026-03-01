@@ -29,6 +29,12 @@ DARKIFY_INVERT_LEVEL_LARGE="${DARKIFY_INVERT_LEVEL_LARGE:-$CFG_DARKIFY_INVERT_LE
 [ -z "$DARKIFY_INVERT_LEVEL_MEDIUM" ] && DARKIFY_INVERT_LEVEL_MEDIUM="3%,88%"
 [ -z "$DARKIFY_INVERT_LEVEL_LARGE" ] && DARKIFY_INVERT_LEVEL_LARGE="4%,92%"
 
+# Effective per-image values (can be overridden from frontmatter).
+ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT="$DARKIFY_INVERT_LEVEL_DEFAULT"
+ACTIVE_DARKIFY_INVERT_LEVEL_SMALL="$DARKIFY_INVERT_LEVEL_SMALL"
+ACTIVE_DARKIFY_INVERT_LEVEL_MEDIUM="$DARKIFY_INVERT_LEVEL_MEDIUM"
+ACTIVE_DARKIFY_INVERT_LEVEL_LARGE="$DARKIFY_INVERT_LEVEL_LARGE"
+
 MAGICK_AVAILABLE="unknown"
 IM_CMD=""
 ensure_magick() {
@@ -55,14 +61,14 @@ darkify_image() {
     local dest="$2"
     local method="$3"
     local variant="${4:-default}"
-    local invert_level="$DARKIFY_INVERT_LEVEL_DEFAULT"
+    local invert_level="$ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT"
 
     if [ "$variant" = "thumb-small" ]; then
-        invert_level="$DARKIFY_INVERT_LEVEL_SMALL"
+        invert_level="$ACTIVE_DARKIFY_INVERT_LEVEL_SMALL"
     elif [ "$variant" = "thumb-medium" ]; then
-        invert_level="$DARKIFY_INVERT_LEVEL_MEDIUM"
+        invert_level="$ACTIVE_DARKIFY_INVERT_LEVEL_MEDIUM"
     elif [ "$variant" = "thumb-large" ]; then
-        invert_level="$DARKIFY_INVERT_LEVEL_LARGE"
+        invert_level="$ACTIVE_DARKIFY_INVERT_LEVEL_LARGE"
     fi
 
     case "$method" in
@@ -314,6 +320,23 @@ extract_content_image_links() {
 process_image_entry() {
     PATHMD="_${MD_FILE#*_}"
     TILE_LIGHT_BG=$(to_vips_background "$BG")
+    ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT="$DARKIFY_INVERT_LEVEL_DEFAULT"
+    ACTIVE_DARKIFY_INVERT_LEVEL_SMALL="$DARKIFY_INVERT_LEVEL_SMALL"
+    ACTIVE_DARKIFY_INVERT_LEVEL_MEDIUM="$DARKIFY_INVERT_LEVEL_MEDIUM"
+    ACTIVE_DARKIFY_INVERT_LEVEL_LARGE="$DARKIFY_INVERT_LEVEL_LARGE"
+
+    if [ -n "$IMG_DARKIFY_INVERT_LEVEL_DEFAULT" ] && [ "$IMG_DARKIFY_INVERT_LEVEL_DEFAULT" != "null" ]; then
+        ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT="$IMG_DARKIFY_INVERT_LEVEL_DEFAULT"
+    fi
+    if [ -n "$IMG_DARKIFY_INVERT_LEVEL_SMALL" ] && [ "$IMG_DARKIFY_INVERT_LEVEL_SMALL" != "null" ]; then
+        ACTIVE_DARKIFY_INVERT_LEVEL_SMALL="$IMG_DARKIFY_INVERT_LEVEL_SMALL"
+    fi
+    if [ -n "$IMG_DARKIFY_INVERT_LEVEL_MEDIUM" ] && [ "$IMG_DARKIFY_INVERT_LEVEL_MEDIUM" != "null" ]; then
+        ACTIVE_DARKIFY_INVERT_LEVEL_MEDIUM="$IMG_DARKIFY_INVERT_LEVEL_MEDIUM"
+    fi
+    if [ -n "$IMG_DARKIFY_INVERT_LEVEL_LARGE" ] && [ "$IMG_DARKIFY_INVERT_LEVEL_LARGE" != "null" ]; then
+        ACTIVE_DARKIFY_INVERT_LEVEL_LARGE="$IMG_DARKIFY_INVERT_LEVEL_LARGE"
+    fi
 
     if [ -z "$IMG_NAME" ] || [ "$IMG_NAME" = "null" ]; then
         echo "Skipping image entry with empty/invalid name in $MD_FILE"
@@ -354,10 +377,10 @@ img_dark=$IMG_DARK
 needs_darkify=$NEEDS_DARKIFY
 darkify_method=$DARKIFY_METHOD
 darkify_suffix=$DARKIFY_SUFFIX
-darkify_invert_level_default=$DARKIFY_INVERT_LEVEL_DEFAULT
-darkify_invert_level_small=$DARKIFY_INVERT_LEVEL_SMALL
-darkify_invert_level_medium=$DARKIFY_INVERT_LEVEL_MEDIUM
-darkify_invert_level_large=$DARKIFY_INVERT_LEVEL_LARGE
+darkify_invert_level_default=$ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT
+darkify_invert_level_small=$ACTIVE_DARKIFY_INVERT_LEVEL_SMALL
+darkify_invert_level_medium=$ACTIVE_DARKIFY_INVERT_LEVEL_MEDIUM
+darkify_invert_level_large=$ACTIVE_DARKIFY_INVERT_LEVEL_LARGE
 EOF
 )
     META_MATCH="false"
@@ -552,6 +575,10 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK=$(echo "$YAML" | yq -r ".images[$i].dark // false")
         DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
         FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
+        IMG_DARKIFY_INVERT_LEVEL_DEFAULT=$(echo "$YAML" | yq -r ".images[$i].invert_level.default // \"\"")
+        IMG_DARKIFY_INVERT_LEVEL_SMALL=$(echo "$YAML" | yq -r ".images[$i].invert_level.small // \"\"")
+        IMG_DARKIFY_INVERT_LEVEL_MEDIUM=$(echo "$YAML" | yq -r ".images[$i].invert_level.medium // \"\"")
+        IMG_DARKIFY_INVERT_LEVEL_LARGE=$(echo "$YAML" | yq -r ".images[$i].invert_level.large // \"\"")
         if [ -n "$IMG_NAME" ] && [ "$IMG_NAME" != "null" ] && [ -z "${PROCESSED_IMAGES[$IMG_NAME]}" ]; then
             process_image_entry
             PROCESSED_IMAGES[$IMG_NAME]=1
@@ -566,6 +593,10 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
+        IMG_DARKIFY_INVERT_LEVEL_SMALL=""
+        IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""
+        IMG_DARKIFY_INVERT_LEVEL_LARGE=""
         process_image_entry
         PROCESSED_IMAGES[$IMG_NAME]=1
     fi
@@ -585,6 +616,10 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
+        IMG_DARKIFY_INVERT_LEVEL_SMALL=""
+        IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""
+        IMG_DARKIFY_INVERT_LEVEL_LARGE=""
         process_image_entry
         PROCESSED_IMAGES[$IMG_NAME]=1
     done < <(extract_content_image_links "$MD_FILE")

@@ -102,11 +102,6 @@ defaults:
       layout: item
   - scope:
       path: ""
-      type: food
-    values:
-      layout: item
-  - scope:
-      path: ""
       type: projects
     values:
       layout: item
