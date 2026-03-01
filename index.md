@@ -13,6 +13,11 @@ title: Home
         {% if site.theme.home_hero_follow_theme != false %}
           data-light-src="{{ '/assets/icons/logo_light_300.png' | relative_url }}"
         {% endif %}
+        width="1372"
+        height="1372"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
         alt="{{ site.title | default: site.author }}"
       >
       <nav class="home-hero-nav" aria-label="Areas">

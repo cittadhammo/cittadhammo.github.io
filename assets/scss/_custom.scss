@@ -730,6 +730,7 @@ html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dar
 .home-layout.home-hero-enabled .home-hero-logo {
   width: min(180px, 38vw);
   height: auto;
+  aspect-ratio: 1 / 1;
   display: block;
   margin: 0 auto 2rem;
 }
