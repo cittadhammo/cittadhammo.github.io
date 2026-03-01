@@ -421,6 +421,11 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 		color: var(--color-on-header-text);
 	}
 
+	li,
+	span {
+		color: var(--color-on-header-text);
+	}
+
 	a,
 	a:visited,
 	a:hover,
@@ -429,9 +434,104 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 	}
 }
 
+.footer-blocks {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 2.4rem 3rem;
+	margin: 0 auto;
+	max-width: 70em;
+	padding: 0 3rem;
+}
+
+.footer-block {
+	flex: 1 1 100%;
+	max-width: 100%;
+	min-width: 0;
+
+	@media (min-width: variables.$breakpoint-small) {
+		flex: 1 1 calc(50% - 1.5rem);
+		max-width: calc(50% - 1.5rem);
+	}
+
+	@media (min-width: variables.$breakpoint-large) {
+		flex: 1 1 calc(33.333% - 2rem);
+		max-width: calc(33.333% - 2rem);
+	}
+}
+
+.footer-block-title {
+	margin-bottom: 0.8rem;
+}
+
+.footer-block-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer-block-item {
+	font-size: 1.8rem;
+	margin-bottom: 0.7rem;
+	word-break: break-word;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.footer-email-row {
+	align-items: center;
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.8rem;
+	white-space: normal;
+}
+
+.footer-email-link {
+	color: var(--color-on-header-text);
+	text-decoration: none;
+}
+
+.footer-email-copy {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 3px;
+	color: var(--color-on-header-text);
+	cursor: pointer;
+	font-family: variables.$font-lekton;
+	font-size: 1.2rem;
+	letter-spacing: 0.08rem;
+	line-height: 1;
+	padding: 0.35rem 0.55rem;
+	text-transform: uppercase;
+	flex: 0 0 auto;
+}
+
+.footer-email-copy:hover,
+.footer-email-copy:focus-visible {
+	background: rgba(255, 255, 255, 0.2);
+	outline: none;
+}
+
+.footer-email-copy-feedback {
+	color: var(--color-on-header-muted);
+	font-size: 1.2rem;
+	opacity: 0;
+	transition: opacity 160ms ease;
+}
+
+.footer-email-copy-feedback.visible {
+	opacity: 1;
+}
+
 .obfuscate-email {
+  color: var(--color-on-header-text);
+  display: inline-block;
   direction: rtl;
   unicode-bidi: bidi-override;
+  white-space: nowrap;
+  word-break: normal;
 }
 
 .contact,

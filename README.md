@@ -128,6 +128,47 @@ sudo pacman -S libvips go-yq gawk findutils openslide
 - For root-domain deploys, set `baseurl: ""` in `_config.yml`.
 - Generated assets are preserved during serve via symlink logic in `make serve`.
 
+## Footer Blocks
+
+Footer content is driven by `_config.yml` under `footer.blocks`.
+
+Each block supports:
+- `title`: block heading
+- `items`: list of rows
+
+Each item supports:
+- `type: email_obfuscated` (anti-scraping display, uses RTL obfuscation)
+- `type: link` (`label`, `url` or `source_key`, plus optional `external`, `relative_url`, `title`)
+- text row (omit `type`, use `text` or `value`)
+
+Example:
+
+```yml
+footer:
+  blocks:
+    - title: "Contact"
+      items:
+        - type: email_obfuscated
+          source_key: email
+    - title: "Connect"
+      items:
+        - type: link
+          label: "Discord"
+          source_key: discord_url
+          external: true
+        - type: link
+          label: "Contribute"
+          source_key: contribute_url
+          relative_url: true
+    - title: "Info"
+      items:
+        - text: "Dhamma Charts and Art."
+        - type: link
+          label: "About"
+          url: "/charts/about.html"
+          relative_url: true
+```
+
 ## Local Mirror
 
 ```bash

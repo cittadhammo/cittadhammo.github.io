@@ -1,38 +1,136 @@
-<!--
-  <footer class="footer">
-  	<div class="container">
-  		<section class="contact">
-  			<h2>Contact</h2>
-  			<a title="{{ site.email }}" href="mailto:{{ site.email }}">{{ site.email }}</a>
-  		</section>
-  		<section class="follow">
-  			<h2>Follow</h2>
-  			<ul>
-  				<li><a title="LinkedIn" href="{{ site.linkedin }}" target="_blank">LinkedIn</a></li>
-  				<li><a title="Twitter" href="{{ site.twitter }}" target="_blank">Twitter</a></li>
-  				<li><a title="Github" href="{{ site.github }}" target="_blank">Github</a></li>
-  			</ul>
-  		</section>
-  	</div>
-  </footer>
--->
-
 <footer class="footer">
-  <div class=" foot">
-    <section class="contact">
-      <h2>Contact</h2>
-      <p>
-        <span class="obfuscate-email">moc.liamnotorp@strahcammah<span class="email-first-letter-rouge">d</span></span>
-      </p>
-    </section>
-    <section class="follow">
-      <h2>Connect</h2>
-      <p class="rouge-first">
-        <a target="_blank" rel="noopener noreferrer" title="Discord" href="{{ site.discord_url }}">Discord</a>
-      </p>
-      <p class="rouge-first">
-        <a title="Contribute" href="{{ site.contribute_url | relative_url }}">Contribute</a>
-      </p>
-    </section>
+  {% assign footer_blocks = site.footer.blocks %}
+  {% if footer_blocks == nil or footer_blocks.size == 0 %}
+    {% assign footer_blocks = '' | split: '' %}
+  {% endif %}
+
+  <div class="footer-blocks">
+    {% for block in footer_blocks %}
+      <section class="footer-block">
+        {% if block.title %}
+          <h2 class="footer-block-title">{{ block.title }}</h2>
+        {% endif %}
+
+        {% assign block_items = block.items %}
+        {% if block_items == nil %}
+          {% assign block_items = '' | split: '' %}
+        {% endif %}
+
+        <ul class="footer-block-list">
+          {% for item in block_items %}
+            {% assign item_type = item.type | default: 'text' %}
+            {% assign item_label = item.label | default: item.text | default: item.url | default: '' %}
+            {% assign item_value = item.value | default: item.text | default: item.url | default: '' %}
+            {% if item.source_key %}
+              {% assign sourced_value = site[item.source_key] %}
+              {% if sourced_value %}
+                {% assign item_value = sourced_value %}
+                {% if item.label == nil or item.label == '' %}
+                  {% assign item_label = sourced_value %}
+                {% endif %}
+              {% endif %}
+            {% endif %}
+
+            <li class="footer-block-item{% if item_type == 'link' %} rouge-first{% endif %}">
+              {% if item_type == 'email_obfuscated' %}
+                {% assign email_value = item_value | to_s | strip %}
+                {% if email_value != '' %}
+                  {% assign email_first_char = email_value | slice: 0, 1 %}
+                  {% assign email_rest = email_value | slice: 1, email_value.size %}
+                  {% assign email_rest_reversed = email_rest | split: '' | reverse | join: '' %}
+                  <div class="footer-email-row">
+                    <a class="footer-email-link" href="mailto:{{ email_value | escape }}">
+                      <span class="obfuscate-email">{{ email_rest_reversed }}<span class="email-first-letter-rouge">{{ email_first_char }}</span></span>
+                    </a>
+                    <button
+                      class="footer-email-copy"
+                      type="button"
+                      data-copy-email="{{ email_value | escape }}"
+                      aria-label="Copy email address"
+                      title="Copy email"
+                    >
+                      Copy
+                    </button>
+                    <span class="footer-email-copy-feedback" aria-live="polite"></span>
+                  </div>
+                {% endif %}
+              {% elsif item_type == 'link' %}
+                {% assign href_value = item.url | default: item_value | to_s | strip %}
+                {% if href_value != '' %}
+                  {% if item.relative_url == true %}
+                    {% assign final_href = href_value | relative_url %}
+                  {% else %}
+                    {% assign final_href = href_value %}
+                  {% endif %}
+                  <a
+                    href="{{ final_href }}"
+                    {% if item.external == true %}target="_blank" rel="noopener noreferrer"{% endif %}
+                    {% if item.title %}title="{{ item.title }}"{% endif %}
+                  >{{ item_label }}</a>
+                {% endif %}
+              {% else %}
+                {{ item_value }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
   </div>
 </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var buttons = document.querySelectorAll(".footer-email-copy[data-copy-email]");
+    if (!buttons.length) return;
+
+    function fallbackCopy(text) {
+      var textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(textarea);
+      return ok;
+    }
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var email = button.getAttribute("data-copy-email") || "";
+        if (!email) return;
+
+        var feedback = button.parentElement ? button.parentElement.querySelector(".footer-email-copy-feedback") : null;
+        var setFeedback = function (message) {
+          if (!feedback) return;
+          feedback.textContent = message;
+          feedback.classList.add("visible");
+          setTimeout(function () {
+            feedback.classList.remove("visible");
+          }, 1200);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email)
+            .then(function () { setFeedback("Copied"); })
+            .catch(function () {
+              setFeedback(fallbackCopy(email) ? "Copied" : "Copy failed");
+            });
+          return;
+        }
+
+        setFeedback(fallbackCopy(email) ? "Copied" : "Copy failed");
+      });
+    });
+  });
+</script>

@@ -6,6 +6,24 @@ description: "Dhamma Charts and Art."
 logo: "/assets/icons/logo300.png"
 discord_url: "https://discord.gg/MkyKZh8ANy"
 contribute_url: "/references/info/contribute.html"
+footer:
+  blocks:
+    - title: "Contact"
+      items:
+        - type: email_obfuscated
+          source_key: email
+    - title: "Connect"
+      items:
+        - type: link
+          label: "Discord"
+          source_key: discord_url
+          external: true
+          title: "Discord"
+        - type: link
+          label: "Contribute"
+          source_key: contribute_url
+          relative_url: true
+          title: "Contribute"
 # Theme config
 theme:
   default: "auto" # Initial mode on first visit: "auto" follows browser/system preference.
