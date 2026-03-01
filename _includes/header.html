@@ -27,7 +27,9 @@
               <span class="main-area-title">{{ main_area_title }}</span>
             </a>
           {% else %}
-            <span class="main-area-title">{{ main_area_title }}</span>
+            <a href="{{ index_url }}#{{ area_anchor }}">
+              <span class="main-area-title">{{ main_area_title }}</span>
+            </a>
           {% endif %}
           <span class="other-areas">
             {% assign all_areas = site.data.areas %}

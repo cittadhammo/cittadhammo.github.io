@@ -653,6 +653,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   align-items: center;
 }
 
+html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
+  display: none;
+}
+
 .home-layout.home-hero-enabled .home-hero .home-hero-inner {
   width: 100%;
   text-align: center;

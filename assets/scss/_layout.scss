@@ -525,6 +525,28 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 	opacity: 1;
 }
 
+.footer-edit-link-row {
+	margin: 2.8rem auto 0;
+	max-width: 70em;
+	padding: 0 3rem;
+	text-align: left;
+}
+
+.footer-edit-link,
+.footer-edit-link:visited {
+	color: var(--color-on-header-muted) !important;
+	font-size: 1.2rem;
+	opacity: 0.65;
+	text-decoration: none;
+}
+
+.footer-edit-link:hover,
+.footer-edit-link:focus-visible {
+	color: var(--color-on-header-muted) !important;
+	opacity: 0.95;
+	text-decoration: underline;
+}
+
 .obfuscate-email {
   color: var(--color-on-header-text);
   display: inline-block;

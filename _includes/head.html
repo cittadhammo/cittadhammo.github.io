@@ -160,6 +160,13 @@
     }
   })();
 </script>
+<script>
+  (function () {
+    if (window.location.hash && window.location.hash.length > 1) {
+      document.documentElement.classList.add("has-initial-hash");
+    }
+  })();
+</script>
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/vendor/magnific-popup.min.css' | relative_url }}">
 <script src="{{ '/assets/scripts/scrollreveal.js' | relative_url }}"></script>

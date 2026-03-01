@@ -77,6 +77,22 @@
       </section>
     {% endfor %}
   </div>
+
+  {% if page.layout == 'item' %}
+    {% assign source_path = page.path | to_s | strip %}
+    {% if source_path != '' %}
+      {% assign content_prefix = 'vault/content/' %}
+      {% if source_path contains content_prefix %}
+        {% assign edit_source_path = source_path %}
+      {% else %}
+        {% assign edit_source_path = content_prefix | append: source_path %}
+      {% endif %}
+      {% assign edit_url = 'https://github.com/cittadhammo/dhammacharts/edit/master/' | append: edit_source_path | replace: ' ', '%20' %}
+      <div class="footer-edit-link-row">
+        <a class="footer-edit-link" href="{{ edit_url }}" target="_blank" rel="noopener noreferrer">Edit this page</a>
+      </div>
+    {% endif %}
+  {% endif %}
 </footer>
 
 <script>
