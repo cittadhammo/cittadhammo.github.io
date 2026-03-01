@@ -16,7 +16,7 @@
   {% assign category_title = category_title | strip %}
   <section class="projects">
     <div class="container">
-      <h1 class="cat-title projects">{{ category_title }}</h1>
+      <h1 class="cat-title">{{ category_title }}</h1>
       <ul class="projects-list">
         {% for item in items %}
           {% assign parent = item.url | split: '/' | pop | last %}

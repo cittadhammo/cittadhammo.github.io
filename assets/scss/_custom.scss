@@ -355,6 +355,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   margin-bottom: 2rem; // Optional: to add some space above the title
 }
 
+.cat-title {
+  margin-bottom: 5rem;
+}
+
 
   .masonry2 {
     column-count: 3;       /* Number of columns */
@@ -760,4 +764,35 @@ html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
 .home-layout.home-hero-enabled .home-hero-nav a:focus-visible span:after {
   visibility: visible;
   transform: scaleX(1);
+}
+
+@media print {
+  .cat-title {
+    margin-bottom: 0.2rem !important;
+  }
+
+  .inverted {
+    background: transparent !important;
+    color: #000 !important;
+  }
+
+  .inverted h1,
+  .inverted h2,
+  .inverted h3,
+  .inverted h4,
+  .inverted p,
+  .inverted a {
+    color: #000 !important;
+  }
+
+  .inverted .other-areas a.nav-other-area-link {
+    color: #000 !important;
+  }
+
+  .home-layout.home-hero-enabled .home-hero-title,
+  .home-layout.home-hero-enabled .home-hero-nav a,
+  .home-layout.home-hero-enabled .home-hero-nav a span,
+  .home-layout.home-hero-enabled .home-hero-nav a .rouge-first {
+    color: #000 !important;
+  }
 }
