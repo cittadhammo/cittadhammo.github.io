@@ -33,6 +33,11 @@
 <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
 <link rel="mask-icon" href="{{ '/safari-pinned-tab.svg' | relative_url }}" color="#5bbad5">
 <meta name="theme-color" content="#000000" id="meta-theme-color">
+<style>
+  html[data-theme="dark"] img[data-dark-src]:not([data-theme-image-ready="true"]) {
+    opacity: 0;
+  }
+</style>
 <script>
   (function () {
     var config = {
@@ -71,6 +76,33 @@
     function updateThemeImages(theme) {
       var isDark = theme === "dark";
       var images = document.querySelectorAll("img[data-light-src]");
+
+      function markImageReady(img, targetSrc) {
+        if (!isDark || !img.getAttribute("data-dark-src")) {
+          img.setAttribute("data-theme-image-ready", "true");
+          return;
+        }
+
+        if (img.getAttribute("src") === targetSrc && img.complete && img.naturalWidth > 0) {
+          img.setAttribute("data-theme-image-ready", "true");
+          return;
+        }
+
+        img.removeAttribute("data-theme-image-ready");
+
+        if (img.__themeReadyTarget === targetSrc) return;
+        img.__themeReadyTarget = targetSrc;
+
+        var onComplete = function () {
+          if (img.getAttribute("src") === targetSrc) {
+            img.setAttribute("data-theme-image-ready", "true");
+          }
+        };
+
+        img.addEventListener("load", onComplete, { once: true });
+        img.addEventListener("error", onComplete, { once: true });
+      }
+
       images.forEach(function (img) {
         var lightSrc = img.getAttribute("data-light-src");
         var darkSrc = img.getAttribute("data-dark-src") || lightSrc;
@@ -78,6 +110,7 @@
         if (nextSrc && img.getAttribute("src") !== nextSrc) {
           img.setAttribute("src", nextSrc);
         }
+        markImageReady(img, nextSrc);
       });
 
       var links = document.querySelectorAll("a[data-light-href]");
