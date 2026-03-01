@@ -597,7 +597,7 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
   left: -0.75rem; /* Half of gap (1.5rem) to center it */
   top: 50%;
   transform: translateY(-50%);
-  width: 1.5px; /* Bar width */
+  width: 2px; /* Bar width */
   height: 1.2em; /* Bar height, relative to font-size of parent a */
   background-color: var(--color-on-header-text); /* Vertical bar color */
 }

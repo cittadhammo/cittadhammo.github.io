@@ -27,11 +27,41 @@
   <meta name="twitter:image" content="{{ seo_image_url }}">
   <meta name="twitter:card" content="summary_large_image">
 {% endif %}
-<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
-<link rel="icon" type="image/png" href="{{ '/favicon-32x32.png' | relative_url }}" sizes="32x32">
-<link rel="icon" type="image/png" href="{{ '/favicon-16x16.png' | relative_url }}" sizes="16x16">
-<link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
-<link rel="mask-icon" href="{{ '/safari-pinned-tab.svg' | relative_url }}" color="#5bbad5">
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="{{ '/assets/icons/favicon_io/apple-touch-icon.png' | relative_url }}"
+  data-light-href="{{ '/assets/icons/favicon_io/apple-touch-icon.png' | relative_url }}"
+  data-dark-href="{{ '/assets/icons/favicon_io-dark/apple-touch-icon.png' | relative_url }}"
+>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="{{ '/assets/icons/favicon_io/favicon-32x32.png' | relative_url }}"
+  data-light-href="{{ '/assets/icons/favicon_io/favicon-32x32.png' | relative_url }}"
+  data-dark-href="{{ '/assets/icons/favicon_io-dark/favicon-32x32.png' | relative_url }}"
+>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="{{ '/assets/icons/favicon_io/favicon-16x16.png' | relative_url }}"
+  data-light-href="{{ '/assets/icons/favicon_io/favicon-16x16.png' | relative_url }}"
+  data-dark-href="{{ '/assets/icons/favicon_io-dark/favicon-16x16.png' | relative_url }}"
+>
+<link
+  rel="shortcut icon"
+  href="{{ '/assets/icons/favicon_io/favicon.ico' | relative_url }}"
+  data-light-href="{{ '/assets/icons/favicon_io/favicon.ico' | relative_url }}"
+  data-dark-href="{{ '/assets/icons/favicon_io-dark/favicon.ico' | relative_url }}"
+>
+<link
+  rel="manifest"
+  href="{{ '/assets/icons/favicon_io/site.webmanifest' | relative_url }}"
+  data-light-href="{{ '/assets/icons/favicon_io/site.webmanifest' | relative_url }}"
+  data-dark-href="{{ '/assets/icons/favicon_io-dark/site.webmanifest' | relative_url }}"
+>
 <meta name="theme-color" content="#000000" id="meta-theme-color">
 <style>
   html[data-theme="dark"] img[data-dark-src]:not([data-theme-image-ready="true"]) {
@@ -113,7 +143,7 @@
         markImageReady(img, nextSrc);
       });
 
-      var links = document.querySelectorAll("a[data-light-href]");
+      var links = document.querySelectorAll("[data-light-href]");
       links.forEach(function (link) {
         var lightHref = link.getAttribute("data-light-href");
         var darkHref = link.getAttribute("data-dark-href") || lightHref;

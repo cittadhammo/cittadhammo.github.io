@@ -31,7 +31,7 @@ theme:
   respect_prefers_color_scheme: true # When default is "auto", use prefers-color-scheme (dark => dark, else light).
   toggle_show_auto_label: false # If true, toggle can show an "Auto" label/state in UI.
   home_hero_landing: true # If true, show a full-screen hero on home with title/logo/area links.
-  home_hero_follow_theme: false # If false, hero stays in dark style even when the site theme is light.
+  home_hero_follow_theme: true # If false, hero stays in dark style even when the site theme is light.
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""
