@@ -1,5 +1,17 @@
 # To do list for Dhammacharts
 
+  - [ ] Add Chart from Others (Joe Rucker, etc.)
+  - [ ] Add other projects (You, Pali Chantings, etc.)
+  - [ ] Che projects
+  - [ ] Interactive charts (click on leaves for Manual of Buddhist Tern (rectangle))
+  - [ ] Emails related to Charts
+  - [ ] Buddha Brain fix names
+  - [ ] Overlay grey or more in parallels.
+  - [ ] Hero pages with links
+  - [ ] code pages
+  - [ ] change footer with real links
+  - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
+  - [ ] Add nice charts 
   - [x] ^ remove description for item pages
   - [x] ^ check jekyll errors
   - [x] ^ Subtitle propriety for long title ?
@@ -9,14 +21,17 @@
   - [x] SEO
   - [x] Clean up
   - [x] Test for keep assets at build if no change detected in assets images 
-  - [ ] Hero pages with links
+  - [x] Grey font for authors
+  - [x] Bright Dark Thumbnails
+  - [x] Dark images in bright mode
+  - [x] Fix default layout in config 
+  - [x] Make darkmode obvious/default
+  - [x] Footer 
+  - [x] Flicker images on dark mode
   - [x] page for normal content with image in content lightboxed
-  - [ ] code pages
   - [x] Dark mode
   - [x] grid for item propreties 
   - [x] add modify in github on item pages and how to add new items, categories, etc.j
-  - [ ] change footer with real links
-  - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
   - [x] include head in map ?
   - [x] there is script and vendor in the assets, should be one only, no lib ?
   - [x] Where to put the images assets ? Only path in proprieties of items or full image in content (displayed in obsidian) ?
@@ -25,19 +40,19 @@
   - [x] Content as description or as draft note ? Make sens as description as could be multiple paragraph and quite a bit of information.
   - [x] Maybe have a blurb description in proprieties, but not the page itself ?
   - [x] Do we rely on tags and type proprieties instead of folder structure ?
-  - [ ] script for updating data via any new folder not in the tree ?
-  - [ ] change folded structure for images 
-  - [ ] change name convention for charts, no B no M (needs to work with download, might not be worth it, or create another SVG folder)
-  - [ ] have folder structure base category with numbers (heavy coding) ?
-  - [ ] have tag structure base category, no data, but name convention or soft keys (ligh coding) ?
-  - [ ] Copy the assets from vault to website assets to serve them from the pages. 
-  - [ ] If `map: true` then propose download of raw image, pdf, svg in the description.
-  - [ ] `files: `  frontmatter for available downloads, (by default maps are included) 
+  - [x] script for updating data via any new folder not in the tree ?
+  - [x] NOT DONE change folded structure for images 
+  - [x] NOT DONE change name convention for charts, no B no M (needs to work with download, might not be worth it, or create another SVG folder)
+  - [x] NOT DONE have folder structure base category with numbers (heavy coding) ?
+  - [x] NOT DONE have tag structure base category, no data, but name convention or soft keys (ligh coding) ?
+  - [x] Copy the assets from vault to website assets to serve them from the pages. 
+  - [x] If `map: true` then propose download of raw image, pdf, svg in the description.
+  - [x] `files: `  frontmatter for available downloads, (by default maps are included) 
   - [x] License and Tech data for hyperlinks.
-  - [ ] Images structure without items? Move up the other one, one level.
+  - [x] WHAT? Images structure without items? Move up the other one, one level.
   - [x] If (license.name == "CC0") add url in data
   - [x] check the need for colon in yaml
-  - [ ] Add grid-line during the year or use fallback to what it is download
+  - [x] Add grid-line during the year or use fallback to what it is download
   - [x] remove unused lib like masonry
   - [x] remove title name in data and make new logic
   - [x] add [[ ]] sustem wide image for frontmatter removal and in page as lightbox 
