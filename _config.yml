@@ -36,6 +36,11 @@ img_ext: webp # Default image extension for charts and diagrams thumbnails
 darkify:
   method: "invert_lightness" # replace | multiply | invert_lightness | replace_only
   suffix: "dark"
+  invert_level:
+    default: "5%,95%"
+    small: "0%,50%"
+    medium: "2%,60%"
+    large: "3%,70%"
 
 # The collections represent the areas of the websites.
 # Add collections below if you add a new _collection folder into content[:w
@@ -87,7 +92,7 @@ defaults:
       layout: "page"
 
 # Add any folder that need not to be included in the build website.
-include: ['well-known']
+include: ["well-known"]
 exclude:
   - _config_cdn.yml
   - _config_gh.yml

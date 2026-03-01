@@ -14,6 +14,20 @@ ASSET_META_VERSION="1"
 # Darkify config
 DARKIFY_METHOD=$(yq -r '.darkify.method // "replace"' "$CONFIG_FILE")
 DARKIFY_SUFFIX=$(yq -r '.darkify.suffix // "dark"' "$CONFIG_FILE")
+CFG_DARKIFY_INVERT_LEVEL_DEFAULT=$(yq -r '.darkify.invert_level.default // ""' "$CONFIG_FILE")
+CFG_DARKIFY_INVERT_LEVEL_SMALL=$(yq -r '.darkify.invert_level.small // ""' "$CONFIG_FILE")
+CFG_DARKIFY_INVERT_LEVEL_MEDIUM=$(yq -r '.darkify.invert_level.medium // ""' "$CONFIG_FILE")
+CFG_DARKIFY_INVERT_LEVEL_LARGE=$(yq -r '.darkify.invert_level.large // ""' "$CONFIG_FILE")
+# Brighter per-size tuning for thumbnail dark variants when method=invert_lightness.
+# Format: "<black-point>,<white-point>" for ImageMagick `-level`.
+DARKIFY_INVERT_LEVEL_DEFAULT="${DARKIFY_INVERT_LEVEL_DEFAULT:-$CFG_DARKIFY_INVERT_LEVEL_DEFAULT}"
+DARKIFY_INVERT_LEVEL_SMALL="${DARKIFY_INVERT_LEVEL_SMALL:-$CFG_DARKIFY_INVERT_LEVEL_SMALL}"
+DARKIFY_INVERT_LEVEL_MEDIUM="${DARKIFY_INVERT_LEVEL_MEDIUM:-$CFG_DARKIFY_INVERT_LEVEL_MEDIUM}"
+DARKIFY_INVERT_LEVEL_LARGE="${DARKIFY_INVERT_LEVEL_LARGE:-$CFG_DARKIFY_INVERT_LEVEL_LARGE}"
+[ -z "$DARKIFY_INVERT_LEVEL_DEFAULT" ] && DARKIFY_INVERT_LEVEL_DEFAULT="5%,95%"
+[ -z "$DARKIFY_INVERT_LEVEL_SMALL" ] && DARKIFY_INVERT_LEVEL_SMALL="2%,82%"
+[ -z "$DARKIFY_INVERT_LEVEL_MEDIUM" ] && DARKIFY_INVERT_LEVEL_MEDIUM="3%,88%"
+[ -z "$DARKIFY_INVERT_LEVEL_LARGE" ] && DARKIFY_INVERT_LEVEL_LARGE="4%,92%"
 
 MAGICK_AVAILABLE="unknown"
 IM_CMD=""
@@ -40,6 +54,16 @@ darkify_image() {
     local src="$1"
     local dest="$2"
     local method="$3"
+    local variant="${4:-default}"
+    local invert_level="$DARKIFY_INVERT_LEVEL_DEFAULT"
+
+    if [ "$variant" = "thumb-small" ]; then
+        invert_level="$DARKIFY_INVERT_LEVEL_SMALL"
+    elif [ "$variant" = "thumb-medium" ]; then
+        invert_level="$DARKIFY_INVERT_LEVEL_MEDIUM"
+    elif [ "$variant" = "thumb-large" ]; then
+        invert_level="$DARKIFY_INVERT_LEVEL_LARGE"
+    fi
 
     case "$method" in
         replace)
@@ -62,7 +86,7 @@ darkify_image() {
                 -channel Lightness -negate \
                 -channel RGB \
                 -colorspace sRGB \
-                -level 5%,95% \
+                -level "$invert_level" \
                 "$dest"
             ;;
         replace_only)
@@ -330,6 +354,10 @@ img_dark=$IMG_DARK
 needs_darkify=$NEEDS_DARKIFY
 darkify_method=$DARKIFY_METHOD
 darkify_suffix=$DARKIFY_SUFFIX
+darkify_invert_level_default=$DARKIFY_INVERT_LEVEL_DEFAULT
+darkify_invert_level_small=$DARKIFY_INVERT_LEVEL_SMALL
+darkify_invert_level_medium=$DARKIFY_INVERT_LEVEL_MEDIUM
+darkify_invert_level_large=$DARKIFY_INVERT_LEVEL_LARGE
 EOF
 )
     META_MATCH="false"
@@ -412,9 +440,9 @@ EOF
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
-                darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD"
-                darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD"
-                darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD"
+                darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD" "thumb-small"
+                darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD" "thumb-medium"
+                darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD" "thumb-large"
             fi
         fi
 

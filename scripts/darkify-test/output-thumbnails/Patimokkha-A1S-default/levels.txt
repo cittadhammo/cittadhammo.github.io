@@ -1,0 +1,4 @@
+default=5%,95%
+small=2%,82%
+medium=3%,88%
+large=4%,92%

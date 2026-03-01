@@ -2,8 +2,22 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CONFIG_FILE="${DARKIFY_CONFIG_FILE:-"$ROOT_DIR/_config.yml"}"
 INPUT_DIR="${1:-"$SCRIPT_DIR/input"}"
 OUTPUT_DIR="${2:-"$SCRIPT_DIR/output"}"
+
+config_value() {
+  local path="$1"
+  if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
+    yq -r "$path // \"\"" "$CONFIG_FILE"
+  else
+    echo ""
+  fi
+}
+
+CFG_DARKIFY_INVERT_LEVEL_DEFAULT="$(config_value '.darkify.invert_level.default')"
+DARKIFY_INVERT_LEVEL_DEFAULT="${DARKIFY_INVERT_LEVEL_DEFAULT:-${CFG_DARKIFY_INVERT_LEVEL_DEFAULT:-5%,95%}}"
 
 # TUNING CHEAT SHEET (ImageMagick arguments used in this file)
 # -brightness-contrast A x B
@@ -127,7 +141,7 @@ darkify_image() {
       #    - subtle: `-2x10`
       #    - current: `-5x20`
       #    - stronger: `-10x30`
-      # 7) `-level 5%,95%`: remap tones:
+      # 7) `-level ...`: remap tones (from DARKIFY_INVERT_LEVEL_DEFAULT):
       #    - input 5% becomes output black,
       #    - input 95% becomes output white,
       #    - values in-between are stretched.
@@ -141,7 +155,7 @@ darkify_image() {
         -channel RGB \
         -colorspace sRGB \
         -brightness-contrast -5x20 \
-        -level 5%,95% \
+        -level "$DARKIFY_INVERT_LEVEL_DEFAULT" \
         "$dest"
       ;;
     replace_only)

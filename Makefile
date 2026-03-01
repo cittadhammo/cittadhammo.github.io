@@ -1,4 +1,9 @@
-.PHONY: assets maps-html images darkify-test clean sync-config build serve sync-agent-docs
+.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails clean sync-config build serve sync-agent-docs
+
+DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
+DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
+DARKIFY_THUMBS_OUTPUT ?= ./scripts/darkify-test/output-thumbnails
+DARKIFY_CONFIG_FILE ?= ./_config.yml
 
 # Run the search and mapping script
 assets:
@@ -23,7 +28,17 @@ images-compressed-lossy:
 
 # Compare all darkify methods on images in scripts/darkify-test/input
 darkify-test:
-	bash ./scripts/darkify-test/run.sh
+	DARKIFY_CONFIG_FILE="$(DARKIFY_CONFIG_FILE)" \
+	bash ./scripts/darkify-test/run.sh "$(DARKIFY_TEST_INPUT)" "$(DARKIFY_TEST_OUTPUT)"
+
+# Generate original + small/medium/large thumbnail darkify test outputs
+darkify-test-thumbnails:
+	DARKIFY_CONFIG_FILE="$(DARKIFY_CONFIG_FILE)" \
+	DARKIFY_INVERT_LEVEL_DEFAULT="$(DARKIFY_INVERT_LEVEL_DEFAULT)" \
+	DARKIFY_INVERT_LEVEL_SMALL="$(DARKIFY_INVERT_LEVEL_SMALL)" \
+	DARKIFY_INVERT_LEVEL_MEDIUM="$(DARKIFY_INVERT_LEVEL_MEDIUM)" \
+	DARKIFY_INVERT_LEVEL_LARGE="$(DARKIFY_INVERT_LEVEL_LARGE)" \
+	bash ./scripts/darkify-test/run-thumbnails.sh "$(DARKIFY_TEST_INPUT)" "$(DARKIFY_THUMBS_OUTPUT)"
 
 clean:
 	rm -rf assets/images/*
@@ -51,3 +66,42 @@ serve: # there is a keep file in _config local that will take care of the assets
 
 sync-agent-docs:
 	cp AGENTS.md GEMINI.md
+
+help:
+	@echo "DhammaCharts Make Targets"
+	@echo ""
+	@echo "Commands:"
+	@echo "  make assets                    Generate/copy image assets + map tiles/viewers"
+	@echo "  make maps-html                 Regenerate map HTML only (no tiles/thumbnails)"
+	@echo "  make images                    Generate PDF/PNG assets (lossy)"
+	@echo "  make images-uncompressed       Generate PDF/PNG assets (default script mode)"
+	@echo "  make images-uncompressed-lossless  Generate PDF/PNG assets (lossless)"
+	@echo "  make images-compressed-lossy   Generate PDF/PNG assets (lossy)"
+	@echo "  make build                     Build Jekyll site with _config.yml + _config_local.yml"
+	@echo "  make serve                     Serve site locally with livereload"
+	@echo "  make clean                     Remove generated assets/images and maps"
+	@echo "  make sync-config               Sync _config_local.yml exclude list"
+	@echo "  make darkify-test              Run method comparison darkify test harness"
+	@echo "  make darkify-test-thumbnails   Run original + thumbnail darkify test harness"
+	@echo "  make sync-agent-docs           Copy AGENTS.md to GEMINI.md"
+	@echo ""
+	@echo "Variables:"
+	@echo "  DARKIFY_TEST_INPUT             Input dir for darkify tests"
+	@echo "                                 Default: $(DARKIFY_TEST_INPUT)"
+	@echo "  DARKIFY_TEST_OUTPUT            Output dir for make darkify-test"
+	@echo "                                 Default: $(DARKIFY_TEST_OUTPUT)"
+	@echo "  DARKIFY_THUMBS_OUTPUT          Output dir for make darkify-test-thumbnails"
+	@echo "                                 Default: $(DARKIFY_THUMBS_OUTPUT)"
+	@echo "  DARKIFY_CONFIG_FILE            Config file used for darkify defaults"
+	@echo "                                 Default: $(DARKIFY_CONFIG_FILE)"
+	@echo "  DARKIFY_INVERT_LEVEL_DEFAULT   Level for original-dark in thumbnail test (e.g. 5%,95%)"
+	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 5%,95%"
+	@echo "  DARKIFY_INVERT_LEVEL_SMALL     Level for small-dark thumbnail (e.g. 2%,82%)"
+	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 2%,82%"
+	@echo "  DARKIFY_INVERT_LEVEL_MEDIUM    Level for medium-dark thumbnail (e.g. 3%,88%)"
+	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 3%,88%"
+	@echo "  DARKIFY_INVERT_LEVEL_LARGE     Level for large-dark thumbnail (e.g. 4%,92%)"
+	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 4%,92%"
+	@echo ""
+	@echo "Example:"
+	@echo "  make darkify-test-thumbnails DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIFY_INVERT_LEVEL_MEDIUM='2%,85%' DARKIFY_INVERT_LEVEL_LARGE='3%,90%'"

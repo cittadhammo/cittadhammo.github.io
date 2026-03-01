@@ -32,15 +32,19 @@ Jekyll site for publishing Dhamma charts, writings, references, and 3D printing 
 ## Commands
 
 ```bash
+make help         # Show all make commands and variables
 make assets       # Generate/copy image assets + map tiles/viewers
+make maps-html    # Regenerate map HTML only (no tiles/thumbnails)
 make images       # Generate PDF/PNG assets from vault script
-make images-compressed       # Generate with lossless compression (quality=100)
-make images-compressed-lossy    # Generate with lossy compression (quality=70-90)
+make images-uncompressed          # Generate with script default compression mode
+make images-uncompressed-lossless # Generate with lossless compression
+make images-compressed-lossy      # Generate with lossy compression
 make build        # Jekyll build with _config.yml + _config_local.yml
 make serve        # Local serve with livereload + assets symlink into _site
 make clean        # Remove generated assets/images and maps
 make sync-config  # Sync exclude list into _config_local.yml (+ assets/images)
 make darkify-test # Compare all darkify methods on test images
+make darkify-test-thumbnails # Test original + small/medium/large dark variants
 ```
 
 ## Asset Pipeline
@@ -73,15 +77,20 @@ Re-run `make assets` after content/frontmatter/image changes.
 
 ```bash
 make darkify-test
+make darkify-test-thumbnails
 ```
 
 Equivalent direct script command:
 
 ```bash
 bash scripts/darkify-test/run.sh
+bash scripts/darkify-test/run-thumbnails.sh
 ```
 
-- Outputs are written to `scripts/darkify-test/output/<image-base>/` for all darkify methods.
+- Method comparison outputs are written to `scripts/darkify-test/output/<image-base>/`.
+- Thumbnail/original outputs are written to `scripts/darkify-test/output-thumbnails/<image-base>/`.
+- Invert-lightness levels are configured in `_config.yml` under `darkify.invert_level`.
+- `make help` shows test variables (`DARKIFY_TEST_INPUT`, `DARKIFY_TEST_OUTPUT`, `DARKIFY_THUMBS_OUTPUT`, `DARKIFY_CONFIG_FILE`) and optional override vars (`DARKIFY_INVERT_LEVEL_*`).
 
 ## Dependencies
 
