@@ -1,8 +1,8 @@
 # To do list for Dhammacharts
 
   - [ ] Fix logo for dark mode
-  - [ ] add hero page ? it flikers when going back to home page headers. 
-  - [ ] print css, make sure category are not their own page
+  - [x] add hero page ? it flikers when going back to home page headers. 
+  - [x] print css, make sure category are not their own page
   - [ ] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, etc.)
   - [ ] Che projects

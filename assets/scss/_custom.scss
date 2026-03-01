@@ -696,6 +696,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   align-items: center;
 }
 
+html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero {
+  background: #fff;
+  color: #000;
+}
+
 html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
   display: none;
 }
@@ -716,6 +721,10 @@ html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
   margin: 0 0 1.5rem;
   width: 100%;
   text-align: center;
+}
+
+html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero-title {
+  color: #000;
 }
 
 .home-layout.home-hero-enabled .home-hero-logo {
@@ -742,6 +751,10 @@ html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
   position: relative;
 }
 
+html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero-nav a {
+  color: #000;
+}
+
 .home-layout.home-hero-enabled .home-hero-nav a span {
   display: inline-block;
   position: relative;
@@ -758,6 +771,10 @@ html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
   visibility: hidden;
   transform: scaleX(0);
   transition: transform 220ms ease, visibility 220ms ease;
+}
+
+html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero-nav a span:after {
+  background-color: #000;
 }
 
 .home-layout.home-hero-enabled .home-hero-nav a:hover span:after,

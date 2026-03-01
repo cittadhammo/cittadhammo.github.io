@@ -6,7 +6,15 @@ title: Home
   <section class="home-hero" aria-label="Home Hero">
     <div class="home-hero-inner container">
       <h1 class="home-hero-title rouge-first">{{ site.title | default: site.author }}</h1>
-      <img class="home-hero-logo" src="{{ '/assets/icons/logoR300.png' | relative_url }}" alt="{{ site.title | default: site.author }}">
+      <img
+        class="home-hero-logo"
+        src="{{ '/assets/icons/logo_dark_300.png' | relative_url }}"
+        data-dark-src="{{ '/assets/icons/logo_dark_300.png' | relative_url }}"
+        {% if site.theme.home_hero_follow_theme != false %}
+          data-light-src="{{ '/assets/icons/logo_light_300.png' | relative_url }}"
+        {% endif %}
+        alt="{{ site.title | default: site.author }}"
+      >
       <nav class="home-hero-nav" aria-label="Areas">
         {% for area in site.data.areas %}
           {% capture area_title %}
