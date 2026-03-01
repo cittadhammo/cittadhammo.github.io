@@ -789,28 +789,54 @@ html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dar
     margin-bottom: 0.2rem !important;
   }
 
+  html,
+  body {
+    color: #000 !important;
+  }
+
+  h1,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  li,
+  span,
+  strong,
+  em,
+  small,
+  label,
+  blockquote,
+  th,
+  td {
+    color: #000 !important;
+  }
+
+  h2,
+  .h2 {
+    color: #666 !important;
+  }
+
+  .main-area-title,
+  .header .logo,
+  .header .logo a,
+  .header-links,
+  .header-links a,
+  .header-links span {
+    color: #000 !important;
+  }
+
+  .rouge-first::first-letter {
+    color: inherit !important;
+  }
+
   .inverted {
     background: transparent !important;
     color: #000 !important;
   }
 
-  .inverted h1,
-  .inverted h2,
-  .inverted h3,
-  .inverted h4,
-  .inverted p,
-  .inverted a {
-    color: #000 !important;
-  }
-
   .inverted .other-areas a.nav-other-area-link {
-    color: #000 !important;
-  }
-
-  .home-layout.home-hero-enabled .home-hero-title,
-  .home-layout.home-hero-enabled .home-hero-nav a,
-  .home-layout.home-hero-enabled .home-hero-nav a span,
-  .home-layout.home-hero-enabled .home-hero-nav a .rouge-first {
     color: #000 !important;
   }
 }
