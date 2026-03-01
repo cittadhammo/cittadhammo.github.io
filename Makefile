@@ -1,4 +1,4 @@
-.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure clean sync-config build serve sync-agent-docs
+.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
@@ -47,6 +47,13 @@ darkify-test-thumbnails:
 structure:
 	bash ./scripts/sync_structure.sh "$(STRUCTURE_CONTENT_DIR)" "$(STRUCTURE_CONFIG_FILE)" "$(STRUCTURE_AREAS_FILE)"
 
+# Check collections/defaults/areas are already in sync (no file changes)
+structure-check:
+	bash ./scripts/check_structure_sync.sh "$(STRUCTURE_CONTENT_DIR)" "$(STRUCTURE_CONFIG_FILE)" "$(STRUCTURE_AREAS_FILE)"
+
+# Sync then verify no remaining drift
+structure-sync-check: structure structure-check
+
 clean:
 	rm -rf assets/images/*
 	rm -rf maps/*
@@ -90,7 +97,9 @@ help:
 	@echo "  make sync-config               Sync _config_local.yml exclude list"
 	@echo "  make darkify-test              Run method comparison darkify test harness"
 	@echo "  make darkify-test-thumbnails   Run original + thumbnail darkify test harness"
-	@echo "  make structure                 Sync _config.yml collections/defaults and areas.yml from vault/content/_* folders"
+	@echo "  make structure                 Sync all collection/folder/category/page refs into _config.yml and areas.yml"
+	@echo "  make structure-check           Check if _config.yml and areas.yml are in sync (no changes)"
+	@echo "  make structure-sync-check      Run sync then verify consistency"
 	@echo "  make sync-agent-docs           Copy AGENTS.md to GEMINI.md"
 	@echo ""
 	@echo "Variables:"

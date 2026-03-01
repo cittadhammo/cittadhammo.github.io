@@ -6,14 +6,12 @@ description: "Dhamma Charts and Art."
 logo: "/assets/icons/logo300.png"
 discord_url: "https://discord.gg/MkyKZh8ANy"
 contribute_url: "/references/info/contribute.html"
-
 # Theme config
 theme:
   default: "auto" # Initial mode on first visit: "auto" follows browser/system preference.
   allow_user_toggle: true # Show the theme toggle and persist user choice in localStorage.
   respect_prefers_color_scheme: true # When default is "auto", use prefers-color-scheme (dark => dark, else light).
   toggle_show_auto_label: false # If true, toggle can show an "Auto" label/state in UI.
-
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""
@@ -22,11 +20,9 @@ highlighter: rouge
 sass:
   sass_dir: assets/scss
   style: compressed
-
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
-
 # Config file
 collections_dir: vault/content
 data_dir: vault/data
@@ -42,7 +38,6 @@ darkify:
     small: "0%,50%" # -level for small-dark.webp (brightest thumbnail profile).
     medium: "2%,60%" # -level for medium-dark.webp.
     large: "3%,70%" # -level for large-dark.webp.
-
 # The collections represent the areas of the websites.
 # Add collections below if you add a new _collection folder into content[:w
 collections:
@@ -58,40 +53,49 @@ collections:
   references:
     output: true
     sort_by: order
-
+  food:
+    output: true
+    sort_by: order
+  projects:
+    output: true
+    sort_by: order
 # This will add default layout to all items into categories.
 # For pages, make sure to specify a layout in the frontmatter
 defaults:
   - scope:
       path: ""
-      type: "charts"
+      type: charts
     values:
-      layout: "item"
+      layout: item
   - scope:
       path: ""
-      type: "3d-printing"
+      type: 3d-printing
     values:
-      layout: "item"
+      layout: item
   - scope:
       path: ""
-      type: "projects"
+      type: writtings
     values:
-      layout: "item"
+      layout: item
   - scope:
       path: ""
-      type: "writtings"
+      type: references
     values:
-      layout: "item"
+      layout: item
   - scope:
       path: ""
-      type: "references"
+      type: food
     values:
-      layout: "item"
+      layout: item
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: item
   - scope:
       path: ""
     values:
       layout: "page"
-
 # Add any folder that need not to be included in the build website.
 include: ["well-known"]
 exclude:

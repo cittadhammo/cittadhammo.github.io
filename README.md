@@ -45,7 +45,9 @@ make clean        # Remove generated assets/images and maps
 make sync-config  # Sync exclude list into _config_local.yml (+ assets/images)
 make darkify-test # Compare all darkify methods on test images
 make darkify-test-thumbnails # Test original + small/medium/large dark variants
-make structure    # Sync collections/defaults/areas from vault/content/_* folders
+make structure    # Sync all collection/folder/category/page refs into _config.yml and areas.yml
+make structure-check # Check if _config.yml and areas.yml are in sync with vault/content
+make structure-sync-check # Sync and then verify consistency
 ```
 
 ## Asset Pipeline
