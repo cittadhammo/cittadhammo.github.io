@@ -1,9 +1,12 @@
-.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails clean sync-config build serve sync-agent-docs
+.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure clean sync-config build serve sync-agent-docs
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
 DARKIFY_THUMBS_OUTPUT ?= ./scripts/darkify-test/output-thumbnails
 DARKIFY_CONFIG_FILE ?= ./_config.yml
+STRUCTURE_CONTENT_DIR ?= ./vault/content
+STRUCTURE_CONFIG_FILE ?= ./_config.yml
+STRUCTURE_AREAS_FILE ?= ./vault/data/areas.yml
 
 # Run the search and mapping script
 assets:
@@ -39,6 +42,10 @@ darkify-test-thumbnails:
 	DARKIFY_INVERT_LEVEL_MEDIUM="$(DARKIFY_INVERT_LEVEL_MEDIUM)" \
 	DARKIFY_INVERT_LEVEL_LARGE="$(DARKIFY_INVERT_LEVEL_LARGE)" \
 	bash ./scripts/darkify-test/run-thumbnails.sh "$(DARKIFY_TEST_INPUT)" "$(DARKIFY_THUMBS_OUTPUT)"
+
+# Sync collections/defaults/areas with folders under vault/content/_*
+structure:
+	bash ./scripts/sync_structure.sh "$(STRUCTURE_CONTENT_DIR)" "$(STRUCTURE_CONFIG_FILE)" "$(STRUCTURE_AREAS_FILE)"
 
 clean:
 	rm -rf assets/images/*
@@ -83,6 +90,7 @@ help:
 	@echo "  make sync-config               Sync _config_local.yml exclude list"
 	@echo "  make darkify-test              Run method comparison darkify test harness"
 	@echo "  make darkify-test-thumbnails   Run original + thumbnail darkify test harness"
+	@echo "  make structure                 Sync _config.yml collections/defaults and areas.yml from vault/content/_* folders"
 	@echo "  make sync-agent-docs           Copy AGENTS.md to GEMINI.md"
 	@echo ""
 	@echo "Variables:"
@@ -102,6 +110,12 @@ help:
 	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 3%,88%"
 	@echo "  DARKIFY_INVERT_LEVEL_LARGE     Level for large-dark thumbnail (e.g. 4%,92%)"
 	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 4%,92%"
+	@echo "  STRUCTURE_CONTENT_DIR          Source content root to scan for _collection dirs"
+	@echo "                                 Default: $(STRUCTURE_CONTENT_DIR)"
+	@echo "  STRUCTURE_CONFIG_FILE          _config.yml file to update"
+	@echo "                                 Default: $(STRUCTURE_CONFIG_FILE)"
+	@echo "  STRUCTURE_AREAS_FILE           areas.yml file to update"
+	@echo "                                 Default: $(STRUCTURE_AREAS_FILE)"
 	@echo ""
 	@echo "Example:"
 	@echo "  make darkify-test-thumbnails DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIFY_INVERT_LEVEL_MEDIUM='2%,85%' DARKIFY_INVERT_LEVEL_LARGE='3%,90%'"

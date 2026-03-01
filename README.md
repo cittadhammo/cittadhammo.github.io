@@ -45,6 +45,7 @@ make clean        # Remove generated assets/images and maps
 make sync-config  # Sync exclude list into _config_local.yml (+ assets/images)
 make darkify-test # Compare all darkify methods on test images
 make darkify-test-thumbnails # Test original + small/medium/large dark variants
+make structure    # Sync collections/defaults/areas from vault/content/_* folders
 ```
 
 ## Asset Pipeline
