@@ -9,10 +9,10 @@ contribute_url: "/references/info/contribute.html"
 
 # Theme config
 theme:
-  default: "light" # "light" | "dark"
-  allow_user_toggle: true
-  respect_prefers_color_scheme: false
-  toggle_show_auto_label: false
+  default: "auto" # Initial mode on first visit: "auto" follows browser/system preference.
+  allow_user_toggle: true # Show the theme toggle and persist user choice in localStorage.
+  respect_prefers_color_scheme: true # When default is "auto", use prefers-color-scheme (dark => dark, else light).
+  toggle_show_auto_label: false # If true, toggle can show an "Auto" label/state in UI.
 
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
@@ -34,13 +34,14 @@ img_ext: webp # Default image extension for charts and diagrams thumbnails
 # img_ext: jpg # Default image extension for charts and diagrams thumbnails
 # img_ext: "png" # Default image extension for charts and diagrams thumbnails
 darkify:
-  method: "invert_lightness" # replace | multiply | invert_lightness | replace_only
-  suffix: "dark"
+  method: "invert_lightness" # Dark conversion method for generated dark assets.
+  # replace | multiply | invert_lightness | replace_only
+  suffix: "dark" # Suffix used for generated dark variants (e.g. medium-dark.webp).
   invert_level:
-    default: "5%,95%"
-    small: "0%,50%"
-    medium: "2%,60%"
-    large: "3%,70%"
+    default: "5%,95%" # -level for original dark files and dark map tiles.
+    small: "0%,50%" # -level for small-dark.webp (brightest thumbnail profile).
+    medium: "2%,60%" # -level for medium-dark.webp.
+    large: "3%,70%" # -level for large-dark.webp.
 
 # The collections represent the areas of the websites.
 # Add collections below if you add a new _collection folder into content[:w
