@@ -157,6 +157,42 @@
   }
 }
 
+/* Progressive enhancement:
+   - Fallback: current multi-column layout above (widely supported).
+   - Enhancement: grid-lanes where available. */
+@supports (display: grid-lanes) {
+  .projects-list {
+    display: grid-lanes;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* Keep gutters across engines/flag builds with partial gap support. */
+    gap: 1.5rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 1.5rem;
+    column-count: initial;
+  }
+
+  .projects-list li {
+    break-inside: initial;
+    display: block;
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  @media (max-width: 900px) {
+    .projects-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects-list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
 html[data-theme="dark"] .module a:hover .img-wrapper {
   &:after { opacity: .15; }
 
