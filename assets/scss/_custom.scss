@@ -208,19 +208,26 @@ a.bigger {
 	align-items: center;
 	justify-content: space-between;
 	gap: 10px;
+	flex-wrap: wrap;
 }
 
 .header-links {
   display: flex;
   justify-content: flex-end;
   align-items: center; // Added for vertical alignment of items in the flex container
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  max-width: 100%;
+  min-width: 0;
 
   a {
-    margin-left: 15px;
+    margin-left: 0;
   }
 
   @media (max-width: variables.$breakpoint-xsmall) {
-    align-self: flex-end;
+    align-self: stretch;
+    justify-content: flex-start;
+    gap: 0.4rem 0.8rem;
   }
 }
 
@@ -236,7 +243,7 @@ a.bigger {
   font-size: 1.1rem;
   gap: 0;
   letter-spacing: 0.12rem;
-  margin-left: 15px;
+  margin-left: 0;
   padding: 0.2rem;
   text-transform: uppercase;
   transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
@@ -246,6 +253,7 @@ a.bigger {
   display: inline-flex;
   gap: 0;
   align-items: center;
+  padding-right: 0.6rem;
 }
 
 .theme-toggle svg {
@@ -288,6 +296,8 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 .title-group {
   display: flex;
   flex-direction: column;
+  flex: 1 1 280px;
+  min-width: 0;
   
 
   h2 {
@@ -299,6 +309,35 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .main-area-title {
     font-size: 1.7rem; // Increased font size
     // sfont-weight: bold; // Added font weight
+  }
+}
+
+@media (max-width: variables.$breakpoint-medium - 1) {
+  .logo-and-title-container {
+    align-items: flex-start;
+    column-gap: 10px;
+    row-gap: 1rem;
+  }
+
+  .header-links {
+    width: 100%;
+    justify-content: end;
+  }
+
+  .header.inverted.has-header-links {
+    padding: 3rem 0 2rem;
+  }
+}
+
+@media (max-width: variables.$breakpoint-xsmall) {
+  .logo-and-title-container {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .title-group {
+    flex: 1 1 auto;
+    width: 100%;
   }
 }
 
