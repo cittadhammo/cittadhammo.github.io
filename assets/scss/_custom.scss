@@ -5,6 +5,12 @@
   font-size: smaller;
 }
 
+/* Tighten subtitle/source spacing only on item pages. */
+.item-layout h2.subtitle {
+  letter-spacing: 0.12rem;
+  word-spacing: -0.3rem;
+}
+
 .rouge {
 	color: variables.$color-red;
 }
@@ -532,6 +538,12 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   text-transform: uppercase; /* Added text-transform */
   display: inline; /* Ensure it stays inline */
   margin-left: 0.5em; /* Added space to the left */
+}
+
+.item-layout .source-author-h2-style {
+  font-weight: 400;
+  letter-spacing: 0.12rem;
+  word-spacing: -0.3rem;
 }
 
 .map-icon {
