@@ -24,13 +24,13 @@
           {% endcapture %}
           {% assign main_area_title = main_area_title | strip %}
           {% assign area_anchor = include.area_name | slugify %}
-          {% assign index_url = '/index.html' | relative_url %}
+          {% assign index_url = '/' | relative_url %}
           {% if page.layout != 'home' %}
             <a href="{{ index_url }}#{{ area_anchor }}">
               <span class="main-area-title">{{ main_area_title }}</span>
             </a>
           {% else %}
-            <a href="{{ index_url }}#{{ area_anchor }}">
+            <a href="#{{ area_anchor }}">
               <span class="main-area-title">{{ main_area_title }}</span>
             </a>
           {% endif %}
@@ -43,7 +43,11 @@
                   {% continue %}
                 {% endif %}
                 {% assign anchor_id = area.name | slugify %}
-                {% assign final_link_path = index_url | append: '#' | append: anchor_id %}
+                {% if page.layout == 'home' %}
+                  {% assign final_link_path = '#' | append: anchor_id %}
+                {% else %}
+                  {% assign final_link_path = index_url | append: '#' | append: anchor_id %}
+                {% endif %}
                 {% capture area_link_title %}
                   {% if area.title %}
                     {{ area.title }}

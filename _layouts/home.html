@@ -4,7 +4,7 @@
     {% include head.html %}
   </head>
 
-  <body class="black home-layout{% if site.theme.home_hero_landing %} home-hero-enabled{% endif %}{% if site.theme.home_hero_follow_theme == false %} home-hero-fixed-dark{% endif %}">
+  <body class="black home-layout{% if site.theme.home_hero_landing %} home-hero-enabled{% endif %}{% if site.theme.home_hero_follow_theme == false %} home-hero-fixed-dark{% endif %}{% if site.theme.home_hero_hide_on_scroll_cue != false %} home-hero-hide-on-hash{% endif %}">
     <main class="home">
       {{ content }}
     </main>

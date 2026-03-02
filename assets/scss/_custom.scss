@@ -694,6 +694,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   color: #fff;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero {
@@ -701,7 +702,7 @@ html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dar
   color: #000;
 }
 
-html.has-initial-hash .home-layout.home-hero-enabled .home-hero {
+html.has-initial-hash .home-layout.home-hero-enabled.home-hero-hide-on-hash .home-hero {
   display: none;
 }
 
@@ -782,6 +783,32 @@ html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dar
 .home-layout.home-hero-enabled .home-hero-nav a:focus-visible span:after {
   visibility: visible;
   transform: scaleX(1);
+}
+
+.home-layout.home-hero-enabled .home-hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.25rem, 4vw, 2.5rem);
+  transform: translateX(-50%);
+  display: block;
+  line-height: 0;
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.home-layout.home-hero-enabled .home-hero-scroll-cue img {
+  display: block;
+  width: 56px;
+  height: auto;
+  transform-origin: center;
+  transform: rotate(-90deg) scale(0.3);
+}
+
+.home-layout.home-hero-enabled .home-hero-scroll-cue:hover,
+.home-layout.home-hero-enabled .home-hero-scroll-cue:focus-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
 }
 
 @media print {

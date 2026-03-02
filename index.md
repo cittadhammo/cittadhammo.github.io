@@ -33,6 +33,16 @@ title: Home
           <a href="#{{ area.name | slugify }}"><span class="rouge-first">{{ area_title }}</span></a>
         {% endfor %}
       </nav>
+      {% assign first_area = site.data.areas | first %}
+      {% if first_area %}
+        {% assign hide_hero_on_scroll_cue = site.theme.home_hero_hide_on_scroll_cue %}
+        {% if hide_hero_on_scroll_cue == nil %}
+          {% assign hide_hero_on_scroll_cue = true %}
+        {% endif %}
+        <a class="home-hero-scroll-cue" href="#{{ first_area.name | slugify }}" data-hide-hero-on-click="{{ hide_hero_on_scroll_cue | jsonify }}" aria-label="Scroll to content">
+          <img src="{{ '/assets/icons/previous-white.png' | relative_url }}" alt="" width="56" height="56" loading="lazy" decoding="async">
+        </a>
+      {% endif %}
     </div>
   </section>
 {% endif %}
