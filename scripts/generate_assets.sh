@@ -3,10 +3,8 @@ set -e
 
 SRC_IMAGE_DIR="./vault/assets/images"
 DEST_IMAGE_DIR="./assets/images"
-SRC_PDF_DIR="./vault/assets/pdfs"
-SRC_SVG_DIR="./vault/assets/svgs"
-DEST_PDF_DIR="./assets/pdfs"
-DEST_SVG_DIR="./assets/svgs"
+SRC_DOWNLOAD_PDF_DIR="./vault/assets/pdfs"
+SRC_DOWNLOAD_SVG_DIR="./vault/assets/svgs"
 MD_DIR="./vault/content" 
 MAPS_HTML_DIR="./maps"
 SIZE_DATA_FILE="./vault/data/size.yml"
@@ -250,31 +248,31 @@ all_files_exist() {
     return 0
 }
 
-sync_static_download_assets() {
-    mkdir -p "$DEST_PDF_DIR" "$DEST_SVG_DIR"
+copy_download_variant() {
+    local src_dir="$1"
+    local target_dir="$2"
+    local default_name="$3"
+    local configured_name="$4"
+    local label="$5"
 
-    if [ -d "$SRC_PDF_DIR" ]; then
-        if command -v rsync >/dev/null 2>&1; then
-            rsync -a --delete "$SRC_PDF_DIR"/ "$DEST_PDF_DIR"/
-        else
-            rm -rf "$DEST_PDF_DIR"/*
-            cp -a "$SRC_PDF_DIR"/. "$DEST_PDF_DIR"/
-        fi
-        echo "Synced PDFs: $SRC_PDF_DIR -> $DEST_PDF_DIR"
-    else
-        echo "PDF source directory not found, skipping: $SRC_PDF_DIR"
+    local variant_name=""
+    if [ "$configured_name" = "true" ]; then
+        variant_name="$default_name"
+    elif [ -n "$configured_name" ] && [ "$configured_name" != "null" ] && [ "$configured_name" != "false" ]; then
+        variant_name="$configured_name"
     fi
 
-    if [ -d "$SRC_SVG_DIR" ]; then
-        if command -v rsync >/dev/null 2>&1; then
-            rsync -a --delete "$SRC_SVG_DIR"/ "$DEST_SVG_DIR"/
-        else
-            rm -rf "$DEST_SVG_DIR"/*
-            cp -a "$SRC_SVG_DIR"/. "$DEST_SVG_DIR"/
-        fi
-        echo "Synced SVGs: $SRC_SVG_DIR -> $DEST_SVG_DIR"
+    if [ -z "$variant_name" ]; then
+        return
+    fi
+
+    local src_variant="$src_dir/$variant_name"
+    local dest_variant="$target_dir/$variant_name"
+    if [ -f "$src_variant" ]; then
+        cp "$src_variant" "$dest_variant"
+        echo "Copied $label variant for $IMG_NAME: $variant_name"
     else
-        echo "SVG source directory not found, skipping: $SRC_SVG_DIR"
+        echo "Warning: $label variant not found for $IMG_NAME: $src_variant"
     fi
 }
 
@@ -294,12 +292,8 @@ if [ -z "$TEMPLATE_HTML" ]; then
 fi
 
 mkdir -p "$DEST_IMAGE_DIR"
-mkdir -p "$DEST_PDF_DIR"
-mkdir -p "$DEST_SVG_DIR"
 mkdir -p "$MAPS_HTML_DIR"
 mkdir -p "$(dirname "$SIZE_DATA_FILE")"
-
-sync_static_download_assets
 
 # Initialize or load existing size data
 if [ -f "$SIZE_DATA_FILE" ]; then
@@ -429,6 +423,21 @@ EOF
             echo "Skipping original copy for $IMG_NAME (unchanged)"
         else
             cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME"
+        fi
+
+        if [ "$FILE" = "true" ]; then
+            copy_download_variant \
+                "$SRC_DOWNLOAD_PDF_DIR" \
+                "$DEST_FOLDER" \
+                "$IMG_BASE.pdf" \
+                "$IMG_PDF" \
+                "PDF"
+            copy_download_variant \
+                "$SRC_DOWNLOAD_SVG_DIR" \
+                "$DEST_FOLDER" \
+                "$IMG_BASE.svg" \
+                "$IMG_SVG" \
+                "SVG"
         fi
     fi
 
@@ -611,6 +620,8 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK=$(echo "$YAML" | yq -r ".images[$i].dark // false")
         DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
         FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
+        IMG_PDF=$(echo "$YAML" | yq -r ".images[$i].pdf // \"\"")
+        IMG_SVG=$(echo "$YAML" | yq -r ".images[$i].svg // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_DEFAULT=$(echo "$YAML" | yq -r ".images[$i].invert_level.default // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_SMALL=$(echo "$YAML" | yq -r ".images[$i].invert_level.small // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=$(echo "$YAML" | yq -r ".images[$i].invert_level.medium // \"\"")
@@ -629,6 +640,8 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        IMG_PDF=""
+        IMG_SVG=""
         IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
         IMG_DARKIFY_INVERT_LEVEL_SMALL=""
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""
@@ -652,6 +665,8 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        IMG_PDF=""
+        IMG_SVG=""
         IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
         IMG_DARKIFY_INVERT_LEVEL_SMALL=""
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""

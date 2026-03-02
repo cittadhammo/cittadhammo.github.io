@@ -227,7 +227,7 @@
                     {% assign pdf_name = file_item.pdf | to_s | strip %}
                   {% endif %}
                   {% if pdf_name != '' %}
-                    {% assign pdf_href = '/assets/pdfs/' | append: pdf_name | relative_url %}
+                    {% assign pdf_href = '/assets/images/' | append: file_base | append: '/' | append: pdf_name | relative_url %}
                   {% endif %}
 
                   {% assign svg_href = '' %}
@@ -238,7 +238,7 @@
                     {% assign svg_name = file_item.svg | to_s | strip %}
                   {% endif %}
                   {% if svg_name != '' %}
-                    {% assign svg_href = '/assets/svgs/' | append: svg_name | relative_url %}
+                    {% assign svg_href = '/assets/images/' | append: file_base | append: '/' | append: svg_name | relative_url %}
                   {% endif %}
 
                   {% assign online_href = '' %}
