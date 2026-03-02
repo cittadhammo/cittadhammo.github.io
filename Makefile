@@ -4,6 +4,7 @@ DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
 DARKIFY_THUMBS_OUTPUT ?= ./scripts/darkify-test/output-thumbnails
 DARKIFY_CONFIG_FILE ?= ./_config.yml
+DARKIFY_THUMBS_CONFIG_FILE ?= ./scripts/darkify-test/levels.yml
 STRUCTURE_CONTENT_DIR ?= ./vault/content
 STRUCTURE_CONFIG_FILE ?= ./_config.yml
 STRUCTURE_AREAS_FILE ?= ./vault/data/areas.yml
@@ -37,6 +38,7 @@ darkify-test:
 # Generate original + small/medium/large thumbnail darkify test outputs
 darkify-test-thumbnails:
 	DARKIFY_CONFIG_FILE="$(DARKIFY_CONFIG_FILE)" \
+	DARKIFY_TEST_THUMBS_CONFIG_FILE="$(DARKIFY_THUMBS_CONFIG_FILE)" \
 	DARKIFY_INVERT_LEVEL_DEFAULT="$(DARKIFY_INVERT_LEVEL_DEFAULT)" \
 	DARKIFY_INVERT_LEVEL_SMALL="$(DARKIFY_INVERT_LEVEL_SMALL)" \
 	DARKIFY_INVERT_LEVEL_MEDIUM="$(DARKIFY_INVERT_LEVEL_MEDIUM)" \
@@ -111,14 +113,16 @@ help:
 	@echo "                                 Default: $(DARKIFY_THUMBS_OUTPUT)"
 	@echo "  DARKIFY_CONFIG_FILE            Config file used for darkify defaults"
 	@echo "                                 Default: $(DARKIFY_CONFIG_FILE)"
+	@echo "  DARKIFY_THUMBS_CONFIG_FILE     Local thumbnail test level config (editable per run)"
+	@echo "                                 Default: $(DARKIFY_THUMBS_CONFIG_FILE)"
 	@echo "  DARKIFY_INVERT_LEVEL_DEFAULT   Level for original-dark in thumbnail test (e.g. 5%,95%)"
-	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 5%,95%"
+	@echo "                                 Default: env > $(DARKIFY_THUMBS_CONFIG_FILE) > $(DARKIFY_CONFIG_FILE) > 5%,95%"
 	@echo "  DARKIFY_INVERT_LEVEL_SMALL     Level for small-dark thumbnail (e.g. 2%,82%)"
-	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 2%,82%"
+	@echo "                                 Default: env > $(DARKIFY_THUMBS_CONFIG_FILE) > $(DARKIFY_CONFIG_FILE) > 2%,82%"
 	@echo "  DARKIFY_INVERT_LEVEL_MEDIUM    Level for medium-dark thumbnail (e.g. 3%,88%)"
-	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 3%,88%"
+	@echo "                                 Default: env > $(DARKIFY_THUMBS_CONFIG_FILE) > $(DARKIFY_CONFIG_FILE) > 3%,88%"
 	@echo "  DARKIFY_INVERT_LEVEL_LARGE     Level for large-dark thumbnail (e.g. 4%,92%)"
-	@echo "                                 Default: from $(DARKIFY_CONFIG_FILE), fallback 4%,92%"
+	@echo "                                 Default: env > $(DARKIFY_THUMBS_CONFIG_FILE) > $(DARKIFY_CONFIG_FILE) > 4%,92%"
 	@echo "  STRUCTURE_CONTENT_DIR          Source content root to scan for _collection dirs"
 	@echo "                                 Default: $(STRUCTURE_CONTENT_DIR)"
 	@echo "  STRUCTURE_CONFIG_FILE          _config.yml file to update"

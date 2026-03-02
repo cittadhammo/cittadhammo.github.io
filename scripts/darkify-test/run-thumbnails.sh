@@ -4,28 +4,39 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 CONFIG_FILE="${DARKIFY_CONFIG_FILE:-"$ROOT_DIR/_config.yml"}"
+THUMBS_CONFIG_FILE="${DARKIFY_TEST_THUMBS_CONFIG_FILE:-"$SCRIPT_DIR/levels.yml"}"
 INPUT_DIR="${1:-"$SCRIPT_DIR/input"}"
 OUTPUT_DIR="${2:-"$SCRIPT_DIR/output-thumbnails"}"
 
-config_value() {
-  local path="$1"
-  if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
-    yq -r "$path // \"\"" "$CONFIG_FILE"
+config_value_from_file() {
+  local file="$1"
+  local path="$2"
+  if [ -f "$file" ] && command -v yq >/dev/null 2>&1; then
+    yq -r "$path // \"\"" "$file"
   else
     echo ""
   fi
 }
 
-# Defaults come from _config.yml (darkify.invert_level.*), with env vars as overrides.
-CFG_DARKIFY_INVERT_LEVEL_DEFAULT="$(config_value '.darkify.invert_level.default')"
-CFG_DARKIFY_INVERT_LEVEL_SMALL="$(config_value '.darkify.invert_level.small')"
-CFG_DARKIFY_INVERT_LEVEL_MEDIUM="$(config_value '.darkify.invert_level.medium')"
-CFG_DARKIFY_INVERT_LEVEL_LARGE="$(config_value '.darkify.invert_level.large')"
+# Levels precedence:
+# 1) Env vars
+# 2) scripts/darkify-test/levels.yml (or DARKIFY_TEST_THUMBS_CONFIG_FILE)
+# 3) _config.yml (darkify.invert_level.*)
+# 4) hardcoded fallbacks
+CFG_MAIN_DARKIFY_INVERT_LEVEL_DEFAULT="$(config_value_from_file "$CONFIG_FILE" '.darkify.invert_level.default')"
+CFG_MAIN_DARKIFY_INVERT_LEVEL_SMALL="$(config_value_from_file "$CONFIG_FILE" '.darkify.invert_level.small')"
+CFG_MAIN_DARKIFY_INVERT_LEVEL_MEDIUM="$(config_value_from_file "$CONFIG_FILE" '.darkify.invert_level.medium')"
+CFG_MAIN_DARKIFY_INVERT_LEVEL_LARGE="$(config_value_from_file "$CONFIG_FILE" '.darkify.invert_level.large')"
 
-DARKIFY_INVERT_LEVEL_DEFAULT="${DARKIFY_INVERT_LEVEL_DEFAULT:-${CFG_DARKIFY_INVERT_LEVEL_DEFAULT:-5%,95%}}"
-DARKIFY_INVERT_LEVEL_SMALL="${DARKIFY_INVERT_LEVEL_SMALL:-${CFG_DARKIFY_INVERT_LEVEL_SMALL:-2%,82%}}"
-DARKIFY_INVERT_LEVEL_MEDIUM="${DARKIFY_INVERT_LEVEL_MEDIUM:-${CFG_DARKIFY_INVERT_LEVEL_MEDIUM:-3%,88%}}"
-DARKIFY_INVERT_LEVEL_LARGE="${DARKIFY_INVERT_LEVEL_LARGE:-${CFG_DARKIFY_INVERT_LEVEL_LARGE:-4%,92%}}"
+CFG_TEST_DARKIFY_INVERT_LEVEL_DEFAULT="$(config_value_from_file "$THUMBS_CONFIG_FILE" '.invert_level.default')"
+CFG_TEST_DARKIFY_INVERT_LEVEL_SMALL="$(config_value_from_file "$THUMBS_CONFIG_FILE" '.invert_level.small')"
+CFG_TEST_DARKIFY_INVERT_LEVEL_MEDIUM="$(config_value_from_file "$THUMBS_CONFIG_FILE" '.invert_level.medium')"
+CFG_TEST_DARKIFY_INVERT_LEVEL_LARGE="$(config_value_from_file "$THUMBS_CONFIG_FILE" '.invert_level.large')"
+
+DARKIFY_INVERT_LEVEL_DEFAULT="${DARKIFY_INVERT_LEVEL_DEFAULT:-${CFG_TEST_DARKIFY_INVERT_LEVEL_DEFAULT:-${CFG_MAIN_DARKIFY_INVERT_LEVEL_DEFAULT:-5%,95%}}}"
+DARKIFY_INVERT_LEVEL_SMALL="${DARKIFY_INVERT_LEVEL_SMALL:-${CFG_TEST_DARKIFY_INVERT_LEVEL_SMALL:-${CFG_MAIN_DARKIFY_INVERT_LEVEL_SMALL:-2%,82%}}}"
+DARKIFY_INVERT_LEVEL_MEDIUM="${DARKIFY_INVERT_LEVEL_MEDIUM:-${CFG_TEST_DARKIFY_INVERT_LEVEL_MEDIUM:-${CFG_MAIN_DARKIFY_INVERT_LEVEL_MEDIUM:-3%,88%}}}"
+DARKIFY_INVERT_LEVEL_LARGE="${DARKIFY_INVERT_LEVEL_LARGE:-${CFG_TEST_DARKIFY_INVERT_LEVEL_LARGE:-${CFG_MAIN_DARKIFY_INVERT_LEVEL_LARGE:-4%,92%}}}"
 
 ensure_tools() {
   if ! command -v vips >/dev/null 2>&1; then
@@ -113,14 +124,21 @@ small=$DARKIFY_INVERT_LEVEL_SMALL
 medium=$DARKIFY_INVERT_LEVEL_MEDIUM
 large=$DARKIFY_INVERT_LEVEL_LARGE
 EOF
+  if [ -f "$THUMBS_CONFIG_FILE" ]; then
+    cp "$THUMBS_CONFIG_FILE" "$target_dir/levels-config.yml"
+  fi
 
   echo "  - wrote: $target_dir/original.$ext"
   echo "  - wrote: $target_dir/original-dark.$ext"
   echo "  - wrote: $target_dir/{small,medium,large}.webp"
   echo "  - wrote: $target_dir/{small,medium,large}-dark.webp"
+  if [ -f "$THUMBS_CONFIG_FILE" ]; then
+    echo "  - wrote: $target_dir/levels-config.yml"
+  fi
 done
 
 echo ""
 echo "Done. Compare outputs in: $OUTPUT_DIR"
-echo "Tip: override levels per run, e.g."
-echo "  DARKIFY_INVERT_LEVEL_DEFAULT='5%,95%' DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIFY_INVERT_LEVEL_MEDIUM='2%,85%' DARKIFY_INVERT_LEVEL_LARGE='3%,90%' bash scripts/darkify-test/run-thumbnails.sh"
+echo "Levels source priority:"
+echo "  env vars > $THUMBS_CONFIG_FILE > $CONFIG_FILE > built-in defaults"
+echo "Tip: edit $THUMBS_CONFIG_FILE and rerun."

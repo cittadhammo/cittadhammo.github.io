@@ -2,7 +2,7 @@
 
 Quick local test harness for the darkify methods used by `scripts/generate_assets.sh`.
 
-Default invert-lightness levels are read from `_config.yml`:
+Default invert-lightness levels are read from `scripts/darkify-test/levels.yml` first, then `_config.yml`:
 - `darkify.invert_level.default`
 - `darkify.invert_level.small`
 - `darkify.invert_level.medium`
@@ -54,6 +54,29 @@ DARKIFY_INVERT_LEVEL_DEFAULT='5%,95%' DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIF
 make darkify-test-thumbnails DARKIFY_INVERT_LEVEL_DEFAULT='5%,95%' DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIFY_INVERT_LEVEL_MEDIUM='2%,85%' DARKIFY_INVERT_LEVEL_LARGE='3%,90%'
 ```
 
+Edit local thumbnail test config (recommended workflow):
+
+```yaml
+# scripts/darkify-test/levels.yml
+invert_level:
+  default: "5%,95%"
+  small: "2%,82%"
+  medium: "3%,88%"
+  large: "4%,92%"
+```
+
+Then run:
+
+```bash
+make darkify-test-thumbnails
+```
+
+Use another thumbnail levels file (optional):
+
+```bash
+make darkify-test-thumbnails DARKIFY_THUMBS_CONFIG_FILE=/path/to/levels.yml
+```
+
 Use another config file (optional):
 
 ```bash
@@ -81,6 +104,7 @@ Files generated:
 - `small.webp`, `medium.webp`, `large.webp`
 - `small-dark.webp`, `medium-dark.webp`, `large-dark.webp`
 - `levels.txt` (records the exact level settings used)
+- `levels-config.yml` (copy of the thumbnail test config file used for that run, if present)
 
 ## Notes
 
