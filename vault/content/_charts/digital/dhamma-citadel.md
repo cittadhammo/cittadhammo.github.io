@@ -41,6 +41,6 @@ images:
     display: true
     dark: true
     file: true
-    title: A0 Vertical (Black Background) 
+    title: A0 Vertical (Black Background)
 ---
 

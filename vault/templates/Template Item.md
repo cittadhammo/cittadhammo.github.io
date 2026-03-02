@@ -1,10 +1,14 @@
 ---
 title: "{{title}}"
-published: false
+subtitle:
+description:
+author:
 year:
+published: false
 license:
 sources:
 techs:
+code:
 images:
   - name:
     dark:

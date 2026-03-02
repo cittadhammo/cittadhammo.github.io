@@ -204,7 +204,7 @@
               {% endfor %}
 
               {% if files_to_display.size > 0 %}
-                <span class="h2">Files</span>
+                <span class="h2">Download Files</span>
                 {% for file_item in files_to_display %}
                   {% assign file_name = file_item.name | default: file_item | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
                   {% assign file_base = file_name | split: '.' | first %}

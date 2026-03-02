@@ -1,9 +1,9 @@
 ---
 title: Khundaka
 published: false
-license: 
-tech: 
-year:
+license:
+tech:
+year: "2023"
 draft: true
 sources:
   - "[[Practical Vinaya]]"

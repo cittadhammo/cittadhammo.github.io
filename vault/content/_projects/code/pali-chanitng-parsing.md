@@ -1,12 +1,13 @@
 ---
-title: "Pali Parsing Algorithm"
+title: Pali Chanting Parsing Algorithm
+subtitle:
 published: false
 draft: false
-license: 
-sources: 
-images: 
-tech: 
-description: 
+license:
+sources:
+images:
+tech:
+description:
 tags:
 ---
 

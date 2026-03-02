@@ -15,8 +15,11 @@ The goal is to keep content easy to maintain through:
 
 Useful pages:
 
-- `[[DhammaCharts.org]]` for project/site context
-- `[[CHECK]]` for pending tasks and attention points
+- [[DhammaCharts.org]] for project/site context
+
+## Tip
+
+Install https://github.com/fcskit/obsidian-eln-plugin for easy management of nested properties of items. (manual install works well)
 
 ## Publishing and Site Build Notes
 
@@ -84,12 +87,12 @@ cd vault && python3 ./scripts/generate_pdf_png.py --compression lossy
 
 ### Filename Convention
 
-Each SVG filename should start with a format code describing paper size, orientation, background, and margin.
+Each SVG filename should end with a format code describing paper size, orientation, background, and margin.
 
 Format:
 
-- `A[0-2]x[B][M]-name.svg`
-- `2A0x[B][M]-name.svg`
+- `<name>-A[0-2][V|H|S][B][M].svg`
+- `<name>-2A0[V|H|S][B][M].svg`
 
 Legend:
 
@@ -100,14 +103,15 @@ Legend:
 
 Examples:
 
-- `A1V-map.svg` -> A1 vertical, white background, no margin
-- `A0HBM-graph.svg` -> A0 horizontal, black background, margin
-- `2A0S-design.svg` -> 2A0 square, white background, no margin
-- `A2VBM-sketch.svg` -> A2 vertical, black background, margin
+- `map-A1V.svg` -> A1 vertical, white background, no margin
+- `graph-A0HBM.svg` -> A0 horizontal, black background, margin
+- `design-2A0S.svg` -> 2A0 square, white background, no margin
+- `sketch-A2VBM.svg` -> A2 vertical, black background, margin
+- `myChart-it-A0BM.svg` -> A0 vertical, black background, margin
 
 Naming note:
 
-- Files usually start with a capital letter and CamelCase.
+- Any descriptive name can be used before the final `-<format>` suffix.
 
 ## Frontmatter Notes
 
