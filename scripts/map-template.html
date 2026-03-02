@@ -93,6 +93,8 @@ layout: none
           };
           const storageKey = "theme";
           const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+          const urlParams = new URLSearchParams(window.location.search);
+          const forcedTheme = urlParams.get("theme");
 
           function getPreferredTheme() {
               if (!themeConfig.respectPrefers || !mediaQuery) return null;
@@ -117,6 +119,9 @@ layout: none
 
           const storedMode = getStoredTheme();
           let initialMode = storedMode || themeConfig.defaultMode || "light";
+          if (forcedTheme === "dark" || forcedTheme === "light") {
+              initialMode = forcedTheme;
+          }
           if (initialMode !== "light" && initialMode !== "dark" && initialMode !== "auto") {
               initialMode = "light";
           }

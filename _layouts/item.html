@@ -209,34 +209,73 @@
                   {% assign file_name = file_item.name | default: file_item | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
                   {% assign file_base = file_name | split: '.' | first %}
                   {% assign file_ext = file_name | split: '.' | last %}
+                  {% assign primary_format_label = file_ext | upcase %}
+                  {% assign file_label = file_item.title | default: file_base %}
                   {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
                   {% assign has_dark_variant = true %}
                   {% if file_item.dark == true %}
                     {% assign has_dark_variant = false %}
                   {% endif %}
-                  <p class="rouge-first">
-                    <a
-                      class="black-under"
-                      href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_name | relative_url }}"
-                      download="{{ file_name | split: '.' | first }}"
-                      target="_blank"
-                      rel="nofollow"
-                    >
-                      {{ file_item.title }}
-                    </a>
-                    {% if has_dark_variant %}
-                      (
-                      <a
-                        class="black-under"
-                        href="{{ '/assets/images/' | append: file_base | append: '/' | append: file_base | append: '-' | append: dark_suffix | append: '.' | append: file_ext | relative_url }}"
-                        download="{{ file_base | append: '-' | append: dark_suffix }}"
-                        target="_blank"
-                        rel="nofollow"
-                      >
-                        Dark
-                      </a>
-                      )
+                  {% assign png_href = '/assets/images/' | append: file_base | append: '/' | append: file_name | relative_url %}
+                  {% assign png_dark_href = '/assets/images/' | append: file_base | append: '/' | append: file_base | append: '-' | append: dark_suffix | append: '.' | append: file_ext | relative_url %}
+
+                  {% assign pdf_href = '' %}
+                  {% assign pdf_name = '' %}
+                  {% if file_item.pdf == true %}
+                    {% assign pdf_name = file_base | append: '.pdf' %}
+                  {% elsif file_item.pdf %}
+                    {% assign pdf_name = file_item.pdf | to_s | strip %}
+                  {% endif %}
+                  {% if pdf_name != '' %}
+                    {% assign pdf_href = '/assets/pdfs/' | append: pdf_name | relative_url %}
+                  {% endif %}
+
+                  {% assign svg_href = '' %}
+                  {% assign svg_name = '' %}
+                  {% if file_item.svg == true %}
+                    {% assign svg_name = file_base | append: '.svg' %}
+                  {% elsif file_item.svg %}
+                    {% assign svg_name = file_item.svg | to_s | strip %}
+                  {% endif %}
+                  {% if svg_name != '' %}
+                    {% assign svg_href = '/assets/svgs/' | append: svg_name | relative_url %}
+                  {% endif %}
+
+                  {% assign online_href = '' %}
+                  {% if file_item.online == true %}
+                    {% assign online_href = '/maps/' | append: file_base | append: '.html' | relative_url %}
+                  {% elsif file_item.online %}
+                    {% assign online_raw = file_item.online | to_s | strip %}
+                    {% if online_raw != '' %}
+                      {% if online_raw contains '://' %}
+                        {% assign online_href = online_raw %}
+                      {% else %}
+                        {% assign online_href = online_raw | relative_url %}
+                      {% endif %}
                     {% endif %}
+                  {% endif %}
+                  {% assign online_dark_href = '' %}
+                  {% if online_href != '' and has_dark_variant %}
+                    {% if online_href contains '?' %}
+                      {% assign online_dark_href = online_href | append: '&theme=dark' %}
+                    {% else %}
+                      {% assign online_dark_href = online_href | append: '?theme=dark' %}
+                    {% endif %}
+                  {% endif %}
+                  <p class="rouge-first">
+                    <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ file_label }}</a>
+                    <span class="download-format-links">
+                      <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ primary_format_label }}</a>{% if has_dark_variant %} (<a class="black-under" href="{{ png_dark_href }}" download="{{ file_base | append: '-' | append: dark_suffix }}" target="_blank" rel="nofollow">DARK</a>){% endif %}
+                      {% if pdf_href != '' %}
+                        | <a class="black-under" href="{{ pdf_href }}" download="{{ pdf_name | split: '.' | first }}" target="_blank" rel="nofollow">PDF</a>
+                      {% endif %}
+                      {% if svg_href != '' %}
+                        | <a class="black-under" href="{{ svg_href }}" download="{{ svg_name | split: '.' | first }}" target="_blank" rel="nofollow">SVG</a>
+                      {% endif %}
+                      {% if online_href != '' %}
+                        | <a class="black-under" href="{{ online_href }}" rel="nofollow">ONLINE</a>{% if online_dark_href != '' %} (<a class="black-under" href="{{ online_dark_href }}" rel="nofollow">DARK</a>){% endif %}
+                      {% endif %}
+                    </span>
                   </p>
                 {% endfor %}
               {% endif %}

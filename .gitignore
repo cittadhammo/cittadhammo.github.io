@@ -22,6 +22,8 @@ _site/
 *.sqlite
 
 assets/images/
+assets/pdfs/
+assets/svgs/
 maps/
 # Ignore all images in the items directory
 vendor/bundle

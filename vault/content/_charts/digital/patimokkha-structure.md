@@ -28,6 +28,10 @@ techs:
 images:
   - name: Patimokkha-A1S.png
     map: true
+    file: true
+    pdf: true
+    svg: true
+    online: true
 code:
   - name: Notebook
     url: https://observablehq.com/@cittadhammo/bhikkhu-patimokkha?collection=@cittadhammo/finished

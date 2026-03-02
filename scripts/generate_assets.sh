@@ -3,6 +3,10 @@ set -e
 
 SRC_IMAGE_DIR="./vault/assets/images"
 DEST_IMAGE_DIR="./assets/images"
+SRC_PDF_DIR="./vault/assets/pdfs"
+SRC_SVG_DIR="./vault/assets/svgs"
+DEST_PDF_DIR="./assets/pdfs"
+DEST_SVG_DIR="./assets/svgs"
 MD_DIR="./vault/content" 
 MAPS_HTML_DIR="./maps"
 SIZE_DATA_FILE="./vault/data/size.yml"
@@ -246,6 +250,34 @@ all_files_exist() {
     return 0
 }
 
+sync_static_download_assets() {
+    mkdir -p "$DEST_PDF_DIR" "$DEST_SVG_DIR"
+
+    if [ -d "$SRC_PDF_DIR" ]; then
+        if command -v rsync >/dev/null 2>&1; then
+            rsync -a --delete "$SRC_PDF_DIR"/ "$DEST_PDF_DIR"/
+        else
+            rm -rf "$DEST_PDF_DIR"/*
+            cp -a "$SRC_PDF_DIR"/. "$DEST_PDF_DIR"/
+        fi
+        echo "Synced PDFs: $SRC_PDF_DIR -> $DEST_PDF_DIR"
+    else
+        echo "PDF source directory not found, skipping: $SRC_PDF_DIR"
+    fi
+
+    if [ -d "$SRC_SVG_DIR" ]; then
+        if command -v rsync >/dev/null 2>&1; then
+            rsync -a --delete "$SRC_SVG_DIR"/ "$DEST_SVG_DIR"/
+        else
+            rm -rf "$DEST_SVG_DIR"/*
+            cp -a "$SRC_SVG_DIR"/. "$DEST_SVG_DIR"/
+        fi
+        echo "Synced SVGs: $SRC_SVG_DIR -> $DEST_SVG_DIR"
+    else
+        echo "SVG source directory not found, skipping: $SRC_SVG_DIR"
+    fi
+}
+
 # Read the template file
 if [ ! -f "$TEMPLATE_FILE" ]; then
     echo "Template file not found: $TEMPLATE_FILE"
@@ -262,8 +294,12 @@ if [ -z "$TEMPLATE_HTML" ]; then
 fi
 
 mkdir -p "$DEST_IMAGE_DIR"
+mkdir -p "$DEST_PDF_DIR"
+mkdir -p "$DEST_SVG_DIR"
 mkdir -p "$MAPS_HTML_DIR"
 mkdir -p "$(dirname "$SIZE_DATA_FILE")"
+
+sync_static_download_assets
 
 # Initialize or load existing size data
 if [ -f "$SIZE_DATA_FILE" ]; then

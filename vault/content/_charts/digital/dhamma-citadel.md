@@ -24,7 +24,10 @@ images:
     display: true
     dark: true
     map: true
-    file: false
+    file: true
+    pdf: true
+    svg: true
+    online: true
     title: A0 Square
   - name: DhammaCitadel-A0SM.png
     display: false
@@ -36,6 +39,8 @@ images:
     display: true
     dark: true
     file: true
+    pdf: true
+    svg: true
     title: A0 Vertical
   - name: DhammaCitadel-A0VBM.png
     display: true
@@ -43,4 +48,3 @@ images:
     file: true
     title: A0 Vertical (Black Background)
 ---
-

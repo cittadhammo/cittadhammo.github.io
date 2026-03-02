@@ -1,4 +1,4 @@
-.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs
+.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks sync-download-assets
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
@@ -58,26 +58,45 @@ structure-sync-check: structure structure-check
 
 clean:
 	rm -rf assets/images/*
+	rm -rf assets/pdfs/*
+	rm -rf assets/svgs/*
 	rm -rf maps/*
 
-# Updates _config_local.yml's exclude list with _config.yml's exclude list, and adds "assets/images"
+# Updates _config_local.yml's exclude list with _config.yml's exclude list, and adds local asset symlink paths
 sync-config:
-	yq -i '.exclude = (load("_config.yml").exclude + ["assets/images"])' _config_local.yml
+	yq -i '.exclude = (load("_config.yml").exclude + ["assets/images","assets/pdfs","assets/svgs"])' _config_local.yml
+
+link-site-assets:
+	# You might need to build the site first to get the assets folder in _site
+	mkdir -p ./_site/assets
+	rm -rf ./_site/assets/images ./_site/assets/pdfs ./_site/assets/svgs
+	ln -sr ./assets/images ./_site/assets/images
+	ln -sr ./assets/pdfs ./_site/assets/pdfs
+	ln -sr ./assets/svgs ./_site/assets/svgs
+
+remove-site-asset-symlinks:
+	rm -f ./_site/assets/images ./_site/assets/pdfs ./_site/assets/svgs
+
+sync-download-assets:
+	mkdir -p ./assets/pdfs ./assets/svgs
+	rm -rf ./assets/pdfs/* ./assets/svgs/*
+	cp -a ./vault/assets/pdfs/. ./assets/pdfs/
+	cp -a ./vault/assets/svgs/. ./assets/svgs/
 
 build: # careful with the keep file in config_local
+	$(MAKE) sync-download-assets
 	bundle exec jekyll build --config _config.yml,_config_local.yml
+	$(MAKE) link-site-assets
 
 change-images-assets-to-symlink:
-	rm -rf ./_site/assets/images
-	ln -sr ./assets/images ./_site/assets/images
+	$(MAKE) link-site-assets
 
 remove-symlink:
-	rm _site/assets/images
+	$(MAKE) remove-site-asset-symlinks
 
-serve: # there is a keep file in _config local that will take care of the assets images
-	# You might need to build the site first to get the assets folder in _site
-	rm -rf ./_site/assets/images
-	ln -sr ./assets/images ./_site/assets/images
+serve: # keep_files in _config_local.yml preserves asset symlinks during serve
+	$(MAKE) sync-download-assets
+	$(MAKE) link-site-assets
 	bundle exec jekyll serve --livereload --config _config.yml,_config_local.yml
 
 sync-agent-docs:
@@ -95,6 +114,9 @@ help:
 	@echo "  make images-compressed-lossy   Generate PDF/PNG assets (lossy)"
 	@echo "  make build                     Build Jekyll site with _config.yml + _config_local.yml"
 	@echo "  make serve                     Serve site locally with livereload"
+	@echo "  make sync-download-assets      Copy vault/assets/{pdfs,svgs} into assets/{pdfs,svgs}"
+	@echo "  make link-site-assets          Symlink images/pdfs/svgs into _site/assets"
+	@echo "  make remove-site-asset-symlinks  Remove asset symlinks from _site/assets"
 	@echo "  make clean                     Remove generated assets/images and maps"
 	@echo "  make sync-config               Sync _config_local.yml exclude list"
 	@echo "  make darkify-test              Run method comparison darkify test harness"
