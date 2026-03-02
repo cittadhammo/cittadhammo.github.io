@@ -11,9 +11,6 @@ sources:
 techs:
   - name: D3
     url: http://d3js.org
-images:
-  - name: Parallels-A0S.png
-    map: true
 code:
   - name: Notebook
     url: https://observablehq.com/d/861e7f60185d063d

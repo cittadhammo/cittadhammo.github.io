@@ -192,9 +192,16 @@
 </script>
 <script>
   (function () {
-    if (window.location.hash && window.location.hash.length > 1) {
-      document.documentElement.classList.add("has-initial-hash");
+    function syncInitialHashClass() {
+      if (window.location.hash && window.location.hash.length > 1) {
+        document.documentElement.classList.add("has-initial-hash");
+      } else {
+        document.documentElement.classList.remove("has-initial-hash");
+      }
     }
+
+    syncInitialHashClass();
+    window.addEventListener("hashchange", syncInitialHashClass);
   })();
 </script>
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
