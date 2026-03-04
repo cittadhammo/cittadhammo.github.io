@@ -34,6 +34,17 @@ theme:
   home_hero_follow_theme: false # If false, hero stays in dark style even when the site theme is light.
   home_hero_hide_on_scroll_cue: true # If true, clicking the hero bottom arrow hides the hero after scrolling.
   page_scroll_reveal_default: false # If true, page-layout pages use scroll reveal unless overridden in frontmatter.
+  # Order of metadata blocks in item pages (omit keys you want hidden).
+  item_meta_order:
+    - author
+    - year
+    - license
+    - techs
+    - code
+    - references
+    - sources
+    - downloads
+  
   item_meta_compact: true # If true, item metadata blocks can flow horizontally and wrap.
   # Per-metadata wide rules for compact meta layout.
   # Supported values:
@@ -43,22 +54,12 @@ theme:
   item_meta_compact_wide:
     author: "never"
     year: "never"
-    license: "count:2"
-    references: "count:2"
+    license: "never"
+    techs: "never"
+    code: "never"
+    references: "always"
     sources: "always"
-    techs: "count:4"
-    code: "count:2"
     downloads: "always"
-  # Order of metadata blocks in item pages (omit keys you want hidden).
-  item_meta_order:
-    - author
-    - year
-    - license
-    - techs
-    - references
-    - sources
-    - code
-    - downloads
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""
