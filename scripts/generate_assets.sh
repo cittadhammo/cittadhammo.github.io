@@ -535,6 +535,7 @@ EOF
     if [ "$MAP" = "true" ]; then
         TILE_PATH="$DEST_FOLDER/tiles"
         TILE_DARK_PATH="$DEST_FOLDER/tiles-dark"
+        TILE_DARK_BG="0 0 0"
 
         echo "Processing $IMG_NAME..."
 
@@ -561,14 +562,18 @@ EOF
         fi
 
         HAS_DARK_TILES="false"
-        if [ "$NEEDS_DARKIFY" = "true" ]; then
+        NEEDS_DARK_TILES="false"
+        if [ "$NEEDS_DARKIFY" = "true" ] || [ "$IMG_DARK" = "true" ]; then
+            NEEDS_DARK_TILES="true"
+        fi
+        if [ "$NEEDS_DARK_TILES" = "true" ]; then
+            HAS_DARK_TILES="true"
             if [ "$MAPS_HTML_ONLY" = "true" ]; then
-                if [[ -d "$TILE_DARK_PATH" ]]; then
-                    HAS_DARK_TILES="true"
+                if [[ ! -d "$TILE_DARK_PATH" ]]; then
+                    HAS_DARK_TILES="false"
                 fi
                 echo "Skipping dark tile generation (MAPS_HTML_ONLY=true)."
             else
-                HAS_DARK_TILES="true"
                 DARK_TILES_UP_TO_DATE="false"
                 if [ "$META_MATCH" = "true" ] && [[ -d "$TILE_DARK_PATH" ]]; then
                     DARK_TILES_UP_TO_DATE="true"
@@ -577,8 +582,16 @@ EOF
                 if [ "$DARK_TILES_UP_TO_DATE" = "true" ]; then
                     echo "Skipping $IMG_NAME dark tiles (unchanged)."
                 else
-                    ensure_magick
-                    darkify_tile_set "$TILE_PATH" "$TILE_DARK_PATH" "$DARKIFY_METHOD"
+                    rm -rf "$TILE_DARK_PATH"
+                    if [ "$IMG_DARK" = "true" ]; then
+                        mkdir -p "$TILE_DARK_PATH"
+                        vips dzsave "$SRC_IMG_PATH" "$TILE_DARK_PATH" \
+                            --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
+                            --tile-size 256 --background "$TILE_DARK_BG" --vips-progress
+                    else
+                        ensure_magick
+                        darkify_tile_set "$TILE_PATH" "$TILE_DARK_PATH" "$DARKIFY_METHOD"
+                    fi
                 fi
             fi
         fi

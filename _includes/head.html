@@ -154,6 +154,44 @@
       });
     }
 
+    function isInternalMapUrl(rawUrl) {
+      if (!rawUrl) return false;
+      try {
+        var parsed = new URL(rawUrl, window.location.origin);
+        return parsed.origin === window.location.origin && parsed.pathname.indexOf("/maps/") !== -1;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function withThemeQuery(rawUrl, theme) {
+      try {
+        var parsed = new URL(rawUrl, window.location.origin);
+        parsed.searchParams.set("theme", theme);
+
+        if (/^https?:\/\//i.test(rawUrl)) return parsed.toString();
+        return parsed.pathname + parsed.search + parsed.hash;
+      } catch (e) {
+        return rawUrl;
+      }
+    }
+
+    function updateThemeMapLinks(theme) {
+      var links = document.querySelectorAll("a[href]");
+      links.forEach(function (link) {
+        var href = link.getAttribute("href");
+        if (!isInternalMapUrl(href)) return;
+        link.setAttribute("href", withThemeQuery(href, theme));
+      });
+
+      var mapTriggers = document.querySelectorAll("[data-map-url]");
+      mapTriggers.forEach(function (el) {
+        var mapUrl = el.getAttribute("data-map-url");
+        if (!isInternalMapUrl(mapUrl)) return;
+        el.setAttribute("data-map-url", withThemeQuery(mapUrl, theme));
+      });
+    }
+
     function applyTheme(theme, mode) {
       document.documentElement.setAttribute("data-theme", theme);
       document.documentElement.setAttribute("data-theme-mode", mode);
@@ -164,6 +202,7 @@
       }
 
       updateThemeImages(theme);
+      updateThemeMapLinks(theme);
     }
 
     var storedMode = getStoredTheme();
@@ -179,6 +218,7 @@
     window.__applyTheme = applyTheme;
     window.__resolveTheme = resolveTheme;
     window.__updateThemeImages = updateThemeImages;
+    window.__updateThemeMapLinks = updateThemeMapLinks;
 
     if (mediaQuery && config.respectPrefers) {
       mediaQuery.addEventListener("change", function () {
@@ -254,6 +294,9 @@
     if (window.__updateThemeImages) {
       var theme = document.documentElement.getAttribute("data-theme") || "light";
       window.__updateThemeImages(theme);
+      if (window.__updateThemeMapLinks) {
+        window.__updateThemeMapLinks(theme);
+      }
     }
   });
 </script>
