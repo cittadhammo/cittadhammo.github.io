@@ -614,10 +614,6 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
   margin-bottom: 1.5rem;
 }
 
-.page-layout h1 {
-  margin-bottom: 0.6rem;
-}
-
 /* Constrain image width in project aside for large screens */
 @media (min-width: variables.$breakpoint-large) {
   .project aside .img-wrapper-2 {

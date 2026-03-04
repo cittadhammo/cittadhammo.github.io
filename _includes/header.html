@@ -1,5 +1,23 @@
 {% assign show_theme_toggle = include.show_theme_toggle and site.theme.allow_user_toggle != false %}
-{% assign pages = site[include.area_name] | where: 'type', 'page' %}
+{% assign collection_pages = site[include.area_name] | where: 'type', 'page' %}
+{% assign area_config = site.data.areas | where: 'name', include.area_name | first %}
+{% assign pages = '' | split: '' %}
+{% if area_config and area_config.pages %}
+  {% for configured_page in area_config.pages %}
+    {% assign configured_name = configured_page.name | default: configured_page | to_s | strip %}
+    {% if configured_name != '' %}
+      {% for candidate_page in collection_pages %}
+        {% assign candidate_basename = candidate_page.name | split: '.' | first %}
+        {% if candidate_page.slug == configured_name or candidate_basename == configured_name %}
+          {% assign pages = pages | push: candidate_page %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% assign pages = collection_pages %}
+{% endif %}
 {% assign has_header_links = show_theme_toggle or pages.size > 0 %}
 <header id="{{ include.area_name | slugify }}" class="header {% if include.inverted %}inverted{% endif %}{% if has_header_links %} has-header-links{% endif %}">
   <div class="container">

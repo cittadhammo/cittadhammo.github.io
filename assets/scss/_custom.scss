@@ -359,6 +359,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   margin-bottom: 5rem;
 }
 
+/* Keep page-layout titles tight; generic .cat-title spacing is too large here. */
+.page-layout .cat-title {
+  margin-bottom: 0.6rem;
+}
+
 
   .masonry2 {
     column-count: 3;       /* Number of columns */
