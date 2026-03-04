@@ -48,6 +48,16 @@ theme:
     techs: "count:4"
     code: "count:2"
     downloads: "always"
+  # Order of metadata blocks in item pages (omit keys you want hidden).
+  item_meta_order:
+    - author
+    - year
+    - license
+    - techs
+    - references
+    - sources
+    - code
+    - downloads
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""
