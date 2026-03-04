@@ -5,280 +5,30 @@
   </head>
 
   <body class="black item-layout">
-    {% assign area_name = page.collection %}
-    {% assign area = site.data.areas | where: 'name', area_name | first %}
-    {% capture area_title %}
-      {% if area.title %}
-        {{ area.title }}
-      {% else %}
-        {% include humanize_name.html value=area.name %}
-      {% endif %}
-    {% endcapture %}
-    {% assign area_title = area_title | strip %}
-    {% include header.html subTitle=area_title inverted=true area_name=area_name show_theme_toggle=true %}
-
-    <div class="container arrow-div">
-      {% assign area_anchor = area_name | slugify %}
-      {% assign back_href = '/' | relative_url %}
-      <a style="padding: 10px;" class="black-under" href="{{ back_href }}#{{ area_anchor }}" class="bigger">
-        <i class="arrow left"></i>
-      </a>
-    </div>
+    {% include area-header.html area_name=page.collection show_theme_toggle=true show_back=true %}
 
     <main class="content item-content">
       <section class="project">
         <div class="container">
           <article>
             <span class="h2" style="padding-top: 1rem;">Title</span>
-            <h1>
-              {{ page.title }}
-            </h1>
+            <h1>{{ page.title }}</h1>
             {% if page.subtitle %}
-              <h2 class="subtitle">
-                {{ page.subtitle }}
-              </h2>
+              <h2 class="subtitle">{{ page.subtitle }}</h2>
             {% endif %}
 
-            <div class="project-meta{% if site.theme.item_meta_compact == true %} project-meta-compact{% endif %}">
-              {% assign default_meta_order = 'author,year,license,references,sources,techs,code,downloads' | split: ',' %}
-              {% assign configured_meta_order = site.theme.item_meta_order %}
-              {% assign meta_order = configured_meta_order | default: default_meta_order %}
-              {% for meta_key in meta_order %}
-                {% assign normalized_meta_key = meta_key | to_s | strip %}
-                {% include item-meta-block.html block_key=normalized_meta_key %}
-              {% endfor %}
-
-              <!-- <span class="h2">Description</span> -->
-              <!-- {{ page.content }} -->
-            </div>
+            {% include item-meta.html %}
           </article>
+
           <aside>
-            <ul class="lightbox-gallery">
-              {% for image in page.images %}
-                {% if image.display != false %}
-                  {% assign image_name = image.name | default: image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
-                  {% assign img = image_name | split: '.' | first %}
-                  {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
-                  {% assign has_dark_variant = true %}
-                  {% if image.dark == true %}
-                    {% assign has_dark_variant = false %}
-                  {% endif %}
-                  <li>
-                    {% if image.map %}
-                      <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a
-                          class="mfp-image"
-                          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-                          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-                          {% if has_dark_variant %}
-                            data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
-                          {% endif %}
-                          data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
-                          {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
-                        >
-                          <img
-                            class="load-hidden"
-                            src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
-                            data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
-                            {% if has_dark_variant %}
-                              data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
-                            {% endif %}
-                            style="aspect-ratio: {{ site.data.size[img].medium }};"
-                            alt="{{ image.alt }}"
-                          >
-                        </a>
-                        <a class="map-icon load-hidden" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
-                          <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
-                        </a>
-                      </div>
-                    {% else %}
-                      <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-                        <a
-                          class="mfp-image"
-                          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-                          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-                          {% if has_dark_variant %}
-                            data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
-                          {% endif %}
-                          {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
-                        >
-                          <img
-                            class="load-hidden"
-                            src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
-                            data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
-                            {% if has_dark_variant %}
-                              data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
-                            {% endif %}
-                            alt="{{ image.alt }}"
-                          >
-                        </a>
-                      </div>
-                    {% endif %}
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
+            {% include item-gallery.html %}
           </aside>
         </div>
       </section>
 
-      {% assign area = site.data.areas | where: 'name', page.collection | first %}
-      {% assign category = page.path | split: '/' | pop | last %}
-      {% assign allItems = site[page.collection] %}
-
-      <!--
-        all items with the given category based on path
-        (there is no way to filter the array in liquid)
-      -->
-
-      {% assign items = '' | split: '' %}
-      {% for item in allItems %}
-        {% assign c = item.url | split: '/' | pop | last %}
-        {% if c == category %}
-          {% assign items = items | push: item %}
-        {% endif %}
-      {% endfor %}
-
-      <!-- looking for previous and next items according to area.categories -->
-
-      {% assign i = 0 %}
-      {% for item in items %}
-        {% if item == page %}
-          {% assign itemIndex = i %}
-        {% endif %}
-        {% assign i = i | plus: 1 %}
-      {% endfor %}
-
-      {% assign previousIndex = itemIndex | minus: 1 %}
-      {% assign nextIndex = itemIndex | plus: 1 %}
-
-      {% assign cats = area.categories %}
-      {% assign k = 0 %}
-      {% for cat in cats %}
-        {% if cat.name == category %}
-          {% assign catIndex = k %}
-        {% endif %}
-        {% assign k = k | plus: 1 %}
-      {% endfor %}
-
-      {% assign previousCatIndex = catIndex | minus: 1 %}
-      {% assign nextCatIndex = catIndex | plus: 1 %}
-
-      {% if previousIndex < 0 %}
-        {% assign lastCat = cats[previousCatIndex].name %}
-        {% assign itemsLastCat = '' | split: '' %}
-        {% for item in allItems %}
-          {% assign c = item.url | split: '/' | pop | last %}
-          {% if c == lastCat %}
-            {% assign itemsLastCat = itemsLastCat | push: item %}
-          {% endif %}
-        {% endfor %}
-        {% assign lastItem = itemsLastCat | last %}
-        <!--
-          previous in previous cat with round <a href="{{ lastItem.url }}">{{
-          lastItem.title }}</a>
-          <br>
-        -->
-
-        {% if previousCatIndex < 0 %}
-          <!-- previous in previous cat: You are on the first item of the first cat <br> -->
-
-        {% else %}
-          {% assign lastCat = cats[previousCatIndex].name %}
-
-          {% assign itemsLastCat = '' | split: '' %}
-          {% for item in allItems %}
-            {% assign c = item.url | split: '/' | pop | last %}
-            {% if c == lastCat %}
-              {% assign itemsLastCat = itemsLastCat | push: item %}
-            {% endif %}
-          {% endfor %}
-
-          {% assign lastItem = itemsLastCat | last %}
-          {% assign previousLink = lastItem.url %}
-          {% assign previousTitle = lastItem.title %}
-          <!-- previous in previous cat -->
-        {% endif %}
-
-      {% else %}
-        {% assign previousLink = items[previousIndex].url %}
-        {% assign previousTitle = items[previousIndex].title %}
-
-        <!-- previous -->
-      {% endif %}
-
-      {% if nextIndex == items.size %}
-        {% if nextCatIndex == cats.size %}
-          <!-- next in next cat: You are on the last item of the last cat <br> -->
-
-        {% else %}
-          {% assign nextCat = cats[nextCatIndex].name %}
-
-          {% assign itemsNextCat = '' | split: '' %}
-          {% for item in allItems %}
-            {% assign c = item.url | split: '/' | pop | last %}
-            {% if c == nextCat %}
-              {% assign itemsNextCat = itemsNextCat | push: item %}
-            {% endif %}
-          {% endfor %}
-
-          {% assign firstItem = itemsNextCat | first %}
-          {% assign nextLink = firstItem.url %}
-          {% assign nextTitle = firstItem.title %}
-
-          <!-- next in next cat -->
-        {% endif %}
-
-        {% if nextCatIndex == cats.size %}
-          {% assign nextCatIndex = 0 %}
-        {% endif %}
-
-        {% assign nextCat = cats[nextCatIndex].name %}
-
-        {% assign itemsNextCat = '' | split: '' %}
-        {% for item in allItems %}
-          {% assign c = item.url | split: '/' | pop | last %}
-          {% if c == nextCat %}
-            {% assign itemsNextCat = itemsNextCat | push: item %}
-          {% endif %}
-        {% endfor %}
-
-        {% assign firstItem = itemsNextCat | first %}
-
-        <!--
-          next in next cat with round
-          <a href="{{ firstItem.url }}">{{ firstItem.title }}</a>
-          <br>
-        -->
-
-      {% else %}
-        {% assign nextLink = items[nextIndex].url %}
-        {% assign nextTitle = items[nextIndex].title %}
-        <!-- next -->
-      {% endif %}
-
-      <section class="project-navigation">
-        <div class="container">
-          {% if previousLink %}
-            <a class="prev" title="Previous {{ previousTitle }}" href="{{ previousLink | relative_url }}">
-              <span class="h2">Previous</span>
-              <h2>{{ previousTitle }}</h2>
-            </a>
-          {% else %}
-            <a class="prev"></a>
-          {% endif %}
-
-          {% if nextLink %}
-            <a class="next" title="Next {{ nextTitle }}" href="{{ nextLink | relative_url }}">
-              <span class="h2">Next</span>
-              <h2>{{ nextTitle }}</h2>
-            </a>
-          {% else %}
-            <a class="next"></a>
-          {% endif %}
-        </div>
-      </section>
+      {% include item-navigation.html %}
     </main>
+
     {% include footer.html %}
     <script>
       window.SITE = {
@@ -288,7 +38,6 @@
     <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/lightbox.js' | relative_url }}"></script>
-    <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | relative_url }}"></script> -->
     <script src="{{ '/assets/scripts/vendor/sticky-kit.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/project.js' | relative_url }}"></script>
   </body>

@@ -33,6 +33,7 @@ theme:
   home_hero_landing: true # If true, show a full-screen hero on home with title/logo/area links.
   home_hero_follow_theme: false # If false, hero stays in dark style even when the site theme is light.
   home_hero_hide_on_scroll_cue: true # If true, clicking the hero bottom arrow hides the hero after scrolling.
+  page_scroll_reveal_default: false # If true, page-layout pages use scroll reveal unless overridden in frontmatter.
   item_meta_compact: true # If true, item metadata blocks can flow horizontally and wrap.
   # Per-metadata wide rules for compact meta layout.
   # Supported values:
@@ -105,8 +106,10 @@ collections:
   projects:
     output: true
     sort_by: order
-# This will add default layout to all items into categories.
-# For pages, make sure to specify a layout in the frontmatter
+# Layout defaults:
+# - collection items use `item`
+# - generic fallback uses `default` (safe for non-area pages)
+# - area reference pages should explicitly set `layout: page`
 defaults:
   - scope:
       path: ""
@@ -136,7 +139,7 @@ defaults:
   - scope:
       path: ""
     values:
-      layout: "page"
+      layout: "default"
 # Add any folder that need not to be included in the build website.
 include: ["well-known"]
 exclude:

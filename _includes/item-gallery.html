@@ -1,0 +1,65 @@
+<ul class="lightbox-gallery">
+  {% for image in page.images %}
+    {% if image.display != false %}
+      {% assign image_name = image.name | default: image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+      {% assign img = image_name | split: '.' | first %}
+      {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
+      {% assign has_dark_variant = true %}
+      {% if image.dark == true %}
+        {% assign has_dark_variant = false %}
+      {% endif %}
+      <li>
+        {% if image.map %}
+          <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
+            <a
+              class="mfp-image"
+              href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+              data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+              {% if has_dark_variant %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% endif %}
+              data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
+              {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+            >
+              <img
+                class="load-hidden"
+                src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                {% if has_dark_variant %}
+                  data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                {% endif %}
+                style="aspect-ratio: {{ site.data.size[img].medium }};"
+                alt="{{ image.alt }}"
+              >
+            </a>
+            <a class="map-icon load-hidden" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
+              <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
+            </a>
+          </div>
+        {% else %}
+          <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
+            <a
+              class="mfp-image"
+              href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+              data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+              {% if has_dark_variant %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% endif %}
+              {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+            >
+              <img
+                class="load-hidden"
+                src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+                {% if has_dark_variant %}
+                  data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+                {% endif %}
+                alt="{{ image.alt }}"
+              >
+            </a>
+          </div>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

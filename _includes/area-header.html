@@ -1,0 +1,24 @@
+{% assign area_name = include.area_name | default: page.collection %}
+{% assign area = site.data.areas | where: 'name', area_name | first %}
+{% capture area_title %}
+  {% if area and area.title %}
+    {{ area.title }}
+  {% elsif area and area.name %}
+    {% include humanize_name.html value=area.name %}
+  {% elsif area_name %}
+    {% include humanize_name.html value=area_name %}
+  {% endif %}
+{% endcapture %}
+{% assign area_title = area_title | strip %}
+
+{% include header.html subTitle=area_title inverted=true area_name=area_name show_theme_toggle=include.show_theme_toggle %}
+
+{% if include.show_back != false and area_name %}
+  <div class="container arrow-div">
+    {% assign area_anchor = area_name | slugify %}
+    {% assign back_href = '/' | relative_url %}
+    <a style="padding: 10px;" class="black-under" href="{{ back_href }}#{{ area_anchor }}" class="bigger">
+      <i class="arrow left"></i>
+    </a>
+  </div>
+{% endif %}

@@ -1,0 +1,9 @@
+<div class="project-meta{% if site.theme.item_meta_compact == true %} project-meta-compact{% endif %}">
+  {%- assign default_meta_order = 'author,year,license,references,sources,techs,code,downloads' | split: ',' -%}
+  {%- assign configured_meta_order = site.theme.item_meta_order -%}
+  {%- assign meta_order = configured_meta_order | default: default_meta_order -%}
+  {%- for meta_key in meta_order -%}
+    {%- assign normalized_meta_key = meta_key | to_s | strip -%}
+    {%- include item-meta-block.html block_key=normalized_meta_key -%}
+  {%- endfor -%}
+</div>

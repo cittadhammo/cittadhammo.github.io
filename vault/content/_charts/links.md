@@ -2,6 +2,7 @@
 layout: page
 title: Links
 type: page
+scroll_reveal: true
 ---
 
 <!-- <h1 class="projects rouge">Links</h1> -->

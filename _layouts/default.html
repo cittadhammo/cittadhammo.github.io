@@ -3,9 +3,14 @@
   <head>
     {% include head.html %}
   </head>
-  <body>
-    <a href="{{ '/' | relative_url }}"> Home </a>
-    <hr>
-    {{ content }}
+  <body class="black default-layout">
+    <main class="home">
+      <section class="projects">
+        <div class="container">
+          {{ content }}
+        </div>
+      </section>
+    </main>
+    {% include footer.html %}
   </body>
 </html>

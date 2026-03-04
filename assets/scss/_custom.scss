@@ -15,10 +15,6 @@
 	color: variables.$color-red;
 }
 
-// .rouge:hover, .rouge-first:hover {
-// 	text-decoration: underline;
-// }
-
 .rouge, .black-under {
 	text-decoration: underline 0.09em rgba(255, 255, 255, 0);
 	transition: text-decoration-color 300ms;
@@ -60,10 +56,6 @@ a.blackclair:hover {
 .rouge h1 {
 	color: variables.$color-red !important;
 }
-
-// .rouge h2{
-// 	color: $color-red!important;
-// }
 .rouge h3 {
 	color: variables.$color-red !important;
 }
@@ -106,7 +98,6 @@ a.blackclair:hover {
 }
 
 .arrow {
-	// border: solid grey;
 	border: solid variables.$color-black;
 	border-width: 0 3px 3px 0;
 	display: inline-block;
@@ -118,20 +109,11 @@ a.blackclair:hover {
 	-webkit-transform: rotate(135deg);
 }
 
-// .bigger:hover .arrow {
-//   border: solid black;
-// 	border-width: 0 3px 3px 0;
-// }
-
 a.bigger {
 	position: relative;
 }
 
-// .bigger img{
-// 	display: inherit;
-// }
 .previous {
-	// width: 0.7em;
 	width: 0.5em;
 }
 
@@ -142,13 +124,6 @@ a.bigger {
 	top: -55%;
 	left: -188%;
 	position: absolute;
-	// content:"";
-	// height: 3rem;
-	// width: 3rem;
-	// top: -50%;
-	// left: -50%;
-	// position: absolute;
-	// background: rgba(0, 0, 0, 0.4);
 }
 
 .foot {
@@ -198,9 +173,6 @@ a.bigger {
 		width: 100%;
 	}
 
-	.inDiv {
-		// justify-content: center;
-	}
 }
 
 .logo-and-title-container {
@@ -308,7 +280,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
   .main-area-title {
     font-size: 1.7rem; // Increased font size
-    // sfont-weight: bold; // Added font weight
   }
 }
 
@@ -431,21 +402,12 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   color: variables.$color-red !important;
 }
 
-// Custom styles for nav-other-area-link for the white underline effect
 .other-areas {
   a.nav-other-area-link {
     text-decoration: none; // Remove default underline
     color: variables.$color-gray !important; // Mimic greyed-out initial color
     word-spacing: -6px;
     transition: color 300ms ease-in-out; // Smooth color transition
-
-    // &:hover {
-    //   span:after {
-    //     visibility: visible;
-    //     -webkit-transform: scaleX(1);
-    //     transform: scaleX(1);
-    //   }
-    // }
 
     span {
       display: inline-block;
@@ -528,9 +490,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   display: flex;
   align-items: center;
   justify-content: center;
-  // background-color: rgba(255,255,255,0.6); /* Initial more opaque background */
-  // border-radius: 5px; /* Slight rounding for square look */
-  // border: 2px solid black; /* Added black border */
   transition: background-color 0.3s ease; /* Smooth transition for hover effect */
   cursor: pointer; /* Indicate it's clickable */
   
@@ -538,10 +497,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     width: 24px;
     height: 24px;
   }
-}
-
-.fullscreen-map-icon-in-lightbox:hover {
-  // background-color: rgba(255,255,255,0.9); /* Even more opaque on hover */
 }
 
 .fullscreen-map-icon-in-lightbox img {

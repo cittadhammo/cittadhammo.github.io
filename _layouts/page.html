@@ -4,28 +4,13 @@
     {% include head.html %}
   </head>
 
-  <body class="black page-layout">
+  {% assign page_scroll_reveal_enabled = site.theme.page_scroll_reveal_default %}
+  {% if page.scroll_reveal != nil %}
+    {% assign page_scroll_reveal_enabled = page.scroll_reveal %}
+  {% endif %}
+  <body class="black page-layout{% if page_scroll_reveal_enabled %} page-scroll-reveal{% endif %}">
     <main class="home">
-    {% assign area_name = page.collection %}
-    {% assign area = site.data.areas | where: 'name', area_name | first %}
-    {% capture area_title %}
-      {% if area.title %}
-        {{ area.title }}
-      {% else %}
-        {% include humanize_name.html value=area.name %}
-      {% endif %}
-    {% endcapture %}
-    {% assign area_title = area_title | strip %}
-      {% include header.html subTitle=area_title inverted=true area_name=area_name show_theme_toggle=true %}
-      {% if page.back != false %}
-        <div class="container arrow-div">
-          {% assign area_anchor = area_name | slugify %}
-          {% assign back_href = '/' | relative_url %}
-          <a style="padding: 10px;" class="black-under" href="{{ back_href }}#{{ area_anchor }}" class="bigger">
-            <i class="arrow left"></i>
-          </a>
-        </div>
-      {% endif %}
+      {% include area-header.html area_name=page.collection show_theme_toggle=true show_back=page.back %}
       <section class="projects">
         <div class="container">
           <h1 class="cat-title projects">{{ page.title }}</h1>
@@ -36,7 +21,6 @@
       </section>
     </main>
     {% include footer.html %}
-    <!-- <script src="{{ "/assets/scripts/vendor/scrollreveal.min.js" | relative_url }}"></script> -->
     <script src="{{ '/assets/scripts/vendor/jquery-1.12.4.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/vendor/jquery.magnific-popup.min.js' | relative_url }}"></script>
     <script>
@@ -44,6 +28,8 @@
       window.PAGE_BASEURL = {{ '' | relative_url | jsonify }};
     </script>
     <script src="{{ '/assets/scripts/page-wikilink-lightbox.js' | relative_url }}"></script>
-    <script src="{{ '/assets/scripts/home.js' | relative_url }}"></script>
+    {% if page_scroll_reveal_enabled %}
+      <script src="{{ '/assets/scripts/page-reveal.js' | relative_url }}"></script>
+    {% endif %}
   </body>
 </html>

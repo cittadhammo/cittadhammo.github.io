@@ -1,8 +1,8 @@
-{% assign meta_label = '' %}
-{% assign meta_count = 0 %}
-{% capture meta_content %}{% endcapture %}
+{%- assign meta_label = '' -%}
+{%- assign meta_count = 0 -%}
+{%- capture meta_content -%}{%- endcapture -%}
 
-{% case include.block_key %}
+{%- case include.block_key -%}
   {% when 'author' %}
     {% if page.author %}
       {% assign meta_label = 'Author' %}
@@ -331,27 +331,27 @@
         {% endfor %}
       {% endcapture %}
     {% endif %}
-{% endcase %}
+{%- endcase -%}
 
-{% if meta_count > 0 %}
-  {% assign wide_rule = 'never' %}
-  {% if site.theme.item_meta_compact_wide %}
-    {% assign wide_rule = site.theme.item_meta_compact_wide[include.block_key] | default: 'never' %}
-  {% endif %}
-  {% assign wide_rule_parts = wide_rule | split: ':' %}
-  {% assign wide_rule_name = wide_rule_parts[0] | downcase %}
-  {% assign block_wide = false %}
-  {% if wide_rule_name == 'always' %}
-    {% assign block_wide = true %}
-  {% elsif wide_rule_name == 'count' %}
-    {% assign wide_rule_min = wide_rule_parts[1] | default: '2' | plus: 0 %}
-    {% if meta_count >= wide_rule_min %}
-      {% assign block_wide = true %}
-    {% endif %}
-  {% endif %}
+{%- if meta_count > 0 -%}
+  {%- assign wide_rule = 'never' -%}
+  {%- if site.theme.item_meta_compact_wide -%}
+    {%- assign wide_rule = site.theme.item_meta_compact_wide[include.block_key] | default: 'never' -%}
+  {%- endif -%}
+  {%- assign wide_rule_parts = wide_rule | split: ':' -%}
+  {%- assign wide_rule_name = wide_rule_parts[0] | downcase -%}
+  {%- assign block_wide = false -%}
+  {%- if wide_rule_name == 'always' -%}
+    {%- assign block_wide = true -%}
+  {%- elsif wide_rule_name == 'count' -%}
+    {%- assign wide_rule_min = wide_rule_parts[1] | default: '2' | plus: 0 -%}
+    {%- if meta_count >= wide_rule_min -%}
+      {%- assign block_wide = true -%}
+    {%- endif -%}
+  {%- endif -%}
 
   <div class="meta-block meta-block-{{ include.block_key }}{% if block_wide %} meta-block-wide{% endif %}">
     <span class="h2">{{ meta_label }}</span>
-    {{ meta_content }}
+    {{- meta_content -}}
   </div>
-{% endif %}
+{%- endif -%}

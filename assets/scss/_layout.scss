@@ -16,8 +16,7 @@
 
 .logo {
 	float: left;
-	font-size: 3.2rem; // do not do anything
-	// font-size: 1.8rem;
+	font-size: 3.2rem;
 	font-weight: 300;
 	margin: 0;
 	line-height: 1;
@@ -34,37 +33,19 @@
 .content {
 	background: variables.$color-white;
 	padding: 7rem 0 0;
-	//padding: 2rem 0 0;
-	// margin-bottom: 31.24rem;
 	position: relative;
 	top: 0;
 	left: 0;
 	z-index: 1;
 
-	@media (max-width: variables.$breakpoint-medium - 1) { // Apply when width is less than breakpoint-medium
-		padding: 1rem 0 0; // Reduce padding for smaller screens
+	@media (max-width: variables.$breakpoint-medium - 1) {
+		padding: 1rem 0 0;
 	}
 
 	@media (min-width: variables.$breakpoint-medium) {
 		padding: 21rem 0 0;
-		//margin-bottom: 23.42rem;
 	}
 }
-// Adition HERE
-// .home {
-// 	background: $color-white;
-// 	padding: 2rem 0 0;
-// 	// margin-bottom: 31.24rem;
-// 	position: relative;
-// 	top: 0;
-// 	left: 0;
-// 	z-index: 1;
-
-// 	@media (min-width: $breakpoint-medium) {
-// 		padding: 7rem 0 0;
-// 		// margin-bottom: 23.42rem;
-// 	}
-// }
 
 .intro,
 .projects {
@@ -151,10 +132,9 @@
     transition: filter .35s ease-in-out;
   }
 
-  span {
-    //margin: 1rem 0 .5rem;
-    display: block;
-  }
+	span {
+	    display: block;
+	}
 }
 
 /* Progressive enhancement:
@@ -223,23 +203,22 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 		max-width: 100%;
 	}
 
-	article {
-		margin-bottom: 3rem;
+		article {
+			margin-bottom: 3rem;
 
 		@media (min-width: variables.$breakpoint-medium) {
 			float: right;
 			right: 0;
 			width: 35%;
-			position: absolute;
-			right: 10%;
-			// text-align: justify;
-      p {
-        max-width: 45rem;
-      }
-		}
+				position: absolute;
+				right: 10%;
+	      p {
+	        max-width: 45rem;
+	      }
+			}
 	}
 
-	aside {
+		aside {
 		margin-left: -3rem;
 		margin-right: -3rem;
 
@@ -247,13 +226,12 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 			@include mixins.clearfix;
 		}
 
-		@media (min-width: variables.$breakpoint-medium) {
-			float: left;
-			//width: 55%;
-			width: 45%;
-    		padding-left: 10%;
+			@media (min-width: variables.$breakpoint-medium) {
+				float: left;
+				width: 45%;
+	    		padding-left: 10%;
+			}
 		}
-	}
 
 		.project-meta {
 			margin: 3rem 0 0;
@@ -289,11 +267,10 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 			padding-bottom: 0;
 		}
 
-	.h2 {
-		//margin: 1rem 0 .5rem;
-    margin: 1.2rem 0 0.3rem;
-		&:first-of-type {
-			margin-top: 0;
+		.h2 {
+	    margin: 1.2rem 0 0.3rem;
+			&:first-of-type {
+				margin-top: 0;
 		}
 	}
 
@@ -438,7 +415,6 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 	bottom: 0;
 	left: 0;
 	padding: 5rem 0;
-	//position: fixed;
 	right: 0;
 	z-index: -1;
 
@@ -603,28 +579,24 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 .header-links {
   display: flex;
   align-items: center;
-  // gap: 1.5rem; /* Overall spacing between link groups */
 }
 
 .header-links a {
-  position: relative; /* Needed for positioning the pseudo-element */
-  font-size: 1.8rem; /* Slightly larger font */
-  /* white-space: nowrap; */ /* Prevent wrapping */
-  padding: 5px; /* Remove any default padding that might affect sizing */
-  margin: 0; /* Remove any default margin */
-  /* Ensure a specific color for the links, if not already set by .rouge-first */
-  /* color: variables.$color-text; */ 
+  position: relative;
+  font-size: 1.8rem;
+  padding: 5px;
+  margin: 0;
 }
 
 .header-links a:not(:first-child)::before {
   content: "";
   position: absolute;
-  left: -0.75rem; /* Half of gap (1.5rem) to center it */
+  left: -0.75rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 2px; /* Bar width */
-  height: 1.2em; /* Bar height, relative to font-size of parent a */
-  background-color: var(--color-on-header-text); /* Vertical bar color */
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--color-on-header-text);
 }
 
 .arrow-div {
@@ -642,16 +614,16 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 /* Constrain image width in project aside for large screens */
 @media (min-width: variables.$breakpoint-large) {
   .project aside .img-wrapper-2 {
-    max-width: 50em; /* Example: limit to 35em, adjust as needed */
-    margin-left: auto; /* Center the image wrapper if it's smaller than parent */
+    max-width: 50em;
+    margin-left: auto;
     margin-right: 0;
   }
 }
 
 @media (max-width: variables.$breakpoint-xsmall) {
   .logo-and-title-container {
-    flex-direction: column; /* Stack logo/title and links vertically */
-    align-items: flex-start; /* Align items to the start when stacked */
-    gap: 10px; /* Add some space between stacked items */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }

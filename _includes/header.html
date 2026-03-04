@@ -22,11 +22,6 @@
 <header id="{{ include.area_name | slugify }}" class="header {% if include.inverted %}inverted{% endif %}{% if has_header_links %} has-header-links{% endif %}">
   <div class="container">
     <div class="logo-and-title-container">
-      <!--
-        <a href="{{ '/' | relative_url }}">
-        	<img src="{{ '/assets/icons/logoR.png' | relative_url }}" alt="{{ site.author }}" style="max-height: 50px;">
-        </a>
-      -->
       <div class="title-group">
         <h1 class="logo rouge-first">
           <a title="{{ site.author }}" href="{{ '/' | relative_url }}">{{ site.author }}</a>
