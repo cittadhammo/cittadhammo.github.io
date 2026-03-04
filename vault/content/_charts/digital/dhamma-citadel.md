@@ -7,6 +7,13 @@ year: 2025
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/
+references:
+  - name: Chart Information
+    title: Background and notes for The Dhamma Citadel
+    url: /charts/dhamma-citadel-info/
+  - name: Dhamma Citadel Manual
+    title: Detailed manual in the Writtings area
+    url: /writtings/dhamma/dhamma-citadel-manual/
 sources:
   - name: Buddhist Dictionary Manual of Buddhist Terms and Doctrines
     author: Nyanatiloka Mahathera

@@ -98,6 +98,65 @@
                 {% endfor %}
               {% endif %}
 
+              {% if page.references %}
+                <span class="h2">References</span>
+                {% for reference in page.references %}
+                  {% assign reference_name = '' %}
+                  {% assign reference_url = '' %}
+                  {% assign reference_key = '' %}
+                  {% assign reference_title = '' %}
+                  {% assign fallback_reference = nil %}
+
+                  {% if reference.name %}
+                    {% assign reference_name = reference.name | to_s | strip %}
+                    {% assign reference_url = reference.url | to_s | strip %}
+                    {% assign reference_key = reference.key | default: reference.name | slugify %}
+                    {% assign reference_title = reference.title | to_s | strip %}
+                  {% else %}
+                    {% assign reference_name = reference | to_s | strip %}
+                    {% assign reference_key = reference | slugify %}
+                  {% endif %}
+
+                  {% if reference_key != '' %}
+                    {% assign fallback_reference = site.data.links[reference_key] %}
+                  {% endif %}
+                  {% if reference_url == '' and fallback_reference and fallback_reference.url %}
+                    {% assign reference_url = fallback_reference.url | to_s | strip %}
+                  {% endif %}
+                  {% if reference_name == '' and fallback_reference and fallback_reference.name %}
+                    {% assign reference_name = fallback_reference.name | to_s | strip %}
+                  {% endif %}
+
+                  {% assign reference_href = reference_url %}
+                  {% assign reference_external = false %}
+                  {% if reference_url != '' %}
+                    {% assign reference_first_char = reference_url | slice: 0, 1 %}
+                    {% if reference_url contains '://' or reference_url contains 'mailto:' %}
+                      {% assign reference_external = true %}
+                    {% elsif reference_first_char == '/' %}
+                      {% assign reference_href = reference_url | relative_url %}
+                    {% endif %}
+                  {% endif %}
+
+                  {% if reference_name != '' %}
+                    <p class="rouge-first">
+                      {% if reference_href != '' %}
+                        <a
+                          class="black-under"
+                          href="{{ reference_href }}"
+                          {% if reference_title != '' %}title="{{ reference_title }}"{% endif %}
+                          {% if reference_external %}target="_blank" rel="nofollow"{% endif %}
+                        >
+                          {{ reference_name }}
+                        </a>
+                      {% else %}
+                        {{ reference_name }}
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
               {% if page.sources %}
                 <span class="h2">Sources</span>
                 {% for source in page.sources %}
