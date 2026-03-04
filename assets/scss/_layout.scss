@@ -255,14 +255,39 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 		}
 	}
 
-	.project-meta {
-		margin: 3rem 0 0;
-
-		@media (min-width: variables.$breakpoint-medium) {
+		.project-meta {
 			margin: 3rem 0 0;
+
+			@media (min-width: variables.$breakpoint-medium) {
+				margin: 3rem 0 0;
+				max-width: 100%;
+			}
+		}
+
+		.project-meta.project-meta-compact {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: flex-start;
+			gap: 1.4rem 2rem;
+		}
+
+		.project-meta.project-meta-compact .meta-block {
+			flex: 1 1 18rem;
+			min-width: min(100%, 16rem);
 			max-width: 100%;
 		}
-	}
+
+		.project-meta.project-meta-compact .meta-block.meta-block-wide {
+			flex-basis: 100%;
+		}
+
+		.project-meta.project-meta-compact .meta-block .h2 {
+			margin-top: 0;
+		}
+
+		.project-meta.project-meta-compact .meta-block p:last-child {
+			padding-bottom: 0;
+		}
 
 	.h2 {
 		//margin: 1rem 0 .5rem;
