@@ -1,8 +1,6 @@
 # To do list for Dhammacharts
 
-  - [ ] Fix logo for dark mode
-  - [x] add hero page ? it flikers when going back to home page headers. 
-  - [x] print css, make sure category are not their own page
+  - [ ] Add gap between images in asides?
   - [ ] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, etc.)
   - [ ] Che projects
@@ -15,6 +13,9 @@
   - [ ] change footer with real links
   - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
   - [ ] Add nice charts 
+  - [x] Fix logo for dark mode
+  - [x] add hero page ? it flikers when going back to home page headers. 
+  - [x] print css, make sure category are not their own page
   - [x] ^ remove description for item pages
   - [x] ^ check jekyll errors
   - [x] ^ Subtitle propriety for long title ?
