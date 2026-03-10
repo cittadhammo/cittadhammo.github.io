@@ -26,6 +26,8 @@
       {% assign license_json = page.license | jsonify | strip %}
       {% if license_json contains '[' %}
         {% assign license_items = page.license %}
+      {% elsif license_json == '{}' %}
+        {% assign license_items = '' | split: '' %}
       {% else %}
         {% assign license_items = '' | split: '' %}
         {% assign license_items = license_items | push: page.license %}
@@ -39,13 +41,24 @@
           {% assign license_key = '' %}
           {% assign fallback_license = nil %}
 
-          {% if license.name %}
+          {% if license.name == nil or license.name == '' %}
+            {% if license == '' or license == nil %}
+              {% continue %}
+            {% endif %}
+            {% assign license_name = license | to_s | strip %}
+            {% assign license_key = license_name | slugify %}
+          {% else %}
             {% assign license_name = license.name | to_s | strip %}
             {% assign license_url = license.url | to_s | strip %}
-            {% assign license_key = license.key | default: license.name | slugify %}
-          {% else %}
-            {% assign license_name = license | to_s | strip %}
-            {% assign license_key = license | slugify %}
+            {% if license.key %}
+              {% assign license_key = license.key | slugify %}
+            {% elsif license_name != '' %}
+              {% assign license_key = license_name | slugify %}
+            {% endif %}
+          {% endif %}
+
+          {% if license_name == '' %}
+            {% continue %}
           {% endif %}
 
           {% if license_key != '' %}
@@ -83,14 +96,25 @@
           {% assign reference_title = '' %}
           {% assign fallback_reference = nil %}
 
-          {% if reference.name %}
+          {% if reference.name == nil or reference.name == '' %}
+            {% if reference == '' or reference == nil %}
+              {% continue %}
+            {% endif %}
+            {% assign reference_name = reference | to_s | strip %}
+            {% assign reference_key = reference_name | slugify %}
+          {% else %}
             {% assign reference_name = reference.name | to_s | strip %}
             {% assign reference_url = reference.url | to_s | strip %}
-            {% assign reference_key = reference.key | default: reference.name | slugify %}
+            {% if reference.key %}
+              {% assign reference_key = reference.key | slugify %}
+            {% elsif reference_name != '' %}
+              {% assign reference_key = reference_name | slugify %}
+            {% endif %}
             {% assign reference_title = reference.title | to_s | strip %}
-          {% else %}
-            {% assign reference_name = reference | to_s | strip %}
-            {% assign reference_key = reference | slugify %}
+          {% endif %}
+
+          {% if reference_name == '' %}
+            {% continue %}
           {% endif %}
 
           {% if reference_key != '' %}
@@ -142,10 +166,17 @@
         {% for source in page.sources %}
           {% assign source_name = source.name | to_s | strip %}
           {% assign source_url = source.url | to_s | strip %}
-          {% assign source_key = source.key | default: source.name | slugify %}
+          {% assign source_key = '' %}
           {% assign fallback_source = nil %}
-          {% if source_key != '' %}
-            {% assign fallback_source = site.data.links[source_key] %}
+
+          {% if source_name == '' %}
+            {% continue %}
+          {% endif %}
+
+          {% if source.key %}
+            {% assign source_key = source.key | slugify %}
+          {% else %}
+            {% assign source_key = source_name | slugify %}
           {% endif %}
           {% if source_url == '' and fallback_source and fallback_source.url %}
             {% assign source_url = fallback_source.url | to_s | strip %}
@@ -182,10 +213,17 @@
         {% for tech in page.techs %}
           {% assign tech_name = tech.name | to_s | strip %}
           {% assign tech_url = tech.url | to_s | strip %}
-          {% assign tech_key = tech.key | default: tech.name | slugify %}
+          {% assign tech_key = '' %}
           {% assign fallback_tech = nil %}
-          {% if tech_key != '' %}
-            {% assign fallback_tech = site.data.links[tech_key] %}
+
+          {% if tech_name == '' %}
+            {% continue %}
+          {% endif %}
+
+          {% if tech.key %}
+            {% assign tech_key = tech.key | slugify %}
+          {% else %}
+            {% assign tech_key = tech_name | slugify %}
           {% endif %}
           {% if tech_url == '' and fallback_tech and fallback_tech.url %}
             {% assign tech_url = fallback_tech.url | to_s | strip %}
@@ -213,10 +251,17 @@
         {% for item in page.code %}
           {% assign code_name = item.name | to_s | strip %}
           {% assign code_url = item.url | to_s | strip %}
-          {% assign code_key = item.key | default: item.name | slugify %}
+          {% assign code_key = '' %}
           {% assign fallback_code = nil %}
-          {% if code_key != '' %}
-            {% assign fallback_code = site.data.links[code_key] %}
+
+          {% if code_name == '' %}
+            {% continue %}
+          {% endif %}
+
+          {% if item.key %}
+            {% assign code_key = item.key | slugify %}
+          {% else %}
+            {% assign code_key = code_name | slugify %}
           {% endif %}
           {% if code_url == '' and fallback_code and fallback_code.url %}
             {% assign code_url = fallback_code.url | to_s | strip %}
@@ -248,7 +293,10 @@
     {% assign files_to_display = '' | split: ',' %}
     {% for item in page.images %}
       {% if item.file %}
-        {% assign files_to_display = files_to_display | push: item %}
+        {% assign item_name = item.name | to_s | strip %}
+        {% if item_name != '' %}
+          {% assign files_to_display = files_to_display | push: item %}
+        {% endif %}
       {% endif %}
     {% endfor %}
 
@@ -258,6 +306,11 @@
       {% capture meta_content %}
         {% for file_item in files_to_display %}
           {% assign file_name = file_item.name | default: file_item | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+
+          {% if file_name == '' %}
+            {% continue %}
+          {% endif %}
+
           {% assign file_base = file_name | split: '.' | first %}
           {% assign file_ext = file_name | split: '.' | last %}
           {% assign primary_format_label = file_ext | upcase %}
