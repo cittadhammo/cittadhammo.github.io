@@ -1,20 +1,37 @@
 ---
 title: "{{title}}"
 subtitle:
+published: false
 description:
 author:
 year:
-published: false
 license:
-sources:
+  - name:
+    url:
 techs:
+  - name:
+    url:
 code:
+  - name:
+    url:
+references:
+  - name:
+    title:
+    url:
+sources:
+  - name:
+    author:
+    url:
 images:
   - name:
+    display:
     dark:
     map:
     file:
-    display:
+    pdf:
+    svg:
+    online:
+    title:
     invert_level:
       small:
       medium:

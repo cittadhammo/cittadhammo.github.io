@@ -13,6 +13,8 @@
   - [ ] change footer with real links
   - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
   - [ ] Add nice charts 
+  - [ ] Is there a way to make the link page easier to code?
+  - [ ] more gap in between element in meta block
   - [x] Fix logo for dark mode
   - [x] add hero page ? it flikers when going back to home page headers. 
   - [x] print css, make sure category are not their own page

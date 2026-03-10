@@ -17,9 +17,13 @@ Useful pages:
 
 - [[DhammaCharts.org]] for project/site context
 
-## Tip
+## Plugins
 
-Install https://github.com/fcskit/obsidian-eln-plugin for easy management of nested properties of items. (manual install works well)
+Install [obsidian-eln-plugin](https://github.com/fcskit/obsidian-eln-plugin) for easy management of nested properties of items. (manual install works well) OR use https://github.com/cittadhammo/obsidian-nested-properties/tree/fix/add-item-button-for-list-properties
+
+Add [Data file editor](https://github.com/ZukTol/obsidian-data-files-editor) plugin to edit `.yml` file
+
+Add Excalidraw
 
 ## Publishing and Site Build Notes
 

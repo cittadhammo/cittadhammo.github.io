@@ -27,7 +27,9 @@
     - name:   vinaya
     - name:   perso
 
-- name:   references
+- name:   projects
   categories: 
-    - name:   info
-      title:  Information
+    - name:   code
+    - name:   craft
+    - name:   data
+    - name:   website
