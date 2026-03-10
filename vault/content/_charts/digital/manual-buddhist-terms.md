@@ -1,18 +1,29 @@
 ---
 title: The Manual of Buddhist Terms & Doctrines
+subtitle:
+description: "This project explore the graph created by mapping the links and references of the book: *Buddhist Dictionary: A Manual of Buddhist Terms and Doctrines* By Nyanatiloka Thera. The chart explore the connections of the different entries in the dictionary. The text size is according to the number of entries the entry quotes or get quoted. The structure is revealed via the Hierarchical Edge Bundles for General Graphs Method. This approach extracts the community structure of the network and organizes it into a more balanced and meaningful hierarchy so that its edge bundle rendering better indicates its structure. Via the original notebook, you can create different colors schemes and have access to different options."
 author: Cittadhammo Bhikkhu
-year: 2024 
-license: 
+year: 2024
+published: true
+license:
   - name: CC0
-    url:  https://creativecommons.org/publicdomain/zero/1.0/
-techs: 
+    url: https://creativecommons.org/publicdomain/zero/1.0/
+techs:
   - name: D3.js
-    url:  http://d3js.org
+    url: http://d3js.org
   - name: NetworkX.py
+    url:
   - name: ChatGPT
-images:
-  - name: Manual-A1S.png
-    map: true
+    url:
+code:
+  - name: Original Notebook
+    url: https://observablehq.com/d/2d1af81c02434761
+  - name: Force Directed Variation
+    url:
+references:
+  - name:
+    title:
+    url:
 sources:
   - name: The Manual of Buddhist Terms & Doctrines (PDF)
     author: Nyanatiloka Thera on the Buddhist Library
@@ -26,15 +37,18 @@ sources:
   - name: Hierarchical Edge Bundles for General Graphs
     author: Yuntao Jia, Michael Garland, J. Hart
     url: https://www.semanticscholar.org/paper/Hierarchical-Edge-Bundles-for-General-Graphs-Jia-Garland/31f3ae917eaf2c1562274356cf7759d6a547cb69
-code: 
-  - name: Original Notebook
-    url: https://observablehq.com/d/2d1af81c02434761
-  - name: Force Directed Variation
-    url: 
+images:
+  - name: Manual-A1S.png
+    display:
+    dark:
+    map: true
+    file:
+    pdf:
+    svg:
+    online:
+    title:
+    invert_level:
+      small:
+      medium:
+      large:
 ---
-
-This project  explore the graph created by mapping the links and references of the book: *Buddhist Dictionary: A Manual of Buddhist Terms and Doctrines* By Nyanatiloka Thera
-
-The chart explore the connections of the different entries in the dictionary. The text size is according to the number of entries the entry quotes or get quoted. The structure is revealed via the Hierarchical Edge Bundles for General Graphs Method. This approach extracts the community structure of the network and organizes it into a more balanced and meaningful hierarchy so that its edge bundle rendering better indicates its structure. 
-
-Via the original notebook, you can create different colors schemes and have access to different options. 

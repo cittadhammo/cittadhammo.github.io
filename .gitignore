@@ -29,3 +29,4 @@ vendor/bundle
 vault/.obsidian
 vault/.trash
 vault/scripts/__pycache__
+.obsidian
