@@ -1,7 +1,7 @@
 ---
 title: Dependent Origination Chart
 subtitle:
-description: "This chart provides a one-page overview of Dependent Origination, including transcendental Dependent Origination, the Four Noble Truths, and the Eightfold Path. It also includes short textual descriptions of kamma, a being, and other concepts, with snippets from key sutta references."
+description: This chart provides a one-page overview of Dependent Origination, including transcendental Dependent Origination, the Four Noble Truths, and the Eightfold Path. It also includes short textual descriptions of kamma, a being, and other concepts, with snippets from key sutta references.
 author: Koen vd Biggelaar
 year: 2022
 published: false
@@ -15,6 +15,9 @@ code:
   - name: Dependent Origination Chart
     url: https://observablehq.com/d/ffda953e4df4dd4b
 references:
+  - name: 
+	title:
+	url
 sources:
   - name: www.suttavada.foundation
     author:

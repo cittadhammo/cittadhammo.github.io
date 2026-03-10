@@ -773,6 +773,11 @@ html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dar
   height: auto;
   transform-origin: center;
   transform: rotate(-90deg) scale(0.3);
+  filter: brightness(0) invert(1);
+}
+
+html[data-theme="light"] .home-layout.home-hero-enabled:not(.home-hero-fixed-dark) .home-hero-scroll-cue img {
+  filter: brightness(0);
 }
 
 .home-layout.home-hero-enabled .home-hero-scroll-cue:hover,
