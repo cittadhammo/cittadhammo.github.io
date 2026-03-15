@@ -44,7 +44,7 @@ theme:
     - references
     - sources
     - downloads
-  
+
   item_meta_compact: true # If true, item metadata blocks can flow horizontally and wrap.
   # Per-metadata wide rules for compact meta layout.
   # Supported values:
@@ -60,6 +60,7 @@ theme:
     references: "always"
     sources: "always"
     downloads: "always"
+  item_aside_gap: "1rem" # Gap between images in the aside gallery on item pages.
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""
@@ -91,7 +92,7 @@ darkify:
 collections:
   charts:
     output: true
-    sort_by: order
+    sort_by: year
   3d-printing:
     output: true
     sort_by: order

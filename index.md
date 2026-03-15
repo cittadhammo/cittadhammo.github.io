@@ -57,6 +57,6 @@ title: Home
   {% assign area_title = area_title | strip %}
   <section class="home-area" id="area-{{ area.name | slugify }}">
     {% include header.html subTitle=area_title inverted=true area_name=area.name show_theme_toggle=forloop.first %}
-    {% include itemsList.md area = area.name %}
+    {% include itemsList.html area = area.name %}
   </section>
 {% endfor %}
