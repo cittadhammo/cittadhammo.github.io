@@ -20,8 +20,45 @@
               "icon": "lucide-file",
               "title": "CHECK"
             }
+          },
+          {
+            "id": "a109cc977e3296ff",
+            "type": "leaf",
+            "state": {
+              "type": "yaml",
+              "state": {
+                "file": "vault/data/areas.yml"
+              },
+              "icon": "lucide-file",
+              "title": "areas"
+            }
+          },
+          {
+            "id": "9d17942db6053b30",
+            "type": "leaf",
+            "state": {
+              "type": "yaml",
+              "state": {
+                "file": "_config.yml"
+              },
+              "icon": "lucide-file",
+              "title": "_config"
+            }
+          },
+          {
+            "id": "0f9520c2866d4ce5",
+            "type": "leaf",
+            "state": {
+              "type": "yaml",
+              "state": {
+                "file": "_config.yml"
+              },
+              "icon": "lucide-file",
+              "title": "_config"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -180,21 +217,57 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "code-files:Create Code File": false
     }
   },
-  "active": "c4b3a6bb0e2989e8",
+  "active": "0f9520c2866d4ce5",
   "lastOpenFiles": [
-    "_layouts/item.html~",
-    "index.md~",
-    "_includes/footer.html~",
-    "_includes/head.html~",
-    "_includes/itemsList.md~",
-    "_includes/headerCustom.html~",
-    "_layouts/single-page.html~",
-    "vault/data/size.yml.tmp",
-    "_layouts/page.html~",
-    "_layouts/default.html~",
-    "_layouts/home.html~"
+    "_site/charts/by-others/dependent-origination.html",
+    "_site/charts/by-others",
+    "vault/content/_charts/by-others/dependent-origination.md",
+    "vault/content/_charts/digital/vinaya-pitaka.md",
+    "_site/charts/digital/vinaya-pitaka.html",
+    "_site/charts/digital/sutta-parallels.html",
+    "_site/charts/digital/patimokkha-structure.html",
+    "_site/charts/digital/patimokkha-categories.html",
+    "_site/charts/digital/path-to-nibbana.html",
+    "_site/charts/digital/manual-buddhist-terms.html",
+    "_site/charts/digital/buddha-brain.html",
+    "_site/charts/digital/37-wings-to-awakenings.html",
+    "_site/charts/digital/31-planes-of-existence.html",
+    "vault/content/_charts/digital/sutta-collation.md",
+    "vault/content/_charts/digital/khundaka.md",
+    "vault/content/_charts/digital/parivara.md",
+    "vault/content/_charts/digital/path-to-nibbana.md",
+    "vault/content/_charts/digital/manual-buddhist-terms.md",
+    "vault/content/_charts/digital/dhamma-citadel.md",
+    "vault/content/_charts/digital/37-wings-to-awakenings.md",
+    "vault/content/_charts/digital/31-planes-of-existence.md",
+    "vault/content/_charts/digital/sutta-parallels.md",
+    "vault/content/_charts/digital/patimokkha-structure.md",
+    "vault/content/_charts/digital/patimokkha-categories.md",
+    "vault/content/_charts/digital/buddha-brain.md",
+    "vault/templates/Template Item.md",
+    "vault/content/_charts/dhamma-citadel-info.md",
+    "vault/README.md",
+    "CHECK.md",
+    "vault/content/_projects/code/mdbook-typst.md",
+    "vault/content/_projects/code/Untitled.md",
+    "README.md",
+    "vault/content/_projects/Websites/DhammaCharts.org.md",
+    "_site/projects/craft/stupa-slip-casting.md",
+    "assets/images/DhammaCitadel-A0VBM/large.webp",
+    "assets/images/DhammaCitadel-A0VBM/medium.webp",
+    "assets/images/DhammaCitadel-A0VBM/small.webp",
+    "assets/images/DhammaCitadel-A0VBM/DhammaCitadel-A0VBM.png",
+    "assets/images/DhammaCitadel-A0VM/large.webp",
+    "assets/images/DhammaCitadel-A0VM/medium.webp",
+    "assets/images/DhammaCitadel-A0VM/small.webp",
+    "assets/images/DhammaCitadel-A0VM/DhammaCitadel-A0VM.svg",
+    "assets/images/DhammaCitadel-A0VM/DhammaCitadel-A0VM.png",
+    "assets/images/DhammaCitadel-A0SM/large.webp",
+    "maps/DhammaCitadel-A0S.md",
+    "vault/content/_charts/links.md"
   ]
 }
