@@ -41,17 +41,19 @@ images:
     dark: true
     map: false
     file: true
-    title: A0 Square
+    title: A0 Square (White Margin)
+    pdf: true
   - name: DhammaCitadel-A0VM.png
-    display: true
+    display: false
     dark: true
     file: true
     pdf: true
-    svg: true
+    svg: false
     title: A0 Vertical
   - name: DhammaCitadel-A0VBM.png
-    display: true
+    display: false
     dark: true
     file: true
     title: A0 Vertical (Black Background)
+    pdf: true
 ---

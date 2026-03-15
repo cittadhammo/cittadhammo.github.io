@@ -4,7 +4,7 @@ subtitle:
 description: This chart is a radial visualization of the path to Nibbana, the ultimate goal in Buddhism. It illustrates the different stages of the path, including the four foundations of mindfulness, the four form absorptions (jhanas), and the four formless absorptions. The chart provides a comprehensive overview of the meditative practices that lead to the cessation of suffering and the attainment of enlightenment.
 author: Cittadhammo
 year: "2025"
-published: true
+published: false
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/
@@ -25,7 +25,7 @@ sources:
     author:
     url:
 images:
-  - name:
+  - name: test.png
     display:
     dark:
     map:

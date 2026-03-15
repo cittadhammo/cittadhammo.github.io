@@ -15,9 +15,7 @@ code:
   - name: Dependent Origination Chart
     url: https://observablehq.com/d/ffda953e4df4dd4b
 references:
-  - name: 
-	title:
-	url
+  - name: test
 sources:
   - name: www.suttavada.foundation
     author:

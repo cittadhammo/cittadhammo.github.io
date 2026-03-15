@@ -4,7 +4,7 @@ subtitle:
 description: This chart is a radial tree visualization of the Buddha's teachings, also known as the Dhamma. It is a detailed and interactive mind map that shows the relationships between different concepts in Buddhism, starting from the Four Noble Truths and branching out to various topics such as the Eightfold Path, the five aggregates, and the planes of existence. The data for the chart is sourced from a Google Spreadsheet and visualized using D3.js on the Observable platform.
 author: Cittadhammo
 year: 2025
-published: true
+published: false
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/
