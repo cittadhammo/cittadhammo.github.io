@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 SRC_IMAGE_DIR="./vault/assets/images"
 DEST_IMAGE_DIR="./assets/images"
@@ -121,13 +120,62 @@ darkify_tile_set() {
     cp -a "$light_tiles_dir"/. "$dark_tiles_dir"/
 
     while IFS= read -r tile_file; do
-        local temp_file="${tile_file}.tmp.webp"
+        local ext="${tile_file##*.}"
+        local base="${tile_file%.*}"
+        local temp_file="${base}.tmp.${ext}"
         darkify_image "$tile_file" "$temp_file" "$method"
         mv "$temp_file" "$tile_file"
         tile_count=$((tile_count + 1))
-    done < <(find "$dark_tiles_dir" -type f -name "*.webp" | sort)
+    done < <(find "$dark_tiles_dir" -type f \( -name "*.webp" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \) | sort)
 
     echo "Generated $tile_count dark tiles in $dark_tiles_dir"
+}
+
+TILE_GENERATION_LOG=""
+
+generate_tiles() {
+    local src="$1"
+    local dest="$2"
+    local bg="$3"
+    local label="$4"
+    local result=""
+    local suffix_used=""
+
+    rm -rf "$dest"
+    mkdir -p "$dest"
+
+    if vips dzsave "$src" "$dest" \
+        --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
+        --tile-size 256 --background "$bg" 2>/dev/null; then
+        result="webp-near_lossless"
+        suffix_used=".webp"
+        echo "Tiles: $label (webp near_lossless)"
+    elif vips dzsave "$src" "$dest" \
+        --layout google --centre --suffix .webp[Q=95] \
+        --tile-size 256 --background "$bg" 2>/dev/null; then
+        result="webp-Q95"
+        suffix_used=".webp"
+        echo "Tiles: $label (webp Q=95)"
+    elif vips dzsave "$src" "$dest" \
+        --layout google --centre \
+        --tile-size 256 --background "$bg" 2>/dev/null; then
+        result="jpeg-default"
+        suffix_used=".jpg"
+        echo "Tiles: $label (JPEG default)"
+    elif vips dzsave "$src" "$dest" \
+        --layout google --centre --suffix .png \
+        --tile-size 256 --background "$bg" 2>/dev/null; then
+        result="png"
+        suffix_used=".png"
+        echo "Tiles: $label (PNG)"
+    else
+        rm -rf "$dest"
+        result="FAILED"
+        suffix_used=""
+        echo "Tiles: $label FAILED (all strategies exhausted)"
+    fi
+
+    echo "$result:$suffix_used"
 }
 
 to_vips_background() {
@@ -165,7 +213,6 @@ to_vips_background() {
         return
     fi
 
-    # Fallback keeps old behavior if background is missing/unknown.
     echo "255 255 255"
 }
 
@@ -553,11 +600,12 @@ EOF
             if [ "$LIGHT_TILES_UP_TO_DATE" = "true" ]; then
                 echo "Skipping $IMG_NAME light tiles (unchanged)."
             else
-                rm -rf "$TILE_PATH"
-                mkdir -p "$TILE_PATH"
-                vips dzsave "$SRC_IMG_PATH" "$TILE_PATH" \
-                    --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                    --tile-size 256 --background "$TILE_LIGHT_BG" --vips-progress
+                LIGHT_TILE_RESULT=$(generate_tiles "$SRC_IMG_PATH" "$TILE_PATH" "$TILE_LIGHT_BG" "light")
+                LIGHT_TILE_STATUS="${LIGHT_TILE_RESULT%%:*}"
+                if [ "$LIGHT_TILE_STATUS" = "FAILED" ]; then
+                    HAS_DARK_TILES="false"
+                fi
+                TILE_GENERATION_LOG="${TILE_GENERATION_LOG}light:${IMG_NAME}:${LIGHT_TILE_RESULT}\n"
             fi
         fi
 
@@ -582,15 +630,23 @@ EOF
                 if [ "$DARK_TILES_UP_TO_DATE" = "true" ]; then
                     echo "Skipping $IMG_NAME dark tiles (unchanged)."
                 else
-                    rm -rf "$TILE_DARK_PATH"
                     if [ "$IMG_DARK" = "true" ]; then
-                        mkdir -p "$TILE_DARK_PATH"
-                        vips dzsave "$SRC_IMG_PATH" "$TILE_DARK_PATH" \
-                            --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
-                            --tile-size 256 --background "$TILE_DARK_BG" --vips-progress
+                        DARK_TILE_RESULT=$(generate_tiles "$SRC_IMG_PATH" "$TILE_DARK_PATH" "$TILE_DARK_BG" "dark")
+                        DARK_TILE_STATUS="${DARK_TILE_RESULT%%:*}"
+                        if [ "$DARK_TILE_STATUS" = "FAILED" ]; then
+                            HAS_DARK_TILES="false"
+                        fi
+                        TILE_GENERATION_LOG="${TILE_GENERATION_LOG}dark:${IMG_NAME}:${DARK_TILE_RESULT}\n"
                     else
                         ensure_magick
-                        darkify_tile_set "$TILE_PATH" "$TILE_DARK_PATH" "$DARKIFY_METHOD"
+                        if ! darkify_tile_set "$TILE_PATH" "$TILE_DARK_PATH" "$DARKIFY_METHOD" 2>&1; then
+                            echo "Warning: darkify_tile_set failed for $IMG_NAME"
+                            rm -rf "$TILE_DARK_PATH"
+                            HAS_DARK_TILES="false"
+                            TILE_GENERATION_LOG="${TILE_GENERATION_LOG}dark:${IMG_NAME}:darkify_FAILED\n"
+                        else
+                            TILE_GENERATION_LOG="${TILE_GENERATION_LOG}dark:${IMG_NAME}:darkify_success\n"
+                        fi
                     fi
                 fi
             fi
@@ -621,8 +677,17 @@ EOF
 # Loop through all markdown files
 find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     YAML=$(awk '/^---/{flag=!flag; next} flag' "$MD_FILE")
+    PUBLISHED=$(echo "$YAML" | yq -r '.published // false')
+    if [ "$PUBLISHED" != "true" ]; then
+        continue
+    fi
     PAGE_TITLE=$(echo "$YAML" | yq -r '.title // "Untitled Map"')
-    IMG_COUNT=$(echo "$YAML" | yq -r '.images | length // 0')
+    IS_SEQ=$(echo "$YAML" | yq '(.images | type) == "!!seq"')
+    if [ "$IS_SEQ" != "true" ]; then
+        IMG_COUNT=0
+    else
+        IMG_COUNT=$(echo "$YAML" | yq '.images | length')
+    fi
     declare -A PROCESSED_IMAGES=()
 
     for ((i=0; i<IMG_COUNT; i++)); do
@@ -690,3 +755,9 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
 done
 
 echo "Aspect ratio data has been updated in $SIZE_DATA_FILE"
+
+if [ -n "$TILE_GENERATION_LOG" ]; then
+    echo ""
+    echo "=== Tile Generation Summary ==="
+    echo -e "$TILE_GENERATION_LOG" | column -t -s':'
+fi
