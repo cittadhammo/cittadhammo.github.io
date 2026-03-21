@@ -133,6 +133,32 @@ darkify_tile_set() {
 
 TILE_GENERATION_LOG=""
 
+flatten_if_alpha() {
+    local src="$1"
+    local bg="$2"
+    local tmp_file="$3"
+    local bands=""
+
+    bands=$(vipsheader -f bands "$src" 2>/dev/null)
+
+    if [ "$bands" = "4" ]; then
+        local r g b
+        r=$(echo "$bg" | awk '{print $1}')
+        g=$(echo "$bg" | awk '{print $2}')
+        b=$(echo "$bg" | awk '{print $3}')
+        if vips flatten "$src" "$tmp_file" --background "$r,$g,$b" 2>/dev/null; then
+            echo "$tmp_file"
+            return 0
+        else
+            echo "$src"
+            return 1
+        fi
+    else
+        echo "$src"
+        return 0
+    fi
+}
+
 generate_tiles() {
     local src="$1"
     local dest="$2"
@@ -140,29 +166,36 @@ generate_tiles() {
     local label="$4"
     local result=""
     local suffix_used=""
+    local work_src="$src"
 
     rm -rf "$dest"
     mkdir -p "$dest"
 
-    if vips dzsave "$src" "$dest" \
+    local tmp_flat=""
+    if [ -n "$bg" ]; then
+        tmp_flat=$(mktemp "$dest.XXXXXX.tif")
+        work_src=$(flatten_if_alpha "$src" "$bg" "$tmp_flat")
+    fi
+
+    if vips dzsave "$work_src" "$dest" \
         --layout google --centre --suffix .webp[Q=95,near_lossless=true] \
         --tile-size 256 --background "$bg" 2>/dev/null; then
         result="webp-near_lossless"
         suffix_used=".webp"
         echo "Tiles: $label (webp near_lossless)"
-    elif vips dzsave "$src" "$dest" \
+    elif vips dzsave "$work_src" "$dest" \
         --layout google --centre --suffix .webp[Q=95] \
         --tile-size 256 --background "$bg" 2>/dev/null; then
         result="webp-Q95"
         suffix_used=".webp"
         echo "Tiles: $label (webp Q=95)"
-    elif vips dzsave "$src" "$dest" \
+    elif vips dzsave "$work_src" "$dest" \
         --layout google --centre \
         --tile-size 256 --background "$bg" 2>/dev/null; then
         result="jpeg-default"
         suffix_used=".jpg"
         echo "Tiles: $label (JPEG default)"
-    elif vips dzsave "$src" "$dest" \
+    elif vips dzsave "$work_src" "$dest" \
         --layout google --centre --suffix .png \
         --tile-size 256 --background "$bg" 2>/dev/null; then
         result="png"
@@ -174,6 +207,8 @@ generate_tiles() {
         suffix_used=""
         echo "Tiles: $label FAILED (all strategies exhausted)"
     fi
+
+    [ -f "$tmp_flat" ] && rm -f "$tmp_flat"
 
     echo "$result:$suffix_used"
 }
