@@ -4,7 +4,7 @@ subtitle:
 description: This chart visualizes the parallels within the Sutta Pitaka, the collection of the Buddha's discourses. It is based on the work of Cittadhammo.
 author: Cittadhammo Bhikkhu
 year: 2024
-published: true
+published: false
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/
@@ -23,7 +23,7 @@ sources:
     author:
     url: https://suttacentral.net
 images:
-  - name:
+  - name: test.png
     display:
     dark:
     map:

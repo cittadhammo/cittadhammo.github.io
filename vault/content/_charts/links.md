@@ -6,6 +6,7 @@ scroll_reveal: true
 ---
 
 <!-- <h1 class="projects rouge">Links</h1> -->
+<!-- 
 <div class="flex-container">
   <div class="flex-left">
 
@@ -27,6 +28,7 @@ scroll_reveal: true
 
   </div>
 </div>
+-->
 
 <div class="flex-container">
   <div class="flex-left">

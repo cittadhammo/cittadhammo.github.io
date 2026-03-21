@@ -164,6 +164,16 @@
       }
     }
 
+    function hasThemeParam(rawUrl) {
+      if (!rawUrl) return false;
+      try {
+        var parsed = new URL(rawUrl, window.location.origin);
+        return parsed.searchParams.has("theme");
+      } catch (e) {
+        return rawUrl.indexOf("theme=") !== -1;
+      }
+    }
+
     function withThemeQuery(rawUrl, theme) {
       try {
         var parsed = new URL(rawUrl, window.location.origin);
@@ -181,6 +191,7 @@
       links.forEach(function (link) {
         var href = link.getAttribute("href");
         if (!isInternalMapUrl(href)) return;
+        if (hasThemeParam(href)) return;
         link.setAttribute("href", withThemeQuery(href, theme));
       });
 

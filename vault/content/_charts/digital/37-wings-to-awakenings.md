@@ -4,7 +4,7 @@ subtitle:
 description: The 37 Wings to Awakening (Bodhipakkhiyādhammā) are a set of 37 qualities that are conducive to enlightenment. This interactive visualization by Cittadhammo helps to explore these 37 factors, which are grouped into seven sets.
 author: Cittadhammo
 year: 2025
-published: true
+published: false
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/

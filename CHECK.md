@@ -1,6 +1,6 @@
 # To do list for Dhammacharts
 
-  - [ ] Add gap between images in asides?
+  - [x] Add gap between images in asides?
   - [ ] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, etc.)
   - [ ] Che projects

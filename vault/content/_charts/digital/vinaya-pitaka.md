@@ -4,7 +4,7 @@ subtitle:
 description: The five books of the Vinaya Pitaka and its structure
 author:
 year:
-published: true
+published: false
 license:
   - name:
     url:
@@ -23,7 +23,7 @@ sources:
     author:
     url:
 images:
-  - name:
+  - name: test.png
     display:
     dark:
     map:

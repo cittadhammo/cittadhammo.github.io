@@ -4,7 +4,7 @@ subtitle:
 description: The Bhikkhu Pāṭimokkha is the basic code of monastic discipline for Buddhist monks, found in the Suttavibhaṅga of the Vinaya Piṭaka. This interactive dendrogram visualization by Cittadhammo shows the structure of the 227 rules for bhikkhus.
 author: Cittadhammo
 year: 2025
-published: true
+published: false
 license:
   - name: CC BY-NC 4.0
     url: https://creativecommons.org/licenses/by-nc/4.0/

@@ -1,4 +1,4 @@
-.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
+.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy vectors-add darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
@@ -29,6 +29,10 @@ images-uncompressed-lossless:
 
 images-compressed-lossy:
 	cd vault && python3 ./scripts/generate_pdf_png.py --compression lossy
+
+# Add new SVGs to vectors.yml with default format A1V
+vectors-add:
+	cd vault && python3 ./scripts/update_vectors.py
 
 # Compare all darkify methods on images in scripts/darkify-test/input
 darkify-test:
@@ -100,6 +104,7 @@ help:
 	@echo "  make images-uncompressed       Generate PDF/PNG assets (default script mode)"
 	@echo "  make images-uncompressed-lossless  Generate PDF/PNG assets (lossless)"
 	@echo "  make images-compressed-lossy   Generate PDF/PNG assets (lossy)"
+	@echo "  make vectors-add               Add new SVGs to vectors.yml with default format A1V"
 	@echo "  make build                     Build Jekyll site with _config.yml + _config_local.yml"
 	@echo "  make serve                     Serve site locally with livereload"
 	@echo "  make link-site-assets          Symlink assets/images into _site/assets/images"

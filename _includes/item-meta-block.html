@@ -311,6 +311,10 @@
             {% continue %}
           {% endif %}
 
+          {% assign online_href = '' %}
+          {% assign online_dark_href = '' %}
+          {% assign online_light_href = '' %}
+
           {% assign file_base = file_name | split: '.' | first %}
           {% assign file_ext = file_name | split: '.' | last %}
           {% assign primary_format_label = file_ext | upcase %}
@@ -345,7 +349,6 @@
             {% assign svg_href = '/assets/images/' | append: file_base | append: '/' | append: svg_name | relative_url %}
           {% endif %}
 
-          {% assign online_href = '' %}
           {% if file_item.online == true %}
             {% assign online_href = '/maps/' | append: file_base | append: '.html' | relative_url %}
           {% elsif file_item.online %}
@@ -358,12 +361,18 @@
               {% endif %}
             {% endif %}
           {% endif %}
-          {% assign online_dark_href = '' %}
           {% if online_href != '' and has_dark_variant %}
             {% if online_href contains '?' %}
               {% assign online_dark_href = online_href | append: '&theme=dark' %}
             {% else %}
               {% assign online_dark_href = online_href | append: '?theme=dark' %}
+            {% endif %}
+          {% endif %}
+          {% if online_href != '' %}
+            {% if online_href contains '?' %}
+              {% assign online_light_href = online_href | append: '&theme=light' %}
+            {% else %}
+              {% assign online_light_href = online_href | append: '?theme=light' %}
             {% endif %}
           {% endif %}
           <p class="rouge-first">
@@ -376,8 +385,8 @@
               {% if svg_href != '' %}
                 | <a class="black-under" href="{{ svg_href }}" download="{{ svg_name | split: '.' | first }}" target="_blank" rel="nofollow">SVG</a>
               {% endif %}
-              {% if online_href != '' %}
-                | <a class="black-under" href="{{ online_href }}" rel="nofollow">ONLINE</a>{% if online_dark_href != '' %} (<a class="black-under" href="{{ online_dark_href }}" rel="nofollow">DARK</a>){% endif %}
+              {% if online_light_href != '' %}
+                | <a class="black-under" href="{{ online_light_href }}" rel="nofollow">ONLINE</a>{% if online_dark_href != '' %} (<a class="black-under" href="{{ online_dark_href }}" rel="nofollow">DARK</a>){% endif %}
               {% endif %}
             </span>
           </p>

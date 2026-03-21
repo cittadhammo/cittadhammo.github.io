@@ -1,0 +1,55 @@
+vectors:
+- name: dhamma-citadel
+  formats:
+  - A0S
+  - A0SM
+  - A0SBM
+  - A0VM
+  - A0VBM
+- name: dhamma-citadel-it
+  formats:
+  - A0S
+  - A0SM
+  - A0SBM
+  - A0VM
+  - A0VBM
+- name: dhamma-citadel-bw
+  formats:
+  - A0S
+- name: buddha-brain
+  formats:
+  - A1SM
+  - A1VM
+- name: patimokkha-cat
+  formats:
+  - A1SM
+  - A1VM
+- name: 31-planes
+  formats:
+  - A1S
+  - A1V
+- name: 37-wings
+  formats:
+  - A2S
+- name: manual
+  formats:
+  - A1S
+  - A1V
+- name: parallels
+  formats:
+  - A0S
+  - A0V
+- name: patimokkha
+  formats:
+  - A1S
+  - A1V
+- name: patimokkha-no-resume
+  formats:
+  - A2SM
+- name: sutta-pitaka
+  formats:
+  - A0H
+  - A0VM
+- name: dhamma-citadel-it-bw
+  formats:
+  - A1V

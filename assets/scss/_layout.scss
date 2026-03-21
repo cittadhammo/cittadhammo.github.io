@@ -240,6 +240,10 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 				margin: 3rem 0 0;
 				max-width: 100%;
 			}
+
+			&:not(.project-meta-compact) .meta-block {
+				margin-bottom: 1.3rem;
+			}
 		}
 
 		.project-meta.project-meta-compact {
@@ -267,7 +271,7 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 		}
 
 		.h2 {
-	    margin: 1.2rem 0 0.3rem;
+	    margin: 1.2rem 0 0.5rem;
 			&:first-of-type {
 				margin-top: 0;
 		}

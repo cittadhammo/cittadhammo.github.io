@@ -1,0 +1,10 @@
+vectors:
+- name: dhamma-citadel
+  formats:
+  - A0S
+- name: dhamma-citadel-it
+  formats:
+  - A0S
+- name: dhamma-citadel-bw
+  formats:
+  - A0S

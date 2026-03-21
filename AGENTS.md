@@ -34,7 +34,23 @@
 - `make serve` runs Jekyll with livereload and symlinks `assets/images` into `_site`.
 - `make build` builds with `_config.yml` + `_config_local.yml`.
 - `make clean` removes generated images and map pages.
-- `make images` runs a Python script in `vault/scripts` to generate PDF/PNG assets.
+
+## PDF/PNG Generation (vectors)
+- Source SVGs live in `vault/assets/svgs/<name>.svg` (without format codes).
+- Configuration in `vault/data/vectors.yml` defines which SVGs to generate:
+  ```yaml
+  vectors:
+    - name: DhammaCitadel
+      formats:
+        - A0S
+        - A0SM
+        - A0SBM
+  ```
+- Format codes: A0S, A0V, A0H, A1S, A1V, A1H, A2S, A2V, A2H, 2A0S, 2A0V, 2A0H
+  - Add `B` for black background (e.g., A0SB)
+  - Add `M` for margin (e.g., A0SM, A0SBM)
+- Generated outputs go to `vault/assets/{pdfs,images,wrappers}/<name>-<label>.*`
+- Run `make images` from project root to generate.
 
 ## Dependencies
 - Ruby + Bundler for Jekyll (`bundle install`, then `bundle exec jekyll serve`).

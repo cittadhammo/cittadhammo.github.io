@@ -1,0 +1,35 @@
+# Stucture of the website divided into different areas.
+#
+# Notes: The category tag should be included in the items of the areas.
+# The categories should be included below to show up in the website.
+# If no category is specified, the items will be treated as pages on the top of the area home page.
+
+- name:   charts
+  categories:
+    - name:   digital
+    - name:   by-others 
+    - name:   hand-made
+  pages:
+    - name:   prints
+    - name:   links
+
+- name:   3d-printing
+  title:  3D Printing
+  categories:
+    - name:   stupas
+    - name:   monk
+    - name:   other
+  
+- name:   writtings
+  categories: 
+    - name:   chanting
+    - name:   dhamma
+    - name:   vinaya
+    - name:   perso
+
+- name:   projects
+  categories: 
+    - name:   code
+    - name:   craft
+    - name:   data
+    - name:   website

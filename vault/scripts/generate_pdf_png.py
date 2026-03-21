@@ -6,19 +6,17 @@ from pathlib import Path
 import fitz  # PyMuPDF
 import xml.etree.ElementTree as ET
 import re
+import yaml
 
 parser = argparse.ArgumentParser(description="Generate PDF and PNG from SVG files")
 parser.add_argument("-c", "--compression", choices=["none", "lossless", "lossy"], default="none", help="PNG compression mode")
 args = parser.parse_args()
 
-# === OPTIONS ===
 DPI = 300
 MM_PER_INCH = 25.4
 
-# Compression: "none", "lossless" (pngquant quality=100), "lossy" (pngquant quality=70-90)
 COMPRESSION = args.compression
 
-# === Constants for A formats in mm ===
 A_SIZES = {
     '2A0V': (1189, 1682),
     '2A0H': (1682, 1189),
@@ -34,12 +32,12 @@ A_SIZES = {
     'A2S': (420, 420),
 }
 
-# === Paths ===
 base_dir = Path("assets")
 svg_dir = base_dir / "svgs"
 pdf_dir = base_dir / "pdfs"
 png_dir = base_dir / "images"
 wrapper_dir = base_dir / "wrappers"
+config_file = Path("data/vectors.yml")
 
 for folder in [pdf_dir, png_dir, wrapper_dir]:
     folder.mkdir(parents=True, exist_ok=True)
@@ -77,7 +75,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 """
 
 def svg_units_to_mm(units):
-    return units * 0.2646  # 1 px ≈ 0.2646 mm at 96 DPI
+    return units * 0.2646
 
 def mm_to_px(mm, dpi=DPI):
     return int((mm / MM_PER_INCH) * dpi)
@@ -103,17 +101,14 @@ def get_svg_size(svg_path):
 
     return w, h
 
-def has_black_background(filename):
-    """Check if filename ends with format code containing 'B' (e.g., myChart-A0VB or myChart-it-A0BM)"""
-    return re.search(r"-(2A0|A[0-2])[VHS]B(M)?$", filename) is not None
+def has_black_background(label):
+    return 'B' in label
 
-def has_margin(filename):
-    """Check if filename ends with format code containing 'M' (e.g., myChart-A0VM or myChart-it-A0BM)"""
-    return re.search(r"-(2A0|A[0-2])[VHS](B)?M$", filename) is not None
+def has_margin(label):
+    return 'M' in label
 
-def parse_a_format_from_filename(filename):
-    """Extract the format code from the end of the filename (e.g., A0V from myChart-A0VM)"""
-    match = re.search(r"-((2A0|A[0-2])[VHS])B?M?$", filename)
+def parse_format_from_label(label):
+    match = re.match(r"((2A0|A[0-2])[VHS])", label)
     return match.group(1) if match else "A1V"
 
 def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
@@ -163,7 +158,6 @@ def convert_pdf_to_png(pdf_file, png_output_path, page_w_mm, page_h_mm):
     doc.close()
 
 def compress_png(png_path):
-    """Compress PNG file using pngquant"""
     if COMPRESSION == "none":
         return
     
@@ -184,12 +178,27 @@ def compress_png(png_path):
     except FileNotFoundError:
         print(f"Warning: pngquant not found. Skipping compression.")
 
-# === Main loop ===
-for svg_path in svg_dir.glob("*.svg"):
-    base_name = svg_path.stem
-    prefix = parse_a_format_from_filename(base_name)
-    black_bg = has_black_background(base_name)
-    add_margin = has_margin(base_name)
+def load_vectors_config():
+    config_path = config_file
+    if not config_path.exists():
+        print(f"Error: vectors config not found at {config_path.resolve()}")
+        sys.exit(1)
+    
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
+    
+    return config.get('vectors', [])
+
+def process_vector(name, label):
+    source_svg = svg_dir / f"{name}.svg"
+    if not source_svg.exists():
+        print(f"Warning: source SVG not found: {source_svg}")
+        return
+    
+    base_name = f"{name}-{label}"
+    prefix = parse_format_from_label(label)
+    black_bg = has_black_background(label)
+    add_margin = has_margin(label)
 
     pdf_path = pdf_dir / f"{base_name}.pdf"
     png_path = png_dir / f"{base_name}.png"
@@ -197,17 +206,17 @@ for svg_path in svg_dir.glob("*.svg"):
 
     if pdf_path.exists() and png_path.exists():
         print(f"Skipping existing outputs: {base_name}")
-        continue
+        return
 
     if pdf_path.exists() and not png_path.exists():
         print(f"PNG missing for {base_name}, regenerating all outputs...")
     elif not pdf_path.exists() and png_path.exists():
         print(f"PDF missing for {base_name}, regenerating all outputs...")
     else:
-        print(f"Processing: {svg_path.name}")
+        print(f"Processing: {base_name}")
 
     try:
-        w_units, h_units = get_svg_size(svg_path)
+        w_units, h_units = get_svg_size(source_svg)
         w_mm = svg_units_to_mm(w_units)
         h_mm = svg_units_to_mm(h_units)
 
@@ -242,7 +251,7 @@ for svg_path in svg_dir.glob("*.svg"):
 
         background_color = "black" if black_bg else "white"
 
-        create_wrapper(svg_path, wrapper_path,
+        create_wrapper(source_svg, wrapper_path,
                        page_w_mm, page_h_mm,
                        svg_w_mm, svg_h_mm,
                        margin_left, margin_right, margin_top, margin_bottom,
@@ -257,4 +266,17 @@ for svg_path in svg_dir.glob("*.svg"):
         compress_png(png_path)
 
     except Exception as e:
-        print(f"Error processing {svg_path.name}: {e}")
+        print(f"Error processing {base_name}: {e}")
+
+def main():
+    vectors = load_vectors_config()
+    
+    for entry in vectors:
+        name = entry.get('name')
+        formats = entry.get('formats', [])
+        
+        for label in formats:
+            process_vector(name, label)
+
+if __name__ == "__main__":
+    main()
