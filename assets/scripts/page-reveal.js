@@ -11,7 +11,7 @@
     });
 
     sr.reveal(
-      "#page-content .link-item, #page-content .inDiv, #page-content .flex-container > div, #page-content img",
+      "#page-content .link-item, #page-content .inDiv, #page-content img",
       { interval: 80 }
     );
   });
