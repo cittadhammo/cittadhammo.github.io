@@ -86,7 +86,10 @@
 
   {% when 'references' %}
     {% if page.references %}
-      {% assign meta_label = 'References' %}
+      {% assign meta_label = 'Reference' %}
+      {% if page.references.size > 1 %}
+        {% assign meta_label = 'References' %}
+      {% endif %}
       {% assign meta_count = page.references.size %}
       {% capture meta_content %}
         {% for reference in page.references %}
@@ -160,7 +163,10 @@
 
   {% when 'sources' %}
     {% if page.sources %}
-      {% assign meta_label = 'Sources' %}
+      {% assign meta_label = 'Source' %}
+      {% if page.sources.size > 1 %}
+        {% assign meta_label = 'Sources' %}
+      {% endif %}
       {% assign meta_count = page.sources.size %}
       {% capture meta_content %}
         {% for source in page.sources %}
@@ -207,7 +213,10 @@
 
   {% when 'techs' %}
     {% if page.techs %}
-      {% assign meta_label = 'Technologies' %}
+      {% assign meta_label = 'Technology' %}
+      {% if page.techs.size > 1 %}
+        {% assign meta_label = 'Technologies' %}
+      {% endif %}
       {% assign meta_count = page.techs.size %}
       {% capture meta_content %}
         {% for tech in page.techs %}
@@ -246,6 +255,9 @@
   {% when 'code' %}
     {% if page.code %}
       {% assign meta_label = 'Code' %}
+      {% if page.code.size > 1 %}
+        {% assign meta_label = 'Codes' %}
+      {% endif %}
       {% assign meta_count = page.code.size %}
       {% capture meta_content %}
         {% for item in page.code %}
@@ -301,7 +313,10 @@
     {% endfor %}
 
     {% if files_to_display.size > 0 %}
-      {% assign meta_label = 'Download Files' %}
+      {% assign meta_label = 'File' %}
+      {% if files_to_display.size > 1 %}
+        {% assign meta_label = 'Files' %}
+      {% endif %}
       {% assign meta_count = files_to_display.size %}
       {% capture meta_content %}
         {% for file_item in files_to_display %}
@@ -310,6 +325,14 @@
           {% if file_name == '' %}
             {% continue %}
           {% endif %}
+
+          {% assign file_image_index = -1 %}
+          {% for img_item in page.images %}
+            {% assign img_item_name = img_item.name | to_s | strip %}
+            {% if img_item_name == file_name and file_image_index < 0 %}
+              {% assign file_image_index = forloop.index0 %}
+            {% endif %}
+          {% endfor %}
 
           {% assign online_href = '' %}
           {% assign online_dark_href = '' %}
@@ -361,7 +384,7 @@
               {% endif %}
             {% endif %}
           {% endif %}
-          {% if online_href != '' and has_dark_variant %}
+          {% if online_href != '' %}
             {% if online_href contains '?' %}
               {% assign online_dark_href = online_href | append: '&theme=dark' %}
             {% else %}
@@ -376,7 +399,7 @@
             {% endif %}
           {% endif %}
           <p class="rouge-first">
-            <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ file_label }}</a>
+            <a class="black-under download-lightbox-link" href="{{ png_href }}" data-lightbox-index="{{ file_image_index }}" target="_blank" rel="nofollow">{{ file_label }}</a>
             <span class="download-format-links">
               <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ primary_format_label }}</a>{% if has_dark_variant %} (<a class="black-under" href="{{ png_dark_href }}" download="{{ file_base | append: '-' | append: dark_suffix }}" target="_blank" rel="nofollow">DARK</a>){% endif %}
               {% if pdf_href != '' %}

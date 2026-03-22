@@ -2,7 +2,7 @@
 <ul class="lightbox-gallery"{% if gap != '0px' %} style="display: flex; flex-wrap: wrap; gap: {{ gap }};"{% endif %}>
   {% for image in page.images %}
     {% assign image_name = image.name | default: image | to_s | strip %}
-    {% if image_name == '' or image.display == false %}
+    {% if image_name == '' %}
       {% continue %}
     {% endif %}
     {% assign image_name = image_name | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
@@ -11,6 +11,19 @@
     {% assign has_dark_variant = true %}
     {% if image.dark == true %}
       {% assign has_dark_variant = false %}
+    {% endif %}
+    {% if image.display == false %}
+      <li class="lightbox-only-item" style="display: none;">
+        <a class="mfp-image"
+          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+          {% if has_dark_variant %}data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"{% endif %}
+          data-gallery-index="{{ forloop.index0 }}"
+          {% if image.map %}data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"{% endif %}
+          {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+        ></a>
+      </li>
+      {% continue %}
     {% endif %}
     <li>
       {% if image.map %}
@@ -23,6 +36,7 @@
               data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
             {% endif %}
             data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
+            data-gallery-index="{{ forloop.index0 }}"
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
@@ -49,6 +63,7 @@
             {% if has_dark_variant %}
               data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
             {% endif %}
+            data-gallery-index="{{ forloop.index0 }}"
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
