@@ -66,25 +66,15 @@
 }
 
 .projects-list {
-  column-count: 3;       /* Number of columns at large screen */
-  column-gap: 1.5rem;    /* Space between columns */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   list-style: none;
   padding: 0;
   margin: 0;
 
   li {
-    break-inside: avoid;  /* Prevent item from being split across columns */
-    margin-bottom: 1.5rem;
-    display: inline-block; /* Ensures correct rendering in columns */
-    width: 100%;           /* Full width inside the column */
-  }
-
-  @media (max-width: 900px) {
-    column-count: 2;
-  }
-
-  @media (max-width: 600px) {
-    column-count: 1;
+    margin-bottom: 0;
   }
 
   a {
@@ -132,43 +122,41 @@
     transition: filter .35s ease-in-out;
   }
 
-	span {
-	    display: block;
-	}
-}
-
-/* Progressive enhancement:
-   - Fallback: current multi-column layout above (widely supported).
-   - Enhancement: grid-lanes where available. */
-@supports (display: grid-lanes) {
-  .projects-list {
-    display: grid-lanes;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    /* Keep gutters across engines/flag builds with partial gap support. */
-    gap: 1.5rem;
-    row-gap: 1.5rem;
-    column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-    grid-column-gap: 1.5rem;
-    column-count: initial;
-  }
-
-  .projects-list li {
-    break-inside: initial;
+  span {
     display: block;
-    margin-bottom: 0;
-    width: auto;
   }
 
   @media (max-width: 900px) {
-    .projects-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projects-list.masonry {
+  display: block;
+
+  li {
+    display: inline-block;
+    width: calc(33.333% - 1rem);
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    vertical-align: top;
+  }
+
+  @media (max-width: 900px) {
+    li {
+      width: calc(50% - 0.75rem);
+      margin-right: 1.5rem;
     }
   }
 
   @media (max-width: 600px) {
-    .projects-list {
-      grid-template-columns: 1fr;
+    li {
+      width: 100%;
+      margin-right: 0;
     }
   }
 }

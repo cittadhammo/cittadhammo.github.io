@@ -9,6 +9,29 @@ if (typeof window.ScrollReveal === "function") {
   sr.reveal('.projects-list a');
 }
 
+if (typeof window.Masonry !== "undefined") {
+  var grid = document.querySelector('.projects-list');
+  if (grid) {
+    var msnry;
+    if (typeof imagesLoaded === "function") {
+      imagesLoaded(grid, function () {
+        msnry = new Masonry(grid, {
+          columnWidth: '.projects-list li',
+          itemSelector: 'li',
+          gutter: 24
+        });
+      });
+    } else {
+      msnry = new Masonry(grid, {
+        columnWidth: '.projects-list li',
+        itemSelector: 'li',
+        gutter: 24
+      });
+    }
+    grid.classList.add('masonry');
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var scrollCue = document.querySelector(".home-hero-scroll-cue");
   var hero = document.querySelector(".home-hero");
