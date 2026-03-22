@@ -164,7 +164,7 @@ jobs:
           RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
         run: |
           echo "Syncing tiles to R2..."
-          rclone copy ./assets/images r2:${{ secrets.R2_BUCKET_NAME }}/assets/images \
+          rclone sync ./assets/images r2:${{ secrets.R2_BUCKET_NAME }}/assets/images \
             --include "*/tiles/**" \
             --include "*/tiles-dark/**" \
             --transfers 16 \
@@ -213,6 +213,6 @@ jobs:
         if: steps.deploy_branch.outputs.name == 'cf-pages'
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: cf-pages
