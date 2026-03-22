@@ -2,9 +2,20 @@ vectors:
 - name: dhamma-citadel
   formats:
   - A0S
+  - A0SM
+  - A0SBM
+  - A0VM
+  - A0VBM
 - name: dhamma-citadel-it
   formats:
   - A0S
 - name: dhamma-citadel-bw
   formats:
   - A0S
+- name: manual-buddhist-terms
+  formats:
+  - A1S
+  - A1V
+- name: manual-buddhist-terms-force
+  formats:
+  - A1S

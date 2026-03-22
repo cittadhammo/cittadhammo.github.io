@@ -1,29 +1,25 @@
 ---
 title: The Manual of Buddhist Terms & Doctrines
-subtitle:
+subtitle: Based on the Buddhist Dictionary
 description: "This project explore the graph created by mapping the links and references of the book: *Buddhist Dictionary: A Manual of Buddhist Terms and Doctrines* By Nyanatiloka Thera. The chart explore the connections of the different entries in the dictionary. The text size is according to the number of entries the entry quotes or get quoted. The structure is revealed via the Hierarchical Edge Bundles for General Graphs Method. This approach extracts the community structure of the network and organizes it into a more balanced and meaningful hierarchy so that its edge bundle rendering better indicates its structure. Via the original notebook, you can create different colors schemes and have access to different options."
 author: Cittadhammo Bhikkhu
 year: 2024
-published: false
+published: true
 license:
   - name: CC0
     url: https://creativecommons.org/publicdomain/zero/1.0/
 techs:
   - name: D3.js
     url: http://d3js.org
-  - name: NetworkX.py
-    url:
+  - name: NetworkX
+    url: https://networkx.org/en/
   - name: ChatGPT
-    url:
+    url: https://chatgpt.com/
 code:
   - name: Original Notebook
     url: https://observablehq.com/d/2d1af81c02434761
   - name: Force Directed Variation
-    url:
-references:
-  - name:
-    title:
-    url:
+    url: https://observablehq.com/@cittadhammo/the-illustrated-manual-of-buddhist-terms-and-doctr
 sources:
   - name: The Manual of Buddhist Terms & Doctrines (PDF)
     author: Nyanatiloka Thera on the Buddhist Library
@@ -38,17 +34,25 @@ sources:
     author: Yuntao Jia, Michael Garland, J. Hart
     url: https://www.semanticscholar.org/paper/Hierarchical-Edge-Bundles-for-General-Graphs-Jia-Garland/31f3ae917eaf2c1562274356cf7759d6a547cb69
 images:
-  - name: Manual-A1S.png
-    display:
-    dark:
+  - name: manual-buddhist-terms-A1S.png
+    display: true 
     map: true
-    file:
-    pdf:
-    svg:
-    online:
-    title:
-    invert_level:
-      small:
-      medium:
-      large:
+    file: true
+    pdf: true
+    svg: manual-buddhist-terms.svg
+    online: true
+    title: A1 Square
+  - name: manual-buddhist-terms-A1V.png
+    display: false
+    file: true
+    pdf: true
+    title: A1 Vertical
+  - name: manual-buddhist-terms-force-A1S.png
+    display: true
+    map: true
+    file: true
+    pdf: true
+    svg: manual-buddhist-termsforce.svg
+    online: true
+    title: A1 Force Variation
 ---

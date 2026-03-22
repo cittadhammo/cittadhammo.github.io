@@ -29,13 +29,22 @@ images:
     pdf: true
     svg: dhamma-citadel.svg
     online: true
-    title: A0 Square
-  - name: dhamma-citadel-BW-A0S.png
+    title: A0 English
+  - name: dhamma-citadel-bw-A0S.png
     display: false
     map: true
     file: true
     pdf: true
     svg: dhamma-citadel-bw.svg
     online: true
-    title: A0 Square (B&W)
+    title: A0 English B&W
+  - name: dhamma-citadel-it-A0S.png
+    display: false
+    dark: true
+    map: true
+    file: true
+    pdf: true
+    svg: dhamma-citadel-it.svg
+    online: true
+    title: A0 Italian
 ---
