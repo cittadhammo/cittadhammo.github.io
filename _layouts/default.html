@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% include head.html %}
+    <style>body { visibility: hidden; }</style>
   </head>
   <body class="black default-layout">
     <main class="home">
@@ -12,5 +13,6 @@
       </section>
     </main>
     {% include footer.html %}
+    <script>document.body.style.visibility = "visible";</script>
   </body>
 </html>

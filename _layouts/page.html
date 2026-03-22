@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% include head.html %}
+    <style>body { visibility: hidden; }</style>
   </head>
 
   {% assign page_scroll_reveal_enabled = site.theme.page_scroll_reveal_default %}
@@ -31,5 +32,6 @@
     {% if page_scroll_reveal_enabled %}
       <script src="{{ '/assets/scripts/page-reveal.js' | relative_url }}"></script>
     {% endif %}
+    <script>document.body.style.visibility = "visible";</script>
   </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% include head.html %}
+    <style>body { visibility: hidden; }</style>
   </head>
 
   <body class="black item-layout">
@@ -40,5 +41,6 @@
     <script src="{{ '/assets/scripts/lightbox.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/vendor/sticky-kit.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/scripts/project.js' | relative_url }}"></script>
+    <script>document.body.style.visibility = "visible";</script>
   </body>
 </html>
