@@ -192,11 +192,9 @@
           {% endif %}
 
           <p class="rouge-first">
-            {% if source_url != '' %}
+          {% if source_url != '' %}
+            <p class="rouge-first">
               <a class="black-under" href="{{ source_url }}" target="_blank" rel="nofollow">{{ source_name }}</a>
-            {% else %}
-              {{ source_name }}
-            {% endif %}
             {% if source.author -%}
               <span class="source-author-h2-style">
                 {{ source.author }}
@@ -206,7 +204,10 @@
                 {{ source.license -}}
               {%- endif %}
             {% endif %}
-          </p>
+            </p>
+          {% else %}
+            <p>{{ source_name }}</p>
+          {% endif %}
         {% endfor %}
       {% endcapture %}
     {% endif %}
@@ -241,13 +242,13 @@
             {% assign tech_name = fallback_tech.name | to_s | strip %}
           {% endif %}
 
-          <p class="rouge-first">
-            {% if tech_url != '' %}
+          {% if tech_url != '' %}
+            <p class="rouge-first">
               <a class="black-under" href="{{ tech_url }}" target="_blank" rel="nofollow">{{ tech_name }}</a>
-            {% else %}
-              {{ tech_name }}
-            {% endif %}
-          </p>
+            </p>
+          {% else %}
+            <p>{{ tech_name }}</p>
+          {% endif %}
         {% endfor %}
       {% endcapture %}
     {% endif %}
