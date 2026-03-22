@@ -134,72 +134,22 @@ jobs:
           MAGICK_HEIGHT_LIMIT: 32KP
           MAGICK_THREAD_LIMIT: 2
           MAGICK_TMPDIR: /tmp
-          R2_TILES_BASE_URL: ${{ steps.deploy_branch.outputs.name == 'cf-pages' && secrets.R2_PUBLIC_URL || '' }}
         run: ./scripts/generate_assets.sh
 
       - name: Skip asset generation
         if: steps.should_generate_assets.outputs.run != 'true'
         run: echo "Skipping asset generation. ${{ steps.should_generate_assets.outputs.reason }}"
 
-      # -----------------------------------------------------------------
-      # R2 sync — cf-pages only, only when assets were regenerated
-      # -----------------------------------------------------------------
-
-      - name: Install rclone
-        if: |
-          steps.deploy_branch.outputs.name == 'cf-pages' &&
-          steps.should_generate_assets.outputs.run == 'true'
-        run: curl https://rclone.org/install.sh | sudo bash
-
-      - name: Sync tiles to R2
-        if: |
-          steps.deploy_branch.outputs.name == 'cf-pages' &&
-          steps.should_generate_assets.outputs.run == 'true'
-        env:
-          RCLONE_CONFIG_R2_TYPE: s3
-          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
-          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.CF_R2_ACCESS_KEY_ID }}
-          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
-          RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
-        run: |
-          echo "Syncing tiles to R2..."
-          rclone sync ./assets/images r2:${{ secrets.R2_BUCKET_NAME }}/assets/images \
-            --include "*/tiles/**" \
-            --include "*/tiles-dark/**" \
-            --transfers 16 \
-            --checkers 16 \
-            --stats 10s \
-            -v
-          echo "R2 sync complete."
-
-      - name: Remove tiles from local assets before Jekyll build
-        if: steps.deploy_branch.outputs.name == 'cf-pages'
-        run: |
-          echo "Removing tile directories (served from R2, not needed in _site)..."
-          find ./assets/images -type d -name "tiles" -exec rm -rf {} + 2>/dev/null || true
-          find ./assets/images -type d -name "tiles-dark" -exec rm -rf {} + 2>/dev/null || true
-          REMAINING=$(find ./assets/images -type f | wc -l)
-          echo "Done. Remaining files in assets/images: $REMAINING"
-
-      # -----------------------------------------------------------------
-      # Jekyll build
-      # -----------------------------------------------------------------
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-          bundler-cache: true
+          bundler-cache: true # 👈 important
 
       - name: Build Jekyll site
         run: |
           bundle exec jekyll build \
             --config _config.yml,_config_${{ steps.deploy_branch.outputs.name == 'cf-pages' && 'cdn' || 'gh' }}.yml
-
-      # -----------------------------------------------------------------
-      # Deploy
-      # -----------------------------------------------------------------
 
       - name: Deploy to GitHub Pages
         if: steps.deploy_branch.outputs.name == 'gh-pages'

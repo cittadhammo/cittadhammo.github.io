@@ -185,15 +185,9 @@ layout: none
           });
           const isMobile = window.innerWidth <= 480; // or 768 adjust breakpoint as needed
 
-          // const tileBase = "{{ "/assets/images/__IMG_NAME__/" | relative_url }}";
-          // const tileUrl = tileBase + tilesDir + "/{z}/{y}/{x}.webp";
-
-          const r2Base = "__R2_TILES_BASE_URL__";
-          const tileBase = r2Base
-            ? r2Base + "/assets/images/__IMG_NAME__/"
-            : "{{ "/assets/images/__IMG_NAME__/" | relative_url }}";
-
+          const tileBase = "{{ "/assets/images/__IMG_NAME__/" | relative_url }}";
           const tileUrl = tileBase + tilesDir + "/{z}/{y}/{x}.webp";
+
           const map = new ol.Map({
               layers: [
                   new ol.layer.Tile({

@@ -697,7 +697,6 @@ EOF
             | sed "s/__HEIGHT__/$HEIGHT/g" \
             | sed "s/__BG__/$BG/g" \
             | sed "s/__HAS_DARK_TILES__/$HAS_DARK_TILES/g" \
-            | sed "s|__R2_TILES_BASE_URL__|${R2_TILES_BASE_URL:-}|g" \
             | sed "s/__TITLE__/$(printf '%s\n' "$PAGE_TITLE" | sed 's/[&/\]/\\&/g')/g" \
             | sed "s|__PATHMD__|$PATHMD|g" \
             > "$HTML_FILE"
