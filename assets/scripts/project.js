@@ -66,14 +66,15 @@
         });
     });
 
-    // --- ScrollReveal ---
-    var sr = ScrollReveal({
-        origin   : "bottom",
-        distance : "64px",
-        duration : 900,
-        delay    : 0,
-        scale    : 1
-    });
-    sr.reveal('.project img');
+    if (typeof window.ScrollReveal === "function") {
+        var sr = ScrollReveal({
+            origin   : "bottom",
+            distance : "64px",
+            duration : 900,
+            delay    : 0,
+            scale    : 1
+        });
+        sr.reveal('.project img.load-hidden, .map-icon.load-hidden');
+    }
 
 }(jQuery));

@@ -1,0 +1,16 @@
+meta_version=1
+src_name=manual-buddhist-terms-A1V.png
+src_hash=20706b040ffbe4aee63805f18c4b367abf97a1aa1b4aef290d56e02b6bd80547
+map=false
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%
