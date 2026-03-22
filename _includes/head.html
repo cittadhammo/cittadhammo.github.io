@@ -199,6 +199,7 @@
       mapTriggers.forEach(function (el) {
         var mapUrl = el.getAttribute("data-map-url");
         if (!isInternalMapUrl(mapUrl)) return;
+        if (hasThemeParam(mapUrl)) return;
         el.setAttribute("data-map-url", withThemeQuery(mapUrl, theme));
       });
     }
