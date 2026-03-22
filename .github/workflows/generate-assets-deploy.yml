@@ -213,6 +213,6 @@ jobs:
         if: steps.deploy_branch.outputs.name == 'cf-pages'
         uses: peaceiris/actions-gh-pages@v4
         with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: cf-pages
