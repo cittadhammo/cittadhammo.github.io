@@ -399,7 +399,7 @@
             {% endif %}
           {% endif %}
           <p class="rouge-first">
-            <a class="black-under download-lightbox-link" href="{{ png_href }}" data-lightbox-index="{{ file_image_index }}" target="_blank" rel="nofollow">{{ file_label }}</a>
+            <a class="black-under mfp-image download-lightbox-link" href="{{ png_href }}" data-light-href="{{ png_href }}"{% if has_dark_variant %} data-dark-href="{{ png_dark_href }}"{% endif %} data-gallery-index="{{ file_image_index }}">{{ file_label }}</a>
             <span class="download-format-links">
               <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ primary_format_label }}</a>{% if has_dark_variant %} (<a class="black-under" href="{{ png_dark_href }}" download="{{ file_base | append: '-' | append: dark_suffix }}" target="_blank" rel="nofollow">DARK</a>){% endif %}
               {% if pdf_href != '' %}
