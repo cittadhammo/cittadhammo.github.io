@@ -158,6 +158,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: gh-pages
+          force_orphan: true
 
       - name: Push to cf-pages branch
         if: steps.deploy_branch.outputs.name == 'cf-pages'
@@ -166,3 +167,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: cf-pages
+          force_orphan: true
