@@ -110,3 +110,27 @@ dharma-chart-core-teaching-2022:
   small: 0.648
   medium: 0.647
   large: 0.647
+manual-buddhist-terms-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+manual-buddhist-terms-A1V:
+  small: 0.706
+  medium: 0.706
+  large: 0.706
+manual-buddhist-terms-force-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+dhamma-citadel-bw-A0S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+dhamma-citadel-it-A0S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+twin-miracle:
+  small: 1.338
+  medium: 1.338
+  large: 1.338
