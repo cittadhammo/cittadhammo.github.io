@@ -1,7 +1,7 @@
 ---
 title: The Twin Miracle
 subtitle:
-description:
+description: A wheel of fire representing the teaching on Dependant Origination and a wheel of water representing the Transcendental Dependant Origination
 author: Cittahdammo
 year: 2023
 published: true
