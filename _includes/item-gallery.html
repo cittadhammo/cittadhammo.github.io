@@ -29,13 +29,14 @@
       </li>
       {% continue %}
     {% endif %}
-    {% assign lightonly_class = '' %}
-    {% if image.lightonly == true %}
-      {% assign lightonly_class = 'lightonly-item' %}
-    {% elsif image.darkonly == true %}
-      {% assign lightonly_class = 'darkonly-item' %}
-    {% endif %}
-    <li{% if lightonly_class != '' %} class="{{ lightonly_class }}"{% endif %}>
+    <!-- {% assign lightonly_class = '' %} -->
+    <!-- {% if image.lightonly == true %} -->
+    <!--   {% assign lightonly_class = 'lightonly-item' %} -->
+    <!-- {% elsif image.darkonly == true %} -->
+    <!--   {% assign lightonly_class = 'darkonly-item' %} -->
+    <!-- {% endif %} -->
+    <!-- <li{% if lightonly_class != '' %} class="{{ lightonly_class }}"{% endif %}> -->
+    <li>
       {% if image.map %}
         <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
           <a
