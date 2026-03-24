@@ -279,6 +279,18 @@
         localStorage.setItem(storageKey, mode);
       } catch (e) {}
       updateToggleLabel();
+      updateLightDarkOnlyItems(resolved);
+    }
+
+    function updateLightDarkOnlyItems(theme) {
+      var lightonlyItems = document.querySelectorAll(".lightonly-item");
+      var darkonlyItems = document.querySelectorAll(".darkonly-item");
+      lightonlyItems.forEach(function(item) {
+        item.style.display = theme === "dark" ? "none" : "list-item";
+      });
+      darkonlyItems.forEach(function(item) {
+        item.style.display = theme === "dark" ? "list-item" : "none";
+      });
     }
 
     function updateToggleLabel() {

@@ -37,6 +37,7 @@ images:
   - name: manual-buddhist-terms-A1S.png
     dark: true
     display: true 
+    lightonly: true
     map: true
     file: true
     pdf: true
@@ -45,7 +46,9 @@ images:
     title: A1 Square
   - name: manual-buddhist-terms-dark-A1S.png
     dark: true
+    homedark: true
     display: true 
+    darkonly: true
     map: true
     file: true
     pdf: true
