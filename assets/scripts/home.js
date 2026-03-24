@@ -12,23 +12,17 @@ if (typeof window.ScrollReveal === "function") {
 if (typeof window.Masonry !== "undefined") {
   var grid = document.querySelector('.projects-list');
   if (grid) {
-    var msnry;
+    grid.classList.add('masonry');
+    var msnry = new Masonry(grid, {
+      columnWidth: '.projects-list li',
+      itemSelector: 'li',
+      gutter: 24
+    });
     if (typeof imagesLoaded === "function") {
       imagesLoaded(grid, function () {
-        msnry = new Masonry(grid, {
-          columnWidth: '.projects-list li',
-          itemSelector: 'li',
-          gutter: 24
-        });
-      });
-    } else {
-      msnry = new Masonry(grid, {
-        columnWidth: '.projects-list li',
-        itemSelector: 'li',
-        gutter: 24
+        msnry.layout();
       });
     }
-    grid.classList.add('masonry');
   }
 }
 
