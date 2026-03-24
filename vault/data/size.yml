@@ -134,3 +134,27 @@ twin-miracle:
   small: 1.338
   medium: 1.338
   large: 1.338
+dhamma-citadel-A0SM:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+dhamma-citadel-A0SBM:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+dhamma-citadel-A0VM:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+dhamma-citadel-A0VBM:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+dhamma-citadel-fr-A0S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+manual-buddhist-terms-dark-A1S:
+  small: 1.000
+  medium: 1.000
+  large: 1.000

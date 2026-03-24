@@ -35,6 +35,7 @@ sources:
     url: https://www.semanticscholar.org/paper/Hierarchical-Edge-Bundles-for-General-Graphs-Jia-Garland/31f3ae917eaf2c1562274356cf7759d6a547cb69
 images:
   - name: manual-buddhist-terms-A1S.png
+    dark: true
     display: true 
     map: true
     file: true
@@ -42,6 +43,15 @@ images:
     svg: manual-buddhist-terms.svg
     online: true
     title: A1 Square
+  - name: manual-buddhist-terms-dark-A1S.png
+    dark: true
+    display: true 
+    map: true
+    file: true
+    pdf: true
+    svg: manual-buddhist-terms-dark.svg
+    online: true
+    title: A1 Dark
   - name: manual-buddhist-terms-A1V.png
     display: false
     file: true

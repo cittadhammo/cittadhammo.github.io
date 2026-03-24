@@ -1,6 +1,7 @@
 # To do list for Dhammacharts
 
   - [ ] Year order in home page (revert_)
+  - [ ] Have medium Thumbnails shared for items layout and lightbox
   - [x] Add gap between images in asides?
   - [ ] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, etc.)

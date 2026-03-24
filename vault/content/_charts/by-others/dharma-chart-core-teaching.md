@@ -21,7 +21,7 @@ images:
     file: true
     pdf: true
     online: true
-    title: Size 36"x48"
+    title: Arch E New version
   - name: dharma-chart-core-teaching-2022.png
     display: false
     map: true

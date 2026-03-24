@@ -6,6 +6,9 @@ vectors:
   - A0SBM
   - A0VM
   - A0VBM
+- name: dhamma-citadel-fr
+  formats:
+  - A0S
 - name: dhamma-citadel-it
   formats:
   - A0S
@@ -16,6 +19,12 @@ vectors:
   formats:
   - A1S
   - A1V
+- name: manual-buddhist-terms-dark
+  formats:
+  - A1S
+- name: manual-buddhist-terms-bw
+  formats:
+  - A1S
 - name: manual-buddhist-terms-force
   formats:
   - A1S

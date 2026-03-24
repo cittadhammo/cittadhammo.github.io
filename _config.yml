@@ -94,21 +94,27 @@ collections:
   charts:
     output: true
     sort_by: year
+    reverse: true
   3d-printing:
     output: true
     sort_by: order
+    reverse: true
   writtings:
     output: true
     sort_by: order
+    reverse: true
   references:
     output: true
     sort_by: order
+    reverse: true
   food:
     output: true
     sort_by: order
+    reverse: true
   projects:
     output: true
     sort_by: order
+    reverse: true
 # Layout defaults:
 # - collection items use `item`
 # - generic fallback uses `default` (safe for non-area pages)

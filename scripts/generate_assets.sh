@@ -584,9 +584,12 @@ EOF
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
+            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
+            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
+            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=82]" $SMALL_SIZE --intent relative
+            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=85]" $MEDIUM_SIZE --intent relative
+            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=88]" $LARGE_SIZE --intent relative
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
