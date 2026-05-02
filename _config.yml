@@ -62,6 +62,7 @@ theme:
     sources: "always"
     downloads: "always"
   item_aside_gap: "1rem" # Gap between images in the aside gallery on item pages.
+  item_navigation_cross_section: true # If true, navigation can jump between areas and categories.
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
 baseurl: ""

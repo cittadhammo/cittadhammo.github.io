@@ -1,98 +1,176 @@
-{%- assign area = site.data.areas | where: 'name', page.collection | first -%}
-{%- assign category = page.path | split: '/' | pop | last -%}
-{%- assign all_items = site[page.collection] | reverse -%}
-{%- assign items = '' | split: '' -%}
+{%- assign current_area_name = page.collection -%}
+{%- assign current_category_name = page.path | split: '/' | pop | last -%}
+{%- assign all_areas = site.data.areas -%}
 
-{%- for item in all_items -%}
-  {%- assign item_category = item.url | split: '/' | pop | last -%}
-  {%- if item_category == category -%}
-    {%- assign items = items | push: item -%}
+{%- assign previous_item = nil -%}
+{%- assign next_item = nil -%}
+
+{% comment %} Get items for current area, reversed to match home page order {% endcomment %}
+{%- assign current_area_items = site[current_area_name] | reverse -%}
+
+{% comment %} Filter to items in the current category {% endcomment %}
+{%- assign items_in_cat = '' | split: '' -%}
+{%- for item in current_area_items -%}
+  {%- assign it_cat = item.url | split: '/' | pop | last -%}
+  {%- if it_cat == current_category_name -%}
+    {%- assign items_in_cat = items_in_cat | push: item -%}
   {%- endif -%}
 {%- endfor -%}
 
+{% comment %} Find current item index in current category {% endcomment %}
 {%- assign item_index = nil -%}
-{%- for item in items -%}
+{%- for item in items_in_cat -%}
   {%- if item.url == page.url -%}
     {%- assign item_index = forloop.index0 -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
 
-{%- assign previousLink = '' -%}
-{%- assign previousTitle = '' -%}
-{%- assign nextLink = '' -%}
-{%- assign nextTitle = '' -%}
+{%- if item_index != nil -%}
+  {%- assign prev_idx = item_index | minus: 1 -%}
+  {%- assign next_idx = item_index | plus: 1 -%}
 
-{%- assign categories = area.categories -%}
-{%- assign last_cat_index = categories.size | minus: 1 -%}
-{%- assign cat_index = nil -%}
-{%- for cat in categories -%}
-  {%- if cat.name == category -%}
-    {%- assign cat_index = forloop.index0 -%}
+  {%- if prev_idx >= 0 -%}
+    {%- assign previous_item = items_in_cat[prev_idx] -%}
+  {%- endif -%}
+
+  {%- if next_idx < items_in_cat.size -%}
+    {%- assign next_item = items_in_cat[next_idx] -%}
+  {%- endif -%}
+{%- endif -%}
+
+{% comment %} If boundaries reached, look further {% endcomment %}
+{%- assign area_idx = nil -%}
+{%- for a in all_areas -%}
+  {%- if a.name == current_area_name -%}
+    {%- assign area_idx = forloop.index0 -%}
+    {%- assign current_area_data = a -%}
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
 
-{%- if item_index != nil -%}
-  {%- assign previous_index = item_index | minus: 1 -%}
-  {%- assign next_index = item_index | plus: 1 -%}
+{%- if area_idx != nil -%}
+  {%- assign cat_idx = nil -%}
+  {%- for c in current_area_data.categories -%}
+    {%- if c.name == current_category_name -%}
+      {%- assign cat_idx = forloop.index0 -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
 
-  {%- if previous_index >= 0 -%}
-    {%- assign previous_item = items[previous_index] -%}
-    {%- assign previousLink = previous_item.url -%}
-    {%- assign previousTitle = previous_item.title -%}
-  {%- elsif cat_index != nil and cat_index > 0 -%}
-    {%- assign previous_cat = categories[cat_index | minus: 1].name -%}
-    {%- assign previous_cat_items = '' | split: '' -%}
-    {%- for item in all_items -%}
-      {%- assign item_category = item.url | split: '/' | pop | last -%}
-      {%- if item_category == previous_cat -%}
-        {%- assign previous_cat_items = previous_cat_items | push: item -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- assign previous_item = previous_cat_items | last -%}
-    {%- if previous_item -%}
-      {%- assign previousLink = previous_item.url -%}
-      {%- assign previousTitle = previous_item.title -%}
+  {% comment %} Look for Previous Item {% endcomment %}
+  {%- if previous_item == nil -%}
+    {% comment %} 1. Look back in categories of current area {% endcomment %}
+    {%- if cat_idx != nil and cat_idx > 0 -%}
+      {%- assign start_c = cat_idx | minus: 1 -%}
+      {%- for i in (0..start_c) reversed -%}
+        {%- assign t_cat = current_area_data.categories[i] -%}
+        {%- assign t_items = '' | split: '' -%}
+        {%- for it in current_area_items -%}
+          {%- assign it_cat = it.url | split: '/' | pop | last -%}
+          {%- if it_cat == t_cat.name -%}
+            {%- assign t_items = t_items | push: it -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if t_items.size > 0 -%}
+          {%- assign previous_item = t_items | last -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    
+    {% comment %} 2. Look back in previous areas if allowed {% endcomment %}
+    {%- if previous_item == nil and site.theme.item_navigation_cross_section and area_idx > 0 -%}
+      {%- assign start_a = area_idx | minus: 1 -%}
+      {%- for i in (0..start_a) reversed -%}
+        {%- assign t_area = all_areas[i] -%}
+        {%- assign t_area_items = site[t_area.name] | reverse -%}
+        {%- assign t_cats = t_area.categories | reverse -%}
+        {%- for t_cat in t_cats -%}
+          {%- assign t_items = '' | split: '' -%}
+          {%- for it in t_area_items -%}
+            {%- assign it_cat = it.url | split: '/' | pop | last -%}
+            {%- if it_cat == t_cat.name -%}
+              {%- assign t_items = t_items | push: it -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if t_items.size > 0 -%}
+            {%- assign previous_item = t_items | last -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if previous_item -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
     {%- endif -%}
   {%- endif -%}
 
-  {%- if next_index < items.size -%}
-    {%- assign next_item = items[next_index] -%}
-    {%- assign nextLink = next_item.url -%}
-    {%- assign nextTitle = next_item.title -%}
-  {%- elsif cat_index != nil and cat_index < last_cat_index -%}
-    {%- assign next_cat = categories[cat_index | plus: 1].name -%}
-    {%- assign next_cat_items = '' | split: '' -%}
-    {%- for item in all_items -%}
-      {%- assign item_category = item.url | split: '/' | pop | last -%}
-      {%- if item_category == next_cat -%}
-        {%- assign next_cat_items = next_cat_items | push: item -%}
+  {% comment %} Look for Next Item {% endcomment %}
+  {%- if next_item == nil -%}
+    {% comment %} 1. Look forward in categories of current area {% endcomment %}
+    {%- if cat_idx != nil -%}
+      {%- assign start_c = cat_idx | plus: 1 -%}
+      {%- assign end_c = current_area_data.categories.size | minus: 1 -%}
+      {%- if start_c <= end_c -%}
+        {%- for i in (start_c..end_c) -%}
+          {%- assign t_cat = current_area_data.categories[i] -%}
+          {%- assign t_items = '' | split: '' -%}
+          {%- for it in current_area_items -%}
+            {%- assign it_cat = it.url | split: '/' | pop | last -%}
+            {%- if it_cat == t_cat.name -%}
+              {%- assign t_items = t_items | push: it -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if t_items.size > 0 -%}
+            {%- assign next_item = t_items | first -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
       {%- endif -%}
-    {%- endfor -%}
-    {%- assign next_item = next_cat_items | first -%}
-    {%- if next_item -%}
-      {%- assign nextLink = next_item.url -%}
-      {%- assign nextTitle = next_item.title -%}
+    {%- endif -%}
+
+    {% comment %} 2. Look forward in next areas if allowed {% endcomment %}
+    {%- if next_item == nil and site.theme.item_navigation_cross_section -%}
+      {%- assign start_a = area_idx | plus: 1 -%}
+      {%- assign end_a = all_areas.size | minus: 1 -%}
+      {%- if start_a <= end_a -%}
+        {%- for i in (start_a..end_a) -%}
+          {%- assign t_area = all_areas[i] -%}
+          {%- assign t_area_items = site[t_area.name] | reverse -%}
+          {%- for t_cat in t_area.categories -%}
+            {%- assign t_items = '' | split: '' -%}
+            {%- for it in t_area_items -%}
+              {%- assign it_cat = it.url | split: '/' | pop | last -%}
+              {%- if it_cat == t_cat.name -%}
+                {%- assign t_items = t_items | push: it -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if t_items.size > 0 -%}
+              {%- assign next_item = t_items | first -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if next_item -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
 
 <section class="project-navigation">
   <div class="container">
-    {% if previousLink != '' %}
-      <a class="prev" title="Previous {{ previousTitle }}" href="{{ previousLink | relative_url }}">
+    {% if previous_item %}
+      <a class="prev" title="Previous {{ previous_item.title }}" href="{{ previous_item.url | relative_url }}">
         <span class="h2">Previous</span>
-        <h2>{{ previousTitle }}</h2>
+        <h2>{{ previous_item.title }}</h2>
       </a>
     {% else %}
       <a class="prev"></a>
     {% endif %}
 
-    {% if nextLink != '' %}
-      <a class="next" title="Next {{ nextTitle }}" href="{{ nextLink | relative_url }}">
+    {% if next_item %}
+      <a class="next" title="Next {{ next_item.title }}" href="{{ next_item.url | relative_url }}">
         <span class="h2">Next</span>
-        <h2>{{ nextTitle }}</h2>
+        <h2>{{ next_item.title }}</h2>
       </a>
     {% else %}
       <a class="next"></a>
