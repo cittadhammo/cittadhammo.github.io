@@ -205,7 +205,18 @@
             {% endif %}
             </p>
           {% else %}
-            <p>{{ source_name }}</p>
+            <p>
+              {{ source_name }}
+              {% if source.author -%}
+                <span class="source-author-h2-style">
+                  {{ source.author }}
+                </span>
+                {% if source.license -%}
+                  <br>
+                  {{ source.license -}}
+                {%- endif %}
+              {% endif %}
+            </p>
           {% endif %}
         {% endfor %}
       {% endcapture %}
