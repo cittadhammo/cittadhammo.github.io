@@ -97,6 +97,35 @@ bash scripts/darkify-test/run-thumbnails.sh
 
 ## Dependencies
 
+### Full Install (All Features)
+Install all dependencies required for Jekyll, asset generation, and SVG/PDF/PNG conversion (Arch Linux):
+```bash
+sudo pacman -S --needed libvips go-yq gawk findutils openslide ruby ruby-bundler python-pymupdf python-yaml chromium pngquant
+bundle install
+```
+
+### Partial Install
+Choose the components you need:
+
+#### Minimum for Jekyll Build/Serve
+Only install what's needed to run `make build` or `make serve`:
+```bash
+sudo pacman -S --needed ruby ruby-bundler gawk findutils
+bundle install
+```
+
+#### Add Asset Generation Support
+For `make assets` (image thumbnails, map tiles):
+```bash
+sudo pacman -S --needed libvips go-yq openslide
+```
+
+#### Add SVG/PDF/PNG Generation Support
+For `make images` (convert SVGs to PDF/PNG):
+```bash
+sudo pacman -S --needed python-pymupdf python-yaml chromium pngquant
+```
+
 ### Jekyll
 
 - Ruby
@@ -108,7 +137,7 @@ Setup:
 bundle install
 ```
 
-### Asset scripts
+### Asset Scripts
 
 - `vips` (libvips)
 - `yq` (mikefarah/go-yq)
@@ -120,6 +149,20 @@ Example (Arch Linux):
 
 ```bash
 sudo pacman -S libvips go-yq gawk findutils openslide
+```
+
+### SVG/PDF/PNG Conversion (Optional)
+
+For generating PDF/PNG outputs from SVGs (used by `make images`):
+- `python-pymupdf`
+- `python-yaml`
+- `chromium`
+- `pngquant` (optional, for PNG compression)
+
+Example (Arch Linux):
+
+```bash
+sudo pacman -S python-pymupdf python-yaml chromium pngquant
 ```
 
 ## Configuration Notes
