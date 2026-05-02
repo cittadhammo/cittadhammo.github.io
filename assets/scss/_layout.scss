@@ -140,23 +140,21 @@
 
   li {
     display: inline-block;
-    width: calc(33.333% - 1rem);
-    margin-right: 1.5rem;
+    width: calc((100% - 3rem) / 3);
+    margin-right: 0;
     margin-bottom: 1.5rem;
     vertical-align: top;
   }
 
   @media (max-width: 900px) {
     li {
-      width: calc(50% - 0.75rem);
-      margin-right: 1.5rem;
+      width: calc((100% - 1.5rem) / 2);
     }
   }
 
   @media (max-width: 600px) {
     li {
       width: 100%;
-      margin-right: 0;
     }
   }
 }

@@ -10,19 +10,22 @@ if (typeof window.ScrollReveal === "function") {
 }
 
 if (typeof window.Masonry !== "undefined") {
-  var grid = document.querySelector('.projects-list');
-  if (grid) {
-    grid.classList.add('masonry');
-    var msnry = new Masonry(grid, {
-      columnWidth: '.projects-list li',
-      itemSelector: 'li',
-      gutter: 24
-    });
-    if (typeof imagesLoaded === "function") {
-      imagesLoaded(grid, function () {
-        msnry.layout();
+  var grids = document.querySelectorAll('.projects-list');
+  for (var i = 0; i < grids.length; i++) {
+    (function(grid) {
+      grid.classList.add('masonry');
+      var msnry = new Masonry(grid, {
+        itemSelector: 'li',
+        columnWidth: 'li',
+        gutter: 15,
+        percentPosition: true
       });
-    }
+      if (typeof imagesLoaded === "function") {
+        imagesLoaded(grid, function () {
+          msnry.layout();
+        });
+      }
+    })(grids[i]);
   }
 }
 
