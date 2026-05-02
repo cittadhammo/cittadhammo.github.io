@@ -2,7 +2,7 @@
 
 {% assign area = site.data.areas | where: 'name', area_name | first %}
 
-{% assign items = site[area_name] %}
+{% assign items = site[area_name] | reverse %}
 
 {% for category in area.categories %}
   {% assign category_name = category.name | remove: ' ' %}

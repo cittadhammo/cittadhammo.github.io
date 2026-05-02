@@ -1,6 +1,6 @@
 {%- assign area = site.data.areas | where: 'name', page.collection | first -%}
 {%- assign category = page.path | split: '/' | pop | last -%}
-{%- assign all_items = site[page.collection] -%}
+{%- assign all_items = site[page.collection] | reverse -%}
 {%- assign items = '' | split: '' -%}
 
 {%- for item in all_items -%}
