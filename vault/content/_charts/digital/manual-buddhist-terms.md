@@ -1,6 +1,6 @@
 ---
 title: The Manual of Buddhist Terms & Doctrines
-subtitle: Based on the Buddhist Dictionary
+subtitle: Based on the Buddhist Dictionary by Nyanatiloka
 description: "This project explore the graph created by mapping the links and references of the book: *Buddhist Dictionary: A Manual of Buddhist Terms and Doctrines* By Nyanatiloka Thera. The chart explore the connections of the different entries in the dictionary. The text size is according to the number of entries the entry quotes or get quoted. The structure is revealed via the Hierarchical Edge Bundles for General Graphs Method. This approach extracts the community structure of the network and organizes it into a more balanced and meaningful hierarchy so that its edge bundle rendering better indicates its structure. Via the original notebook, you can create different colors schemes and have access to different options."
 author: Cittadhammo Bhikkhu
 year: 2024
