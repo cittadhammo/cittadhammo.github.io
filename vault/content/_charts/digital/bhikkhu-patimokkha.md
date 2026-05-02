@@ -1,0 +1,59 @@
+---
+title: Bhikkhu Patimokkha
+subtitle:
+description: The Bhikkhu Pāṭimokkha is the basic code of monastic discipline for Buddhist monks, found in the Suttavibhaṅga of the Vinaya Piṭaka. This interactive dendrogram visualization by Cittadhammo shows the structure of the 227 rules for bhikkhus.
+author: Cittadhammo
+year: 2021
+published: true
+license:
+  - name: CC BY-NC 4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+techs:
+  - name: D3
+    url: http://d3js.org
+  - name: Observable
+    url: https://observablehq.com/
+code:
+  - name: Notebook
+    url: https://observablehq.com/@cittadhammo/bhikkhu-patimokkha
+sources:
+  - name: The Concise Buddhist Monastic Code 1
+    author: Bhikkhu Anon
+    url: https://buddhistuniversity.net/content/reference/cbmci
+  - name: Analysis of the Bhikkhu-Pātimokkha
+    author: Bhante Suddhāso
+    url: https://buddhistuniversity.net/content/canon/analysis-of-the-bhikkhu-patimokkha_suddhaso
+  - name: The Heritage of the Sangha
+    author: Ajahn Thiradhammo
+    url:
+  - name: Dhammadana, List of 227 Rules
+    author: Isi Dhamma
+    url: https://en.dhammadana.org/sangha/vinaya/227.htm
+  - name: The Buddhist Monastic Code I
+    author: Ajahn Thanissaro
+    url:
+  - name: Sutta Central - Basket of Monastic Law
+    author: Bhikkhu Brahmali
+    url:
+  - name: THE BHIKKHU PĀTIMOKKHA A WORD BY WORD TRANSLATION
+    author: Bhikkhu Ñāṇatusita
+    url:
+images:
+  - name: bhikkhu-patimokkha-A1S.png
+    display: true
+    dark: true
+    map: true
+    file: true
+    pdf: true
+    svg: true
+    online: true
+    svg: bhikkhu-patimokkha.svg
+    title: A1 (square)
+  - name: bhikkhu-patimokkha-A1V.png
+    display: false
+    dark: true
+    map: false
+    file: true
+    pdf: true
+    title: A1 Vertical
+---

@@ -28,3 +28,11 @@ vectors:
 - name: manual-buddhist-terms-force
   formats:
   - A1S
+- name: bhikkhu-patimokkha
+  formats:
+  - A1S
+  - A1V
+- name: bhikkhu-patimokkha-dark
+  formats:
+  - A1SB
+  - A1VB
