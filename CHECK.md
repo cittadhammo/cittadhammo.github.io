@@ -1,5 +1,6 @@
 # To do list for Dhammacharts
 
+  - [ ] Is buddha brain CC0?
   - [ ] Year order in home page (revert_)
   - [ ] Have medium Thumbnails shared for items layout and lightbox
   - [x] Add gap between images in asides?

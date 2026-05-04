@@ -39,3 +39,6 @@ vectors:
 - name: buddha-brain
   formats:
   - A1S
+- name: sutta-pitaka
+  formats:
+  - A0VM
