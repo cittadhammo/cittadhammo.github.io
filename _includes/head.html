@@ -18,7 +18,7 @@
   {% assign first_image_name = first_image_entry.name | default: first_image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
   {% if first_image_name != '' %}
     {% assign first_image_base = first_image_name | split: '.' | first %}
-    {% assign seo_image_path = '/assets/images/' | append: first_image_base | append: '/large.' | append: site.img_ext %}
+    {% assign seo_image_path = '/assets/images/' | append: first_image_base | append: '/medium.' | append: site.img_ext %}
   {% endif %}
 {% endif %}
 {% if seo_image_path != '' %}

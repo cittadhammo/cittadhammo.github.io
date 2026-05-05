@@ -390,13 +390,11 @@ update_size_data() {
     local img_name="$1"
     local small_ratio="$2"
     local medium_ratio="$3"
-    local large_ratio="$4"
     
     # Create temporary YAML entry
     local temp_entry="$img_name:
   small: $small_ratio
-  medium: $medium_ratio
-  large: $large_ratio"
+  medium: $medium_ratio"
     
     # Check if entry exists and update or append
     if grep -q "^$img_name:" "$SIZE_DATA_FILE"; then
@@ -546,16 +544,14 @@ EOF
     if [ "$DISPLAY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
         THUMB_SMALL="$DEST_FOLDER/small.webp"
         THUMB_MEDIUM="$DEST_FOLDER/medium.webp"
-        THUMB_LARGE="$DEST_FOLDER/large.webp"
         DARK_THUMB_SMALL="$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp"
         DARK_THUMB_MEDIUM="$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp"
-        DARK_THUMB_LARGE="$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp"
 
         THUMBS_UP_TO_DATE="false"
         if [ "$META_MATCH" = "true" ] \
-            && all_files_exist "$THUMB_SMALL" "$THUMB_MEDIUM" "$THUMB_LARGE"; then
+            && all_files_exist "$THUMB_SMALL" "$THUMB_MEDIUM"; then
             if [ "$NEEDS_DARKIFY" = "true" ]; then
-                if all_files_exist "$DARK_THUMB_SMALL" "$DARK_THUMB_MEDIUM" "$DARK_THUMB_LARGE"; then
+                if all_files_exist "$DARK_THUMB_SMALL" "$DARK_THUMB_MEDIUM"; then
                     THUMBS_UP_TO_DATE="true"
                 fi
             else
@@ -575,27 +571,20 @@ EOF
             if [ $(awk "BEGIN {print ($ASPECT_RATIO <= 0.8)}") -eq 1 ]; then
                 SMALL_SIZE=565
                 MEDIUM_SIZE=1131
-                LARGE_SIZE=2263
                 echo "Tall image detected (ratio: $ASPECT_RATIO) - using increased resolution"
             else
                 SMALL_SIZE=400
                 MEDIUM_SIZE=800
-                LARGE_SIZE=1600
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
-            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=95,near_lossless=true]" $SMALL_SIZE --intent relative
-            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=95,near_lossless=true]" $MEDIUM_SIZE --intent relative
-            # vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=95,near_lossless=true]" $LARGE_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=82]" $SMALL_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=85]" $MEDIUM_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=88]" $LARGE_SIZE --intent relative
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
                 darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD" "thumb-small"
                 darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD" "thumb-medium"
-                darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD" "thumb-large"
             fi
         fi
 
@@ -607,12 +596,8 @@ EOF
         MEDIUM_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/medium.webp")
         MEDIUM_RATIO=$(awk "BEGIN {printf \"%.3f\", $MEDIUM_WIDTH / $MEDIUM_HEIGHT}")
 
-        LARGE_WIDTH=$(vipsheader -f width "$DEST_FOLDER/large.webp")
-        LARGE_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/large.webp")
-        LARGE_RATIO=$(awk "BEGIN {printf \"%.3f\", $LARGE_WIDTH / $LARGE_HEIGHT}")
-
-        update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO" "$LARGE_RATIO"
-        echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO, large=$LARGE_RATIO"
+        update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO"
+        echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO"
     else
         echo "Skipping thumbnail generation for non-displayable asset: $IMG_NAME"
     fi
