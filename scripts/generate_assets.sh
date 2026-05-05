@@ -578,8 +578,8 @@ EOF
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=82]" $SMALL_SIZE --intent relative
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=85]" $MEDIUM_SIZE --intent relative
+            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=75]" $SMALL_SIZE --intent relative
+            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=75]" $MEDIUM_SIZE --intent relative
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
