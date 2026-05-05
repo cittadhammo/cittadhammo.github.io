@@ -12,12 +12,14 @@
     {% if image.dark == true %}
       {% assign has_dark_variant = false %}
     {% endif %}
+    {% assign img_ratio = site.data.size[img].medium | default: 'auto' %}
+
     {% if image.display == false %}
       <li class="lightbox-only-item" style="display: none;">
         <a class="mfp-image"
-          href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-          data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-          {% if has_dark_variant %}data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"{% endif %}
+          href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+          data-light-href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+          {% if has_dark_variant %}data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"{% endif %}
           data-gallery-index="{{ forloop.index0 }}"
           {% if image.map %}data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
           {% if has_dark_variant %}
@@ -29,22 +31,16 @@
       </li>
       {% continue %}
     {% endif %}
-    <!-- {% assign lightonly_class = '' %} -->
-    <!-- {% if image.lightonly == true %} -->
-    <!--   {% assign lightonly_class = 'lightonly-item' %} -->
-    <!-- {% elsif image.darkonly == true %} -->
-    <!--   {% assign lightonly_class = 'darkonly-item' %} -->
-    <!-- {% endif %} -->
-    <!-- <li{% if lightonly_class != '' %} class="{{ lightonly_class }}"{% endif %}> -->
+
     <li>
       {% if image.map %}
         <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
           <a
             class="mfp-image"
-            href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-            data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+            href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+            data-light-href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
             {% if has_dark_variant %}
-              data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
             {% endif %}
             data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
             {% if has_dark_variant %}
@@ -55,17 +51,17 @@
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              class="load-hidden"
+              {% if forloop.first == false %}class="load-hidden"{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}
                 data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
               {% endif %}
-              style="aspect-ratio: {{ site.data.size[img].medium }};"
+              style="aspect-ratio: {{ img_ratio }};"
               alt="{{ image.alt }}"
             >
           </a>
-          <a class="map-icon load-hidden" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
+          <a class="map-icon{% if forloop.first == false %} load-hidden{% endif %}" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
             <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
           </a>
         </div>
@@ -73,21 +69,22 @@
         <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
           <a
             class="mfp-image"
-            href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
-            data-light-href="{{ '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url }}"
+            href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
+            data-light-href="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
             {% if has_dark_variant %}
-              data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
             {% endif %}
             data-gallery-index="{{ forloop.index0 }}"
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              class="load-hidden"
+              {% if forloop.first == false %}class="load-hidden"{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}
                 data-dark-src="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
               {% endif %}
+              style="aspect-ratio: {{ img_ratio }};"
               alt="{{ image.alt }}"
             >
           </a>
@@ -96,3 +93,4 @@
     </li>
   {% endfor %}
 </ul>
+

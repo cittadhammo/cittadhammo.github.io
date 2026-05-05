@@ -20,7 +20,7 @@
     var ext = window.PAGE_IMAGE_EXT || "webp";
     var baseurl = window.PAGE_BASEURL || "";
     baseurl = baseurl.replace(/\/+$/, "");
-    var lightHref = baseurl + "/assets/images/" + encodedBase + "/large." + ext;
+    var lightHref = baseurl + "/assets/images/" + encodedBase + "/medium." + ext;
     var src = baseurl + "/assets/images/" + encodedBase + "/medium." + ext;
     var alt = (label && label.trim()) ? label.trim() : cleanTarget.split("/").pop();
 
