@@ -42,3 +42,9 @@ vectors:
 - name: sutta-pitaka
   formats:
   - A0VM
+- name: sutta-pitaka-horizontal
+  formats:
+  - A0HM
+- name: sutta-pitaka-rectilipse
+  formats:
+  - A0HM
