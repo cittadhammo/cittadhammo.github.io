@@ -48,7 +48,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta charset="utf-8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     @page {{
       size: {page_width_mm}mm {page_height_mm}mm;
@@ -128,6 +128,9 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
     if license_config:
         logo = license_config.get('logo')
         text = license_config.get('text', [])
+        scale = license_config.get('scale', 1.0)
+        padding = license_config.get('padding', 10)
+        
         if isinstance(text, str):
             text = [text]
         
@@ -142,11 +145,11 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
   </div>
 """.format(text_html=text_html, logo=logo)
         
-        license_css = """
-    .license-container {
+        license_css = f"""
+    .license-container {{
       position: absolute;
-      bottom: 10mm;
-      right: 10mm;
+      bottom: {padding}mm;
+      right: {padding}mm;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -154,17 +157,20 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
       color: #828282;
       font-family: 'Poppins', sans-serif;
       z-index: 100;
-    }
-    .license-text {
+      transform: scale({scale});
+      transform-origin: bottom right;
+    }}
+    .license-text {{
       text-align: right;
-      font-weight: bold;
-      font-size: 7pt;
+      font-weight: 500;
+      font-size: 8pt;
       line-height: 1.2;
       margin-right: 2mm;
-    }
-    .license-logo {
+    }}
+
+    .license-logo {{
       height: 8mm;
-    }
+    }}
 """
 
     html_content = HTML_TEMPLATE.format(
@@ -333,14 +339,22 @@ def main():
         
         vector_license = entry.get('license')
         
-        # Merge license configs if applicable
+        # Merge license configs
+        # Logic: 
+        # 1. If license is False, no license.
+        # 2. If license is True or missing (but default exists), use default.
+        # 3. If license is a dict, merge with default.
         license_config = None
         if vector_license is False:
             license_config = None
-        elif vector_license or default_license:
+        elif vector_license is True:
             license_config = (default_license or {}).copy()
-            if isinstance(vector_license, dict):
-                license_config.update(vector_license)
+        elif isinstance(vector_license, dict):
+            license_config = (default_license or {}).copy()
+            license_config.update(vector_license)
+        elif vector_license is None and default_license:
+            # By default, use license if a global default is defined
+            license_config = default_license.copy()
         
         for label in formats:
             process_vector(name, label, license_config=license_config)

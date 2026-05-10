@@ -52,12 +52,31 @@ Configuration:
 ### vectors.yml Format
 
 ```yaml
+defaults:
+  license:
+    logo: cc-zero       # Logo name in vault/assets/icons/<name>.svg
+    text:
+      - "DhammaCharts.org"
+      - "Public Domain"
+    scale: 1.0          # Optional: Scale of the badge (default 1.0)
+    padding: 10         # Optional: Distance from bottom-right in mm (default 10)
+
 vectors:
   - name: DhammaCitadel
+    license: true       # Use default license
     formats:
       - A0S
       - A0SM
-      - A0SBM
+  - name: 31-planes
+    license:
+      scale: 0.8        # Override scale
+      padding: 5        # Override padding
+    formats:
+      - A1S
+  - name: internal-chart
+    license: false      # Explicitly disable license
+    formats:
+      - A4V
 ```
 
 Format codes:

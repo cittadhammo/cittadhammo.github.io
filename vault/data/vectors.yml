@@ -1,9 +1,19 @@
 defaults:
   license:
-    logo: by-nc
+    logo: cc-zero
     text:
       - "DhammaCharts.org"
-      - "For free distribution only"
+      - "Public Domain"
+    scale: 1.0
+    padding: 10
+  # Alternative default example:
+  # license:
+  #   logo: by-nc
+  #   text:
+  #     - "DhammaCharts.org"
+  #     - "For free distribution only"
+  #   scale: 1.0
+  #   padding: 10
 
 vectors:
 - name: dhamma-citadel
@@ -55,3 +65,9 @@ vectors:
 - name: sutta-pitaka-rectilipse
   formats:
   - A0HM
+- name: 31-planes
+  license:
+    scale: 2
+    padding: 5
+  formats:
+  - A1S
