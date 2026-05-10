@@ -46,6 +46,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @page {{
       size: {page_width_mm}mm {page_height_mm}mm;
@@ -66,10 +69,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       margin: {margin_top_mm}mm {margin_right_mm}mm {margin_bottom_mm}mm {margin_left_mm}mm;
       border: none;
     }}
+    {license_css}
   </style>
 </head>
 <body>
   <object data="../svgs/{svg_name}" type="image/svg+xml"></object>
+  {license_html}
 </body>
 </html>
 """
@@ -114,7 +119,54 @@ def parse_format_from_label(label):
 def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
                    svg_w_mm, svg_h_mm,
                    margin_left_mm, margin_right_mm, margin_top_mm, margin_bottom_mm,
-                   background_color):
+                   background_color,
+                   license_config=None):
+    
+    license_html = ""
+    license_css = ""
+    
+    if license_config:
+        logo = license_config.get('logo')
+        text = license_config.get('text', [])
+        if isinstance(text, str):
+            text = [text]
+        
+        text_html = "".join([f"<div>{t}</div>" for t in text])
+        
+        license_html = f"""
+  <div class="license-container">
+    <div class="license-text">
+      {{text_html}}
+    </div>
+    <img class="license-logo" src="../icons/{{logo}}.svg">
+  </div>
+""".format(text_html=text_html, logo=logo)
+        
+        license_css = """
+    .license-container {
+      position: absolute;
+      bottom: 10mm;
+      right: 10mm;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      opacity: 0.75;
+      color: #828282;
+      font-family: 'Poppins', sans-serif;
+      z-index: 100;
+    }
+    .license-text {
+      text-align: right;
+      font-weight: bold;
+      font-size: 7pt;
+      line-height: 1.2;
+      margin-right: 2mm;
+    }
+    .license-logo {
+      height: 8mm;
+    }
+"""
+
     html_content = HTML_TEMPLATE.format(
         svg_name=svg_path.name,
         page_width_mm=page_w_mm,
@@ -126,6 +178,8 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
         margin_top_mm=margin_top_mm,
         margin_bottom_mm=margin_bottom_mm,
         background_color=background_color,
+        license_html=license_html,
+        license_css=license_css
     )
     with open(wrapper_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
@@ -187,9 +241,9 @@ def load_vectors_config():
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
     
-    return config.get('vectors', [])
+    return config.get('defaults', {}), config.get('vectors', [])
 
-def process_vector(name, label):
+def process_vector(name, label, license_config=None):
     source_svg = svg_dir / f"{name}.svg"
     if not source_svg.exists():
         print(f"Warning: source SVG not found: {source_svg}")
@@ -255,7 +309,8 @@ def process_vector(name, label):
                        page_w_mm, page_h_mm,
                        svg_w_mm, svg_h_mm,
                        margin_left, margin_right, margin_top, margin_bottom,
-                       background_color)
+                       background_color,
+                       license_config=license_config)
 
         generate_pdf(wrapper_path, pdf_path)
         print(f"Generated PDF: {pdf_path}")
@@ -269,14 +324,26 @@ def process_vector(name, label):
         print(f"Error processing {base_name}: {e}")
 
 def main():
-    vectors = load_vectors_config()
+    defaults, vectors = load_vectors_config()
+    default_license = defaults.get('license')
     
     for entry in vectors:
         name = entry.get('name')
         formats = entry.get('formats', [])
         
+        vector_license = entry.get('license')
+        
+        # Merge license configs if applicable
+        license_config = None
+        if vector_license is False:
+            license_config = None
+        elif vector_license or default_license:
+            license_config = (default_license or {}).copy()
+            if isinstance(vector_license, dict):
+                license_config.update(vector_license)
+        
         for label in formats:
-            process_vector(name, label)
+            process_vector(name, label, license_config=license_config)
 
 if __name__ == "__main__":
     main()

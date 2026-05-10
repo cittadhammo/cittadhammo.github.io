@@ -1,3 +1,10 @@
+defaults:
+  license:
+    logo: by-nc
+    text:
+      - "DhammaCharts.org"
+      - "For free distribution only"
+
 vectors:
 - name: dhamma-citadel
   formats:

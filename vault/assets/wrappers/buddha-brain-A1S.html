@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @page {
       size: 594mm 594mm;
@@ -22,9 +25,41 @@
       margin: 0.0mm 0.0mm 0.0mm 0.0mm;
       border: none;
     }
+    
+    .license-container {
+      position: absolute;
+      bottom: 10mm;
+      right: 10mm;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      opacity: 0.75;
+      color: #828282;
+      font-family: 'Poppins', sans-serif;
+      z-index: 100;
+    }
+    .license-text {
+      text-align: right;
+      font-weight: bold;
+      font-size: 7pt;
+      line-height: 1.2;
+      margin-right: 2mm;
+    }
+    .license-logo {
+      height: 8mm;
+    }
+
   </style>
 </head>
 <body>
   <object data="../svgs/buddha-brain.svg" type="image/svg+xml"></object>
+  
+  <div class="license-container">
+    <div class="license-text">
+      <div>DhammaCharts.org</div><div>For free distribution only</div>
+    </div>
+    <img class="license-logo" src="../icons/by-nc.svg">
+  </div>
+
 </body>
 </html>
