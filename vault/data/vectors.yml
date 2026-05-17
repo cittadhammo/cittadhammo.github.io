@@ -3,9 +3,9 @@ defaults:
     logo: cc-zero
     text:
       - "DhammaCharts.org"
-      - "Public Domain"
-    scale: 1.0
-    padding: 10
+      - "Freely Available"
+    scale: 1
+    padding: 5
   # Alternative default example:
   # license:
   #   logo: by-nc
@@ -56,6 +56,7 @@ vectors:
 - name: buddha-brain
   formats:
   - A1S
+  license: true
 - name: sutta-pitaka
   formats:
   - A0VM

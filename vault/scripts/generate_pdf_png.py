@@ -153,8 +153,8 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
       display: flex;
       flex-direction: row;
       align-items: center;
-      opacity: 0.75;
-      color: #828282;
+      opacity: 1.0;
+      color: #333333;
       font-family: 'Poppins', sans-serif;
       z-index: 100;
       transform: scale({scale});

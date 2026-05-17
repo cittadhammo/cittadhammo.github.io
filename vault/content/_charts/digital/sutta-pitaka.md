@@ -32,7 +32,7 @@ images:
     online: true
     title: A0 Vertical
   - name: sutta-pitaka-horizontal-A0HM.png
-    display: true
+    display: false
     map: true
     file: true
     pdf: true
