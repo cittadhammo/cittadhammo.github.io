@@ -3,9 +3,18 @@
 ## Overview
 - This is a Jekyll site for displaying and storing Dhamma Charts and Art.
 - Content is sourced from an Obsidian vault that is synced from another repo.
-- The site uses the Pineapple Jekyll template.
+- Sites uses the Pineapple Jekyll template.
+
+## New Configuration Options
+- `site.theme.scroll_reveal`: Set to `false` in `_config.yml` to disable all ScrollReveal animations site-wide.
+- `reveal-first`: A CSS class used for the very first visible item in the gallery to ensure it animates instantly without waiting for JS.
+
+## Dark Mode Improvements
+- A `MutationObserver` in `head.html` intercepts and swaps image `src` for dark variants as they are parsed, preventing any flicker of light variants on load.
+- Manual variants (`lightonly: true`, `darkonly: true` in frontmatter) are handled via inline CSS in the head and the `updateLightDarkOnlyItems` function.
 
 ## Key Structure
+
 - Content lives in `vault/content` (markdown with YAML frontmatter).
 - Source images live in `vault/assets/images` and generated assets go to `assets/images`.
 - Map viewer pages are generated into `maps` from `scripts/map-template.html`.

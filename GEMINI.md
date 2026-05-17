@@ -1,52 +1,79 @@
-# Project Context for Gemini CLI
+# AGENTS.md
 
-This document outlines key information about the Dhammacharts project for the Gemini CLI agent.
+## Overview
+- This is a Jekyll site for displaying and storing Dhamma Charts and Art.
+- Content is sourced from an Obsidian vault that is synced from another repo.
+- Sites uses the Pineapple Jekyll template.
 
-## General Project Overview
-*   This website is built with **Jekyll** and uses **Bundler** for Ruby dependency management.
-*   Content is managed via an **Obsidian vault**, which is synced from another repository.
-*   The primary goal is displaying and storing Dhamma Charts and Art.
+## New Configuration Options
+- `site.theme.scroll_reveal`: Set to `false` in `_config.yml` to disable all ScrollReveal animations site-wide.
+- `reveal-first`: A CSS class used for the very first visible item in the gallery to ensure it animates instantly without waiting for JS.
 
-## Development Workflow
-*   When Gemini CLI is running, the `make local-serve` command has already been launched. Therefore, there is no need to rebuild the site.
-*   Any code modifications I make should be **instantaneously visible** to the user without needing to rebuild or restart the server.
-*   Live reloading is handled via `jekyll serve --livereload --config _config.yml,_config_local.yml` or the `make serve-local` command.
+## Dark Mode Improvements
+- A `MutationObserver` in `head.html` intercepts and swaps image `src` for dark variants as they are parsed, preventing any flicker of light variants on load.
+- Manual variants (`lightonly: true`, `darkonly: true` in frontmatter) are handled via inline CSS in the head and the `updateLightDarkOnlyItems` function.
 
-## Content Structure & Organization
-*   Content can be organized into "areas." To add a new area:
-    *   Create an `area_name.md` file in the root (with title and area frontmatter).
-    *   Add a collection to the `_config.yml` file.
-    *   Adjust the `areas.yml` file in the `content/_data/` folder.
-*   Pages within a collection need a frontmatter `type: page` to be displayed at the top right of an area.
-*   Categories of items are extracted via their path.
+## Key Structure
 
-## Asset Management & Generation
-*   **Charts are primarily SVG files.** These are converted into **PNG tiles** via a script located in `vault/script`.
-*   A `generate assets` script in the root `scripts` folder is also involved in asset processing.
-*   The **`searchAndMap.sh`** script (`make assets`) is crucial for asset generation:
-    *   Scans markdown files for images listed in their frontmatter.
-    *   Copies original images and creates three resized thumbnails.
-    *   For images marked as maps, it generates map tiles and records dimensions in `maps.yml`.
-*   A Python script handles general image processing and can be run via `make images`.
-*   To optimize live reloads and avoid excessive copying, a "clever trick" is used: `keep_files` in the Jekyll config combined with a relative symlink to assets.
-*   **Generated tiles are served and displayed using special HTML map files that utilize the OpenLayers library.**
+- Content lives in `vault/content` (markdown with YAML frontmatter).
+- Source images live in `vault/assets/images` and generated assets go to `assets/images`.
+- Map viewer pages are generated into `maps` from `scripts/map-template.html`.
+- Site layouts and includes are in `_layouts` and `_includes`.
+- Styles are in `assets/scss/_custom.scss` and pulled by `assets/css/style.scss`.
 
-## Key Makefile Commands
-*   `make serve`: Starts Jekyll with livereload.
-*   `make assets`: Runs the `searchAndMap.sh` script.
-*   `make images`: Runs the Python script inside the vault directory.
-*   `make clean`: Cleans up the build folder.
+## Content Model
+- “Areas” are top-level collections. To add a new area:
+- Create `area_name.md` at the repo root with `title` and `area` frontmatter.
+- Add a collection to `_config.yml`.
+- Update `content/_data/areas.yml`.
+- Pages in collections need frontmatter `type: page` to appear in the top-right area navigation.
+- Categories are inferred from content paths.
 
-## Script Dependencies
-*   Required dependencies for asset generation scripts: `vips` (libvips), `go-yq` (mikefarah/yq), `gawk` (awk), `findutils` (find), `openslide`.
+## Asset Generation
+- Main asset pipeline is `scripts/generate_assets.sh` and `make assets`.
+- It scans all markdown in `vault/content`, reads frontmatter `images`, and for each image:
+- Copies the original to `assets/images/<basename>`.
+- Generates `small.webp`, `medium.webp`, and `large.webp` thumbnails.
+- Writes aspect ratios to `vault/data/size.yml`.
+- If an image is marked `map: true`, it generates map tiles and a viewer page in `maps`.
+- Map viewers use OpenLayers with the template `scripts/map-template.html`.
 
-## Configuration Notes
-*   The `baseurl` in `_config.yml` might need to be set to `''` if the website is deployed to the root folder of a domain.
+## Development
+- Primary commands are in `Makefile`.
+- `make serve` runs Jekyll with livereload and symlinks `assets/images` into `_site`.
+- `make build` builds with `_config.yml` + `_config_local.yml`.
+- `make clean` removes generated images and map pages.
 
-## No Comment in Liquid Language
+## PDF/PNG Generation (vectors)
+- Source SVGs live in `vault/assets/svgs/<name>.svg` (without format codes).
+- Configuration in `vault/data/vectors.yml` defines which SVGs to generate:
+  ```yaml
+  vectors:
+    - name: DhammaCitadel
+      formats:
+        - A0S
+        - A0SM
+        - A0SBM
+  ```
+- Format codes: A0S, A0V, A0H, A1S, A1V, A1H, A2S, A2V, A2H, 2A0S, 2A0V, 2A0H
+  - Add `B` for black background (e.g., A0SB)
+  - Add `M` for margin (e.g., A0SM, A0SBM)
+- Generated outputs go to `vault/assets/{pdfs,images,wrappers}/<name>-<label>.*`
+- Run `make images` from project root to generate.
 
-* Comment made inside the page code with liquid syntax {# #} are breaking the code. DO NOT USE THEM
+## Dependencies
+- Ruby + Bundler for Jekyll (`bundle install`, then `bundle exec jekyll serve`).
+- Asset scripts require `vips`, `yq` (mikefarah), `gawk`, `findutils`, and `openslide`.
 
-## Gemini CLI Specific Notes
-*   **CSS Location:** Custom styles are located in `assets/scss/_custom.scss` and are imported via `assets/css/style.scss`.
-*   **Git Usage:** The Gemini CLI should **not** run git commands. The user will manage git operations manually.
+## Config Notes
+- Local serve uses `_config.yml` and `_config_local.yml`.
+- For root-domain deployments, set `baseurl` in `_config.yml` to an empty string.
+- Jekyll keeps generated assets via `keep_files` and a symlink trick in `make serve`.
+
+## Gotchas
+- Do not use Liquid comments `{# #}` inside page code; they break parsing.
+- Generated files live under `assets/images` and `maps`; rerun `make assets` after content or image changes.
+- Do not run git commands; the user will handle git operations manually.
+
+## Ignore
+- `_archive` is legacy and should be ignored.
