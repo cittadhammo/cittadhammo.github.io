@@ -66,8 +66,9 @@ theme:
   item_navigation_cross_section: true # If true, navigation can jump between areas and categories.
 # Site config
 # baseurl: "https://www.dhammacharts.org/old-website"
+# url: "https://cittadhammo.github.io"
 baseurl: ""
-url: "https://cittadhammo.github.io"
+url: "https://www.dhammacharts.org"
 highlighter: rouge
 sass:
   sass_dir: assets/scss

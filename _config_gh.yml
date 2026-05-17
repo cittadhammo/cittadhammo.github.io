@@ -1,2 +1,4 @@
-baseurl: "/dhammacharts"
-url: "https://cittadhammo.github.io"
+# baseurl: "/dhammacharts"
+# url: "https://cittadhammo.github.io"
+baseurl: ""
+url: "https://www.dhammacharts.org"
