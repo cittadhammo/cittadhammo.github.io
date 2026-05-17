@@ -93,6 +93,11 @@
           {% for page in pages %}
             <a href="{{ page.url | relative_url }}" class="rouge-first white-under"> {{ page.title }} </a>
           {% endfor %}
+          {% if area_config.external_links %}
+            {% for ext_link in area_config.external_links %}
+              <a href="{{ ext_link.url }}" target="_blank" rel="noopener noreferrer" class="rouge-first white-under"> {{ ext_link.title }} </a>
+            {% endfor %}
+          {% endif %}
         </div>
       {% endif %}
     </div>
