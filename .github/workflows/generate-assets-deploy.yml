@@ -48,6 +48,12 @@ jobs:
 
       - name: Copy cached generated assets
         run: |
+          if [ "${FORCE_ASSETS}" = "true" ]; then
+            echo "FORCE_ASSETS is enabled. Skipping cache restoration to ensure a clean build."
+            mkdir -p assets/images maps
+            exit 0
+          fi
+
           mkdir -p assets/images
           if [ -d ".deploy-cache/assets/images" ]; then
             cp -a .deploy-cache/assets/images/. assets/images/
@@ -78,7 +84,10 @@ jobs:
             reason="Asset-related files changed."
           elif [ ! -d "assets/images" ] || [ -z "$(find assets/images -mindepth 1 -print -quit)" ]; then
             run_assets="true"
-            reason="No cached generated assets available; forcing generation."
+            reason="No cached generated images available; forcing generation."
+          elif [ ! -d "maps" ] || [ -z "$(find maps -mindepth 1 -print -quit)" ]; then
+            run_assets="true"
+            reason="No cached map viewers available; forcing generation."
           fi
 
           echo "run=$run_assets" >> "$GITHUB_OUTPUT"
