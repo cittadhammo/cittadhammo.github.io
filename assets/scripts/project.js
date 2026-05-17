@@ -41,9 +41,17 @@
 
         // --- Height Synchronization Function ---
         function updateAsideMinHeight() {
+            var w = $(window).width();
             const article = $("article");
-            const height = article.height() + 48;
-            $(".project aside").css("min-height", height);
+            const $aside = $(".project aside");
+
+            if (w < 750) {
+                // On mobile, clear the min-height to avoid gaps
+                $aside.css("min-height", "");
+            } else {
+                const height = article.height() + 48;
+                $aside.css("min-height", height);
+            }
 
             // Recalculate sticky after height changes
             sticky(); 
