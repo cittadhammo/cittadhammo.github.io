@@ -317,14 +317,13 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 
 		&:nth-of-type(1),
 		&:nth-of-type(2) {
-			display: table;
-			margin: 0 auto;
-			text-align: center;
+			display: block;
+			margin: 0;
+			text-align: left;
 
 			@media (min-width: variables.$breakpoint-xsmall) {
 				display: inline-block;
 				margin: 0;
-				text-align: left;
 			}
 		}
 
@@ -336,14 +335,17 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 
 		&:nth-of-type(2) {
 			margin-top: 3rem;
+			text-align: right;
 
 			@media (min-width: variables.$breakpoint-xsmall) {
 				float: right;
 				margin-top: 0;
+				text-align: left;
 			}
 		}
 
 		&.next {
+			text-align: right;
 			span {
 				text-align: right;
 				&:after {
