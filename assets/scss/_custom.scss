@@ -556,7 +556,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   letter-spacing: .2rem; /* Added letter-spacing */
   text-transform: uppercase; /* Added text-transform */
   display: inline; /* Ensure it stays inline */
-  margin-left: 0.5em; /* Added space to the left */
+  padding-left: 1rem; /* Indent applied to every line */
+  margin-left: -0.4rem; /* Reduce the initial gap on the first line */
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .item-layout .source-author-h2-style {
