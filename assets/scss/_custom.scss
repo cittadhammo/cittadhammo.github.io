@@ -364,6 +364,22 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     }
   }
 
+  @keyframes revealFirstItem {
+    from {
+      opacity: 0;
+      transform: translateY(64px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-first {
+    opacity: 0;
+    animation: revealFirstItem 0.9s ease-out forwards;
+  }
+
   html.sr .load-hidden {
     visibility: hidden;
 }
