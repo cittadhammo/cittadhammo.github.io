@@ -6,6 +6,7 @@ description: "Dhamma Charts and Art."
 logo: "/assets/icons/logo300.png"
 discord_url: "https://discord.gg/MkyKZh8ANy"
 contribute_url: "/references/info/contribute.html"
+cloudflare_analytics_token: "7156239ca8f04c6fba39475503ef00cc"
 footer:
   blocks:
     - title: "Contact"
@@ -188,3 +189,7 @@ exclude:
   - CHECK.md
   - QUOTE.md
   - OPTIMISATION.md
+  - OPTIMISATION2.md
+  - CLOUDFLARE_SETUP.md
+  - LIGHTONLY_DARKONLY_DEBUG.md
+  - PLAN-icon-overlay.md

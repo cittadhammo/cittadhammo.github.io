@@ -12,14 +12,16 @@
 ## Dark Mode Improvements
 - A `MutationObserver` in `head.html` intercepts and swaps image `src` for dark variants as they are parsed, preventing any flicker of light variants on load.
 - Manual variants (`lightonly: true`, `darkonly: true` in frontmatter) are handled via inline CSS in the head and the `updateLightDarkOnlyItems` function.
+- Cloudflare Web Analytics is enabled via `site.cloudflare_analytics_token` in `_config.yml`.
 
 ## Key Structure
-
 - Content lives in `vault/content` (markdown with YAML frontmatter).
 - Source images live in `vault/assets/images` and generated assets go to `assets/images`.
 - Map viewer pages are generated into `maps` from `scripts/map-template.html`.
 - Site layouts and includes are in `_layouts` and `_includes`.
 - Styles are in `assets/scss/_custom.scss` and pulled by `assets/css/style.scss`.
+- Project documentation files in root (GEMINI.md, AGENTS.md, OPTIMISATION*.md, etc.) are excluded from the Jekyll build.
+
 
 ## Content Model
 - “Areas” are top-level collections. To add a new area:

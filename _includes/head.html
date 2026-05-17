@@ -416,3 +416,8 @@
 </script>
 <script src="{{ '/assets/scripts/vendor/imagesloaded.pkgd.min.js' | relative_url }}"></script>
 <script src="{{ '/assets/scripts/vendor/masonry.pkgd.min.js' | relative_url }}"></script>
+{% if site.cloudflare_analytics_token %}
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cloudflare_analytics_token }}"}'></script>
+<!-- End Cloudflare Web Analytics -->
+{% endif %}
