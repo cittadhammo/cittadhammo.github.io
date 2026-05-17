@@ -1,10 +1,20 @@
 {% assign gap = site.theme.item_aside_gap | default: '0px' %}
+{% assign found_first_darkonly = false %}
 <ul class="lightbox-gallery"{% if gap != '0px' %} style="display: flex; flex-wrap: wrap; gap: {{ gap }};"{% endif %}>
   {% for image in page.images %}
     {% assign image_name = image.name | default: image | to_s | strip %}
     {% if image_name == '' %}
       {% continue %}
     {% endif %}
+
+    {% assign is_reveal_first = false %}
+    {% if forloop.first %}
+      {% assign is_reveal_first = true %}
+    {% elsif image.darkonly and found_first_darkonly == false %}
+      {% assign is_reveal_first = true %}
+      {% assign found_first_darkonly = true %}
+    {% endif %}
+
     {% assign image_name = image_name | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
     {% assign img = image_name | split: '.' | first %}
     {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
@@ -32,7 +42,7 @@
       {% continue %}
     {% endif %}
 
-    <li>
+    <li{% if image.lightonly %} class="lightonly-item"{% elsif image.darkonly %} class="darkonly-item"{% endif %}>
       {% if image.map %}
         <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
           <a
@@ -51,7 +61,7 @@
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              {% if site.theme.scroll_reveal != false %}{% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
+              {% if site.theme.scroll_reveal != false %}{% if is_reveal_first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}
@@ -61,7 +71,7 @@
               alt="{{ image.alt }}"
             >
           </a>
-          <a class="map-icon{% if site.theme.scroll_reveal != false %}{% if forloop.first %} reveal-first{% else %} load-hidden{% endif %}{% endif %}" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
+          <a class="map-icon{% if site.theme.scroll_reveal != false %}{% if is_reveal_first %} reveal-first{% else %} load-hidden{% endif %}{% endif %}" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
             <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
           </a>
         </div>
@@ -78,7 +88,7 @@
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              {% if site.theme.scroll_reveal != false %}{% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
+              {% if site.theme.scroll_reveal != false %}{% if is_reveal_first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}

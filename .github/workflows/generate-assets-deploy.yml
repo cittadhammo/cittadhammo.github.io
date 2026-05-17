@@ -56,6 +56,14 @@ jobs:
             echo "No cached assets/images found on ${{ steps.deploy_branch.outputs.name }} branch."
           fi
 
+          mkdir -p maps
+          if [ -d ".deploy-cache/maps" ]; then
+            cp -a .deploy-cache/maps/. maps/
+            echo "Restored cached maps from ${{ steps.deploy_branch.outputs.name }} branch."
+          else
+            echo "No cached maps found on ${{ steps.deploy_branch.outputs.name }} branch."
+          fi
+
       - name: Decide whether to generate assets
         id: should_generate_assets
         run: |
