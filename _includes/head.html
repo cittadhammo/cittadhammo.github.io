@@ -258,7 +258,9 @@
 </script>
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/vendor/magnific-popup.min.css' | relative_url }}">
+{% if site.theme.scroll_reveal != false %}
 <script src="{{ '/assets/scripts/scrollreveal.js' | relative_url }}"></script>
+{% endif %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var toggle = document.querySelector("[data-theme-toggle]");

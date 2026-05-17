@@ -1,6 +1,6 @@
 <div style="clear: both; height: 195px; display:flex">
     <div width="200px" style="float: left; margin-right: 2rem; margin-bottom: 5rem"><a href="{{include.link}}">
-  <img class="link-item load-hidden" src="{{ '/' | append: include.image_path | relative_url }}" alt="" style="width:130px; aspect-ratio: 1/1;">
+  <img class="link-item{% if site.theme.scroll_reveal != false %} load-hidden{% endif %}" src="{{ '/' | append: include.image_path | relative_url }}" alt="" style="width:130px; aspect-ratio: 1/1;">
   </a>
     </div>
     <div>

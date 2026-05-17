@@ -31,6 +31,7 @@ theme:
   allow_user_toggle: true # Show the theme toggle and persist user choice in localStorage.
   respect_prefers_color_scheme: true # When default is "auto", use prefers-color-scheme (dark => dark, else light).
   toggle_show_auto_label: false # If true, toggle can show an "Auto" label/state in UI.
+  scroll_reveal: true # If false, ScrollReveal is disabled site-wide.
   home_hero_landing: false # If true, show a full-screen hero on home with title/logo/area links.
   home_hero_follow_theme: true # If false, hero stays in dark style even when the site theme is light.
   home_hero_hide_on_scroll_cue: true # If true, clicking the hero bottom arrow hides the hero after scrolling.

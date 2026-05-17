@@ -21,7 +21,7 @@
         {% for item in items %}
           {% assign parent = item.url | split: '/' | pop | last %}
           {% if parent == category.name %}
-            <li class="load-hidden">
+            <li{% if site.theme.scroll_reveal != false %} class="load-hidden"{% endif %}>
               <a href="{{ item.url | relative_url }}">
                 <div class="img-wrapper">
                   {% assign image = item.images | first %}

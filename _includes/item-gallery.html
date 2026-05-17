@@ -51,7 +51,7 @@
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              {% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}
+              {% if site.theme.scroll_reveal != false %}{% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}
@@ -61,7 +61,7 @@
               alt="{{ image.alt }}"
             >
           </a>
-          <a class="map-icon{% if forloop.first %} reveal-first{% else %} load-hidden{% endif %}" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
+          <a class="map-icon{% if site.theme.scroll_reveal != false %}{% if forloop.first %} reveal-first{% else %} load-hidden{% endif %}{% endif %}" href="{{ '/maps/' | append: img | append: '.html' | relative_url }}">
             <img src="{{ '/assets/icons/fs-s.png' | relative_url }}" alt="Map Icon">
           </a>
         </div>
@@ -78,7 +78,7 @@
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
-              {% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}
+              {% if site.theme.scroll_reveal != false %}{% if forloop.first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
               src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               data-light-src="{{ '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url }}"
               {% if has_dark_variant %}
