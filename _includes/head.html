@@ -223,6 +223,51 @@
       initialMode = "light";
     }
     var initialTheme = resolveTheme(initialMode);
+
+    // CRITICAL: Intercept elements as they are parsed to prevent flicker
+    (function() {
+      var isDark = initialTheme === "dark";
+      if (!isDark) return;
+
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type !== "childList") return;
+          for (var i = 0; i < mutation.addedNodes.length; i++) {
+            var node = mutation.addedNodes[i];
+            if (node.nodeType !== 1) continue;
+
+            // Check if node itself is an image with dark variant
+            if (node.nodeName === "IMG" && node.hasAttribute("data-dark-src")) {
+              var darkSrc = node.getAttribute("data-dark-src");
+              if (darkSrc && node.getAttribute("src") !== darkSrc) {
+                node.setAttribute("src", darkSrc);
+              }
+            }
+
+            // Check children (for deep fragments)
+            var imgs = node.querySelectorAll("img[data-dark-src]");
+            for (var j = 0; j < imgs.length; j++) {
+              var img = imgs[j];
+              var dSrc = img.getAttribute("data-dark-src");
+              if (dSrc && img.getAttribute("src") !== dSrc) {
+                img.setAttribute("src", dSrc);
+              }
+            }
+          }
+        });
+      });
+
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+
+      // Stop observing once the DOM is fully parsed to save resources
+      window.addEventListener("DOMContentLoaded", function() {
+        observer.disconnect();
+      });
+    })();
+
     applyTheme(initialTheme, initialMode);
 
     window.__themeConfig = config;
