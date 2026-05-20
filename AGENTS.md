@@ -23,6 +23,17 @@
 - Project documentation files in root (GEMINI.md, AGENTS.md, OPTIMISATION*.md, etc.) are excluded from the Jekyll build.
 
 
+- `external_links`: Add to an area in `vault/data/areas.yml` to render external links in the area header alongside regular pages. Each entry needs `title` and `url`:
+  ```yaml
+  - name: charts
+    pages:
+      - name: links
+    external_links:
+      - title: Old Site
+        url:   https://dhammacharts.github.io/
+  ```
+  Links open in a new tab via `target="_blank"`.
+
 ## Content Model
 - “Areas” are top-level collections. To add a new area:
 - Create `area_name.md` at the repo root with `title` and `area` frontmatter.
@@ -62,6 +73,7 @@
   - Add `M` for margin (e.g., A0SM, A0SBM)
 - Generated outputs go to `vault/assets/{pdfs,images,wrappers}/<name>-<label>.*`
 - Run `make images` from project root to generate.
+- License overlay on generated output is opt-in via `vault/data/vectors.yml`. Set `license: true` to use the `defaults.license` settings, or `license: { key: value }` to override specific settings (e.g., `scale`, `padding`). If absent, no wrapper overlay is added (most SVGs already have license text baked into the source file).
 
 ## Dependencies
 - Ruby + Bundler for Jekyll (`bundle install`, then `bundle exec jekyll serve`).
