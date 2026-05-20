@@ -11,4 +11,7 @@
     - name:   hand-made
   pages:
     - name:   links
+  external_links:
+    - title:  Old Site
+      url:    https://dhammacharts.github.io/
 

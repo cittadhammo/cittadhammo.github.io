@@ -44,7 +44,7 @@ images:
     svg: manual-buddhist-terms.svg
     online: true
     title: A1 Square
-  - name: manual-buddhist-terms-dark-A1S.png
+  - name: manual-buddhist-terms-dark-A1SB.png
     dark: true
     homedark: true
     display: true 
