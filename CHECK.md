@@ -1,5 +1,9 @@
 # To do list for Dhammacharts
 
+  - [ ] border on dark images
+  - [ ] Add dark and light image on both theme in aside
+  - [ ] add hover effect, link and mb in item layout 
+  - [ ] change font on force manual chart
   - [ ] Is buddha brain CC0?
   - [ ] Year order in home page (revert_)
   - [ ] Have medium Thumbnails shared for items layout and lightbox
