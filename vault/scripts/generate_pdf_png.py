@@ -339,22 +339,16 @@ def main():
         
         vector_license = entry.get('license')
         
-        # Merge license configs
-        # Logic: 
-        # 1. If license is False, no license.
-        # 2. If license is True or missing (but default exists), use default.
-        # 3. If license is a dict, merge with default.
+        # License is opt-in. Only add wrapper overlay if explicitly configured.
+        # 1. If license is True, use the default config.
+        # 2. If license is a dict, merge with default.
+        # 3. Otherwise (False or absent), no overlay.
         license_config = None
-        if vector_license is False:
-            license_config = None
-        elif vector_license is True:
+        if vector_license is True:
             license_config = (default_license or {}).copy()
         elif isinstance(vector_license, dict):
             license_config = (default_license or {}).copy()
             license_config.update(vector_license)
-        elif vector_license is None and default_license:
-            # By default, use license if a global default is defined
-            license_config = default_license.copy()
         
         for label in formats:
             process_vector(name, label, license_config=license_config)
