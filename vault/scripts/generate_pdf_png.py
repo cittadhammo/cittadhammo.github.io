@@ -17,6 +17,8 @@ MM_PER_INCH = 25.4
 
 COMPRESSION = args.compression
 
+BLEED_MM = 0.5
+
 A_SIZES = {
     '2A0V': (1189, 1682),
     '2A0H': (1682, 1189),
@@ -202,18 +204,22 @@ def generate_pdf(wrapper_file, pdf_file):
         f"file://{wrapper_file.resolve()}"
     ], check=True)
 
-def convert_pdf_to_png(pdf_file, png_output_path, page_w_mm, page_h_mm):
+def convert_pdf_to_png(pdf_file, png_output_path, output_w_mm, output_h_mm):
     doc = fitz.open(str(pdf_file))
     page = doc.load_page(0)
 
-    target_px_w = mm_to_px(page_w_mm)
-    target_px_h = mm_to_px(page_h_mm)
+    # Compute the content area in PDF points, removing the bleed margin
+    margin_pt = BLEED_MM / MM_PER_INCH * 72
+    clip = fitz.Rect(margin_pt, margin_pt, page.rect.width - margin_pt, page.rect.height - margin_pt)
 
-    zoom_x = target_px_w / page.rect.width
-    zoom_y = target_px_h / page.rect.height
+    # Render only the clipped area at the target output resolution
+    target_px_w = mm_to_px(output_w_mm)
+    target_px_h = mm_to_px(output_h_mm)
+    zoom_x = target_px_w / clip.width
+    zoom_y = target_px_h / clip.height
     mat = fitz.Matrix(zoom_x, zoom_y)
 
-    pix = page.get_pixmap(matrix=mat, alpha=False)
+    pix = page.get_pixmap(matrix=mat, alpha=False, clip=clip)
     pix.save(str(png_output_path))
     doc.close()
 
@@ -311,6 +317,17 @@ def process_vector(name, label, license_config=None):
 
         background_color = "black" if black_bg else "white"
 
+        output_w_mm = page_w_mm
+        output_h_mm = page_h_mm
+
+        # Add bleed around page to give Chromium a rendering buffer
+        page_w_mm += BLEED_MM * 2
+        page_h_mm += BLEED_MM * 2
+        margin_left += BLEED_MM
+        margin_right += BLEED_MM
+        margin_top += BLEED_MM
+        margin_bottom += BLEED_MM
+
         create_wrapper(source_svg, wrapper_path,
                        page_w_mm, page_h_mm,
                        svg_w_mm, svg_h_mm,
@@ -321,7 +338,7 @@ def process_vector(name, label, license_config=None):
         generate_pdf(wrapper_path, pdf_path)
         print(f"Generated PDF: {pdf_path}")
 
-        convert_pdf_to_png(pdf_path, png_path, page_w_mm, page_h_mm)
+        convert_pdf_to_png(pdf_path, png_path, output_w_mm, output_h_mm)
         print(f"Generated PNG: {png_path}")
 
         compress_png(png_path)
