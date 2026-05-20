@@ -1,4 +1,4 @@
-.PHONY: help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy vectors-add darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
+.PHONY: all help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy vectors-add darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
@@ -8,6 +8,9 @@ DARKIFY_THUMBS_CONFIG_FILE ?= ./scripts/darkify-test/levels.yml
 STRUCTURE_CONTENT_DIR ?= ./vault/content
 STRUCTURE_CONFIG_FILE ?= ./_config.yml
 STRUCTURE_AREAS_FILE ?= ./vault/data/areas.yml
+
+# Run images, assets, then serve
+all: images assets serve
 
 # Run the search and mapping script
 assets:
@@ -98,6 +101,7 @@ help:
 	@echo "DhammaCharts Make Targets"
 	@echo ""
 	@echo "Commands:"
+	@echo "  make all                       Run images → assets → serve"
 	@echo "  make assets                    Generate/copy image assets + map tiles/viewers"
 	@echo "  make maps-html                 Regenerate map HTML only (no tiles/thumbnails)"
 	@echo "  make images                    Generate PDF/PNG assets (lossy)"
