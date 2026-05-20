@@ -17,6 +17,10 @@ MM_PER_INCH = 25.4
 
 COMPRESSION = args.compression
 
+# Bleed margin around the PDF page. Chromium's --print-to-pdf renders a 1px
+# anti-aliased edge artifact at the page boundary. By rendering a page that is
+# BLEED_MM larger on each side and clipping the bleed off in convert_pdf_to_png,
+# we discard the artifact entirely.
 BLEED_MM = 0.5
 
 A_SIZES = {
@@ -208,7 +212,9 @@ def convert_pdf_to_png(pdf_file, png_output_path, output_w_mm, output_h_mm):
     doc = fitz.open(str(pdf_file))
     page = doc.load_page(0)
 
-    # Compute the content area in PDF points, removing the bleed margin
+    # Clip: render only the inner area, discarding the bleed margin that
+    # Chromium fills with background_color. This removes the 1px anti-aliased
+    # edge artifact that print-to-pdf produces at right/bottom page boundaries.
     margin_pt = BLEED_MM / MM_PER_INCH * 72
     clip = fitz.Rect(margin_pt, margin_pt, page.rect.width - margin_pt, page.rect.height - margin_pt)
 
@@ -320,7 +326,9 @@ def process_vector(name, label, license_config=None):
         output_w_mm = page_w_mm
         output_h_mm = page_h_mm
 
-        # Add bleed around page to give Chromium a rendering buffer
+        # Expand the HTML page by BLEED_MM on each side. The SVG stays at its
+        # original size and is inset by BLEED_MM, so Chromium has a buffer of
+        # background_color around it. The bleed is clipped off during rasterization.
         page_w_mm += BLEED_MM * 2
         page_h_mm += BLEED_MM * 2
         margin_left += BLEED_MM

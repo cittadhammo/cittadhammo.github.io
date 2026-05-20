@@ -578,6 +578,7 @@ EOF
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
+            # Q=90 reduces banding on dark backgrounds vs Q=75
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=90]" $SMALL_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=90]" $MEDIUM_SIZE --intent relative
 

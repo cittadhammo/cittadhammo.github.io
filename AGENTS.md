@@ -74,6 +74,7 @@
 - Generated outputs go to `vault/assets/{pdfs,images,wrappers}/<name>-<label>.*`
 - Run `make images` from project root to generate.
 - License overlay on generated output is opt-in via `vault/data/vectors.yml`. Set `license: true` to use the `defaults.license` settings, or `license: { key: value }` to override specific settings (e.g., `scale`, `padding`). If absent, no wrapper overlay is added (most SVGs already have license text baked into the source file).
+- Chromium `--print-to-pdf` renders a 1px anti-aliased edge artifact at the page boundary. To fix this, the script adds a 0.5mm bleed around the page and clips it off during PNG rasterization (`BLEED_MM` in `generate_pdf_png.py`). This means `B` (black background) format codes are no longer needed for artifact suppression — the bleed handles all backgrounds uniformly.
 
 ## Dependencies
 - Ruby + Bundler for Jekyll (`bundle install`, then `bundle exec jekyll serve`).
