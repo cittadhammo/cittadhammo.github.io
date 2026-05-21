@@ -74,7 +74,7 @@ images:
     pdf: true
     svg: dhamma-citadel-bw.svg
     online: true
-    title: A0 BLack & White
+    title: A0 Black & White
   - name: dhamma-citadel-fr-A0S.png
     display: false
     dark: true

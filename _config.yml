@@ -28,9 +28,9 @@ footer:
 
 # Theme config
 theme:
-  default: "auto" # Initial mode on first visit: "auto" follows browser/system preference.
+  default: "light" # Initial mode on first visit: "auto" follows browser/system preference.
   allow_user_toggle: true # Show the theme toggle and persist user choice in localStorage.
-  respect_prefers_color_scheme: true # When default is "auto", use prefers-color-scheme (dark => dark, else light).
+  respect_prefers_color_scheme: false # When default is "auto", use prefers-color-scheme (dark => dark, else light).
   toggle_show_auto_label: false # If true, toggle can show an "Auto" label/state in UI.
   scroll_reveal: true # If false, ScrollReveal is disabled site-wide.
   home_hero_landing: false # If true, show a full-screen hero on home with title/logo/area links.
