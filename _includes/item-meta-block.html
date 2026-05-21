@@ -2,6 +2,8 @@
 {%- assign meta_count = 0 -%}
 {%- capture meta_content -%}{%- endcapture -%}
 
+{%- assign site_domain = site.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first -%}
+
 {%- case include.block_key -%}
   {% when 'author' %}
     {% if page.author %}
@@ -74,7 +76,12 @@
           {% if license_name != '' %}
             <p class="rouge-first">
               {% if license_url != '' %}
-                <a class="black-under" href="{{ license_url }}" target="_blank" rel="nofollow">{{ license_name }}</a>
+                {% if license_url contains '://' %}
+                  {% assign license_domain = license_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+                  <a class="black-under" href="{{ license_url }}" title="{{ license_domain }}" target="_blank" rel="nofollow">{{ license_name }}</a>
+                {% else %}
+                  <a class="black-under" href="{{ license_url }}" target="_blank" rel="nofollow">{{ license_name }}</a>
+                {% endif %}
               {% else %}
                 {{ license_name }}
               {% endif %}
@@ -144,14 +151,25 @@
           {% if reference_name != '' %}
             <p class="rouge-first">
               {% if reference_href != '' %}
-                <a
-                  class="black-under"
-                  href="{{ reference_href }}"
-                  {% if reference_title != '' %}title="{{ reference_title }}"{% endif %}
-                  {% if reference_external %}target="_blank" rel="nofollow"{% endif %}
-                >
-                  {{ reference_name }}
-                </a>
+                {% if reference_url contains '://' %}
+                  {% assign reference_domain = reference_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+                  <a
+                    class="black-under"
+                    href="{{ reference_href }}"
+                    title="{{ reference_title | default: reference_domain }}"
+                    {% if reference_external %}target="_blank" rel="nofollow"{% endif %}
+                  >
+                    {{ reference_name }}
+                  </a>
+                {% else %}
+                  <a
+                    class="black-under"
+                    href="{{ reference_href }}"
+                    {% if reference_external %}target="_blank" rel="nofollow"{% endif %}
+                  >
+                    {{ reference_name }}
+                  </a>
+                {% endif %}
               {% else %}
                 {{ reference_name }}
               {% endif %}
@@ -193,7 +211,12 @@
 
           {% if source_url != '' %}
             <p class="rouge-first">
-              <a class="black-under" href="{{ source_url }}" target="_blank" rel="nofollow">{{ source_name }}</a>
+              {% if source_url contains '://' %}
+                {% assign source_domain = source_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+                <a class="black-under" href="{{ source_url }}" title="{{ source_domain }}" target="_blank" rel="nofollow">{{ source_name }}</a>
+              {% else %}
+                <a class="black-under" href="{{ source_url }}" target="_blank" rel="nofollow">{{ source_name }}</a>
+              {% endif %}
             {% if source.author -%}
               <span class="source-author-h2-style">
                 {{ source.author }}
@@ -254,7 +277,12 @@
 
           {% if tech_url != '' %}
             <p class="rouge-first">
-              <a class="black-under" href="{{ tech_url }}" target="_blank" rel="nofollow">{{ tech_name }}</a>
+              {% if tech_url contains '://' %}
+                {% assign tech_domain = tech_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+                <a class="black-under" href="{{ tech_url }}" title="{{ tech_domain }}" target="_blank" rel="nofollow">{{ tech_name }}</a>
+              {% else %}
+                <a class="black-under" href="{{ tech_url }}" target="_blank" rel="nofollow">{{ tech_name }}</a>
+              {% endif %}
             </p>
           {% else %}
             <p>{{ tech_name }}</p>
@@ -295,15 +323,27 @@
 
           <p class="rouge-first">
             {% if code_url != '' %}
-              <a
-                class="black-under"
-                title="{{ code_name }}"
-                href="{{ code_url }}"
-                target="_blank"
-                rel="nofollow"
-              >
-                {{ code_name }}
-              </a>
+              {% if code_url contains '://' %}
+                {% assign code_domain = code_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+                <a
+                  class="black-under"
+                  title="{{ code_domain }}"
+                  href="{{ code_url }}"
+                  target="_blank"
+                  rel="nofollow"
+                >
+                  {{ code_name }}
+                </a>
+              {% else %}
+                <a
+                  class="black-under"
+                  href="{{ code_url }}"
+                  target="_blank"
+                  rel="nofollow"
+                >
+                  {{ code_name }}
+                </a>
+              {% endif %}
             {% else %}
               {{ code_name }}
             {% endif %}
@@ -359,7 +399,11 @@
             {% assign has_dark_variant = false %}
           {% endif %}
           {% assign png_href = '/assets/images/' | append: file_base | append: '/' | append: file_name | relative_url %}
-          {% assign png_dark_href = '/assets/images/' | append: file_base | append: '/' | append: file_base | append: '-' | append: dark_suffix | append: '.' | append: file_ext | relative_url %}
+          {% assign png_dark_file = file_base | append: '-' | append: dark_suffix | append: '.' | append: file_ext %}
+          {% assign png_dark_href = '/assets/images/' | append: file_base | append: '/' | append: png_dark_file | relative_url %}
+
+          {% assign png_key = file_base | append: '/' | append: file_name %}
+          {% assign png_dark_key = file_base | append: '/' | append: png_dark_file %}
 
           {% assign pdf_href = '' %}
           {% assign pdf_name = '' %}
@@ -370,6 +414,7 @@
           {% endif %}
           {% if pdf_name != '' %}
             {% assign pdf_href = '/assets/images/' | append: file_base | append: '/' | append: pdf_name | relative_url %}
+            {% assign pdf_key = file_base | append: '/' | append: pdf_name %}
           {% endif %}
 
           {% assign svg_href = '' %}
@@ -381,6 +426,7 @@
           {% endif %}
           {% if svg_name != '' %}
             {% assign svg_href = '/assets/images/' | append: file_base | append: '/' | append: svg_name | relative_url %}
+            {% assign svg_key = file_base | append: '/' | append: svg_name %}
           {% endif %}
 
           {% if file_item.online == true %}
@@ -409,18 +455,19 @@
               {% assign online_light_href = online_href | append: '?theme=light' %}
             {% endif %}
           {% endif %}
+
           <p class="rouge-first">
-            <a class="black-under mfp-image download-lightbox-link" href="{{ png_href }}" data-light-href="{{ png_href }}"{% if has_dark_variant %} data-dark-href="{{ png_dark_href }}"{% endif %} data-gallery-index="{{ file_image_index }}">{{ file_label }}</a>
+            <a class="black-under mfp-image download-lightbox-link" title="Image" href="{{ png_href }}" data-light-href="{{ png_href }}"{% if has_dark_variant %} data-dark-href="{{ png_dark_href }}"{% endif %} data-gallery-index="{{ file_image_index }}">{{ file_label }}</a>
             <span class="download-format-links">
-              <a class="black-under" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ primary_format_label }}</a>{% if has_dark_variant %} (<a class="black-under" href="{{ png_dark_href }}" download="{{ file_base | append: '-' | append: dark_suffix }}" target="_blank" rel="nofollow">DARK</a>){% endif %}
+              <a class="black-under" title="{{ site.data.file_sizes[png_key] }}" href="{{ png_href }}" download="{{ file_name | split: '.' | first }}" target="_blank" rel="nofollow">{{ primary_format_label }}</a>{% if has_dark_variant %} (<a class="black-under" title="{{ site.data.file_sizes[png_dark_key] }}" href="{{ png_dark_href }}" download="{{ file_base | append: '-' | append: dark_suffix }}" target="_blank" rel="nofollow">DARK</a>){% endif %}
               {% if pdf_href != '' %}
-                | <a class="black-under" href="{{ pdf_href }}" download="{{ pdf_name | split: '.' | first }}" target="_blank" rel="nofollow">PDF</a>
+                | <a class="black-under" title="{{ site.data.file_sizes[pdf_key] }}" href="{{ pdf_href }}" download="{{ pdf_name | split: '.' | first }}" target="_blank" rel="nofollow">PDF</a>
               {% endif %}
               {% if svg_href != '' %}
-                | <a class="black-under" href="{{ svg_href }}" download="{{ svg_name | split: '.' | first }}" target="_blank" rel="nofollow">SVG</a>
+                | <a class="black-under" title="{{ site.data.file_sizes[svg_key] }}" href="{{ svg_href }}" download="{{ svg_name | split: '.' | first }}" target="_blank" rel="nofollow">SVG</a>
               {% endif %}
               {% if online_light_href != '' %}
-                | <a class="black-under" href="{{ online_light_href }}" rel="nofollow">ONLINE</a>{% if online_dark_href != '' %} (<a class="black-under" href="{{ online_dark_href }}" rel="nofollow">DARK</a>){% endif %}
+                | <a class="black-under" title="Map" href="{{ online_light_href }}" rel="nofollow">ONLINE</a>{% if online_dark_href != '' %} (<a class="black-under" title="Map" href="{{ online_dark_href }}" rel="nofollow">DARK</a>){% endif %}
               {% endif %}
             </span>
           </p>

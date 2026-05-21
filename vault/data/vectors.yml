@@ -72,3 +72,6 @@ vectors:
     padding: 5
   formats:
   - A1S
+- name: sutta-parallels
+  formats:
+  - A0S

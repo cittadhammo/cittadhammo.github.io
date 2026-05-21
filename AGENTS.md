@@ -48,6 +48,7 @@
 - Copies the original to `assets/images/<basename>`.
 - Generates `small.webp`, `medium.webp`, and `large.webp` thumbnails.
 - Writes aspect ratios to `vault/data/size.yml`.
+- Generates file sizes in MB to `vault/data/file_sizes.yml` for tooltips.
 - If an image is marked `map: true`, it generates map tiles and a viewer page in `maps`.
 - Map viewers use OpenLayers with the template `scripts/map-template.html`.
 

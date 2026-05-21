@@ -778,6 +778,11 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     done < <(extract_content_image_links "$MD_FILE")
 done
 
+# Ensure file sizes are updated for tooltips
+if [ -f "scripts/generate_file_sizes.sh" ]; then
+    bash scripts/generate_file_sizes.sh
+fi
+
 echo "Aspect ratio data has been updated in $SIZE_DATA_FILE"
 
 if [ -n "$TILE_GENERATION_LOG" ]; then

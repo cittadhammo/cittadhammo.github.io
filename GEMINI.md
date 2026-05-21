@@ -23,6 +23,17 @@
 - Project documentation files in root (GEMINI.md, AGENTS.md, OPTIMISATION*.md, etc.) are excluded from the Jekyll build.
 
 
+- `external_links`: Add to an area in `vault/data/areas.yml` to render external links in the area header alongside regular pages. Each entry needs `title` and `url`:
+  ```yaml
+  - name: charts
+    pages:
+      - name: links
+    external_links:
+      - title: Old Site
+        url:   https://dhammacharts.github.io/
+  ```
+  Links open in a new tab via `target="_blank"`.
+
 ## Content Model
 - “Areas” are top-level collections. To add a new area:
 - Create `area_name.md` at the repo root with `title` and `area` frontmatter.
@@ -37,6 +48,7 @@
 - Copies the original to `assets/images/<basename>`.
 - Generates `small.webp`, `medium.webp`, and `large.webp` thumbnails.
 - Writes aspect ratios to `vault/data/size.yml`.
+- Generates file sizes in MB to `vault/data/file_sizes.yml` for tooltips.
 - If an image is marked `map: true`, it generates map tiles and a viewer page in `maps`.
 - Map viewers use OpenLayers with the template `scripts/map-template.html`.
 
@@ -62,6 +74,8 @@
   - Add `M` for margin (e.g., A0SM, A0SBM)
 - Generated outputs go to `vault/assets/{pdfs,images,wrappers}/<name>-<label>.*`
 - Run `make images` from project root to generate.
+- License overlay on generated output is opt-in via `vault/data/vectors.yml`. Set `license: true` to use the `defaults.license` settings, or `license: { key: value }` to override specific settings (e.g., `scale`, `padding`). If absent, no wrapper overlay is added (most SVGs already have license text baked into the source file).
+- Chromium `--print-to-pdf` renders a 1px anti-aliased edge artifact at the page boundary. To fix this, the script adds a 0.5mm bleed around the page and clips it off during PNG rasterization (`BLEED_MM` in `generate_pdf_png.py`). This means `B` (black background) format codes are no longer needed for artifact suppression — the bleed handles all backgrounds uniformly.
 
 ## Dependencies
 - Ruby + Bundler for Jekyll (`bundle install`, then `bundle exec jekyll serve`).
