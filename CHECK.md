@@ -1,27 +1,27 @@
 # To do list for Dhammacharts
 
-  - [ ] border on dark images
   - [ ] Add dark and light image on both theme in aside
-  - [ ] add hover effect, link and mb in item layout 
   - [ ] change font on force manual chart
-  - [ ] Is buddha brain CC0?
-  - [ ] Year order in home page (revert_)
-  - [ ] Have medium Thumbnails shared for items layout and lightbox
-  - [x] Add gap between images in asides?
   - [ ] Add Chart from Others (Joe Rucker, etc.)
-  - [ ] Add other projects (You, Pali Chantings, etc.)
+  - [ ] Add other projects (You, Pali Chantings, AI made, etc.)
   - [ ] Che projects
   - [ ] Interactive charts (click on leaves for Manual of Buddhist Tern (rectangle))
   - [ ] Emails related to Charts
-  - [ ] Buddha Brain fix names
   - [ ] Overlay grey or more in parallels.
-  - [ ] Hero pages with links
   - [ ] code pages
   - [ ] change footer with real links
-  - [ ] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
   - [ ] Add nice charts 
   - [ ] Is there a way to make the link page easier to code?
-  - [ ] more gap in between element in meta block
+  - [x] border on dark images
+  - [x] add hover effect, link and mb in item layout 
+  - [x] Is buddha brain CC0?
+  - [x] Year order in home page (revert_)
+  - [x] Have medium Thumbnails shared for items layout and lightbox
+  - [x] Add gap between images in asides?
+  - [x] Buddha Brain fix names
+  - [x] Hero pages with links
+  - [x] add area for Charts, 3d prints, about, writings, code (projects) websites, formless realms, you, discords, 
+  - [x] more gap in between element in meta block
   - [x] Fix logo for dark mode
   - [x] add hero page ? it flikers when going back to home page headers. 
   - [x] print css, make sure category are not their own page
@@ -69,17 +69,3 @@
   - [x] remove unused lib like masonry
   - [x] remove title name in data and make new logic
   - [x] add [[ ]] sustem wide image for frontmatter removal and in page as lightbox 
-
- ## Old To Do
-
-  - Import nice charts in Others       
-  - Fix JoeRucker
-  - Fix names
-  - ~~Fix masonry~~
-  - Add masonry to links
-  - Update charts page
-      - links to image, fullscreen, etc.
-  - change email image
-  - Fix high res files, SVG etc.
-  - Div sources linklinkss
-
