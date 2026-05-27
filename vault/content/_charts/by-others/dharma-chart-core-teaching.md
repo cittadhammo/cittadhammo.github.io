@@ -2,7 +2,7 @@
 title: Buddha's Core Teachings
 subtitle: The Buddha-Dharma Chart
 description: This chart organizes all the core topics of Buddhism in a tree, starting from the 3 Jewels.
-author: Joe Rocker
+author: Joe Rucker
 year: 2025
 published: true
 license:
