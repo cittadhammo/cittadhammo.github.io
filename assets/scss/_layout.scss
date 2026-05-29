@@ -218,21 +218,17 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 	    		padding-left: 10%;
 			}
 
-			.lightbox-gallery,
-			.lightbox-gallery li,
-			.lightbox-gallery .img-wrapper-2,
-			.lightbox-gallery a {
+			.lightbox-gallery > li.gif-item {
+				flex: 0 0 100%;
 				width: 100%;
+				min-width: 0;
 			}
 
-			.lightbox-gallery a,
-			.lightbox-gallery img {
+			.lightbox-gallery > li.gif-item > .img-wrapper-2,
+			.lightbox-gallery > li.gif-item > .img-wrapper-2 > a,
+			.lightbox-gallery > li.gif-item > .img-wrapper-2 > a > img {
 				display: block;
-			}
-
-			.lightbox-gallery img {
 				width: 100%;
-				height: auto;
 			}
 		}
 

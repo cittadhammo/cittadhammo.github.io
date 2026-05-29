@@ -51,7 +51,17 @@
       {% continue %}
     {% endif %}
 
-    <li{% if image.lightonly %} class="lightonly-item"{% elsif image.darkonly %} class="darkonly-item"{% endif %}>
+    {% assign li_classes = '' %}
+    {% if image_ext == 'gif' %}
+      {% assign li_classes = li_classes | append: ' gif-item' %}
+    {% endif %}
+    {% if image.lightonly %}
+      {% assign li_classes = li_classes | append: ' lightonly-item' %}
+    {% elsif image.darkonly %}
+      {% assign li_classes = li_classes | append: ' darkonly-item' %}
+    {% endif %}
+
+    <li class="{{ li_classes | strip }}">
       <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
         {% if image.url %}
           <a
@@ -127,4 +137,3 @@
     </li>
   {% endfor %}
 </ul>
-
