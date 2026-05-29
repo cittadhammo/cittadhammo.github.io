@@ -1,8 +1,10 @@
 # To do list for Dhammacharts
 
-  - [ ] Add TU app to make darkify image
+  - [ ] Smaller license in parralells
+  - [x] Add TU app to make darkify image
   - [x] border on dark images
   - [ ] Sutta pitaka parallels remove structure
+  - [ ] fix word lenghts on path to Nibbana
   - [ ] Add dark and light image on both theme in aside
   - [ ] change font on force manual chart
   - [ ] Add Chart from Others (Joe Rucker, etc.)

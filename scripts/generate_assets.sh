@@ -274,6 +274,16 @@ resolve_image_name() {
     local name="$1"
 
     if [[ "$name" == *.* ]]; then
+        if [ -f "$SRC_IMAGE_DIR/$name" ]; then
+            echo "$name"
+            return
+        fi
+        # Search all of vault/assets if not in default dir
+        local found=$(find "./vault/assets" -type f -name "$name" -print -quit)
+        if [ -n "$found" ]; then
+            echo "$name"
+            return
+        fi
         echo "$name"
         return
     fi
@@ -282,6 +292,13 @@ resolve_image_name() {
     while IFS= read -r found; do
         matches+=("$found")
     done < <(find "$SRC_IMAGE_DIR" -maxdepth 1 -type f -iname "$name.*" -printf '%f\n' | sort)
+
+    if [ "${#matches[@]}" -eq 0 ]; then
+        # If no matches in primary dir, search all of vault/assets
+        while IFS= read -r found; do
+            matches+=("$found")
+        done < <(find "./vault/assets" -type f -iname "$name.*" -printf '%f\n' | sort)
+    fi
 
     if [ "${#matches[@]}" -eq 1 ]; then
         echo "${matches[0]}"
@@ -455,7 +472,15 @@ process_image_entry() {
 
     echo "Found image: $IMG_NAME (map: $MAP)"
 
+    # Resolve source path by searching vault/assets/ if not in default location
     SRC_IMG_PATH="$SRC_IMAGE_DIR/$IMG_NAME"
+    if [ ! -f "$SRC_IMG_PATH" ]; then
+        FOUND_PATH=$(find "./vault/assets" -type f -name "$IMG_NAME" -print -quit)
+        if [ -n "$FOUND_PATH" ]; then
+            SRC_IMG_PATH="$FOUND_PATH"
+        fi
+    fi
+
     EXT="${IMG_NAME##*.}"
     IMG_BASE="${IMG_NAME%.*}"
     DEST_FOLDER="$DEST_IMAGE_DIR/$IMG_BASE"

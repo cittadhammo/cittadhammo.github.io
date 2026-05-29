@@ -60,10 +60,11 @@ make structure-sync-check # Sync and then verify consistency
 
 For each image it:
 
-- copies original image files into `assets/images/<basename>/`
+- copies original image files into `assets/images/<basename>/` (searches recursively in `vault/assets/` if not found in `images/` subdir)
 - generates `small.webp`, `medium.webp`, `large.webp` when `display: true`
 - updates aspect ratios in `vault/data/size.yml`
 - if `map: true`, generates tiles (Google layout) and a viewer page in `maps`
+- if `url: <link>` is provided in frontmatter, the image on the site will link directly to that URL instead of opening a lightbox.
 
 ### Incremental behavior
 
