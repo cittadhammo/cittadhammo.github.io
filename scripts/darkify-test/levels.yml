@@ -1,5 +1,5 @@
 invert_level:
-  default: "0%,100%"
-  small: "0%,50%"
-  medium: "0%,60%"
+  default: "5%,90%"
+  small: "5%,80%"
+  medium: "5%,70%"
   large: "4%,92%"

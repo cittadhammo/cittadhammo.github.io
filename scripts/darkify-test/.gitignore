@@ -1,2 +1,9 @@
+input/*
+!input/.gitkeep
 output/*
 !output/.gitkeep
+output-thumbnails/*
+!output-thumbnails/.gitkeep
+output-tui/*
+!output-tui/.gitkeep
+tmp_current/

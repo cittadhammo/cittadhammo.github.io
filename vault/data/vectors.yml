@@ -72,6 +72,12 @@ vectors:
     padding: 5
   formats:
   - A1S
+- name: 31-planes-pali
+  license:
+    scale: 2
+    padding: 5
+  formats:
+  - A1S
 - name: sutta-parallels
   formats:
   - A0S

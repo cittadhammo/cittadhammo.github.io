@@ -19,6 +19,9 @@ sources:
   - name: SuttaCentral
     author:
     url: https://suttacentral.net
+references:
+  - name: Parallels Methodology
+    url: https://suttacentral.net/methodology?lang=en#item2
 images:
   - name: sutta-parallels-A0S.png
     display: true
