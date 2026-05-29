@@ -204,7 +204,7 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 			}
 	}
 
-		aside {
+	aside {
 		margin-left: -3rem;
 		margin-right: -3rem;
 
@@ -216,6 +216,23 @@ html[data-theme="dark"] .module a:hover .img-wrapper {
 				float: left;
 				width: 45%;
 	    		padding-left: 10%;
+			}
+
+			.lightbox-gallery,
+			.lightbox-gallery li,
+			.lightbox-gallery .img-wrapper-2,
+			.lightbox-gallery a {
+				width: 100%;
+			}
+
+			.lightbox-gallery a,
+			.lightbox-gallery img {
+				display: block;
+			}
+
+			.lightbox-gallery img {
+				width: 100%;
+				height: auto;
 			}
 		}
 
