@@ -3,7 +3,7 @@ title: 31 Planes of Existence
 subtitle: The Map of Samsara
 description: "This chart is a radial visualization of the 31 planes of existence in Buddhist cosmology. It is divided into three realms: the Arupa Loka (formless realm), the Rupa Loka (fine-material realm), and the Kama Loka (sensuous realm). Each realm is further subdivided into different planes, with detailed information about each plane. The chart is interactive, allowing users to explore the different realms and planes of existence."
 author: Tan Cittadhammo & Tan Karunno
-year: 2024
+year: 2023
 published: true
 license:
   - name: CC BY-NC-SA 4.0
@@ -15,10 +15,6 @@ techs:
 code:
   - name: 31 Planes of Existence
     url: https://observablehq.com/d/2efec0e29fe3e7f9
-references:
-  - name:
-    title:
-    url:
 sources:
   - name: The 31 Planes of Existence
     author: Access to Insight
@@ -32,7 +28,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-planes-A1S
+    svg: 31-planes
     online: true
     title: A1 Square
     invert_level:
@@ -44,7 +40,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-planes-pali-A1S
+    svg: 31-planes-pali
     online: true
     title: A1 Pali
     invert_level:

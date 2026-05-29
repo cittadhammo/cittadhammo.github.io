@@ -1,9 +1,9 @@
 ---
 title: Path to Nibbana
-subtitle:
+subtitle: A Radial Visualization
 description: This chart is a radial visualization of the path to Nibbana, the ultimate goal in Buddhism. It illustrates the different stages of the path, including the four foundations of mindfulness, the four form absorptions (jhanas), and the four formless absorptions. The chart provides a comprehensive overview of the meditative practices that lead to the cessation of suffering and the attainment of enlightenment.
 author: Cittadhammo
-year: "2025"
+year: 2022
 published: false
 license:
   - name: CC0
@@ -16,12 +16,8 @@ techs:
 code:
   - name: Nibbana IV
     url: https://observablehq.com/d/7cb6eafdcff5fb81
-references:
-  - name:
-    title:
-    url:
 sources:
-  - name:
+  - name: 
     author:
     url:
 images:

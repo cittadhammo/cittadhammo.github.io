@@ -81,3 +81,15 @@ vectors:
 - name: sutta-parallels
   formats:
   - A0S
+- name: 37-wings
+  license:
+    scale: 2
+    padding: 5
+  formats: 
+  - A1S
+- name: 37-wings-2
+  license:
+    scale: 2
+    padding: 5
+  formats: 
+  - A1S

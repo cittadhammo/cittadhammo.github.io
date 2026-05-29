@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 595.0mm 595.0mm;
+      margin: 0;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 595.0mm;
+      height: 595.0mm;
+      overflow: hidden;
+      background: white;
+    }
+    object {
+      display: block;
+      width: 594.0mm;
+      height: 594.0mm;
+      margin: 0.5mm 0.5mm 0.5mm 0.5mm;
+      border: none;
+    }
+    
+    .license-container {
+      position: absolute;
+      bottom: 5mm;
+      right: 5mm;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      opacity: 1.0;
+      color: #333333;
+      font-family: 'Poppins', sans-serif;
+      z-index: 100;
+      transform: scale(2);
+      transform-origin: bottom right;
+    }
+    .license-text {
+      text-align: right;
+      font-weight: 500;
+      font-size: 8pt;
+      line-height: 1.2;
+      margin-right: 2mm;
+    }
+
+    .license-logo {
+      height: 8mm;
+    }
+
+  </style>
+</head>
+<body>
+  <object data="../svgs/37-wings.svg" type="image/svg+xml"></object>
+  
+  <div class="license-container">
+    <div class="license-text">
+      <div>DhammaCharts.org</div><div>Freely Available</div>
+    </div>
+    <img class="license-logo" src="../icons/cc-zero.svg">
+  </div>
+
+</body>
+</html>
