@@ -1,8 +1,9 @@
-.PHONY: all help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy vectors-add darkify-test darkify-test-thumbnails structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
+.PHONY: all help assets maps-html images images-uncompressed images-uncompressed-lossless images-compressed-lossy vectors-add darkify-test darkify-test-thumbnails darkify-tui structure structure-check structure-sync-check clean sync-config build serve sync-agent-docs link-site-assets remove-site-asset-symlinks
 
 DARKIFY_TEST_INPUT ?= ./scripts/darkify-test/input
 DARKIFY_TEST_OUTPUT ?= ./scripts/darkify-test/output
 DARKIFY_THUMBS_OUTPUT ?= ./scripts/darkify-test/output-thumbnails
+DARKIFY_TUI_OUTPUT ?= ./scripts/darkify-test/output-tui
 DARKIFY_CONFIG_FILE ?= ./_config.yml
 DARKIFY_THUMBS_CONFIG_FILE ?= ./scripts/darkify-test/levels.yml
 STRUCTURE_CONTENT_DIR ?= ./vault/content
@@ -51,6 +52,10 @@ darkify-test-thumbnails:
 	DARKIFY_INVERT_LEVEL_MEDIUM="$(DARKIFY_INVERT_LEVEL_MEDIUM)" \
 	DARKIFY_INVERT_LEVEL_LARGE="$(DARKIFY_INVERT_LEVEL_LARGE)" \
 	bash ./scripts/darkify-test/run-thumbnails.sh "$(DARKIFY_TEST_INPUT)" "$(DARKIFY_THUMBS_OUTPUT)"
+
+# Interactive TUI for tuning darkify levels
+darkify-tui:
+	bash ./scripts/darkify-test/tui.sh
 
 # Sync collections/defaults/areas with folders under vault/content/_*
 structure:
@@ -117,6 +122,7 @@ help:
 	@echo "  make sync-config               Sync _config_local.yml exclude list"
 	@echo "  make darkify-test              Run method comparison darkify test harness"
 	@echo "  make darkify-test-thumbnails   Run original + thumbnail darkify test harness"
+	@echo "  make darkify-tui               Interactive TUI for tuning darkify levels"
 	@echo "  make structure                 Sync all collection/folder/category/page refs into _config.yml and areas.yml"
 	@echo "  make structure-check           Check if _config.yml and areas.yml are in sync (no changes)"
 	@echo "  make structure-sync-check      Run sync then verify consistency"

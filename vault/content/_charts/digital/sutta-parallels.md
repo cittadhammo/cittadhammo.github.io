@@ -22,14 +22,14 @@ sources:
 images:
   - name: sutta-parallels-A0S.png
     display: true
-    map: false
+    map: true
     file: true
     pdf: true
     svg: sutta-parallels
     online: true
-    title: A0 
+    title: A0 Square 
     invert_level:
-      default: "5%,95%"
-      small: "4%,74%"
-      medium: "3%,88%"
+      default: "0%,100%"
+      small: "0%,50%"
+      medium: "0%,60%"
 ---

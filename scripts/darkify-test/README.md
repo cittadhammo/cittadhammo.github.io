@@ -28,7 +28,22 @@ bash scripts/darkify-test/run.sh /path/to/input /path/to/output
 make darkify-test DARKIFY_TEST_INPUT=/path/to/input DARKIFY_TEST_OUTPUT=/path/to/output
 ```
 
-## Thumbnail-Specific Test (new)
+## Interactive TUI (Recommended for tuning)
+
+Use the interactive TUI to pick an image, tune levels for each size, and iterate quickly:
+
+```bash
+make darkify-tui
+```
+
+Features:
+- **Image Selection**: Choose from `scripts/darkify-test/input/`.
+- **Parameter Tuning**: Live-edit `invert_lightness` levels (or choose other methods).
+- **Size-Aware**: Automatically applies correct thumbnail dimensions (tall vs square-wide profiles).
+- **Iteration History**: Save results to custom folders with a label (e.g. `test1`, `v2`).
+- **Config Sync**: Optionally save your best settings back to `scripts/darkify-test/levels.yml`.
+
+## Thumbnail-Specific Test (Legacy manual flow)
 
 Use this to test the production thumbnail flow with per-size `invert_lightness` levels:
 
@@ -82,24 +97,43 @@ Use another config file (optional):
 ```bash
 make darkify-test DARKIFY_CONFIG_FILE=/path/to/_config.yml
 make darkify-test-thumbnails DARKIFY_CONFIG_FILE=/path/to/_config.yml
-```
+- **Config Sync**: Optionally save your best settings back to `scripts/darkify-test/levels.yml`.
+- **Optional Large Thumbnails**: Large thumbnail generation is disabled by default to speed up iteration, but can be enabled on-demand.
+
+## Tuning Guide (invert_lightness)
+
+The `invert_lightness` method uses a `-level black%,white%` adjustment. The default **5%,95%** is a balanced starting point for Dhamma charts.
+
+### Why 5% and 95%?
+*   **Highlight/Shadow Recovery**: Most "white" backgrounds in scans aren't pure white (e.g., 98%). Setting the white clip to **95%** forces these near-whites to pure white before inversion, ensuring a clean dark background without "haze."
+*   **Noise Reduction**: Setting the black clip to **5%** ensures near-black ink/strokes are solid before inversion, preventing "muddy" or washed-out text in dark mode.
+*   **Contrast Stretching**: By pulling the limits in, you stretch the middle 90% of color data across the full 100% range, making lines look sharper and colors more vibrant.
+
+### When to adjust?
+*   **Lower the Black (e.g., 2%)**: If very fine, subtle gray details are disappearing.
+*   **Lower the White (e.g., 85%)**: If the source has a very "dirty" or yellowed background (like an old scan) that isn't turning fully dark.
+*   **Higher the White (e.g., 98%)**: If bright colors look like "glowing neon" or details in highlights are being "blown out."
 
 ## Output
 
-For each input image, results are written to:
-- `scripts/darkify-test/output/<image-base>/`
+### TUI Results
+Written to `scripts/darkify-test/output-tui/<image-base>_<label>_<timestamp>/`:
+- `original.<ext>`, `original-dark.<ext>`
+- `small.webp`, `small-dark.webp`
+- `medium.webp`, `medium-dark.webp`
+- `large.webp`, `large-dark.webp` (only if enabled)
+- `settings.txt`: Records method and levels used for that specific iteration.
 
-Files generated:
+### Legacy Method Comparison
+Written to `scripts/darkify-test/output/<image-base>/`:
 - `original.<ext>`
 - `<image-base>-replace.<ext>`
 - `<image-base>-multiply.<ext>`
 - `<image-base>-invert_lightness.<ext>`
 - `<image-base>-replace_only.<ext>`
 
-For thumbnail-specific tests, results are written to:
-- `scripts/darkify-test/output-thumbnails/<image-base>/`
-
-Files generated:
+### Legacy Thumbnail Test
+Written to `scripts/darkify-test/output-thumbnails/<image-base>/`:
 - `original.<ext>`, `original-dark.<ext>`
 - `small.webp`, `medium.webp`, `large.webp`
 - `small-dark.webp`, `medium-dark.webp`, `large-dark.webp`
@@ -108,5 +142,6 @@ Files generated:
 
 ## Notes
 
-- Requires ImageMagick (`magick` in PATH).
+- Requires ImageMagick (`magick` in PATH), `libvips` (`vips` in PATH), and `gum`.
 - Supported inputs: `.png`, `.jpg`, `.jpeg`, `.webp`.
+

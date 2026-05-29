@@ -1,11 +1,5 @@
 invert_level:
-  default: "5%,95%"
-  small: "2%,82%"
-  medium: "3%,88%"
+  default: "0%,100%"
+  small: "0%,50%"
+  medium: "0%,60%"
   large: "4%,92%"
-
-# invert_level:
-#   default: "5%,95%"
-#   small: "2%,82%"
-#   medium: "3%,88%"
-#   large: "4%,92%"
