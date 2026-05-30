@@ -74,7 +74,11 @@
           {% endif %}
 
           {% if license_name != '' %}
-            <p class="rouge-first">
+            {% assign license_paragraph_class = '' %}
+            {% if license_url != '' %}
+              {% assign license_paragraph_class = 'rouge-first' %}
+            {% endif %}
+            <p{% if license_paragraph_class != '' %} class="{{ license_paragraph_class }}"{% endif %}>
               {% if license_url != '' %}
                 {% if license_url contains '://' %}
                   {% assign license_domain = license_url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
