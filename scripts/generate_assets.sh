@@ -366,6 +366,14 @@ copy_download_variant() {
     fi
 
     local src_variant="$src_dir/$variant_name"
+    if [ ! -f "$src_variant" ]; then
+        local found_variant
+        found_variant=$(find "./vault/assets" -type f -name "$variant_name" -print -quit)
+        if [ -n "$found_variant" ]; then
+            src_variant="$found_variant"
+        fi
+    fi
+
     local dest_variant="$target_dir/$variant_name"
     if [ -f "$src_variant" ]; then
         cp "$src_variant" "$dest_variant"
