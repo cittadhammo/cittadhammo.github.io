@@ -21,11 +21,7 @@ images:
     dark: true
     map: true
     file: true
+    pdf: dependant-origination-3.pdf
     online: true
     title: A0 Vertical
-  - name: dependant-origination.pdf
-    display: false
-    file: true
-    title: PDF
 ---
-
