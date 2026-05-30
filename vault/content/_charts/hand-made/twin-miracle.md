@@ -1,6 +1,6 @@
 ---
 title: The Twin Miracle
-subtitle:
+subtitle: 12 Links of Dependant Co-Arising
 description: A wheel of fire representing the teaching on Dependant Origination and a wheel of water representing the Transcendental Dependant Origination
 author: Cittahdammo
 year: 2023

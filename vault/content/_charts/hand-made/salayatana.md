@@ -1,39 +1,22 @@
 ---
 title: Salayatana
-subtitle:
-description:
-author:
-year:
-published: false
+subtitle: 6 Sense doors, 6 sense consciousness, the Citta
+author: Cittahdammo
+year: 2019
+published: true
 license:
-  - name:
-    url:
+  - name: CC0
 techs:
-  - name:
-    url:
-code:
-  - name:
-    url:
-references:
-  - name:
-    title:
-    url:
+  - name: Pencil
 sources:
-  - name:
-    author:
-    url:
+  - name: Ajahn Sucitto's Teachings
+    url: https://www.dhammatalks.org/books/ShapeOfSuffering/Section0001.html
 images:
-  - name:
-    display:
-    dark:
-    map:
-    file:
-    pdf:
-    svg:
-    online:
-    title:
-    invert_level:
-      small:
-      medium:
-      large:
+  - name: salayatana.jpg
+    display: true
+    dark: true
+    map: true
+    file: true
+    online: true
+    title: Image
 ---

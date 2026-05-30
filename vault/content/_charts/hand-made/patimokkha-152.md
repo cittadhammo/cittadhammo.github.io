@@ -1,39 +1,22 @@
 ---
-title: Patimotkkha 152
-subtitle:
-description:
-author:
-year:
-published: false
+title: Pāṭimokkha 152
+subtitle: The main 152 rules of the Discipline and their divisions.
+author: Cittahdammo
+year: 2018
+published: true
 license:
-  - name:
-    url:
+  - name: CC0
 techs:
-  - name:
-    url:
-code:
-  - name:
-    url:
+  - name: Ink & Watercolor
 references:
-  - name:
-    title:
-    url:
-sources:
-  - name:
-    author:
-    url:
+  - name: Bhikkhu Patimokkha
+    url: /charts/digital/bhikkhu-patimokkha.html
 images:
-  - name:
-    display:
-    dark:
-    map:
-    file:
-    pdf:
-    svg:
-    online:
-    title:
-    invert_level:
-      small:
-      medium:
-      large:
+  - name: patimokkha-152.jpg
+    display: true
+    dark: true
+    map: true
+    file: true
+    online: true
+    title: Image
 ---
