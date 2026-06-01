@@ -17,7 +17,7 @@ code:
   - name: Notebook
     url: "https://observablehq.com/@cittadhammo/suttapitaka"
 references:
-  - name: Interactive Version
+  - name: "Interactive Version<br>(click the bullet to reveal translation and links)"
     url: https://www.dhammacharts.org/suttapitaka-chart/
 sources:
   - name: "suttacentral.net"

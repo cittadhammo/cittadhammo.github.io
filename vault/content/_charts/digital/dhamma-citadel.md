@@ -14,8 +14,6 @@ techs:
   - name: Observable
     url: https://observablehq.com/
 references:
-  - name: Interactive version (click on the sutta)
-    url: https://www.dhammacharts.org/suttapitaka-chart/
   - name: Make your own translation
     url: https://observablehq.com/embed/3915c29fed00300c
 code:
