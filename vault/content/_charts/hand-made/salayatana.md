@@ -15,8 +15,6 @@ images:
   - name: salayatana.jpg
     display: true
     dark: true
-    map: true
     file: true
-    online: true
     title: Image
 ---

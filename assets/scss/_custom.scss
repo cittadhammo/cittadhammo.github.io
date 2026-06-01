@@ -145,18 +145,21 @@ a.bigger {
 .flex-container {
 	display: flex;
 	flex-direction: row;
+	gap: 1.5rem;
 }
 
 .flex-left {
-	width: 50%;
-	margin: 0 5px;
-	padding: 0 5px;
+	flex: 1 1 0;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .flex-right {
-	width: 50%;
-	margin: 0 5px;
-	padding: 0 5px;
+	flex: 1 1 0;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
 }
 
 @media only screen and (max-width:900px) {
@@ -333,6 +336,114 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 /* Keep page-layout titles tight; generic .cat-title spacing is too large here. */
 .page-layout .cat-title {
   margin-bottom: 0.6rem;
+}
+
+body.page-layout #page-content {
+  margin-top: 1.6rem;
+}
+
+body.page-layout #page-content .page-content-body {
+  color: variables.$color-black;
+  width: 100%;
+  max-width: none;
+}
+
+body.page-layout #page-content .page-content-body > p,
+body.page-layout #page-content .page-content-body > ul,
+body.page-layout #page-content .page-content-body > ol,
+body.page-layout #page-content .page-content-body > table,
+body.page-layout #page-content .page-content-body > blockquote,
+body.page-layout #page-content .page-content-body > pre {
+  line-height: 1.62;
+  margin: 0 0 1.2rem;
+}
+
+body.page-layout #page-content .page-content-body a {
+  color: variables.$color-black;
+  text-decoration: underline;
+  text-decoration-color: variables.$color-black;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 300ms, color 300ms;
+}
+
+body.page-layout #page-content .page-content-body a:hover {
+  text-decoration-color: variables.$color-black;
+}
+
+body.page-layout #page-content .page-content-body h2,
+body.page-layout #page-content .page-content-body .h2 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  margin: 2.2rem 0 1rem;
+}
+
+body.print-page #page-content .page-content-body > p {
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  max-width: 60rem;
+}
+
+body.print-page #page-content .page-content-body > h2 {
+  margin: 3rem 0 1rem;
+  color: #666;
+  letter-spacing: 0.24rem;
+  text-transform: uppercase;
+}
+
+body.print-page #page-content .page-content-body > h2:first-of-type {
+  margin-top: 2.2rem;
+}
+
+body.print-page #page-content .page-content-body > ul,
+body.print-page #page-content .page-content-body > ol {
+  margin: 0 0 1.4rem;
+  padding-left: 1.4rem;
+}
+
+body.print-page #page-content .page-content-body > ul > li {
+  margin-bottom: 0.7rem;
+}
+
+body.print-page #page-content .page-content-body > ul > li > strong:first-child,
+body.print-page #page-content .page-content-body > ol strong {
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 0.25rem;
+  color: variables.$color-black;
+  display: inline-block;
+  font-family: variables.$font-lekton;
+  letter-spacing: 0.12rem;
+  line-height: 1;
+  padding: 0.18rem 0.38rem;
+  margin-right: 0.65rem;
+  text-transform: uppercase;
+}
+
+body.print-page #page-content .page-content-body > ol > li {
+  margin-bottom: 0.55rem;
+}
+
+body.print-page #page-content .page-content-body table {
+  margin: 0 auto;
+  max-width: 58rem;
+  width: 100%;
+}
+
+body.print-page #page-content .page-content-body table thead th {
+  color: #666;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+body.print-page #page-content .page-content-body table tbody tr:nth-child(odd) > td {
+  background: variables.$color-white-sand;
+}
+
+body.print-page #page-content .page-content-body a {
+  display: inline-block;
+}
+
+body.print-page #page-content .page-content-body a::first-letter {
+  color: variables.$color-red;
 }
 
 

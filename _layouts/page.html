@@ -9,14 +9,16 @@
   {% if page.scroll_reveal != nil %}
     {% assign page_scroll_reveal_enabled = page.scroll_reveal %}
   {% endif %}
-  <body class="black page-layout{% if page_scroll_reveal_enabled %} page-scroll-reveal{% endif %}">
+  <body class="black page-layout{% if page_scroll_reveal_enabled %} page-scroll-reveal{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
     <main class="home">
       {% include area-header.html area_name=page.collection show_theme_toggle=true show_back=page.back %}
       <section class="projects">
         <div class="container">
           <h1 class="cat-title projects">{{ page.title }}</h1>
           <div id="page-content">
-            {{ content }}
+            <div class="page-content-body">
+              {{ content }}
+            </div>
           </div>
         </div>
       </section>

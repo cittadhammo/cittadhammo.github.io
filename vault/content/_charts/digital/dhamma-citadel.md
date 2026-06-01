@@ -13,6 +13,11 @@ techs:
     url: http://d3js.org
   - name: Observable
     url: https://observablehq.com/
+refereces:
+  - name: Interactive version (click on the sutta)
+    url: https://www.dhammacharts.org/suttapitaka-chart/
+  - name: Make your own translation
+    url: https://observablehq.com/embed/3915c29fed00300c
 code:
   - name: Notebook
     url: https://observablehq.com/@cittadhammo/the-dhamma-citadel
