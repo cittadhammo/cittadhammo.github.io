@@ -21,7 +21,7 @@ COMPRESSION = args.compression
 # anti-aliased edge artifact at the page boundary. By rendering a page that is
 # BLEED_MM larger on each side and clipping the bleed off in convert_pdf_to_png,
 # we discard the artifact entirely.
-BLEED_MM = 0.5
+BLEED_MM = 2.0
 
 A_SIZES = {
     '2A0V': (1189, 1682),
@@ -56,6 +56,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }}
     @page {{
       size: {page_width_mm}mm {page_height_mm}mm;
       margin: 0;
@@ -63,10 +68,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     html, body {{
       margin: 0;
       padding: 0;
-      width: {page_width_mm}mm;
-      height: {page_height_mm}mm;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-      background: {background_color};
+      background-color: {background_color} !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }}
+    html {{
+      background-color: {background_color} !important;
     }}
     object {{
       display: block;
@@ -74,6 +84,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       height: {svg_height_mm}mm;
       margin: {margin_top_mm}mm {margin_right_mm}mm {margin_bottom_mm}mm {margin_left_mm}mm;
       border: none;
+      outline: none;
+      background-color: {background_color} !important;
     }}
     {license_css}
   </style>
@@ -221,7 +233,17 @@ def convert_pdf_to_png(pdf_file, png_output_path, output_w_mm, output_h_mm):
     # Chromium fills with background_color. This removes the 1px anti-aliased
     # edge artifact that print-to-pdf produces at right/bottom page boundaries.
     margin_pt = BLEED_MM / MM_PER_INCH * 72
-    clip = fitz.Rect(margin_pt, margin_pt, page.rect.width - margin_pt, page.rect.height - margin_pt)
+    
+    # We add a tiny 'over-clip' of 0.1pt (approx 1/10th of a pixel) to ensure 
+    # we are strictly inside the safe background area and not touching the 
+    # boundary where artifacts appear.
+    over_clip = 0.5 
+    clip = fitz.Rect(
+        margin_pt + over_clip, 
+        margin_pt + over_clip, 
+        page.rect.width - margin_pt - over_clip, 
+        page.rect.height - margin_pt - over_clip
+    )
 
     # Render only the clipped area at the target output resolution
     target_px_w = mm_to_px(output_w_mm)
