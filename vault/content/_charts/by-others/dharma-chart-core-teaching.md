@@ -17,7 +17,6 @@ code:
 images:
   - name: dharma-chart-core-teaching.png
     display: true
-    dark: true
     map: true
     file: true
     pdf: true
