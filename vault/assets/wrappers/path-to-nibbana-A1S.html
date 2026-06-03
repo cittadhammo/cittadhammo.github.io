@@ -6,24 +6,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     @page {
-      size: 595.0mm 595.0mm;
+      size: 598.0mm 598.0mm;
       margin: 0;
     }
     html, body {
       margin: 0;
       padding: 0;
-      width: 595.0mm;
-      height: 595.0mm;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-      background: white;
+      background-color: white !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    html {
+      background-color: white !important;
     }
     object {
       display: block;
       width: 594.0mm;
       height: 594.0mm;
-      margin: 0.5mm 0.5mm 0.5mm 0.5mm;
+      margin: 2.0mm 2.0mm 2.0mm 2.0mm;
       border: none;
+      outline: none;
+      background-color: white !important;
     }
     
     .license-container {
