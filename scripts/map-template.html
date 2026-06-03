@@ -34,7 +34,10 @@ layout: none
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+      transition:
+        background-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
       cursor: pointer;
     }
     .cross button:hover,
@@ -51,11 +54,14 @@ layout: none
       object-fit: contain;
     }
     .ol-zoom {
-      top: 3.5em !important;
+      top: 2.5em !important;
     }
     .ol-control button {
       color: black !important;
-      transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+      transition:
+        background-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
       cursor: pointer;
     }
     .ol-control button:hover,
@@ -65,12 +71,18 @@ layout: none
       transform: translateY(-1px);
     }
     /* Tablet adjustments (iPad) */
-    @media (max-width: 1024px) {
+    @media (max-width: 1280px) {
       .cross {
-        transform: scale(0.9);
+        top: 0.5em;
+        left: 0.5em;
+        transform: scale(0.8); /* smaller button */
+      }
+      .cross button img {
+        width: 17px;
+        height: 17px;
       }
       .ol-zoom {
-        top: 3.5em !important;
+        top: 3em !important;
         transform: scale(0.9);
       }
     }
