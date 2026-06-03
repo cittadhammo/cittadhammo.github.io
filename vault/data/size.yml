@@ -226,7 +226,12 @@ big-picture:
 salayatana:
   small: 0.998
   medium: 0.998
-
 patimokkha-152:
   small: 0.706
   medium: 0.707
+path-to-nibbana-A1S:
+  small: 1.000
+  medium: 1.000
+path-to-nibbana-dark-A1S:
+  small: 1.000
+  medium: 1.000

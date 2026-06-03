@@ -93,3 +93,16 @@ vectors:
     padding: 5
   formats: 
   - A1S
+- name: path-to-nibbana-dark
+  license:
+    dark: true
+    scale: 1.6
+    padding: 10
+  formats: 
+  - A1S
+- name: path-to-nibbana
+  license:
+    scale: 1.6
+    padding: 10
+  formats: 
+  - A1S
