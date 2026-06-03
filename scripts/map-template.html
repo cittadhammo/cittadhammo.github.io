@@ -51,7 +51,7 @@ layout: none
       object-fit: contain;
     }
     .ol-zoom {
-      top: 2.5em !important;
+      top: 3.5em !important;
     }
     .ol-control button {
       color: black !important;
@@ -63,6 +63,16 @@ layout: none
       background-color: #ffffff;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
       transform: translateY(-1px);
+    }
+    /* Tablet adjustments (iPad) */
+    @media (max-width: 1024px) {
+      .cross {
+        transform: scale(0.9);
+      }
+      .ol-zoom {
+        top: 3.5em !important;
+        transform: scale(0.9);
+      }
     }
     /* Mobile adjustments */
     @media (max-width: 480px) {
