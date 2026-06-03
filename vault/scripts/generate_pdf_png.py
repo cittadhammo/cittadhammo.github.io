@@ -136,6 +136,7 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
         text = license_config.get('text', [])
         scale = license_config.get('scale', 1.0)
         padding = license_config.get('padding', 10)
+        dark = license_config.get('dark', False)
         
         if isinstance(text, str):
             text = [text]
@@ -150,6 +151,9 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
     <img class="license-logo" src="../icons/{{logo}}.svg">
   </div>
 """.format(text_html=text_html, logo=logo)
+
+        text_color = "#CCCCCC" if dark else "#333333"
+        logo_style = "filter: invert(1) opacity(0.8);" if dark else ""
         
         license_css = f"""
     .license-container {{
@@ -160,7 +164,7 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
       flex-direction: row;
       align-items: center;
       opacity: 1.0;
-      color: #333333;
+      color: {text_color};
       font-family: 'Poppins', sans-serif;
       z-index: 100;
       transform: scale({scale});
@@ -176,6 +180,7 @@ def create_wrapper(svg_path, wrapper_path, page_w_mm, page_h_mm,
 
     .license-logo {{
       height: 8mm;
+      {logo_style}
     }}
 """
 
