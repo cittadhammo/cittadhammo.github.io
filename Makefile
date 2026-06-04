@@ -38,6 +38,10 @@ images-compressed-lossy:
 vectors-add:
 	cd vault && python3 ./scripts/update_vectors.py
 
+# Flatten a PNG against a white or custom background
+flatten-png:
+	bash ./scripts/flatten_png.sh "$(FILE)" "$(BG)"
+
 # Compare all darkify methods on images in scripts/darkify-test/input
 darkify-test:
 	DARKIFY_CONFIG_FILE="$(DARKIFY_CONFIG_FILE)" \
@@ -114,6 +118,7 @@ help:
 	@echo "  make images-uncompressed-lossless  Generate PDF/PNG assets (lossless)"
 	@echo "  make images-compressed-lossy   Generate PDF/PNG assets (lossy)"
 	@echo "  make vectors-add               Add new SVGs to vectors.yml with default format A1V"
+	@echo "  make flatten-png               Flatten a PNG against a white or custom background (usage: make flatten-png FILE=img.png [BG='255 255 255'])"
 	@echo "  make build                     Build Jekyll site with _config.yml + _config_local.yml"
 	@echo "  make serve                     Serve site locally with livereload"
 	@echo "  make link-site-assets          Symlink assets/images into _site/assets/images"
@@ -155,4 +160,6 @@ help:
 	@echo "                                 Default: $(STRUCTURE_AREAS_FILE)"
 	@echo ""
 	@echo "Example:"
+	@echo "  make flatten-png FILE=stupa1.png"
+	@echo "  make flatten-png FILE=stupa1.png BG='0 0 0'"
 	@echo "  make darkify-test-thumbnails DARKIFY_INVERT_LEVEL_SMALL='1%,78%' DARKIFY_INVERT_LEVEL_MEDIUM='2%,85%' DARKIFY_INVERT_LEVEL_LARGE='3%,90%'"
