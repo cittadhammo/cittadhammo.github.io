@@ -30,7 +30,11 @@
       {% assign light_href = src_path %}
     {% else %}
       {% assign src_path = '/assets/images/' | append: img | append: '/medium.' | append: site.img_ext | relative_url %}
-      {% assign light_href = src_path %}
+      {% if image.large %}
+        {% assign light_href = '/assets/images/' | append: img | append: '/large.' | append: site.img_ext | relative_url %}
+      {% else %}
+        {% assign light_href = src_path %}
+      {% endif %}
     {% endif %}
 
     {% if image.display == false %}
@@ -38,13 +42,20 @@
         <a class="mfp-image"
           href="{{ light_href }}"
           data-light-href="{{ light_href }}"
-          {% if has_dark_variant %}data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"{% endif %}
+          {% if has_dark_variant %}
+            {% if image.large %}
+              data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+            {% else %}
+              data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+            {% endif %}
+          {% endif %}
           data-gallery-index="{{ forloop.index0 }}"
           {% if image.map %}data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
           {% if has_dark_variant %}
             data-light-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
             data-dark-map-url="{{ '/maps/' | append: img | append: '.html?theme=dark' | relative_url }}"
           {% endif %}{% endif %}
+          {% if image['black-bg'] %}data-black-bg="true"{% endif %}
           {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
         ></a>
       </li>
@@ -86,7 +97,11 @@
             href="{{ light_href }}"
             data-light-href="{{ light_href }}"
             {% if has_dark_variant %}
-              data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% if image.large %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% else %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% endif %}
             {% endif %}
             data-map-url="{{ '/maps/' | append: img | append: '.html' | relative_url }}"
             {% if has_dark_variant %}
@@ -94,6 +109,7 @@
               data-dark-map-url="{{ '/maps/' | append: img | append: '.html?theme=dark' | relative_url }}"
             {% endif %}
             data-gallery-index="{{ forloop.index0 }}"
+            {% if image['black-bg'] %}data-black-bg="true"{% endif %}
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img
@@ -116,9 +132,14 @@
             href="{{ light_href }}"
             data-light-href="{{ light_href }}"
             {% if has_dark_variant %}
-              data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% if image.large %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/large-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% else %}
+                data-dark-href="{{ '/assets/images/' | append: img | append: '/medium-' | append: dark_suffix | append: '.' | append: site.img_ext | relative_url }}"
+              {% endif %}
             {% endif %}
             data-gallery-index="{{ forloop.index0 }}"
+            {% if image['black-bg'] %}data-black-bg="true"{% endif %}
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
           >
             <img

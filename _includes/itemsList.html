@@ -18,61 +18,71 @@
     <div class="container">
       <h1 class="cat-title">{{ category_title }}</h1>
       <ul class="projects-list">
+        {% assign category_items = "" | split: "" %}
         {% for item in items %}
           {% assign parent = item.url | split: '/' | pop | last %}
           {% if parent == category.name %}
-            <li{% if site.theme.scroll_reveal != false %} class="load-hidden"{% endif %}>
-              <a href="{{ item.url | relative_url }}">
-                <div class="img-wrapper">
-                  {% assign image = item.images | first %}
-                  {% assign homedark_image = nil %}
-                  {% for item_img in item.images %}
-                    {% if item_img.homedark == true %}
-                      {% assign homedark_image = item_img %}
-                      {% break %}
-                    {% endif %}
-                  {% endfor %}
-                  {% assign image_entry = image %}
-                  {% if image_entry == nil and item.image %}
-                    {% assign image_entry = item.image %}
-                  {% endif %}
-                  {% assign image_name = image_entry.name | default: image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
-                  {% assign img = image_name | split: '.' | first %}
-                  {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
-                  {% assign has_dark_variant = true %}
-                  {% if image and image.dark == true %}
-                    {% assign has_dark_variant = false %}
-                  {% endif %}
-                  {% if image_name != '' %}
-                    {% assign dark_img_base = img %}
-                    {% assign dark_img_suffix = '' %}
-                    
-                    {% if homedark_image %}
-                      {% assign dark_img_name = homedark_image.name | default: homedark_image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
-                      {% assign dark_img_base = dark_img_name | split: '.' | first %}
-                    {% elsif has_dark_variant %}
-                      {% assign dark_img_suffix = '-' | append: dark_suffix %}
-                    {% endif %}
-
-                    {% assign dark_img_path = '/assets/images/' | append: dark_img_base | append: '/small' | append: dark_img_suffix | append: '.' | append: site.img_ext %}
-                    
-                    <img
-                      src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
-                      data-light-src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
-                      {% if has_dark_variant or homedark_image %}
-                        data-dark-src="{{ dark_img_path | relative_url }}"
-                      {% endif %}
-                      alt="{{ image_name }}"
-                      loading="lazy"
-                      style="aspect-ratio: {{ site.data.size[dark_img_base].small | default: site.data.size[img].small }};"
-                    >
-                  {% endif %}
-                </div>
-                <h3>{{ item.title }}</h3>
-                <span class="h2">{{ item.subtitle }}</span>
-              </a>
-            </li>
+            {% assign category_items = category_items | push: item %}
           {% endif %}
+        {% endfor %}
+
+        {% for item in category_items %}
+          <li{% if site.theme.scroll_reveal != false %} class="{% if forloop.first %}reveal-first{% else %}load-hidden{% endif %}"{% endif %}>
+            <a href="{{ item.url | relative_url }}">
+              <div class="img-wrapper">
+                {% assign image = item.images | first %}
+                {% assign homedark_image = nil %}
+                {% for item_img in item.images %}
+                  {% if item_img.homedark == true %}
+                    {% assign homedark_image = item_img %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+                {% assign image_entry = image %}
+                {% if image_entry == nil and item.image %}
+                  {% assign image_entry = item.image %}
+                {% endif %}
+                {% assign image_name = image_entry.name | default: image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                {% assign img = image_name | split: '.' | first %}
+                {% assign dark_suffix = site.darkify.suffix | default: 'dark' %}
+                {% assign has_dark_variant = true %}
+                {% if image and image.dark == true %}
+                  {% assign has_dark_variant = false %}
+                {% endif %}
+                {% if image_name != '' %}
+                  {% assign dark_img_base = img %}
+                  {% assign dark_img_suffix = '' %}
+
+                  {% if homedark_image %}
+                    {% assign dark_img_name = homedark_image.name | default: homedark_image | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+                    {% assign dark_img_base = dark_img_name | split: '.' | first %}
+                  {% elsif has_dark_variant %}
+                    {% assign dark_img_suffix = '-' | append: dark_suffix %}
+                  {% endif %}
+
+                  {% assign dark_img_path = '/assets/images/' | append: dark_img_base | append: '/small' | append: dark_img_suffix | append: '.' | append: site.img_ext %}
+
+                  <img
+                    src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                    data-light-src="{{ '/assets/images/' | append: img | append: '/small.' | append: site.img_ext | relative_url }}"
+                    {% if has_dark_variant or homedark_image %}
+                      data-dark-src="{{ dark_img_path | relative_url }}"
+                    {% endif %}
+                    alt="{{ image_name }}"
+                    {% if forloop.index <= 6 %}
+                      loading="eager"
+                      fetchpriority="high"
+                    {% else %}
+                      loading="lazy"
+                    {% endif %}
+                    style="aspect-ratio: {{ site.data.size[dark_img_base].small | default: site.data.size[img].small }};"
+                  >
+                {% endif %}
+              </div>
+              <h3>{{ item.title }}</h3>
+              <span class="h2">{{ item.subtitle }}</span>
+            </a>
+          </li>
         {% endfor %}
       </ul>
     </div>

@@ -395,11 +395,13 @@ update_size_data() {
     local img_name="$1"
     local small_ratio="$2"
     local medium_ratio="$3"
+    local large_ratio="$4"
     
     # Create temporary YAML entry
     local temp_entry="$img_name:
   small: $small_ratio
-  medium: $medium_ratio"
+  medium: $medium_ratio
+  large: $large_ratio"
     
     # Check if entry exists and update or append
     if grep -q "^$img_name:" "$SIZE_DATA_FILE"; then
@@ -492,6 +494,7 @@ bg=$BG
 tile_light_bg=$TILE_LIGHT_BG
 img_dark=$IMG_DARK
 needs_darkify=$NEEDS_DARKIFY
+large=$LARGE
 darkify_method=$DARKIFY_METHOD
 darkify_suffix=$DARKIFY_SUFFIX
 darkify_invert_level_default=$ACTIVE_DARKIFY_INVERT_LEVEL_DEFAULT
@@ -551,18 +554,26 @@ EOF
     if [ "$DISPLAY" = "true" ] && [ "$MAPS_HTML_ONLY" != "true" ]; then
         THUMB_SMALL="$DEST_FOLDER/small.webp"
         THUMB_MEDIUM="$DEST_FOLDER/medium.webp"
+        THUMB_LARGE="$DEST_FOLDER/large.webp"
         DARK_THUMB_SMALL="$DEST_FOLDER/small-${DARKIFY_SUFFIX}.webp"
         DARK_THUMB_MEDIUM="$DEST_FOLDER/medium-${DARKIFY_SUFFIX}.webp"
+        DARK_THUMB_LARGE="$DEST_FOLDER/large-${DARKIFY_SUFFIX}.webp"
 
         THUMBS_UP_TO_DATE="false"
-        if [ "$META_MATCH" = "true" ] \
-            && all_files_exist "$THUMB_SMALL" "$THUMB_MEDIUM"; then
-            if [ "$NEEDS_DARKIFY" = "true" ]; then
-                if all_files_exist "$DARK_THUMB_SMALL" "$DARK_THUMB_MEDIUM"; then
-                    THUMBS_UP_TO_DATE="true"
+        if [ "$META_MATCH" = "true" ]; then
+            THUMBS_UP_TO_DATE="true"
+            [ ! -f "$THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+            [ ! -f "$THUMB_MEDIUM" ] && THUMBS_UP_TO_DATE="false"
+            if [ "$LARGE" = "true" ]; then
+                [ ! -f "$THUMB_LARGE" ] && THUMBS_UP_TO_DATE="false"
+            fi
+
+            if [ "$THUMBS_UP_TO_DATE" = "true" ] && [ "$NEEDS_DARKIFY" = "true" ]; then
+                [ ! -f "$DARK_THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+                [ ! -f "$DARK_THUMB_MEDIUM" ] && THUMBS_UP_TO_DATE="false"
+                if [ "$LARGE" = "true" ]; then
+                    [ ! -f "$DARK_THUMB_LARGE" ] && THUMBS_UP_TO_DATE="false"
                 fi
-            else
-                THUMBS_UP_TO_DATE="true"
             fi
         fi
 
@@ -578,21 +589,31 @@ EOF
             if [ $(awk "BEGIN {print ($ASPECT_RATIO <= 0.8)}") -eq 1 ]; then
                 SMALL_SIZE=565
                 MEDIUM_SIZE=1131
+                LARGE_SIZE=2262
                 echo "Tall image detected (ratio: $ASPECT_RATIO) - using increased resolution"
             else
                 SMALL_SIZE=400
                 MEDIUM_SIZE=800
+                LARGE_SIZE=1600
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
             # Q=90 reduces banding on dark backgrounds vs Q=75
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=90]" $SMALL_SIZE --intent relative
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=90]" $MEDIUM_SIZE --intent relative
+            if [ "$LARGE" = "true" ]; then
+                vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=90]" $LARGE_SIZE --intent relative
+            else
+                rm -f "$THUMB_LARGE" "$DARK_THUMB_LARGE"
+            fi
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
                 darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD" "thumb-small"
                 darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD" "thumb-medium"
+                if [ "$LARGE" = "true" ]; then
+                    darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD" "thumb-large"
+                fi
             fi
         fi
 
@@ -604,8 +625,16 @@ EOF
         MEDIUM_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/medium.webp")
         MEDIUM_RATIO=$(awk "BEGIN {printf \"%.3f\", $MEDIUM_WIDTH / $MEDIUM_HEIGHT}")
 
-        update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO"
-        echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO"
+        if [ -f "$DEST_FOLDER/large.webp" ]; then
+            LARGE_WIDTH=$(vipsheader -f width "$DEST_FOLDER/large.webp")
+            LARGE_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/large.webp")
+            LARGE_RATIO=$(awk "BEGIN {printf \"%.3f\", $LARGE_WIDTH / $LARGE_HEIGHT}")
+        else
+            LARGE_RATIO="$MEDIUM_RATIO"
+        fi
+
+        update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO" "$LARGE_RATIO"
+        echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO, large=$LARGE_RATIO"
     else
         echo "Skipping thumbnail generation for non-displayable asset: $IMG_NAME"
     fi
@@ -735,6 +764,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARKIFY_INVERT_LEVEL_SMALL=$(echo "$YAML" | yq -r ".images[$i].invert_level.small // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=$(echo "$YAML" | yq -r ".images[$i].invert_level.medium // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_LARGE=$(echo "$YAML" | yq -r ".images[$i].invert_level.large // \"\"")
+        LARGE=$(echo "$YAML" | yq -r ".images[$i].large // false")
         if [ -n "$IMG_NAME" ] && [ "$IMG_NAME" != "null" ] && [ -z "${PROCESSED_IMAGES[$IMG_NAME]}" ]; then
             process_image_entry
             PROCESSED_IMAGES[$IMG_NAME]=1
@@ -749,6 +779,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        LARGE="false"
         IMG_PDF=""
         IMG_SVG=""
         IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
@@ -774,6 +805,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARK="true"
         DISPLAY="true"
         FILE="false"
+        LARGE="false"
         IMG_PDF=""
         IMG_SVG=""
         IMG_DARKIFY_INVERT_LEVEL_DEFAULT=""
