@@ -1,22 +1,24 @@
 # To do list for Dhammacharts
 
   - [ ] Smaller license in parralells
-  - [x] Add TU app to make darkify image
-  - [x] border on dark images
+  - [ ] CC0 freely avaialbel label
   - [ ] Sutta pitaka parallels remove structure
-  - [ ] fix word lenghts on path to Nibbana
-  - [ ] Add dark and light image on both theme in aside
+  - [x] fix word lenghts on path to Nibbana
+  - [x] Add dark and light image on both theme in aside
   - [ ] change font on force manual chart
-  - [ ] Add Chart from Others (Joe Rucker, etc.)
+  - [ ] add option to flatten item layout
+  - [x] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, AI made, etc.)
   - [ ] Che projects
-  - [ ] Interactive charts (click on leaves for Manual of Buddhist Tern (rectangle))
+  - [x] Interactive charts (click on leaves for Manual of Buddhist Tern (rectangle))
   - [ ] Emails related to Charts
   - [ ] Overlay grey or more in parallels.
   - [ ] code pages
-  - [ ] change footer with real links
+  - [x] change footer with real links
   - [ ] Add nice charts 
   - [ ] Is there a way to make the link page easier to code?
+  - [x] Add TU app to make darkify image
+  - [x] border on dark images
   - [x] border on dark images
   - [x] add hover effect, link and mb in item layout 
   - [x] Is buddha brain CC0?

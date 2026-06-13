@@ -2,9 +2,13 @@
 title: "Magga Vibhaṅga Stupa"
 author: "Cittadhammo Bhikkhu"
 year: 2024
+published: true
+descripion: The Magga Vibhaṅga Stupa is directly inspired by the Magga Vibhanga Sutta (SN 45.8). It symbolizes the Noble Eightfold Path, with each of its components represented through geometric elements within the stupa's design.
 license:
-  - name: "CC0 Public Domain"
+  - name: cc0
 sources:
+  - name: Magga Vibhanga Sutta 
+    url: https://suttacentral.net/sn45.8/en/sujato?lang=en&layout=sidebyside&reference=none&notes=sidenotes&highlight=false&script=latin
   - name: "Inspirational Sketches"
     url: https://drive.google.com/drive/folders/1uRKJcAmZ1QsMqKNXNrs0LFBiEGuGq_Gt?usp=drive_link
   - name: "Ayutaya Style Stupas Images"
@@ -28,6 +32,60 @@ techs:
 code:
   - name: "Notebook"
     url: "https://observablehq.com/d/f7289e34967b18ac"
+images:
+  - name: stupa01.png
+    map: true
+  - name: stupa02.png
+    map: true
+  - name: stupa03.png
+    dark: true
+    large: true
+  - name: stupa04.png
+    dark: true
+  - name: stupa05.png
+    dark: true
+  - name: stupa06.png
+    dark: true
+  - name: stupa07.png
+    dark: true
+  - name: stupa08.png
+    dark: true
+  - name: stupa09.png
+    dark: true
+  - name: stupa10.png
+    dark: true
+  - name: stupa11.png
+    dark: true
+  - name: stupa12.png
+    dark: true
+  - name: stupa13.png
+    map: true
+  - name: stupa14.png
+    map: true
+  - name: stupa15.png
+    map: true
+  - name: stupa16.png
+    map: true
+  - name: stupa17.jpeg
+    dark: true
+  - name: stupa18.jpeg
+    dark: true
+  - name: stupa19.jpeg
+    dark: true
+  - name: stupa20.jpeg
+    dark: true
+  - name: stupa21.jpeg
+    dark: true
+  - name: stupa22.jpeg
+    dark: true
+  - name: stupa23.jpeg
+    dark: true
+  - name: stupa24.jpeg
+    dark: true
+  - name: stupa25.jpeg
+    dark: true
+  - name: stupa26.jpeg
+    dark: true
+  - name: stupa27.jpeg
+    dark: true
 ---
-
-The Magga Vibhaṅga Stupa is directly inspired by the Magga Vibhanga Sutta (SN 45.8). It symbolizes the Noble Eightfold Path, with each of its components represented through geometric elements within the stupa's design.

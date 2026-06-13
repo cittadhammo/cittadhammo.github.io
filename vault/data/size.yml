@@ -181,57 +181,182 @@ sutta-pitaka-A0VM:
 sutta-pitaka-horizontal-A0HM:
   small: 1.413
   medium: 1.413
+  large: 1.413
 sutta-pitaka-rectilipse-A0HM:
   small: 1.413
   medium: 1.413
+  large: 1.413
 manual-buddhist-terms-dark-A1SB:
   small: 1.000
   medium: 1.000
+  large: 1.000
 sutta-parallels-A0S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 31-planes-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 31-planes-pali-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 37-wings-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 37-wings-2-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 i-dhamma:
   small: 1.770
   medium: 1.774
+  large: 1.772
 i-dhamma-animated:
   small: 1.810
   medium: 1.810
+  large: 1.808
 dependant-origination:
   small: 0.712
   medium: 0.712
 dependant-origination-3:
   small: 0.712
   medium: 0.712
+  large: 0.712
 paticcasamuppada:
   small: 2.116
   medium: 2.111
+  large: 2.111
 big-picture:
   small: 1.000
   medium: 1.000
+  large: 1.000
 12-links:
   small: 0.823
   medium: 0.823
+  large: 0.823
 salayatana:
   small: 0.998
   medium: 0.998
+  large: 0.997
 patimokkha-152:
   small: 0.706
   medium: 0.707
+  large: 0.707
 path-to-nibbana-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
 path-to-nibbana-dark-A1S:
   small: 1.000
   medium: 1.000
+  large: 1.000
+stupa1:
+  small: 1.010
+  medium: 1.009
+stupa01:
+  small: 1.010
+  medium: 1.009
+  large: 1.009
+stupa02:
+  small: 0.708
+  medium: 0.707
+  large: 0.707
+stupa03:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa04:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa05:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa06:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa07:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa08:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa09:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa10:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa11:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa12:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+stupa13:
+  small: 1.413
+  medium: 1.413
+  large: 1.415
+stupa14:
+  small: 1.413
+  medium: 1.413
+  large: 1.415
+stupa15:
+  small: 1.413
+  medium: 1.413
+  large: 1.415
+stupa16:
+  small: 1.413
+  medium: 1.413
+  large: 1.415
+stupa17:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa18:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa20:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa21:
+  small: 0.667
+  medium: 0.667
+  large: 0.667
+stupa22:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa23:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa24:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa25:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa26:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
+stupa27:
+  small: 1.498
+  medium: 1.501
+  large: 1.500
