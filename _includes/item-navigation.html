@@ -156,6 +156,7 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- if previous_item or next_item -%}
 <section class="project-navigation">
   <div class="container">
     {% if previous_item %}
@@ -163,8 +164,6 @@
         <span class="h2">Previous</span>
         <h2>{{ previous_item.title }}</h2>
       </a>
-    {% else %}
-      <a class="prev"></a>
     {% endif %}
 
     {% if next_item %}
@@ -172,8 +171,7 @@
         <span class="h2">Next</span>
         <h2>{{ next_item.title }}</h2>
       </a>
-    {% else %}
-      <a class="next"></a>
     {% endif %}
   </div>
 </section>
+{%- endif -%}
