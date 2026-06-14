@@ -16,10 +16,10 @@
     - title:  Old Site
       url:    https://dhammacharts.github.io/
 
-- name:   3d-printing
-  title:  3D Printing
-  categories:
-    - name:   stupas
+# - name:   3d-printing
+#   title:  3D Printing
+#   categories:
+#   - name:   stupas
     # - name:   monk
     # - name:   other
 
