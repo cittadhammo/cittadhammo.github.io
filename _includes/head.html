@@ -65,7 +65,7 @@
 <meta name="theme-color" content="#000000" id="meta-theme-color">
 <style>
   html[data-theme="dark"] img[data-dark-src]:not([data-theme-image-ready="true"]):not(.home-hero-logo) {
-    opacity: 0;
+    opacity: 0 !important;
   }
 
   .lightonly-item,
@@ -146,35 +146,35 @@
       return "light";
     }
 
+    function markImageReady(img, targetSrc, isDark) {
+      if (!isDark || !img.getAttribute("data-dark-src")) {
+        img.setAttribute("data-theme-image-ready", "true");
+        return;
+      }
+
+      if (img.getAttribute("src") === targetSrc && img.complete) {
+        img.setAttribute("data-theme-image-ready", "true");
+        return;
+      }
+
+      img.removeAttribute("data-theme-image-ready");
+
+      if (img.__themeReadyTarget === targetSrc) return;
+      img.__themeReadyTarget = targetSrc;
+
+      var onComplete = function () {
+        if (img.getAttribute("src") === targetSrc) {
+          img.setAttribute("data-theme-image-ready", "true");
+        }
+      };
+
+      img.addEventListener("load", onComplete, { once: true });
+      img.addEventListener("error", onComplete, { once: true });
+    }
+
     function updateThemeImages(theme) {
       var isDark = theme === "dark";
       var images = document.querySelectorAll("img[data-light-src]");
-
-      function markImageReady(img, targetSrc) {
-        if (!isDark || !img.getAttribute("data-dark-src")) {
-          img.setAttribute("data-theme-image-ready", "true");
-          return;
-        }
-
-        if (img.getAttribute("src") === targetSrc && img.complete && img.naturalWidth > 0) {
-          img.setAttribute("data-theme-image-ready", "true");
-          return;
-        }
-
-        img.removeAttribute("data-theme-image-ready");
-
-        if (img.__themeReadyTarget === targetSrc) return;
-        img.__themeReadyTarget = targetSrc;
-
-        var onComplete = function () {
-          if (img.getAttribute("src") === targetSrc) {
-            img.setAttribute("data-theme-image-ready", "true");
-          }
-        };
-
-        img.addEventListener("load", onComplete, { once: true });
-        img.addEventListener("error", onComplete, { once: true });
-      }
 
       images.forEach(function (img) {
         var lightSrc = img.getAttribute("data-light-src");
@@ -183,7 +183,7 @@
         if (nextSrc && img.getAttribute("src") !== nextSrc) {
           img.setAttribute("src", nextSrc);
         }
-        markImageReady(img, nextSrc);
+        markImageReady(img, nextSrc, isDark);
       });
 
       var links = document.querySelectorAll("[data-light-href]");
@@ -297,6 +297,7 @@
               if (darkSrc && node.getAttribute("src") !== darkSrc) {
                 node.setAttribute("src", darkSrc);
               }
+              markImageReady(node, darkSrc, isDark);
             }
 
             // Check children (for deep fragments)
@@ -307,6 +308,7 @@
               if (dSrc && img.getAttribute("src") !== dSrc) {
                 img.setAttribute("src", dSrc);
               }
+              markImageReady(img, dSrc, isDark);
             }
           }
         });
