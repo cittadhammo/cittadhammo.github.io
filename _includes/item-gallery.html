@@ -63,6 +63,15 @@
       {% continue %}
     {% endif %}
 
+    {% if image.header %}
+      {% assign header_slug = image.header | slugify %}
+      <li class="gallery-header">
+        <h1 id="{{ header_slug }}">
+          <a href="#{{ header_slug }}" class="gallery-header-link">{{ image.header }}<span class="anchor-icon" aria-hidden="true">#</span></a>
+        </h1>
+      </li>
+    {% endif %}
+
     {% assign li_classes = '' %}
     {% if image_ext == 'gif' %}
       {% assign li_classes = li_classes | append: ' gif-item' %}
@@ -161,3 +170,24 @@
     </li>
   {% endfor %}
 </ul>
+<script>
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.gallery-header-link');
+    if (!link) return;
+    e.preventDefault();
+
+    var hash = link.getAttribute('href');
+    var url = location.href.split('#')[0] + hash;
+
+    history.replaceState(null, '', hash);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url);
+    }
+
+    var icon = link.querySelector('.anchor-icon');
+    if (icon) {
+      icon.classList.add('flash');
+      setTimeout(function () { icon.classList.remove('flash'); }, 300);
+    }
+  });
+</script>

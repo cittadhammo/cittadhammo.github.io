@@ -495,6 +495,41 @@ body.print-page #page-content .page-content-body a::first-letter {
     visibility: hidden;
 }
 
+.gallery-header {
+  list-style: none;
+
+  h1 {
+    font-size: 2rem;
+    margin: 1.5rem 0 0.5rem;
+    padding: 0;
+    scroll-margin-top: 6rem;
+  }
+}
+
+.gallery-header {
+  a.gallery-header-link {
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .anchor-icon {
+    opacity: 0.3;
+    font-size: 0.8em;
+    margin-left: 0.3em;
+    transition: opacity 0.2s;
+  }
+
+  a.gallery-header-link:hover .anchor-icon {
+    opacity: 0.7;
+  }
+
+  .anchor-icon.flash {
+    opacity: 1;
+  }
+}
+
 .map-header {
 	@media (max-width: 900px) {
 	display: none;

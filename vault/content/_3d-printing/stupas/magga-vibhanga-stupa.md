@@ -40,6 +40,7 @@ images:
     map: true
     box: true
   - name: stupa03.png
+    header: Renders
     dark: true
     home: true
     large: true
@@ -72,6 +73,7 @@ images:
     large: true
   - name: stupa13.png
     box: true
+    header: Detailed Plan
     map: true
     large: true
   - name: stupa14.png
@@ -88,6 +90,7 @@ images:
     large: true
   - name: stupa17.jpeg
     box: true
+    header: 3D Printed Model
     dark: true
     large: true
   - name: stupa18.jpeg
