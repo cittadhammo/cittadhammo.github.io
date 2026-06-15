@@ -4,8 +4,22 @@
     {% include head.html %}
   </head>
 
-  <body class="black item-layout">
-    {% include area-header.html area_name=page.collection show_theme_toggle=true show_back=true %}
+  <body class="black item-layout{% if site.theme.header_sticky %} header-sticky{% endif %}">
+    <div class="header-wrap">
+      {% if site.theme.header_sticky %}
+        {% include area-header.html area_name=page.collection show_theme_toggle=true show_back=false %}
+      {% else %}
+        {% include area-header.html area_name=page.collection show_theme_toggle=true %}
+      {% endif %}
+    </div>
+    {% if site.theme.header_sticky and page.collection %}
+      {% assign area_anchor = page.collection | slugify %}
+      <div class="container arrow-div">
+        <a style="padding: 10px;" class="black-under" href="{{ '/' | relative_url }}#{{ area_anchor }}" class="bigger">
+          <i class="arrow left"></i>
+        </a>
+      </div>
+    {% endif %}
 
     <main class="content item-content">
       <section class="project">

@@ -828,13 +828,43 @@ body.print-page #page-content .page-content-body a::first-letter {
   }
 }
 
-.home-header-sticky .home-area .header {
-  position: sticky;
+.header-sticky .header-wrap {
+  position: fixed;
   top: 0;
-  z-index: 10;
+  width: 100%;
+  z-index: 100;
+  background: var(--color-header-bg);
 }
 
-.home-header-sticky .home-area {
+.header-sticky .header-wrap .header {
+  margin-bottom: 0;
+}
+
+.header-sticky .header-wrap + .container.arrow-div {
+  margin-top: 12rem;
+  padding-top: 0.9rem;
+}
+
+.header-sticky .home-area .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+@media (max-width: 749px) {
+  .header-sticky .header-wrap {
+    position: static;
+    background: none;
+  }
+  .header-sticky .header-wrap .header {
+    margin-bottom: 2rem;
+  }
+  .header-sticky .header-wrap + .container.arrow-div {
+    margin-top: 0;
+  }
+}
+
+.header-sticky .home-area {
   scroll-margin-top: 5rem;
 }
 

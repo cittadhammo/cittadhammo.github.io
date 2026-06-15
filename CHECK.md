@@ -3,6 +3,7 @@
   - [ ] Smaller license in parralells
   - [ ] CC0 freely avaialbel label
   - [ ] Add photo of hanger in print page
+  - [ ] pali letter with a dot on titles.
   - [ ] add title in image aside 
   - [ ] add onshape link to magga vibhanga
   - [ ] Sutta pitaka parallels remove structure
