@@ -18,13 +18,26 @@ $(document).ready(function() {
       var darkMapUrl = $link.attr('data-dark-map-url');
       var title = $link.attr('data-title') || '';
       var galleryIndex = $link.attr('data-gallery-index');
+      var isBox = $link.attr('data-box') === 'true';
       
       if (!lightHref || !darkHref || lightHref === darkHref) {
         return;
       }
       
       var isLightVariant = (currentTheme === 'light');
-      console.log('[processGallery] Link:', galleryIndex, 'lightMap:', lightMapUrl, 'darkMap:', darkMapUrl, 'isLight:', isLightVariant);
+      console.log('[processGallery] Link:', galleryIndex, 'lightMap:', lightMapUrl, 'darkMap:', darkMapUrl, 'isLight:', isLightVariant, 'isBox:', isBox);
+      
+      if (isBox) {
+        // box mode: swap href to match current theme, no variant clone
+        $link.attr('href', isLightVariant ? lightHref : darkHref);
+        $link.attr('data-title', title);
+        if (isLightVariant && lightMapUrl) {
+          $link.attr('data-map-url', lightMapUrl);
+        } else if (!isLightVariant && darkMapUrl) {
+          $link.attr('data-map-url', darkMapUrl);
+        }
+        return;
+      }
       
       var $clone = $link.clone();
       $clone.addClass('variant-clone');
@@ -62,6 +75,21 @@ $(document).ready(function() {
     });
   }
   
+  function updateMfpItems() {
+    // Sync MagnificPopup's internal items array with current DOM hrefs
+    if (!mfpInstance) return;
+    mfpInstance.items.forEach(function(item) {
+      if (item.el) {
+        var $el = $(item.el);
+        var href = $el.attr('href');
+        if (href) {
+          item.src = href;
+        }
+      }
+    });
+    mfpInstance.updateItemHTML();
+  }
+
   function processExternalLinks() {
     var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     
@@ -112,6 +140,9 @@ $(document).ready(function() {
         preload: [0,1]
       },
       callbacks: {
+        open: function() {
+          mfpInstance = this;
+        },
         afterChange: function() {
           this.content.find('.fullscreen-map-icon-in-lightbox').remove();
 
@@ -152,6 +183,7 @@ $(document).ready(function() {
         setTimeout(function() {
           processGallery();
           processExternalLinks();
+          updateMfpItems();
         }, 300);
       }
     });

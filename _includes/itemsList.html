@@ -30,7 +30,18 @@
           <li{% if site.theme.scroll_reveal != false %} class="{% if forloop.first %}reveal-first{% else %}load-hidden{% endif %}"{% endif %}>
             <a href="{{ item.url | relative_url }}">
               <div class="img-wrapper">
-                {% assign image = item.images | first %}
+                {% assign home_image = nil %}
+                {% for item_img in item.images %}
+                  {% if item_img.home == true %}
+                    {% assign home_image = item_img %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+                {% if home_image %}
+                  {% assign image = home_image %}
+                {% else %}
+                  {% assign image = item.images | first %}
+                {% endif %}
                 {% assign homedark_image = nil %}
                 {% for item_img in item.images %}
                   {% if item_img.homedark == true %}

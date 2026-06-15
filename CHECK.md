@@ -2,6 +2,8 @@
 
   - [ ] Smaller license in parralells
   - [ ] CC0 freely avaialbel label
+  - [ ] Add photo of hanger in print page
+  - [ ] add onshape link to magga vibhanga
   - [ ] Sutta pitaka parallels remove structure
   - [x] fix word lenghts on path to Nibbana
   - [x] Add dark and light image on both theme in aside

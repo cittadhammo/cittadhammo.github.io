@@ -509,10 +509,15 @@ EOF
     fi
 
     if [ "$MAPS_HTML_ONLY" != "true" ]; then
-        if [ "$META_MATCH" = "true" ] && [ -f "$DEST_FOLDER/$IMG_NAME" ]; then
-            echo "Skipping original copy for $IMG_NAME (unchanged)"
-        else
-            cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME"
+        if [ "$FILE" = "true" ] || [[ "$IMG_NAME" == *.gif ]]; then
+            if [ "$META_MATCH" = "true" ] && [ -f "$DEST_FOLDER/$IMG_NAME" ]; then
+                echo "Skipping original copy for $IMG_NAME (unchanged)"
+            else
+                cp "$SRC_IMG_PATH" "$DEST_FOLDER/$IMG_NAME"
+            fi
+        elif [ -f "$DEST_FOLDER/$IMG_NAME" ]; then
+            echo "Cleaning up unnecessary original: $IMG_NAME"
+            rm -f "$DEST_FOLDER/$IMG_NAME"
         fi
 
         if [ "$FILE" = "true" ]; then
@@ -562,14 +567,18 @@ EOF
         THUMBS_UP_TO_DATE="false"
         if [ "$META_MATCH" = "true" ]; then
             THUMBS_UP_TO_DATE="true"
-            [ ! -f "$THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+            if [ "$HOME_IMAGE" = "true" ]; then
+                [ ! -f "$THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+            fi
             [ ! -f "$THUMB_MEDIUM" ] && THUMBS_UP_TO_DATE="false"
             if [ "$LARGE" = "true" ]; then
                 [ ! -f "$THUMB_LARGE" ] && THUMBS_UP_TO_DATE="false"
             fi
 
             if [ "$THUMBS_UP_TO_DATE" = "true" ] && [ "$NEEDS_DARKIFY" = "true" ]; then
-                [ ! -f "$DARK_THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+                if [ "$HOME_IMAGE" = "true" ]; then
+                    [ ! -f "$DARK_THUMB_SMALL" ] && THUMBS_UP_TO_DATE="false"
+                fi
                 [ ! -f "$DARK_THUMB_MEDIUM" ] && THUMBS_UP_TO_DATE="false"
                 if [ "$LARGE" = "true" ]; then
                     [ ! -f "$DARK_THUMB_LARGE" ] && THUMBS_UP_TO_DATE="false"
@@ -599,7 +608,11 @@ EOF
             fi
 
             # Q=90 reduces banding on dark backgrounds vs Q=75
-            vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=90]" $SMALL_SIZE --intent relative
+            if [ "$HOME_IMAGE" = "true" ]; then
+                vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/small.webp[Q=90]" $SMALL_SIZE --intent relative
+            else
+                rm -f "$THUMB_SMALL" "$DARK_THUMB_SMALL"
+            fi
             vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/medium.webp[Q=90]" $MEDIUM_SIZE --intent relative
             if [ "$LARGE" = "true" ]; then
                 vips thumbnail "$SRC_IMG_PATH" "$DEST_FOLDER/large.webp[Q=90]" $LARGE_SIZE --intent relative
@@ -609,7 +622,9 @@ EOF
 
             if [ "$NEEDS_DARKIFY" = "true" ]; then
                 ensure_magick
-                darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD" "thumb-small"
+                if [ "$HOME_IMAGE" = "true" ]; then
+                    darkify_image "$THUMB_SMALL" "$DARK_THUMB_SMALL" "$DARKIFY_METHOD" "thumb-small"
+                fi
                 darkify_image "$THUMB_MEDIUM" "$DARK_THUMB_MEDIUM" "$DARKIFY_METHOD" "thumb-medium"
                 if [ "$LARGE" = "true" ]; then
                     darkify_image "$THUMB_LARGE" "$DARK_THUMB_LARGE" "$DARKIFY_METHOD" "thumb-large"
@@ -617,13 +632,17 @@ EOF
             fi
         fi
 
-        SMALL_WIDTH=$(vipsheader -f width "$DEST_FOLDER/small.webp")
-        SMALL_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/small.webp")
-        SMALL_RATIO=$(awk "BEGIN {printf \"%.3f\", $SMALL_WIDTH / $SMALL_HEIGHT}")
-
         MEDIUM_WIDTH=$(vipsheader -f width "$DEST_FOLDER/medium.webp")
         MEDIUM_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/medium.webp")
         MEDIUM_RATIO=$(awk "BEGIN {printf \"%.3f\", $MEDIUM_WIDTH / $MEDIUM_HEIGHT}")
+
+        if [ "$HOME_IMAGE" = "true" ] && [ -f "$DEST_FOLDER/small.webp" ]; then
+            SMALL_WIDTH=$(vipsheader -f width "$DEST_FOLDER/small.webp")
+            SMALL_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/small.webp")
+            SMALL_RATIO=$(awk "BEGIN {printf \"%.3f\", $SMALL_WIDTH / $SMALL_HEIGHT}")
+        else
+            SMALL_RATIO="$MEDIUM_RATIO"
+        fi
 
         if [ -f "$DEST_FOLDER/large.webp" ]; then
             LARGE_WIDTH=$(vipsheader -f width "$DEST_FOLDER/large.webp")
@@ -750,6 +769,19 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     fi
     declare -A PROCESSED_IMAGES=()
 
+    HOME_IMG_IDX=0
+    HOMEDARK_IMG_IDX=-1
+    for ((i=0; i<IMG_COUNT; i++)); do
+        IS_HOME=$(echo "$YAML" | yq -r ".images[$i].home // false")
+        if [ "$IS_HOME" = "true" ]; then
+            HOME_IMG_IDX=$i
+        fi
+        IS_HOMEDARK=$(echo "$YAML" | yq -r ".images[$i].homedark // false")
+        if [ "$IS_HOMEDARK" = "true" ]; then
+            HOMEDARK_IMG_IDX=$i
+        fi
+    done
+
     for ((i=0; i<IMG_COUNT; i++)); do
         RAW_IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name // .images[$i] // \"\"")
         IMG_NAME=$(resolve_image_name "$(normalize_image_name "$RAW_IMG_NAME")")
@@ -765,6 +797,10 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=$(echo "$YAML" | yq -r ".images[$i].invert_level.medium // \"\"")
         IMG_DARKIFY_INVERT_LEVEL_LARGE=$(echo "$YAML" | yq -r ".images[$i].invert_level.large // \"\"")
         LARGE=$(echo "$YAML" | yq -r ".images[$i].large // false")
+        HOME_IMAGE="false"
+        if [ "$i" = "$HOME_IMG_IDX" ] || [ "$i" = "$HOMEDARK_IMG_IDX" ]; then
+            HOME_IMAGE="true"
+        fi
         if [ -n "$IMG_NAME" ] && [ "$IMG_NAME" != "null" ] && [ -z "${PROCESSED_IMAGES[$IMG_NAME]}" ]; then
             process_image_entry
             PROCESSED_IMAGES[$IMG_NAME]=1
@@ -786,6 +822,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARKIFY_INVERT_LEVEL_SMALL=""
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""
         IMG_DARKIFY_INVERT_LEVEL_LARGE=""
+        HOME_IMAGE="true"
         process_image_entry
         PROCESSED_IMAGES[$IMG_NAME]=1
     fi
@@ -812,6 +849,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         IMG_DARKIFY_INVERT_LEVEL_SMALL=""
         IMG_DARKIFY_INVERT_LEVEL_MEDIUM=""
         IMG_DARKIFY_INVERT_LEVEL_LARGE=""
+        HOME_IMAGE="false"
         process_image_entry
         PROCESSED_IMAGES[$IMG_NAME]=1
     done < <(extract_content_image_links "$MD_FILE")

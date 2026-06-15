@@ -60,8 +60,11 @@ make structure-sync-check # Sync and then verify consistency
 
 For each image it:
 
-- copies original image files into `assets/images/<basename>/` (searches recursively in `vault/assets/` if not found in `images/` subdir)
-- generates `small.webp`, `medium.webp`, `large.webp` when `display: true`
+- copies the original to `assets/images/<basename>/` only for `file: true` or `.gif` images (searches recursively in `vault/assets/` if not found in `images/` subdir)
+- generates `medium.webp` when `display: true` (used in item gallery)
+- generates `small.webp` only for the image with `home: true` (used as homepage card)
+- generates `large.webp` when `large: true` (higher-res lightbox)
+- generates dark variants of all thumbnails for theme switching
 - updates aspect ratios in `vault/data/size.yml`
 - if `map: true`, generates tiles (Google layout) and a viewer page in `maps`
 - if `url: <link>` is provided in frontmatter, the image on the site will link directly to that URL instead of opening a lightbox.
@@ -73,6 +76,35 @@ For each image it:
 - First run after this feature may regenerate everything to seed metadata.
 
 Re-run `make assets` after content/frontmatter/image changes.
+
+### Image Frontmatter Reference
+
+Each entry in the `images` array supports these fields:
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `name` | string | — | Image filename (required) |
+| `display` | bool | `true` | Show in item gallery |
+| `dark` | bool | `false` | Image is already dark; skip dark variant generation |
+| `home` | bool | `false` | Use as homepage card; only this image gets `small.webp` |
+| `box` | bool | `false` | Theme-aware lightbox — only matching light/dark variant shows (no clone list) |
+| `large` | bool | `false` | Generate `large.webp` for higher-res lightbox |
+| `map` | bool | `false` | Generate OpenLayers map tiles + viewer page |
+| `file` | bool | `false` | Make original file available for download |
+| `pdf` | string | `""` | PDF filename for download variant |
+| `svg` | string | `""` | SVG filename for download variant |
+| `url` | string | `""` | External link (image becomes a link instead of opening lightbox) |
+| `title` | string | `""` | Image caption / title |
+| `alt` | string | `""` | Alt text for accessibility |
+| `background` | string | `"white"` | Background color for map tiles |
+| `lightonly` | bool | `false` | Only show in light theme |
+| `darkonly` | bool | `false` | Only show in dark theme |
+| `online` | bool | `false` | Image is a reference to an online resource |
+| `invert_level` | object | `{}` | Per-size darkify invert level overrides (`default`, `small`, `medium`, `large`) |
+
+Thumbnail sizes are defined in `scripts/generate_assets.sh`:
+- **Standard** (aspect ratio > 0.8): small=400px, medium=800px, large=1200px
+- **Tall** (aspect ratio ≤ 0.8): small=565px, medium=1131px, large=1697px
 
 ### Darkify Test Harness
 

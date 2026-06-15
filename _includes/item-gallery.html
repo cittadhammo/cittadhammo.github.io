@@ -57,6 +57,7 @@
           {% endif %}{% endif %}
           {% if image['black-bg'] %}data-black-bg="true"{% endif %}
           {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+          {% if image.box %}data-box="true"{% endif %}
         ></a>
       </li>
       {% continue %}
@@ -111,6 +112,7 @@
             data-gallery-index="{{ forloop.index0 }}"
             {% if image['black-bg'] %}data-black-bg="true"{% endif %}
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+            {% if image.box %}data-box="true"{% endif %}
           >
             <img
               {% if site.theme.scroll_reveal != false %}{% if is_reveal_first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
@@ -141,6 +143,7 @@
             data-gallery-index="{{ forloop.index0 }}"
             {% if image['black-bg'] %}data-black-bg="true"{% endif %}
             {% if image.title %}data-title="{{ image.title | escape }}"{% endif %}
+            {% if image.box %}data-box="true"{% endif %}
           >
             <img
               {% if site.theme.scroll_reveal != false %}{% if is_reveal_first %}class="reveal-first"{% else %}class="load-hidden"{% endif %}{% endif %}
