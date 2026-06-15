@@ -376,6 +376,50 @@
 {% endif %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    if (!document.body.classList.contains('header-auto-hide')) return;
+    if (window.innerWidth < 750) return;
+
+    var header = document.querySelector('.header-wrap');
+    var homeHeaders = header ? null : document.querySelectorAll('.home-area .header');
+    if (!header && (!homeHeaders || homeHeaders.length === 0)) return;
+
+    var lastScrollTop = window.scrollY;
+    var headerHeight = header ? header.offsetHeight : homeHeaders[0].offsetHeight;
+    var currentPos = -Math.min(lastScrollTop, headerHeight);
+
+    function applyPos(pos) {
+      if (header) {
+        header.style.top = pos + 'px';
+      } else {
+        for (var i = 0; i < homeHeaders.length; i++) {
+          homeHeaders[i].style.transform = 'translateY(' + pos + 'px)';
+        }
+      }
+    }
+
+    applyPos(currentPos);
+
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var delta = scrollTop - lastScrollTop;
+
+      if (scrollTop === 0) {
+        currentPos = 0;
+      } else {
+        currentPos = Math.max(-headerHeight, Math.min(0, currentPos - delta));
+      }
+
+      applyPos(currentPos);
+      lastScrollTop = scrollTop;
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+      headerHeight = header ? header.offsetHeight : homeHeaders[0].offsetHeight;
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
     var toggle = document.querySelector("[data-theme-toggle]");
     if (!toggle || !window.__themeConfig) return;
 

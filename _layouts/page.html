@@ -9,7 +9,7 @@
   {% if page.scroll_reveal != nil %}
     {% assign page_scroll_reveal_enabled = page.scroll_reveal %}
   {% endif %}
-  <body class="black page-layout{% if page_scroll_reveal_enabled %} page-scroll-reveal{% endif %}{% if site.theme.header_sticky %} header-sticky{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
+  <body class="black page-layout{% if page_scroll_reveal_enabled %} page-scroll-reveal{% endif %}{% if site.theme.header_sticky %} header-sticky{% if site.theme.header_sticky_auto_hide %} header-auto-hide{% endif %}{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
     <main class="home">
       <div class="header-wrap">
         {% if site.theme.header_sticky %}

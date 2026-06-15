@@ -4,7 +4,7 @@
     {% include head.html %}
   </head>
 
-  <body class="black home-layout{% if site.theme.home_hero_landing %} home-hero-enabled{% endif %}{% if site.theme.home_hero_follow_theme == false %} home-hero-fixed-dark{% endif %}{% if site.theme.home_hero_hide_on_scroll_cue != false %} home-hero-hide-on-hash{% endif %}{% if site.theme.header_sticky %} header-sticky{% endif %}">
+  <body class="black home-layout{% if site.theme.home_hero_landing %} home-hero-enabled{% endif %}{% if site.theme.home_hero_follow_theme == false %} home-hero-fixed-dark{% endif %}{% if site.theme.home_hero_hide_on_scroll_cue != false %} home-hero-hide-on-hash{% endif %}{% if site.theme.header_sticky %} header-sticky{% if site.theme.header_sticky_auto_hide %} header-auto-hide{% endif %}{% endif %}">
     <main class="home">
       {{ content }}
     </main>

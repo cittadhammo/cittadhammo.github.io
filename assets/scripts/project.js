@@ -1,5 +1,8 @@
 (function($) {
     $(function() {
+        // Track last offset for sticky header to avoid unnecessary detach/re-init
+        var lastStickyOffset = null;
+
         // --- Sticky Function Definition ---
         function sticky() {
             var w = $(window).width();
@@ -8,32 +11,29 @@
             if (w < 750) {
                 // Detach sticky below 750px
                 $article.trigger('sticky_kit:detach');
+                lastStickyOffset = null;
             } else {
                 var headerHeight = $('.header').outerHeight() || 0;
-                
-                // Calculate the effective offset to allow the article to scroll up 
-                // until its top edge is at the desired sticky point (Header Height)
-                
-                // 1. Current scroll position
                 var scrollTop = $(window).scrollTop(); 
-                
-                // 2. Article's position relative to the document
                 var articleTop = $article.offset().top; 
-
-                // 3. Calculate the offset needed to start sticking only when the 
-                // article's top aligns with the desired viewport position.
-                // This lets the element scroll until its top edge is at headerHeight.
                 var isHeaderSticky = $('body').hasClass('header-sticky');
                 var effectiveOffset = isHeaderSticky
                     ? Math.max(headerHeight, articleTop - scrollTop - headerHeight)
                     : Math.max(0, articleTop - scrollTop - headerHeight);
 
-                $article.stick_in_parent({
-                    offset_top: effectiveOffset 
-                });
-
-                // **CRITICAL FIX:** Force Sticky Kit to recalculate its position
-                $article.trigger("sticky_kit:recalc");
+                // Sticky-kit caches `q` (offset_top) on first init — recalc
+                // doesn't update it. Force detach+re-init when offset changes.
+                if (isHeaderSticky && effectiveOffset !== lastStickyOffset) {
+                    lastStickyOffset = effectiveOffset;
+                    $article.trigger('sticky_kit:detach');
+                    $article.stick_in_parent({ offset_top: effectiveOffset });
+                    // Trigger scroll to apply sticky position immediately,
+                    // preventing visible flicker between detach and re-stick.
+                    $(window).trigger('scroll');
+                } else {
+                    $article.stick_in_parent({ offset_top: effectiveOffset });
+                    $article.trigger("sticky_kit:recalc");
+                }
             }
         }
 
