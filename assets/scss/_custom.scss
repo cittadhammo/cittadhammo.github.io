@@ -787,6 +787,16 @@ body.print-page #page-content .page-content-body a::first-letter {
   }
 }
 
+.home-header-sticky .home-area .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.home-header-sticky .home-area {
+  scroll-margin-top: 5rem;
+}
+
 .home-layout.home-hero-enabled .home-hero {
   min-height: 100vh;
   min-height: 100svh;
