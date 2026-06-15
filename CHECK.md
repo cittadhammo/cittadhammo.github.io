@@ -7,6 +7,7 @@
   - [x] Add dark and light image on both theme in aside
   - [ ] change font on force manual chart
   - [ ] add option to flatten item layout
+  - [ ] is there small thumbnail generated for all (even not front image)
   - [x] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, AI made, etc.)
   - [ ] Che projects
