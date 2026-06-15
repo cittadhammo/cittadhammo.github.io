@@ -204,7 +204,7 @@
     var target = document.querySelector(hash);
     if (target) {
       var header = document.querySelector('.header-wrap');
-      var offset = header ? header.offsetHeight : 0;
+      var offset = header && document.body.classList.contains('header-sticky') ? header.offsetHeight : 0;
       var top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: top, behavior: 'smooth' });
     }
@@ -221,7 +221,7 @@
       var target = document.querySelector(location.hash);
       if (target) {
         var header = document.querySelector('.header-wrap');
-        var offset = header ? header.offsetHeight : 0;
+        var offset = header && document.body.classList.contains('header-sticky') ? header.offsetHeight : 0;
         var top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo(0, top);
       }

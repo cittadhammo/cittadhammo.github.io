@@ -37,7 +37,7 @@ theme:
   home_hero_follow_theme: true # If false, hero stays in dark style even when the site theme is light.
   home_hero_hide_on_scroll_cue: true # If true, clicking the hero bottom arrow hides the hero after scrolling.
   page_scroll_reveal_default: false # If true, page-layout pages use scroll reveal unless overridden in frontmatter.
-  header_sticky: true # If true, headers on home, item, and page layouts stick to the top of the viewport when scrolling.
+  header_sticky: false # If true, headers on home, item, and page layouts stick to the top of the viewport when scrolling.
   # Order of metadata blocks in item pages (omit keys you want hidden).
   item_meta_order:
     - author
