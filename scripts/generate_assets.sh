@@ -589,12 +589,12 @@ EOF
             if [ $(awk "BEGIN {print ($ASPECT_RATIO <= 0.8)}") -eq 1 ]; then
                 SMALL_SIZE=565
                 MEDIUM_SIZE=1131
-                LARGE_SIZE=2262
+                LARGE_SIZE=1697
                 echo "Tall image detected (ratio: $ASPECT_RATIO) - using increased resolution"
             else
                 SMALL_SIZE=400
                 MEDIUM_SIZE=800
-                LARGE_SIZE=1600
+                LARGE_SIZE=1200
                 echo "Square/wide image detected (ratio: $ASPECT_RATIO) - using standard resolution"
             fi
 
