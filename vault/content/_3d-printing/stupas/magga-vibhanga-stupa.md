@@ -123,4 +123,11 @@ images:
   - name: stupa27.jpeg
     dark: true
     large: true
+  - name: printing_video.mp4
+    header: Videos
+    video: https://drive.google.com/file/d/18B4DEOCCG_SijgvH7cnpKLLYc4BnZTTm/preview
+  - name: printing_video2.mp4
+    video: https://drive.google.com/file/d/1HGZ88MaBu-KQPUTMOjWzyY5CgSqaK5Hf/preview
+  - name: printing_video3.mp4
+    video: https://drive.google.com/file/d/1zBCIDdtD4k2cpZfYv4OgNC-Ah-EIpfPd/preview
 ---
