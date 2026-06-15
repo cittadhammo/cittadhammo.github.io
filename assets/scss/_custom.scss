@@ -516,9 +516,15 @@ body.print-page #page-content .page-content-body a::first-letter {
 
   .anchor-icon {
     opacity: 0.3;
-    font-size: 0.8em;
     margin-left: 0.3em;
     transition: opacity 0.2s;
+    display: inline;
+    vertical-align: bottom;
+
+    svg {
+      display: inline;
+      vertical-align: bottom;
+    }
   }
 
   a.gallery-header-link:hover .anchor-icon {
