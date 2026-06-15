@@ -35,57 +35,89 @@ code:
 images:
   - name: stupa01.png
     map: true
+    box: true
   - name: stupa02.png
     map: true
+    box: true
   - name: stupa03.png
     dark: true
+    home: true
     large: true
   - name: stupa04.png
     dark: true
+    large: true
   - name: stupa05.png
     dark: true
+    large: true
   - name: stupa06.png
     dark: true
+    large: true
   - name: stupa07.png
     dark: true
+    large: true
   - name: stupa08.png
     dark: true
+    large: true
   - name: stupa09.png
     dark: true
+    large: true
   - name: stupa10.png
     dark: true
+    large: true
   - name: stupa11.png
     dark: true
+    large: true
   - name: stupa12.png
     dark: true
+    large: true
   - name: stupa13.png
+    box: true
     map: true
+    large: true
   - name: stupa14.png
+    box: true
     map: true
+    large: true
   - name: stupa15.png
+    box: true
     map: true
+    large: true
   - name: stupa16.png
+    box: true
     map: true
+    large: true
   - name: stupa17.jpeg
+    box: true
     dark: true
+    large: true
   - name: stupa18.jpeg
     dark: true
+    large: true
   - name: stupa19.jpeg
     dark: true
+    large: true
   - name: stupa20.jpeg
     dark: true
+    large: true
   - name: stupa21.jpeg
     dark: true
+    large: true
   - name: stupa22.jpeg
     dark: true
+    large: true
   - name: stupa23.jpeg
     dark: true
+    large: true
   - name: stupa24.jpeg
     dark: true
+    large: true
   - name: stupa25.jpeg
     dark: true
+    large: true
   - name: stupa26.jpeg
     dark: true
+    large: true
   - name: stupa27.jpeg
     dark: true
+    large: true
 ---

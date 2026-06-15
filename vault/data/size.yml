@@ -107,7 +107,7 @@ dhamma-citadel-BW-A0S:
   medium: 1.000
   large: 1.000
 dharma-chart-core-teaching-2022:
-  small: 0.648
+  small: 0.647
   medium: 0.647
   large: 0.647
 manual-buddhist-terms-A1S:
@@ -143,11 +143,11 @@ dhamma-citadel-A0SBM:
   medium: 1.000
   large: 1.000
 dhamma-citadel-A0VM:
-  small: 0.708
+  small: 0.707
   medium: 0.707
   large: 0.707
 dhamma-citadel-A0VBM:
-  small: 0.708
+  small: 0.707
   medium: 0.707
   large: 0.707
 dhamma-citadel-fr-A0S:
@@ -240,7 +240,7 @@ big-picture:
 salayatana:
   small: 0.998
   medium: 0.998
-  large: 0.997
+  large: 0.998
 patimokkha-152:
   small: 0.706
   medium: 0.707
@@ -257,11 +257,11 @@ stupa1:
   small: 1.010
   medium: 1.009
 stupa01:
-  small: 1.010
+  small: 1.009
   medium: 1.009
   large: 1.009
 stupa02:
-  small: 0.708
+  small: 0.707
   medium: 0.707
   large: 0.707
 stupa03:
@@ -321,42 +321,46 @@ stupa16:
   medium: 1.413
   large: 1.413
 stupa17:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa18:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa20:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa21:
   small: 0.667
   medium: 0.667
-  large: 0.667
+  large: 0.666
 stupa22:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa23:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa24:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa25:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa26:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
 stupa27:
-  small: 1.498
+  small: 1.501
   medium: 1.501
-  large: 1.501
+  large: 1.500
+stupa19:
+  small: 1.501
+  medium: 1.501
+  large: 1.500

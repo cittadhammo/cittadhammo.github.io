@@ -48,8 +48,7 @@ You can use an online printing service to have a poster printed and delivered. M
 
 SoFlat posters stay completely flat without curling and can be hung directly using a magnetic [poster hanger](https://www.amazon.co.uk/Poster-Magnetic-Hangers-Hanging-Artwork/dp/B07KWY1FWL?sr=8-5).
 
+* [Display Signs Direct](https://displaysignsdirect.co.uk/product/soflat-400gsm-flexible-pvc/?utm_source=Google%20Shopping&utm_campaign=all160924&utm_medium=cpc&utm_term=adtribes)
 * [Premier Print SoFlat Posters](https://www.premierprint.co.uk/print/roll-media/point-of-sale/self-adhesive-wall-paper-printing-2-2/)
 * [Colour Graphics - SoFlat 400gsm PVC](https://colourgraphics.com/materials/banner-grade/soflat-400gsm-flexible-pvc/?width=1000&height=1000&sflatpvc=sflat-pvc)
 * [Print Designs - SoFlat PVC Banners](https://www.printdesigns.com/soflat-pvc-banner-printing)
-* [Quality Print UK](https://www.qualityprint.co.uk/print/roll-media/point-of-sale/self-adhesive-wall-paper-printing-2-2/)
-* [Fabrix - Square Cut SoFlat](https://fabrix.co.uk/soflat-400gsm-flexible-pvc/)

@@ -6,7 +6,7 @@ author: Jayarava
 year: 2011
 published: true
 sources:
-  - name: www.jayarava.org
+  - name: Jayarava.org
     author: Jayarava
     url: https://www.jayarava.org/
 images:
