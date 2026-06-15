@@ -2,6 +2,7 @@
 
   - [ ] Smaller license in parralells
   - [ ] CC0 freely avaialbel label
+  - [ ] add an option to hide sticky header on scroll down, reveal on scroll up.
   - [ ] Add photo of hanger in print page
   - [ ] pali letter with a dot on titles.
   - [ ] add title in image aside 

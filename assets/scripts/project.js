@@ -23,12 +23,7 @@
                 // 3. Calculate the offset needed to start sticking only when the 
                 // article's top aligns with the desired viewport position.
                 // This lets the element scroll until its top edge is at headerHeight.
-                var effectiveOffset = articleTop - scrollTop - headerHeight;
-                
-                // Ensure offset is not negative (though it shouldn't be for initial load)
-                if (effectiveOffset < 0) {
-                    effectiveOffset = 0;
-                }
+                var effectiveOffset = Math.max(headerHeight, articleTop - scrollTop - headerHeight);
 
                 $article.stick_in_parent({
                     offset_top: effectiveOffset 
