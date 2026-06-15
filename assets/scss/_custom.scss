@@ -506,6 +506,10 @@ body.print-page #page-content .page-content-body a::first-letter {
   }
 }
 
+.header-sticky .gallery-header h1 {
+  scroll-margin-top: 12rem;
+}
+
 .gallery-header {
   a.gallery-header-link {
     color: inherit;
@@ -865,7 +869,7 @@ body.print-page #page-content .page-content-body a::first-letter {
 }
 
 .header-sticky .home-area {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 12rem;
 }
 
 .home-layout.home-hero-enabled .home-hero {
