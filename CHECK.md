@@ -5,15 +5,15 @@
   - [ ] add an option to hide sticky header on scroll down, reveal on scroll up.
   - [ ] flicker of the footer on item page on load -
   - [ ] Add photo of hanger in print page
-  - [ ] pali letter with a dot on titles.
-  - [ ] add title in image aside 
+  - [x] pali letter with a dot on titles.
+  - [x] add title in image aside 
   - [ ] add onshape link to magga vibhanga
   - [ ] Sutta pitaka parallels remove structure
   - [x] fix word lenghts on path to Nibbana
   - [x] Add dark and light image on both theme in aside
   - [ ] change font on force manual chart
   - [ ] add option to flatten item layout
-  - [ ] is there small thumbnail generated for all (even not front image)
+  - [x] is there small thumbnail generated for all (even not front image)
   - [x] Add Chart from Others (Joe Rucker, etc.)
   - [ ] Add other projects (You, Pali Chantings, AI made, etc.)
   - [ ] Che projects
