@@ -160,16 +160,18 @@
 <section class="project-navigation">
   <div class="container">
     {% if previous_item %}
+      {% assign prev_title_clean = previous_item.title | replace: 'ṭ', 't' | replace: 'Ṭ', 'T' | replace: 'ḍ', 'd' | replace: 'Ḍ', 'D' | replace: 'ṇ', 'n' | replace: 'Ṇ', 'N' | replace: 'ḷ', 'l' | replace: 'Ḷ', 'L' | replace: 'ṃ', 'm' | replace: 'Ṃ', 'M' %}
       <a class="prev" title="Previous {{ previous_item.title }}" href="{{ previous_item.url | relative_url }}">
         <span class="h2">Previous</span>
-        <h2>{{ previous_item.title }}</h2>
+        <h2>{{ prev_title_clean }}</h2>
       </a>
     {% endif %}
 
     {% if next_item %}
+      {% assign next_title_clean = next_item.title | replace: 'ṭ', 't' | replace: 'Ṭ', 'T' | replace: 'ḍ', 'd' | replace: 'Ḍ', 'D' | replace: 'ṇ', 'n' | replace: 'Ṇ', 'N' | replace: 'ḷ', 'l' | replace: 'Ḷ', 'L' | replace: 'ṃ', 'm' | replace: 'Ṃ', 'M' %}
       <a class="next" title="Next {{ next_item.title }}" href="{{ next_item.url | relative_url }}">
         <span class="h2">Next</span>
-        <h2>{{ next_item.title }}</h2>
+        <h2>{{ next_title_clean }}</h2>
       </a>
     {% endif %}
   </div>
