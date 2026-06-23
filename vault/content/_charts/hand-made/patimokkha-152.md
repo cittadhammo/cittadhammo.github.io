@@ -1,6 +1,6 @@
 ---
 title: Pāṭimokkha 152
-subtitle: The main 152 rules of the Discipline and their divisions.
+subtitle: The main 152 rules of the Discipline and their divisions
 author: Cittahdammo
 year: 2018
 published: true
