@@ -416,7 +416,17 @@
         header.style.top = pos + 'px';
       } else {
         for (var i = 0; i < homeHeaders.length; i++) {
-          homeHeaders[i].style.transform = 'translateY(' + pos + 'px)';
+          var parent = homeHeaders[i].parentElement;
+          if (parent) {
+            var rect = parent.getBoundingClientRect();
+            if (rect.top <= 0 && rect.bottom > 0) {
+              homeHeaders[i].style.transform = 'translateY(' + pos + 'px)';
+            } else {
+              homeHeaders[i].style.transform = 'translateY(0px)';
+            }
+          } else {
+            homeHeaders[i].style.transform = 'translateY(' + pos + 'px)';
+          }
         }
       }
     }
