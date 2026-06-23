@@ -3,6 +3,30 @@
 <meta name="robots" content="index,follow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% seo %}
+{% if page.lcp_preload %}
+<link rel="preload" fetchpriority="high" as="image" href="{{ page.lcp_preload | relative_url }}" type="image/webp">
+{% elsif page.layout == 'item' and page.images and page.images.size > 0 %}
+  {% assign lcp_image_entry = nil %}
+  {% for img_entry in page.images %}
+    {% if img_entry.video %}{% continue %}{% endif %}
+    {% assign entry_name = img_entry.name | default: img_entry | to_s | strip %}
+    {% if entry_name == '' %}{% continue %}{% endif %}
+    {% if img_entry.display == false %}{% continue %}{% endif %}
+    {% assign lcp_image_entry = img_entry %}
+    {% break %}
+  {% endfor %}
+  {% if lcp_image_entry %}
+    {% assign lcp_image_name = lcp_image_entry.name | default: lcp_image_entry | to_s | strip | remove: '[[' | remove: ']]' | split: '|' | first | strip %}
+    {% assign lcp_image_ext = lcp_image_name | split: '.' | last | downcase %}
+    {% assign lcp_img = lcp_image_name | split: '.' | first %}
+    {% if lcp_image_ext == 'gif' %}
+      {% assign lcp_preload_path = '/assets/images/' | append: lcp_img | append: '/' | append: lcp_image_name %}
+    {% else %}
+      {% assign lcp_preload_path = '/assets/images/' | append: lcp_img | append: '/medium.' | append: site.img_ext | default: 'webp' %}
+    {% endif %}
+    <link rel="preload" fetchpriority="high" as="image" href="{{ lcp_preload_path | relative_url }}" type="image/webp">
+  {% endif %}
+{% endif %}
 {% assign seo_description = page.description | to_s | strip %}
 {% if seo_description == '' %}
   {% assign seo_description = page.excerpt | default: site.description %}

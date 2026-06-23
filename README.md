@@ -77,6 +77,15 @@ For each image it:
 
 Re-run `make assets` after content/frontmatter/image changes.
 
+### LCP Image Preloading
+
+To optimize Largest Contentful Paint (LCP) performance, the site automatically preloads the main chart image:
+- **Automatic Preloading:** For any page using the `item` layout, the template (`_includes/head.html`) automatically scans the page's `images` list, resolves the first displayable image (skipping videos and hidden/non-displaying items), and generates a `<link rel="preload" fetchpriority="high">` tag for it.
+- **Manual Override:** You can manually override the preloaded image path by adding the `lcp_preload` variable at the top-level of a page's Front Matter:
+  ```yaml
+  lcp_preload: "/assets/images/dhamma-citadel-A0S/medium.webp"
+  ```
+
 ### Image Frontmatter Reference
 
 Each entry in the `images` array supports these fields:
