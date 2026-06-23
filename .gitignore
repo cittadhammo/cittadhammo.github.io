@@ -30,3 +30,7 @@ vault/.obsidian
 vault/.trash
 vault/scripts/__pycache__
 .obsidian
+
+# Antigravity / Gemini
+.antigravitycli/
+.gemini/
