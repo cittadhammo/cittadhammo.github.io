@@ -34,3 +34,4 @@ vault/scripts/__pycache__
 # Antigravity / Gemini
 .antigravitycli/
 .gemini/
+.nvim.lua
