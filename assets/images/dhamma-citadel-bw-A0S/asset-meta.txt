@@ -1,0 +1,17 @@
+meta_version=1
+src_name=dhamma-citadel-bw-A0S.png
+src_hash=38a8264f3b65b2b7d85373d98b188890a604c87a12147a59773394005f47ed5b
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

@@ -1,0 +1,17 @@
+meta_version=1
+src_name=sutta-pitaka-horizontal-A0HM.png
+src_hash=289a507acfa6861c2a8a8c4ec7ed28ef36e8c00009606cf9636683d0b01d9a6b
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

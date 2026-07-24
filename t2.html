@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting…</title>
+<script>
+  // Preserve the full query string (and hash, just in case) and forward
+  // to the same page inside /digital-garden/
+  var target = "/digital-garden/t2.html" + window.location.search + window.location.hash;
+  window.location.replace(target);
+</script>
+<meta http-equiv="refresh" content="0; url=/digital-garden/t2.html">
+<link rel="canonical" href="https://www.dhammacharts.org/digital-garden/t2.html">
+</head>
+<body>
+<p>Redirecting to <a id="fallback-link" href="/digital-garden/t2.html">the new location</a>…</p>
+<script>
+  // Fix the fallback link too, in case JS runs but the redirect above is blocked
+  document.getElementById("fallback-link").href = target;
+</script>
+</body>
+</html>

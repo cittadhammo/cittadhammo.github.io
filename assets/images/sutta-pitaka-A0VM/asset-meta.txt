@@ -1,0 +1,17 @@
+meta_version=1
+src_name=sutta-pitaka-A0VM.png
+src_hash=3db1d0837b1bbc894373238740cf509993326847565d687820cb7e150f2e40aa
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

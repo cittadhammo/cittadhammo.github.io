@@ -1,0 +1,17 @@
+meta_version=1
+src_name=twin-miracle.jpg
+src_hash=ae7eb13a73174bb9e3a03c8d0adc726c2640796ce0615ffad23bbca39713dd7e
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

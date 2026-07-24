@@ -1,0 +1,17 @@
+meta_version=1
+src_name=31-planes-pali-A1S.png
+src_hash=c413fb0ddf3f1de7184b6b9d9f9892380b79c9a85b840dc07cd2ce60d1ac347e
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,90%
+darkify_invert_level_small=5%,80%
+darkify_invert_level_medium=5%,70%
+darkify_invert_level_large=3%,70%

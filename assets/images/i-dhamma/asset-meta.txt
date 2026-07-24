@@ -1,0 +1,17 @@
+meta_version=1
+src_name=i-dhamma.jpg
+src_hash=ace08787edad288463aa6ef3249f5d809e57e061e9921ea8bbe1f9baafffecf2
+map=false
+display=true
+file=false
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

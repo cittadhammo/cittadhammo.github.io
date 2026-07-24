@@ -1,0 +1,17 @@
+meta_version=1
+src_name=stupa25.jpeg
+src_hash=8494d1f9869a0e2e010385b0bf90248b603cb325ffd67d9d18a022075c975a37
+map=false
+display=true
+file=false
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=true
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

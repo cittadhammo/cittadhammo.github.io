@@ -1,0 +1,17 @@
+meta_version=1
+src_name=sutta-pitaka-rectilipse-A0HM.png
+src_hash=8ffbb6de37148e92cda799e221641b7fd11a892c7b206015d07ef6ca61715842
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

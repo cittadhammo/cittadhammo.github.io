@@ -1,0 +1,17 @@
+meta_version=1
+src_name=12-links.jpg
+src_hash=ad2c2e28800c0884e74d88afa2eb834967478e799334089e9681a9777757ce6e
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

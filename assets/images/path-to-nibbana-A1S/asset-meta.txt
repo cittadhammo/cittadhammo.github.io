@@ -1,0 +1,17 @@
+meta_version=1
+src_name=path-to-nibbana-A1S.png
+src_hash=6039f86c37a02b968b2e2737acb4bd7f95a516ee5a16d05b280f19132ef5447d
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

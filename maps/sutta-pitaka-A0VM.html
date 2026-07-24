@@ -1,0 +1,239 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Sutta Pitaka</title>
+  <link rel="stylesheet" href="/assets/lib/ol/ol.css" />
+  <script src="/assets/lib/ol/ol.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+      background-color: var(--map-bg);
+    }
+    .ol-control {
+      font-size: 17px;
+    }
+    .cross {
+      top: 0.5em;
+      left: 0.5em;
+      float: right;
+    }
+    .cross button {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+      cursor: pointer;
+    }
+    .cross button:hover,
+    .cross button:focus {
+      opacity: 1;
+      background-color: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
+    }
+    .cross button img {
+      width: 13px;
+      height: 13px;
+      display: block;
+      object-fit: contain;
+    }
+    .ol-zoom {
+      top: 2.5em !important;
+    }
+    .ol-control button {
+      color: black !important;
+      transition:
+        background-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+      cursor: pointer;
+    }
+    .ol-control button:hover,
+    .ol-control button:focus {
+      background-color: #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+      transform: translateY(-1px);
+    }
+    /* Tablet adjustments (iPad) */
+    @media (max-width: 1280px) {
+      .cross {
+        top: 0.5em;
+        left: 0.5em;
+        transform: scale(0.8); /* smaller button */
+      }
+      .cross button img {
+        width: 17px;
+        height: 17px;
+      }
+      .ol-zoom {
+        top: 3em !important;
+        transform: scale(0.9);
+      }
+    }
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      .cross {
+        top: 0.5em;
+        left: 0.5em;
+        transform: scale(0.8); /* smaller button */
+      }
+      .cross button img {
+        width: 17px;
+        height: 17px;
+      }
+      .ol-zoom {
+        top: 2.5em !important; /* push zoom buttons further down */
+        transform: scale(0.8); /* smaller button */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map" class="map"></div>
+  <script>
+          const themeConfig = {
+              defaultMode: "light",
+              allowUserToggle: true,
+              respectPrefers: true
+          };
+          const storageKey = "theme";
+          const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+          const urlParams = new URLSearchParams(window.location.search);
+          const forcedTheme = urlParams.get("theme");
+
+          function getPreferredTheme() {
+              if (!themeConfig.respectPrefers || !mediaQuery) return null;
+              return mediaQuery.matches ? "dark" : "light";
+          }
+
+          function getStoredTheme() {
+              if (!themeConfig.allowUserToggle) return null;
+              try {
+                  const value = localStorage.getItem(storageKey);
+                  return value === "light" || value === "dark" ? value : null;
+              } catch (e) {
+                  return null;
+              }
+          }
+
+          function resolveTheme(mode) {
+              if (mode === "dark" || mode === "light") return mode;
+              if (mode === "auto") return getPreferredTheme() || "light";
+              return "light";
+          }
+
+          const storedMode = getStoredTheme();
+          let initialMode = storedMode || themeConfig.defaultMode || "light";
+          if (forcedTheme === "dark" || forcedTheme === "light") {
+              initialMode = forcedTheme;
+          }
+          if (initialMode !== "light" && initialMode !== "dark" && initialMode !== "auto") {
+              initialMode = "light";
+          }
+          const theme = resolveTheme(initialMode);
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.setAttribute("data-theme-mode", initialMode);
+
+          const hasDarkTiles = true;
+          const tilesDir = (theme === "dark" && hasDarkTiles) ? "tiles-dark" : "tiles";
+          const lightBg = "white";
+          const mapBg = theme === "dark" ? "black" : lightBg;
+          document.documentElement.style.setProperty("--map-bg", mapBg);
+
+          const width = 9933;
+          const height = 14043;
+          const extent = [0, 0, width, width];
+          // const extent = [0, 0, 1, 1]; would work as well,
+          // google layour create a square map all the time ,sorry
+
+          // previous button with image
+          const button = document.createElement("button");
+          const img = document.createElement("img");
+          img.src = "/assets/icons/previous.png";
+          img.alt = "Previous";
+          button.appendChild(img);
+
+          const handle = function (e) {
+              window.open("/charts/digital/sutta-pitaka.html", "_self");
+          };
+          button.addEventListener("click", handle, false);
+
+          const element = document.createElement("div");
+    element.className = "cross ol-unselectable ol-control";
+    element.appendChild(button);
+
+    const OneControl = new ol.control.Control({
+    	element: element
+    });
+
+          // end cross button
+
+          const projection = new ol.proj.Projection({
+              code: "pixels",
+              units: "pixels",
+              extent: extent,
+          });
+
+          const overlay = new ol.Overlay({
+              element: document.createElement("div"),
+          });
+          const isMobile = window.innerWidth <= 480; // or 768 adjust breakpoint as needed
+
+          const tileBase = "/assets/images/sutta-pitaka-A0VM/";
+          const tileUrl = tileBase + tilesDir + "/{z}/{y}/{x}.webp";
+
+          const map = new ol.Map({
+              layers: [
+                  new ol.layer.Tile({
+                      preload: Infinity,
+                      extent: extent,
+                      source: new ol.source.TileImage({
+                          url: tileUrl,
+                      })
+                  })
+              ],
+              overlays: [overlay],
+              target: "map",
+              view: new ol.View({
+                  projection: projection,
+                  center: ol.extent.getCenter(extent),
+                  zoom: isMobile ? 1 : 2,   // zoom 1 on mobile, 2 on desktop
+                  maxZoom: 6
+              }),
+              interactions: [
+                  new ol.interaction.DragPan(),
+                  new ol.interaction.MouseWheelZoom(),
+                  new ol.interaction.DoubleClickZoom(),
+                  new ol.interaction.KeyboardPan(),
+                  new ol.interaction.KeyboardZoom(),
+                  new ol.interaction.PinchZoom()
+                  // no DragRotate, no PinchRotate
+              ],
+          });
+              map.addControl(OneControl);
+          // cursor
+
+          map.getViewport().style.cursor = "-webkit-grab";
+          map.on("pointerdrag", function (evt) {
+              map.getViewport().style.cursor = "-webkit-grabbing";
+          });
+
+          map.on("pointerup", function (evt) {
+              map.getViewport().style.cursor = "-webkit-grab";
+          });
+  </script>
+</body>

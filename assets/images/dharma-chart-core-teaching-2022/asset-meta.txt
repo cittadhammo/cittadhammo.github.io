@@ -1,0 +1,17 @@
+meta_version=1
+src_name=dharma-chart-core-teaching-2022.png
+src_hash=7be7ab67ac6fef6b90cde0aeb7af381048753c74305f65a8a238cdce8b952393
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

@@ -1,0 +1,17 @@
+meta_version=1
+src_name=37-wings-A1S.png
+src_hash=2dbba3978219a0cfb435f825a2563ead4feba893ffbeb0730c8be0a054a292e8
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,90%
+darkify_invert_level_small=5%,80%
+darkify_invert_level_medium=5%,70%
+darkify_invert_level_large=3%,70%

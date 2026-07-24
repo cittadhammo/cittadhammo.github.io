@@ -1,0 +1,17 @@
+meta_version=1
+src_name=bhikkhu-patimokkha-A1V.png
+src_hash=a4c111f70caa8c21266f8eed8b2e8079082ca26bb3ecd6e5e23bcf3015d5c02b
+map=false
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%

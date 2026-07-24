@@ -1,0 +1,17 @@
+meta_version=1
+src_name=sutta-parallels-A0S.png
+src_hash=93d6dc92f87a9252bbe653605444395bda17e5f480cde3b805fb5baa6791f376
+map=true
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=false
+needs_darkify=true
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=0%,100%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=0%,60%
+darkify_invert_level_large=3%,70%

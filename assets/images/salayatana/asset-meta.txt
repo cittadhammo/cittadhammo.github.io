@@ -1,0 +1,17 @@
+meta_version=1
+src_name=salayatana.jpg
+src_hash=d670211729bf47da50b4261bf1ed47877a4e0e7346e20969a885b8c8df4bc427
+map=false
+display=true
+file=true
+bg=white
+tile_light_bg=255 255 255
+img_dark=true
+needs_darkify=false
+large=false
+darkify_method=invert_lightness
+darkify_suffix=dark
+darkify_invert_level_default=5%,95%
+darkify_invert_level_small=0%,50%
+darkify_invert_level_medium=2%,60%
+darkify_invert_level_large=3%,70%
