@@ -38,7 +38,7 @@
 - “Areas” are top-level collections. To add a new area:
 - Create `area_name.md` at the repo root with `title` and `area` frontmatter.
 - Add a collection to `_config.yml`.
-- Update `content/_data/areas.yml`.
+- Update `vault/data/areas.yml`.
 - Pages in collections need frontmatter `type: page` to appear in the top-right area navigation.
 - Categories are inferred from content paths.
 

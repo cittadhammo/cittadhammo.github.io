@@ -186,8 +186,5 @@ exclude:
   - GEMINI.md
   - CHECK.md
   - QUOTE.md
-  - OPTIMISATION.md
-  - OPTIMISATION2.md
-  - CLOUDFLARE_SETUP.md
-  - LIGHTONLY_DARKONLY_DEBUG.md
-  - PLAN-icon-overlay.md
+  - BUFF-CHECK.md
+  - docs

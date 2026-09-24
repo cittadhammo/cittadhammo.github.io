@@ -4,9 +4,22 @@ url: "http://localhost:4000"
 keep_files:
   - assets/images
 exclude:
+  - _config_cdn.yml
+  - _config_gh.yml
+  - _config_local.yml
+  - AGENTS.md
   - README.md
+  - LICENSE.md
+  - .bundle
+  - .devcontainer
+  - .github
+  - .obsidian
   - .sass-cache
   - .jekyll-cache
+  - .gitignore
+  - _site
+  - "*.swp"
+  - ".DS_Store"
   - gemfiles
   - Gemfile
   - Gemfile.lock
@@ -22,4 +35,7 @@ exclude:
   - scripts/
   - GEMINI.md
   - CHECK.md
+  - QUOTE.md
+  - BUFF-CHECK.md
+  - docs
   - assets/images

@@ -78,30 +78,46 @@ Some content files used `tech:` but the template (`vault/templates/Template Item
 - `pdf: dependant-origination-3.pdf` pointed nowhere; the file was a stray in `vault/assets/images/` + `other-charts/` (identical copies). Moved one copy to `vault/assets/pdfs/`, deleted the duplicate from `images/`.
 - Verified: all `pdf:`/`svg:` values now resolve (`true` derived, or existing file); `vault/assets/images/` contains only raster images again.
 
-## 4. Duplicate `class` attribute in `_layouts/item.html`
+## 4. Duplicate `class` attribute in `_layouts/item.html` — RESOLVED
 The back-arrow link has `class="black-under"` and a second `class="bigger"`; browsers drop the second one.
 
-**Fix:** Merge into a single `class="black-under bigger"` (verify `bigger` style exists / is wanted).
+**Fix:** Merged into `class="black-under bigger"`. Verified `.bigger` is wanted:
+`a.bigger` (_custom.scss:112) and `.bigger::after` (_custom.scss:120) enlarge the
+arrow's click target — clearly intended for this link. The identical bug existed in
+`_includes/area-header.html:20` (same back-arrow markup); fixed there too.
 
-## 5. Root directory clutter
+## 5. Root directory clutter — RESOLVED
 Debug/report docs and stray files in repo root (excluded from build but untidy):
-- `t2.html` (stray test file?)
-- `CHROMIUM_BORDER_REPORT.md`, `LIGHTONLY_DARKONLY_DEBUG.md`, `OPTIMISATION.md`, `OPTIMISATION2.md`, `CHECK.md`, `PLAN-icon-overlay.md`, `QUOTE.md`
+- `t2.html` — **kept intentionally** (user's share-link redirect to another deployment)
+- `CHROMIUM_BORDER_REPORT.md`, `LIGHTONLY_DARKONLY_DEBUG.md`, `OPTIMISATION.md`,
+  `OPTIMISATION2.md`, `PLAN-icon-overlay.md`, `CLOUDFLARE_SETUP.md` — **moved to `docs/`**
+- `CHECK.md` (active todo list) and `QUOTE.md` — **kept in root** (user decision)
 
-**Fix:** Move debug docs into `docs/`. ~~delete `t2.html` if unused~~ — `t2.html`
-is intentional (user's share-link redirect to another site), keep it. Update `exclude` list in `_config.yml` and any references (Makefile, AGENTS.md, README).
+**Fix:** `_config.yml` exclude list updated: removed the per-file entries for the
+moved docs, added `docs` and `BUFF-CHECK.md` (which was missing and previously
+copied verbatim into `_site`). No hard references existed to the moved files.
+Note: Jekyll does not ignore `docs/` by default — the explicit exclude is required.
+**Gotcha:** `_config_local.yml` has its own `exclude:` array and Jekyll **replaces**
+arrays when merging multiple config files, so `make build` only uses the local
+list. After changing excludes in `_config.yml`, always run `make sync-config`
+(which regenerates the local list via yq) before `make build`.
 
-## 6. Empty untracked `vault/Page.md`
-`vault/Page.md` is empty and untracked — likely an accidental leftover (Obsidian auto-created?).
+## 6. Empty untracked `vault/Page.md` — RESOLVED
+`vault/Page.md` was empty and untracked — an accidental leftover (Obsidian auto-created?).
 
-**Fix:** Delete it (or give it real content if it was intentional).
+**Resolution:** Deleted (user-confirmed).
 
-## 7. AGENTS.md path inaccuracy
-AGENTS.md says areas config lives at `content/_data/areas.yml`, but it is actually `vault/data/areas.yml`.
+## 7. AGENTS.md path inaccuracy — RESOLVED
+AGENTS.md said areas config lives at `content/_data/areas.yml`, but it is actually `vault/data/areas.yml`.
 
-**Fix:** Correct the doc. (`writtings` typo is known-but-intentional to avoid breaking URLs — leave alone.)
+**Fix:** Corrected in both `AGENTS.md` and `GEMINI.md` (they mirror each other).
+(`writtings` typo is known-but-intentional to avoid breaking URLs — leave alone.)
 
-## 8. Declared collections with no content
+## 8. Declared collections with no content — RESOLVED
 `references` and `food` collections are declared in `_config.yml` but have no folders under `vault/content` and no entries in `vault/data/areas.yml`.
 
-**Update:** `food` removed as part of item 1. `references` still declared with no content — confirm intent.
+**Update:** `food` removed as part of item 1. `references` **kept intentionally**
+(user decision) as scaffolding for a future references/contribute area. It has
+layout defaults and meta-ordering configured; `contribute_url` in `_config.yml`
+points to `/references/info/contribute.html` (page not yet created — fine while
+the collection is intentional scaffolding and nothing links to that URL yet).

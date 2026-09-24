@@ -15,7 +15,7 @@
     {% if site.theme.header_sticky and page.collection %}
       {% assign area_anchor = page.collection | slugify %}
       <div class="container arrow-div">
-        <a style="padding: 10px;" class="black-under" href="{{ '/' | relative_url }}#{{ area_anchor }}" class="bigger">
+        <a style="padding: 10px;" class="black-under bigger" href="{{ '/' | relative_url }}#{{ area_anchor }}">
           <i class="arrow left"></i>
         </a>
       </div>
