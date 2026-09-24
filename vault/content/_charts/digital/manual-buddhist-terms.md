@@ -65,7 +65,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: manual-buddhist-termsforce.svg
+    svg: manual-buddhist-terms-force.svg
     online: true
     title: A1 Force Variation
 ---

@@ -2,7 +2,7 @@
 title: "Publishing"
 draft: false
 license: 
-tech: 
+techs: 
 description: 
 
 sources: 

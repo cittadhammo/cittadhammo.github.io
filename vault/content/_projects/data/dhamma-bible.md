@@ -1,7 +1,7 @@
 ---
 title: Dhamma Bible
 license: 
-tech: 
+techs: 
 description: Collection of all the numerical sets & concepts in the Sutta Pitaka
 
 draft: 

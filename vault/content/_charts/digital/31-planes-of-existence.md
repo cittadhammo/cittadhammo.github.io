@@ -28,7 +28,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-planes
+    svg: 31-planes.svg
     online: true
     title: A1 Square
     invert_level:
@@ -40,8 +40,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-planes-pali
-    online: true
+    svg: 31-planes-pali.svg    online: true
     title: A1 Pali
     invert_level:
       default: "5%,90%"

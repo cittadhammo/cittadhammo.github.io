@@ -55,8 +55,8 @@ images:
 | `large` | `false` | Generate large.webp for higher-res lightbox |
 | `map` | `false` | Generate OpenLayers map tiles + viewer page |
 | `file` | `false` | Make original available for download |
-| `pdf` | `""` | PDF filename for download variant |
-| `svg` | `""` | SVG filename for download variant |
+| `pdf` | `false` | PDF download variant: `true` derives `<image-basename>.pdf`; a string names the file exactly |
+| `svg` | `false` | SVG download variant: `true` derives `<image-basename>.svg`; a string names the file exactly |
 | `url` | `""` | External link (image links out instead of lightbox) |
 | `title` | `""` | Image caption |
 | `alt` | `""` | Accessibility alt text |
@@ -65,3 +65,17 @@ images:
 | `darkonly` | `false` | Only in dark theme |
 
 Thumbnail sizes (scripts/generate_assets.sh): standard 400/800/1200px, tall 565/1131/1697px.
+
+### Download variants (`pdf` / `svg`)
+
+Accept a boolean or a string filename. `true` derives the filename from the image basename (`<image-basename>.pdf` / `.svg`); a string is used verbatim as the filename (include the extension — nothing is appended); `false`/empty means no variant.
+
+Requires `file: true` on the same image — without it, no download variant is copied or displayed. The pipeline copies from `vault/assets/pdfs/` (resp. `vault/assets/svgs/`) into `assets/images/<image-basename>/`.
+
+```yaml
+images:
+  - name: 31-planes-A1S.png
+    file: true
+    pdf: true      # → 31-planes-A1S.pdf
+    svg: 31-planes.svg # → exact filename, used verbatim (extension required)
+```

@@ -1,7 +1,7 @@
 ---
 title: Buddhist History - A Data Base
 license: CC0
-tech: 
+techs: 
 description: 
 
 draft: 

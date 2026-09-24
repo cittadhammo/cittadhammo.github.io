@@ -1,7 +1,7 @@
 ---
 title: DhammaChart - A Chart Book
 license: CC0
-tech: 
+techs: 
 description: Book format of the charts stored on dhammaCharts
 
 draft: 

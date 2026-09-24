@@ -1,7 +1,7 @@
 ---
 title: The Model of Enlightenment
 license: CC0
-tech:
+techs:
 description:
 draft:
 sources:

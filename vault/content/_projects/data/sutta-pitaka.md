@@ -1,7 +1,7 @@
 ---
 title: Sutta Pitaka - Data Base
 license: 
-tech: 
+techs: 
 description: 
 
 draft: 

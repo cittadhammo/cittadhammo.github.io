@@ -1,7 +1,7 @@
 ---
 title: "FLTM"
 license: 
-tech: 
+techs: 
 description: 
 
 draft: 

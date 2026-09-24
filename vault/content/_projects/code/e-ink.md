@@ -2,7 +2,7 @@
 title: "E-ink"
 draft: false
 license: 
-tech: 
+techs: 
 description: 
 sources: 
 images: 

@@ -1,7 +1,7 @@
 ---
 title: Western Buddhism
 license: 
-tech: 
+techs: 
 draft: 
 sources: 
 tags:

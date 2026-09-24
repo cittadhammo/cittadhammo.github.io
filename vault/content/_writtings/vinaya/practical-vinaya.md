@@ -1,7 +1,7 @@
 ---
 title: Practical Vinaya
 license: 
-tech: 
+techs: 
 description: 
 
 draft: 

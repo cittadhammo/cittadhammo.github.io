@@ -28,7 +28,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: sutta-pitaka
+    svg: sutta-pitaka.svg
     online: true
     title: A0 Vertical
   - name: sutta-pitaka-horizontal-A0HM.png
@@ -36,7 +36,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: sutta-pitaka-horizontal
+    svg: sutta-pitaka-horizontal.svg
     online: true
     title: A0 Horizontal
   - name: sutta-pitaka-rectilipse-A0HM.png
@@ -44,7 +44,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: sutta-pitaka-rectilipse
+    svg: sutta-pitaka-rectilipse.svg
     online: true
     title: A0 Rectilipse
 ---

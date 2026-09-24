@@ -100,8 +100,8 @@ Each entry in the `images` array supports these fields:
 | `large` | bool | `false` | Generate `large.webp` for higher-res lightbox |
 | `map` | bool | `false` | Generate OpenLayers map tiles + viewer page |
 | `file` | bool | `false` | Make original file available for download |
-| `pdf` | string | `""` | PDF filename for download variant |
-| `svg` | string | `""` | SVG filename for download variant |
+| `pdf` | bool or string | `false` | PDF download variant; `true` derives `<image-basename>.pdf`, a string names the file exactly |
+| `svg` | bool or string | `false` | SVG download variant; `true` derives `<image-basename>.svg`, a string names the file exactly |
 | `url` | string | `""` | External link (image becomes a link instead of opening lightbox) |
 | `title` | string | `""` | Image caption / title |
 | `alt` | string | `""` | Alt text for accessibility |
@@ -114,6 +114,30 @@ Each entry in the `images` array supports these fields:
 Thumbnail sizes are defined in `scripts/generate_assets.sh`:
 - **Standard** (aspect ratio > 0.8): small=400px, medium=800px, large=1200px
 - **Tall** (aspect ratio ≤ 0.8): small=565px, medium=1131px, large=1697px
+
+### Download variants (`pdf` / `svg`)
+
+The `pdf` and `svg` fields accept either a boolean or a string filename:
+
+- `true` — derive the filename from the image basename (e.g. image `31-planes-A1S.png` → `31-planes-A1S.pdf`).
+- `<filename>` (string) — use that exact filename, verbatim: the extension must be included, nothing is appended.
+- `false` / empty — no download variant of that type.
+
+Behavior (identical for `pdf` and `svg`):
+
+- Only takes effect when the image also has `file: true`; without it, no download variant is copied or shown.
+- `scripts/generate_assets.sh` (`copy_download_variant`) copies the source file from `vault/assets/pdfs/` (resp. `vault/assets/svgs/`) into `assets/images/<image-basename>/`, and prints a warning if the source file is missing.
+- On item pages, the Downloads row lists every image with `file: true` (see `item_meta_order: downloads` in `_config.yml`) and renders a link for the PDF (derived the same way: `pdf: true` → `<image-basename>.pdf`) and the SVG (`svg: true` → `<image-basename>.svg`), alongside the original file.
+
+Example:
+
+```yaml
+images:
+  - name: 31-planes-A1S.png
+    file: true   # required for download variants
+    pdf: true    # → copies/serves vault/assets/pdfs/31-planes-A1S.pdf as 31-planes-A1S.pdf
+    svg: 31-planes.svg # → copies/serves vault/assets/svgs/31-planes.svg (string used verbatim — include the extension)
+```
 
 ### Darkify Test Harness
 
@@ -268,7 +292,19 @@ wget \
 
 ## Arch Ruby PATH Note
 
-If gem executables are not found on Arch, this can help:
+If `bundle` is not found (`make: bundle: No such file or directory`), the
+recommended fix is to install the system Bundler package, which puts `bundle`
+on `PATH` as `/usr/bin/bundle`:
+
+```bash
+sudo pacman -S ruby-bundler
+```
+
+(This can happen even when the `bundler` gem is already installed, because
+`gem install --user-install` drops executables into
+`~/.local/share/gem/ruby/<version>/bin`, which is not on the default PATH.)
+
+If gem executables are not found on Arch for another reason, this can help:
 
 ```bash
 echo 'export PATH="$PATH:$(ruby -e "puts Gem.user_dir")/bin"' >> ~/.$(basename $SHELL)rc

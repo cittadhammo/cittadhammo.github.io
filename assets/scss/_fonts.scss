@@ -1,8 +1,5 @@
 @use "variables";
 
-.hero {
-  background-image: url("#{variables.$baseurl}/images/foo.png");
-}
 /* latin-ext */
 @font-face {
 	font-family: 'Lekton';

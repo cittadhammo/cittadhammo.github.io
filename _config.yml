@@ -113,10 +113,6 @@ collections:
     output: true
     sort_by: order
     reverse: true
-  food:
-    output: true
-    sort_by: order
-    reverse: true
   projects:
     output: true
     sort_by: order

@@ -1,7 +1,7 @@
 ---
 title: Prosody
 license: 
-tech: 
+techs: 
 description: 
 
 draft: 

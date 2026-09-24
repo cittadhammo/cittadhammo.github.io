@@ -1,7 +1,7 @@
 ---
 title: Bowl Stands
 license: CC0
-tech:
+techs:
   - D3
   - Onshape
 description: Monk bowl stand

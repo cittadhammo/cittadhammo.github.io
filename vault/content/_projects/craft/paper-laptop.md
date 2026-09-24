@@ -2,7 +2,7 @@
 title: Paper Laptop
 draft: false
 license: 
-tech: 
+techs: 
 description: 
 
 sources: 

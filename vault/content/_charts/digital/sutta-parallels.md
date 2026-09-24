@@ -28,7 +28,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: sutta-parallels
+    svg: sutta-parallels.svg
     online: true
     title: A0 Square 
     invert_level:

@@ -1,7 +1,7 @@
 ---
 title: Simple Pali Chanting Guide
 license: CC0
-tech: 
+techs: 
 description: 
 
 draft: 

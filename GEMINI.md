@@ -45,18 +45,60 @@
 ## Asset Generation
 - Main asset pipeline is `scripts/generate_assets.sh` and `make assets`.
 - It scans all markdown in `vault/content`, reads frontmatter `images`, and for each image:
-- Copies the original to `assets/images/<basename>`.
-- Generates `small.webp`, `medium.webp`, and `large.webp` thumbnails.
+- Copies the original to `assets/images/<basename>` only for `file: true` or `.gif` images.
+- Generates `small.webp` only for the image with `home: true` (homepage card).
+- Generates `medium.webp` for all displayable images (item gallery).
+- Generates `large.webp` when `large: true` (higher-res lightbox).
+- Generates dark variants of all thumbnails for theme switching.
 - Writes aspect ratios to `vault/data/size.yml`.
 - Generates file sizes in MB to `vault/data/file_sizes.yml` for tooltips.
 - If an image is marked `map: true`, it generates map tiles and a viewer page in `maps`.
 - Map viewers use OpenLayers with the template `scripts/map-template.html`.
+
+### Image Frontmatter Options
+
+Per-image fields in `images[]`:
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `name` | string | — | Image filename (required) |
+| `display` | bool | `true` | Show in item gallery |
+| `dark` | bool | `false` | Image is already dark; skip dark variant generation |
+| `home` | bool | `false` | Use as homepage card; only this image gets `small.webp` |
+| `box` | bool | `false` | Theme-aware lightbox — only matching light/dark variant |
+| `large` | bool | `false` | Generate `large.webp` for higher-res lightbox |
+| `map` | bool | `false` | Generate OpenLayers map tiles + viewer page |
+| `file` | bool | `false` | Make original file available for download |
+| `url` | string | `""` | External link instead of lightbox |
+| `background` | string | `"white"` | Background for map tiles |
+| `lightonly` | bool | `false` | Only show in light theme |
+| `darkonly` | bool | `false` | Only show in dark theme |
+| `invert_level` | object | `{}` | Per-size darkify invert level overrides |
+
+Thumbnail sizes defined in `scripts/generate_assets.sh` (standard: 400/800/1200; tall: 565/1131/1697).
+
+### Per-Image `box` Behavior
+- When `box: true`, the lightbox shows only the light or dark variant matching the current theme (no clone list). Swapping themes while the lightbox is open triggers a swap via `processGallery()` in `lightbox.js:30-40`.
+- Only meaningful when a dark variant exists (i.e., `dark: false` and a darkified version is generated).
 
 ## Development
 - Primary commands are in `Makefile`.
 - `make serve` runs Jekyll with livereload and symlinks `assets/images` into `_site`.
 - `make build` builds with `_config.yml` + `_config_local.yml`.
 - `make clean` removes generated images and map pages.
+
+### Agent behavior: asset generation
+- DO NOT run `make assets` / `make images` / `make all` yourself, even in the
+  background: full runs take 15+ minutes (hundreds of webp variants + map tiles
+  from 230MB of source images) and will hit command timeouts, producing partial
+  output. The pipeline is incremental, so partial runs are not harmful, but the
+  user prefers to run these long jobs themselves.
+- Instead: after content/image/frontmatter changes, tell the user to run
+  `make assets` (or `make images` for PDF/PNG vectors) and wait for their
+  confirmation. `make build`/`make serve` are fine for the agent to run.
+- Link checking: `lychee --offline _site` after `make build` validates internal
+  links (pages, image variants, PDF/SVG downloads, map viewers). See
+  BUFF-CHECK.md item 9 for the full recipe.
 
 ## PDF/PNG Generation (vectors)
 - Source SVGs live in `vault/assets/svgs/<name>.svg` (without format codes).

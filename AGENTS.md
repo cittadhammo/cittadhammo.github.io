@@ -87,6 +87,19 @@ Thumbnail sizes defined in `scripts/generate_assets.sh` (standard: 400/800/1200;
 - `make build` builds with `_config.yml` + `_config_local.yml`.
 - `make clean` removes generated images and map pages.
 
+### Agent behavior: asset generation
+- DO NOT run `make assets` / `make images` / `make all` yourself, even in the
+  background: full runs take 15+ minutes (hundreds of webp variants + map tiles
+  from 230MB of source images) and will hit command timeouts, producing partial
+  output. The pipeline is incremental, so partial runs are not harmful, but the
+  user prefers to run these long jobs themselves.
+- Instead: after content/image/frontmatter changes, tell the user to run
+  `make assets` (or `make images` for PDF/PNG vectors) and wait for their
+  confirmation. `make build`/`make serve` are fine for the agent to run.
+- Link checking: `lychee --offline _site` after `make build` validates internal
+  links (pages, image variants, PDF/SVG downloads, map viewers). See
+  BUFF-CHECK.md item 9 for the full recipe.
+
 ## PDF/PNG Generation (vectors)
 - Source SVGs live in `vault/assets/svgs/<name>.svg` (without format codes).
 - Configuration in `vault/data/vectors.yml` defines which SVGs to generate:

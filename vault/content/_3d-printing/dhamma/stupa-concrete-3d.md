@@ -2,7 +2,7 @@
 title: "Stupa Concrete 3D Printing"
 license: 
 published: false
-tech: 
+techs: 
 description: 
 year:
 draft: 

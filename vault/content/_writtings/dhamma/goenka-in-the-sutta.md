@@ -1,7 +1,7 @@
 ---
 title: "Goenka in the Sutta"
 license: 
-tech: 
+techs: 
 description: 
 
 draft: 

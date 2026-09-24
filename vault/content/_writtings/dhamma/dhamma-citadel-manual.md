@@ -1,7 +1,7 @@
 ---
 title: The Dhamma Citadel - Map & Manual
 license: CC0
-tech: 
+techs: 
 description: 
 
 draft: 

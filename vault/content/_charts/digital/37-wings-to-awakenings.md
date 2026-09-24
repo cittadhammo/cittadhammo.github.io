@@ -26,7 +26,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-wings
+    svg: 37-wings.svg
     online: true
     title: A1 Square
     invert_level:
@@ -38,7 +38,7 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-wings-2
+    svg: 37-wings-2.svg
     online: true
     title: A1 Alternative Translation
     invert_level:

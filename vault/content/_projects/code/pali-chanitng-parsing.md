@@ -6,7 +6,7 @@ draft: false
 license:
 sources:
 images:
-tech:
+techs:
 description:
 tags:
 ---

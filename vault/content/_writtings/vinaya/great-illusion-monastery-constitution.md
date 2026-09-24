@@ -1,7 +1,7 @@
 ---
 title: Great Illusion Monastery Constitution
 license: CC0
-tech: 
+techs: 
 description: 
 
 draft: 
