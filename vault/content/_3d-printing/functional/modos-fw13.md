@@ -91,9 +91,8 @@ images:
   - name: modos-fw-037.jpg
     dark: true
     large: true
-  - name: modos-fw-079.png
-    header: CAD Model
   - name: modos-fw-080.png
+    header: CAD Model
   - name: modos-fw-081.png
   - name: modos-fw-082.png
   - name: modos-fw-083.png
