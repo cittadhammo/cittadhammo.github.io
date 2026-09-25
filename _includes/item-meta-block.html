@@ -174,8 +174,26 @@
                     {{ reference_name }}
                   </a>
                 {% endif %}
+                {% if reference.author -%}
+                  <span class="source-author-h2-style">
+                    {{ reference.author }}
+                  </span>
+                  {% if reference.license -%}
+                    <br>
+                    {{ reference.license -}}
+                  {%- endif %}
+                {% endif %}
               {% else %}
                 {{ reference_name }}
+                {% if reference.author -%}
+                  <span class="source-author-h2-style">
+                    {{ reference.author }}
+                  </span>
+                  {% if reference.license -%}
+                    <br>
+                    {{ reference.license -}}
+                  {%- endif %}
+                {% endif %}
               {% endif %}
             </p>
           {% endif %}
