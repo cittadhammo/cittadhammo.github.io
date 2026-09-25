@@ -6,7 +6,7 @@ author: Cittadhammo
 year: 2021
 published: true
 license:
-  - name: cc-by-nc-4-0
+  - name: CC BY-NC 4.0
 techs:
   - name: D3
     url: http://d3js.org

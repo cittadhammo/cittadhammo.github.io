@@ -40,7 +40,8 @@ images:
     map: true
     file: true
     pdf: true
-    svg: 31-planes-pali.svg    online: true
+    svg: 31-planes-pali.svg
+    online: true
     title: A1 Pali
     invert_level:
       default: "5%,90%"

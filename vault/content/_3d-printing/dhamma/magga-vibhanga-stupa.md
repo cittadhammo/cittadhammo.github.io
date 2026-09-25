@@ -3,9 +3,9 @@ title: "Magga Vibhaṅga Stupa"
 author: "Cittadhammo Bhikkhu"
 year: 2024
 published: true
-descripion: The Magga Vibhaṅga Stupa is directly inspired by the Magga Vibhanga Sutta (SN 45.8). It symbolizes the Noble Eightfold Path, with each of its components represented through geometric elements within the stupa's design.
+description: The Magga Vibhaṅga Stupa is directly inspired by the Magga Vibhanga Sutta (SN 45.8). It symbolizes the Noble Eightfold Path, with each of its components represented through geometric elements within the stupa's design.
 license:
-  - name: cc0
+  - name: CC0
 sources:
   - name: Magga Vibhanga Sutta 
     url: https://suttacentral.net/sn45.8/en/sujato?lang=en&layout=sidebyside&reference=none&notes=sidenotes&highlight=false&script=latin

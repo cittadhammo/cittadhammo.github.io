@@ -364,3 +364,471 @@ stupa19:
   small: 1.501
   medium: 1.501
   large: 1.500
+citadel17:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+citadel16:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+citadel20:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+citadel21:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+citadel22:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+Citadel-01:
+  small: 1.501
+  medium: 1.501
+  large: 1.500
+Citadel-02:
+  small: 1.501
+  medium: 1.501
+  large: 1.500
+Citadel-03:
+  small: 1.501
+  medium: 1.501
+  large: 1.500
+Citadel-04:
+  small: 1.501
+  medium: 1.501
+  large: 1.500
+Citadel-05:
+  small: 1.501
+  medium: 1.501
+  large: 1.500
+relics-01:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+relics-02:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+relics-03:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-m1:
+  small: 0.750
+  medium: 0.750
+  large: 0.750
+sutpa-m2:
+  small: 0.750
+  medium: 0.750
+  large: 0.750
+stupa-m3:
+  small: 0.750
+  medium: 0.750
+  large: 0.750
+stupa-m4:
+  small: 0.750
+  medium: 0.750
+  large: 0.750
+stupa-m-sand:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-b-01:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-b-02:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-b-03:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-b-04:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+stupa-b-plan:
+  small: 1.000
+  medium: 1.000
+  large: 1.000
+Bowl-01:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-02:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-03:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-04:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-05:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-06:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+Bowl-07:
+  small: 1.333
+  medium: 1.333
+  large: 1.333
+modos-fw-001:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-002:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-003:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-004:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-005:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-006:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-007:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-008:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-009:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-010:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-011:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-012:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-013:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-014:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-015:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-016:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-017:
+  small: 0.562
+  medium: 0.562
+  large: 0.562
+modos-fw-018:
+  small: 0.562
+  medium: 0.562
+  large: 0.562
+modos-fw-019:
+  small: 0.562
+  medium: 0.562
+  large: 0.562
+modos-fw-020:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-021:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-022:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-023:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-024:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-025:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-026:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-027:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-028:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-029:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-030:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-031:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-032:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-033:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-034:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-035:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-036:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-037:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-038:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-039:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-040:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-041:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-042:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-043:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-044:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-045:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-046:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-047:
+  small: 1.778
+  medium: 1.778
+  large: 1.778
+modos-fw-048:
+  small: 1.120
+  medium: 1.120
+  large: 1.120
+modos-fw-049:
+  small: 1.153
+  medium: 1.153
+  large: 1.153
+modos-fw-050:
+  small: 0.920
+  medium: 0.920
+  large: 0.920
+modos-fw-051:
+  small: 1.189
+  medium: 1.189
+  large: 1.189
+modos-fw-052:
+  small: 1.504
+  medium: 1.504
+  large: 1.504
+modos-fw-053:
+  small: 1.512
+  medium: 1.512
+  large: 1.512
+modos-fw-054:
+  small: 1.389
+  medium: 1.389
+  large: 1.389
+modos-fw-055:
+  small: 1.600
+  medium: 1.600
+  large: 1.600
+modos-fw-056:
+  small: 1.182
+  medium: 1.182
+  large: 1.182
+modos-fw-057:
+  small: 5.405
+  medium: 5.405
+  large: 5.405
+modos-fw-058:
+  small: 1.140
+  medium: 1.140
+  large: 1.140
+modos-fw-059:
+  small: 1.198
+  medium: 1.198
+  large: 1.198
+modos-fw-060:
+  small: 1.521
+  medium: 1.521
+  large: 1.521
+modos-fw-061:
+  small: 1.544
+  medium: 1.544
+  large: 1.544
+modos-fw-062:
+  small: 1.594
+  medium: 1.594
+  large: 1.594
+modos-fw-063:
+  small: 1.133
+  medium: 1.133
+  large: 1.133
+modos-fw-064:
+  small: 1.190
+  medium: 1.190
+  large: 1.190
+modos-fw-065:
+  small: 1.207
+  medium: 1.207
+  large: 1.207
+modos-fw-066:
+  small: 1.538
+  medium: 1.538
+  large: 1.538
+modos-fw-067:
+  small: 1.342
+  medium: 1.342
+  large: 1.342
+modos-fw-068:
+  small: 1.238
+  medium: 1.238
+  large: 1.238
+modos-fw-069:
+  small: 1.143
+  medium: 1.143
+  large: 1.143
+modos-fw-070:
+  small: 1.183
+  medium: 1.183
+  large: 1.183
+modos-fw-071:
+  small: 1.136
+  medium: 1.136
+  large: 1.136
+modos-fw-072:
+  small: 1.309
+  medium: 1.309
+  large: 1.309
+modos-fw-073:
+  small: 1.314
+  medium: 1.314
+  large: 1.314
+modos-fw-074:
+  small: 1.340
+  medium: 1.340
+  large: 1.340
+modos-fw-075:
+  small: 1.338
+  medium: 1.338
+  large: 1.338
+modos-fw-076:
+  small: 1.229
+  medium: 1.229
+  large: 1.229
+modos-fw-077:
+  small: 1.242
+  medium: 1.242
+  large: 1.242
+modos-fw-078:
+  small: 1.248
+  medium: 1.248
+  large: 1.248
+modos-fw-079:
+  small: 0.886
+  medium: 0.886
+  large: 0.886
+modos-fw-080:
+  small: 0.875
+  medium: 0.875
+  large: 0.875
+modos-fw-081:
+  small: 1.216
+  medium: 1.216
+  large: 1.216
+modos-fw-082:
+  small: 1.569
+  medium: 1.569
+  large: 1.569
+modos-fw-083:
+  small: 1.363
+  medium: 1.363
+  large: 1.363
+modos-fw-084:
+  small: 1.130
+  medium: 1.130
+  large: 1.130
+modos-fw-085:
+  small: 1.190
+  medium: 1.190
+  large: 1.190
+modos-fw-086:
+  small: 1.594
+  medium: 1.594
+  large: 1.594
+modos-fw-087:
+  small: 1.504
+  medium: 1.504
+  large: 1.504
