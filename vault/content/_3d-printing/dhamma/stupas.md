@@ -6,11 +6,14 @@ published: true
 description: 3D printed stupas based on an existing open model.
 techs:
 references:
-  - name: "Sand Version Thingiverse Model"
+  - name: "Sand version"
+    author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6834145"
-  - name: "Solid Version Thingiverse Model"
+  - name: "Solid version"
+    author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6635890"
-  - name: "Bigger Sand Version Thingiverse Model"
+  - name: "Bigger sand version"
+    author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6875966"
 sources:
 tags:

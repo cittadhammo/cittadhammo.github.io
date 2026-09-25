@@ -5,7 +5,8 @@ published: true
 description: 3D printed relics based on an existing open model.
 techs:
 references:
-  - name: "Relic Thingiverse Model"
+  - name: "Relic model"
+    author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6875979"
 sources:
 tags:
