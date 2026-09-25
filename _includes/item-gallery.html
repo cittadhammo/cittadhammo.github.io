@@ -11,9 +11,10 @@
           </h1>
         </li>
       {% endif %}
-      <li>
+      {% assign video_ratio = image.video_ratio | default: '16 / 9' %}
+      <li class="video-item">
         <div class="img-wrapper-2" style="position: relative; top: 0; left: 0;">
-          <iframe src="{{ image.video }}" width="640" height="480" allow="autoplay" loading="lazy" style="width: 100%; aspect-ratio: 640 / 480;"></iframe>
+          <iframe src="{{ image.video }}" width="640" allow="autoplay" loading="lazy" style="width: 100%; height: auto; aspect-ratio: {{ video_ratio }};"></iframe>
         </div>
       </li>
       {% continue %}

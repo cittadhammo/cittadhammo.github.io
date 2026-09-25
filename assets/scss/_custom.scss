@@ -497,12 +497,26 @@ body.print-page #page-content .page-content-body a::first-letter {
 
 .gallery-header {
   list-style: none;
+  width: 100%;
 
   h1 {
     font-size: 2rem;
     margin: 1.5rem 0 0.5rem;
     padding: 0;
     scroll-margin-top: 6rem;
+  }
+}
+
+.lightbox-gallery > li.video-item {
+  width: 100%;
+
+  .img-wrapper-2 {
+    margin-left: 0;
+  }
+
+  iframe {
+    display: block;
+    border: 0;
   }
 }
 
