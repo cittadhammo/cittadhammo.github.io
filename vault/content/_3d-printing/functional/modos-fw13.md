@@ -39,15 +39,9 @@ tags:
 images:
   - header: Video
     video: https://www.youtube.com/embed/Mdw4lEszGt8
-  - name: modos-fw-001.jpg
+  - name: modos-fw-003.jpg
     header: Photos
     home: true
-    dark: true
-    large: true
-  - name: modos-fw-002.jpg
-    dark: true
-    large: true
-  - name: modos-fw-003.jpg
     dark: true
     large: true
   - name: modos-fw-004.jpg
@@ -56,10 +50,10 @@ images:
   - name: modos-fw-005.jpg
     dark: true
     large: true
-  - name: modos-fw-006.jpg
+  - name: modos-fw-007.jpg
     dark: true
     large: true
-  - name: modos-fw-007.jpg
+  - name: modos-fw-006.jpg
     dark: true
     large: true
   - name: modos-fw-008.jpg
@@ -68,154 +62,31 @@ images:
   - name: modos-fw-009.jpg
     dark: true
     large: true
-  - name: modos-fw-010.jpg
-    dark: true
-    large: true
-  - name: modos-fw-011.jpg
-    dark: true
-    large: true
   - name: modos-fw-012.jpg
     dark: true
     large: true
-  - name: modos-fw-013.jpg
-    dark: true
-    large: true
   - name: modos-fw-014.jpg
-    dark: true
-    large: true
-  - name: modos-fw-015.jpg
+    header: Internal Parts
     dark: true
     large: true
   - name: modos-fw-016.jpg
     dark: true
     large: true
-  - name: modos-fw-017.jpg
-    dark: true
-    large: true
-  - name: modos-fw-018.jpg
-    dark: true
-    large: true
-  - name: modos-fw-019.jpg
-    dark: true
-    large: true
-  - name: modos-fw-020.jpg
-    dark: true
-    large: true
-  - name: modos-fw-021.jpg
-    dark: true
-    large: true
-  - name: modos-fw-022.jpg
-    dark: true
-    large: true
   - name: modos-fw-023.jpg
-    dark: true
-    large: true
-  - name: modos-fw-024.jpg
-    dark: true
-    large: true
-  - name: modos-fw-025.jpg
-    dark: true
-    large: true
-  - name: modos-fw-026.jpg
-    dark: true
-    large: true
-  - name: modos-fw-027.jpg
-    dark: true
-    large: true
-  - name: modos-fw-028.jpg
+    header: The Familly
     dark: true
     large: true
   - name: modos-fw-029.jpg
     dark: true
     large: true
-  - name: modos-fw-030.jpg
-    dark: true
-    large: true
-  - name: modos-fw-031.jpg
-    dark: true
-    large: true
-  - name: modos-fw-032.jpg
-    dark: true
-    large: true
-  - name: modos-fw-033.jpg
-    dark: true
-    large: true
-  - name: modos-fw-034.jpg
-    dark: true
-    large: true
-  - name: modos-fw-035.jpg
-    dark: true
-    large: true
-  - name: modos-fw-036.jpg
-    dark: true
-    large: true
   - name: modos-fw-037.jpg
-    dark: true
-    large: true
-  - name: modos-fw-038.jpg
-    dark: true
-    large: true
-  - name: modos-fw-039.jpg
-    dark: true
-    large: true
-  - name: modos-fw-040.jpg
-    dark: true
-    large: true
-  - name: modos-fw-041.jpg
-    dark: true
-    large: true
-  - name: modos-fw-042.jpg
-    dark: true
-    large: true
-  - name: modos-fw-043.jpg
-    dark: true
-    large: true
-  - name: modos-fw-044.jpg
-    dark: true
-    large: true
-  - name: modos-fw-045.jpg
-    dark: true
-    large: true
-  - name: modos-fw-046.jpg
     dark: true
     large: true
   - name: modos-fw-047.jpg
     dark: true
     large: true
-  - name: modos-fw-048.png
-    header: Screenshots
-  - name: modos-fw-049.png
-  - name: modos-fw-050.png
-  - name: modos-fw-051.png
-  - name: modos-fw-052.png
-  - name: modos-fw-053.png
-  - name: modos-fw-054.png
-  - name: modos-fw-055.png
-  - name: modos-fw-056.png
-  - name: modos-fw-057.png
-    dark: true
-  - name: modos-fw-058.png
-  - name: modos-fw-059.png
-  - name: modos-fw-060.png
-  - name: modos-fw-061.png
-  - name: modos-fw-062.png
-  - name: modos-fw-063.png
-  - name: modos-fw-064.png
-  - name: modos-fw-065.png
-  - name: modos-fw-066.png
-  - name: modos-fw-067.png
-  - name: modos-fw-068.png
-  - name: modos-fw-069.png
-  - name: modos-fw-070.png
-  - name: modos-fw-071.png
-  - name: modos-fw-072.png
-  - name: modos-fw-073.png
-  - name: modos-fw-074.png
-  - name: modos-fw-075.png
-  - name: modos-fw-076.png
-  - name: modos-fw-077.png
-  - name: modos-fw-078.png
   - name: modos-fw-079.png
+    header: CAD Model
   - name: modos-fw-080.png
   - name: modos-fw-081.png
   - name: modos-fw-082.png
