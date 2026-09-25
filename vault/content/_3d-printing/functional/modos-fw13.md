@@ -7,31 +7,40 @@ description: Modos E-ink screen Framework 13 Laptop, 3D printed, running Omarchy
 license:
   - name: CC0
 techs:
+  - name: "modos.tech"
+    url: "https://www.modos.tech/"
   - name: "onshape.com"
     url: "https://www.onshape.com/en/"
   - name: "omarchy.org"
     url: "https://omarchy.org/"
+  - name: "frame.work"
+    url: "https://frame.work/"
 code:
   - name: "Modos Omarchy plugin"
     url: "https://github.com/cittadhammo/omarchy-modos-eink"
 references:
-  - name: "Parts list"
-    title: "The full parts list is on the Thingiverse model page"
+  - name: "Parts list & 3D files"
+    author: "Thingiverse"
+    title: "The full parts list and the printable files are on the Thingiverse model page"
     url: "https://www.thingiverse.com/thing:7413807"
-  - name: "Modos Github with STEP file for case"
-    url: "https://github.com/Modos-Labs/Glider"
-  - name: "Framework Official Github with CAD files"
-    url: "https://github.com/FrameworkComputer/Framework-Laptop-13"
-  - name: "Onshape CAD model of this project"
+  - name: "Onshape CAD model"
     title: "The LED is in the version tree"
     url: "https://cad.onshape.com/documents/cb0eb71f42dc11dc5cb9468d/w/2c9551e937016c3b63fb3129/e/9adbd52b2bb5d82350882cdf?renderMode=0&uiState=6ab6654dc6c8d207fd902f24"
-  - name: "Framework 13 replica reference"
+  - name: "Modos'own CAD files"
+    author: "Modos"
+    title: "Modos' original case design, not the one used for this build"
+    url: "https://github.com/Modos-Labs/Glider"
+  - name: "Official CAD files"
+    author: "Framework"
+    url: "https://github.com/FrameworkComputer/Framework-Laptop-13"
+  - name: "Framework 13 replica"
+    author: "Zdeněk Anoubis"
     url: "https://github.com/Zdenek-Anoubis/FW-P13"
-  - name: "3D printable Framework 13 chassis design"
-    url: "https://community.frame.work/t/3d-printable-framework-13-chassis-design/79715"
-  - name: "Framework 13 mainboard case with battery"
+  - name: "Mainboard case with battery"
+    author: "Blackvim"
     url: "https://www.printables.com/model/1051364-framework-13-mainboard-case-with-battery"
   - name: "Hinge design from RPI5"
+    author: "helmarw"
     url: "https://www.hackster.io/helmarw/the-ultimate-10inch-touchscreen-rpi5-laptop-5025bb"
 sources:
 tags:
@@ -72,17 +81,14 @@ images:
   - name: modos-fw-016.jpg
     dark: true
     large: true
-  - name: modos-fw-023.jpg
+  - name: modos-fw-029.jpg
     header: The Familly
     dark: true
     large: true
-  - name: modos-fw-029.jpg
+  - name: modos-fw-023.jpg
     dark: true
     large: true
   - name: modos-fw-037.jpg
-    dark: true
-    large: true
-  - name: modos-fw-047.jpg
     dark: true
     large: true
   - name: modos-fw-079.png
