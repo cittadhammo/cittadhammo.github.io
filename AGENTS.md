@@ -96,8 +96,9 @@ Thumbnail sizes defined in `scripts/generate_assets.sh` (standard: 400/800/1200;
 - Instead: after content/image/frontmatter changes, tell the user to run
   `make assets` (or `make images` for PDF/PNG vectors) and wait for their
   confirmation. `make build`/`make serve` are fine for the agent to run.
-- Link checking: `lychee --offline _site` after `make build` validates internal
-  links (pages, image variants, PDF/SVG downloads, map viewers). See
+- Link checking: `lychee --offline --root-dir "$PWD/_site" _site` after `make build`
+  validates internal links (pages, image variants, PDF/SVG downloads, map viewers).
+  The root dir is required, otherwise every root-relative link errors out. See
   BUFF-CHECK.md item 9 for the full recipe.
 
 ## PDF/PNG Generation (vectors)
@@ -132,6 +133,9 @@ Thumbnail sizes defined in `scripts/generate_assets.sh` (standard: 400/800/1200;
 - Do not use Liquid comments `{# #}` inside page code; they break parsing.
 - Generated files live under `assets/images` and `maps`; rerun `make assets` after content or image changes.
 - Do not run git commands; the user will handle git operations manually.
+- `t2.html` at the repo root is the owner's private redirect page. Never delete or "fix" it.
+  `lychee --offline --root-dir "$PWD/_site" _site` always reports it as a broken link
+  (it redirects to `/digital-garden/t2.html`, which does not exist). That single error is expected.
 
 ## Ignore
 - `_archive` is legacy and should be ignored.
