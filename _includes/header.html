@@ -18,7 +18,11 @@
 {% else %}
   {% assign pages = collection_pages %}
 {% endif %}
-{% assign has_header_links = show_theme_toggle or pages.size > 0 %}
+{% assign has_external_links = false %}
+{% if area_config and area_config.external_links and area_config.external_links.size > 0 %}
+  {% assign has_external_links = true %}
+{% endif %}
+{% assign has_header_links = show_theme_toggle or pages.size > 0 or has_external_links %}
 <header id="{{ include.area_name | slugify }}" class="header {% if include.inverted %}inverted{% endif %}{% if has_header_links %} has-header-links{% endif %}">
   <div class="container">
     <div class="logo-and-title-container">
@@ -75,7 +79,7 @@
           </span>
         </h2>
       </div>
-      {% if show_theme_toggle or pages.size > 0 %}
+      {% if show_theme_toggle or pages.size > 0 or has_external_links %}
         <div class="header-links">
           {% if show_theme_toggle %}
             <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
