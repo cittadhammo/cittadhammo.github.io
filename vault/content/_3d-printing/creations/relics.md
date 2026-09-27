@@ -1,5 +1,5 @@
 ---
-title: "Relics"
+title: Reliquary
 author: "Cittadhammo Bhikkhu"
 published: false
 description: 3D printed relics based on an existing open model.

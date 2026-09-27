@@ -34,6 +34,7 @@ code:
     url: "https://observablehq.com/d/f7289e34967b18ac"
 images:
   - name: stupa01.png
+    header: Outline
     map: true
     box: true
   - name: stupa02.png

@@ -437,25 +437,25 @@ stupa-m-sand:
   medium: 1.000
   large: 1.000
 stupa-b-01:
-  small: 1.000
-  medium: 1.000
-  large: 1.000
+  small: 0.750
+  medium: 0.750
+  large: 0.750
 stupa-b-02:
-  small: 1.000
-  medium: 1.000
-  large: 1.000
+  small: 0.750
+  medium: 0.750
+  large: 0.750
 stupa-b-03:
-  small: 1.000
-  medium: 1.000
-  large: 1.000
+  small: 0.750
+  medium: 0.750
+  large: 0.750
 stupa-b-04:
-  small: 1.000
-  medium: 1.000
-  large: 1.000
+  small: 0.750
+  medium: 0.750
+  large: 0.750
 stupa-b-plan:
-  small: 1.000
-  medium: 1.000
-  large: 1.000
+  small: 0.773
+  medium: 0.773
+  large: 0.773
 Bowl-01:
   small: 1.333
   medium: 1.333

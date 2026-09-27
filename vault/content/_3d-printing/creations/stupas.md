@@ -1,5 +1,5 @@
 ---
-title: "Stupas"
+title: "Reliquary Stupa"
 author: "Cittadhammo Bhikkhu"
 year: 2024
 published: true
@@ -12,7 +12,7 @@ references:
   - name: "Solid version"
     author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6635890"
-  - name: "Bigger sand version"
+  - name: "Larger sand version"
     author: "Thingiverse"
     url: "https://www.thingiverse.com/thing:6875966"
 sources:
@@ -20,7 +20,6 @@ tags:
   - 3D
 images:
   - name: stupa-m1.jpg
-    home: true
     dark: true
     large: true
   - name: stupa-m2.jpg
@@ -34,7 +33,8 @@ images:
     large: true
   - name: stupa-m-sand.png
   - name: stupa-b-01.jpg
-    header: Bigger Sand Version
+    header: Larger Sand Version
+    home: true
   - name: stupa-b-02.jpg
   - name: stupa-b-03.jpg
   - name: stupa-b-04.jpg
