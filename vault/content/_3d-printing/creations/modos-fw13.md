@@ -46,8 +46,7 @@ sources:
 tags:
   - 3D
 images:
-  - header: Video
-    video: https://www.youtube.com/embed/Mdw4lEszGt8
+  - video: https://www.youtube.com/embed/Mdw4lEszGt8
   - name: modos-fw-003.jpg
     header: Photos
     home: true
@@ -97,4 +96,5 @@ images:
   - name: modos-fw-082.png
   - name: modos-fw-083.png
   - name: modos-fw-084.png
+order: 2
 ---

@@ -14,26 +14,20 @@ sources:
 tags:
   - 3D
 images:
-  - name: Bowl-01.jpg
-    home: true
-    dark: true
-    large: true
-  - name: Bowl-02.jpg
-    dark: true
-    large: true
-  - name: Bowl-03.jpg
-    dark: true
-    large: true
-  - name: Bowl-04.jpg
-    dark: true
-    large: true
-  - name: Bowl-05.jpg
-    dark: true
-    large: true
   - name: Bowl-06.jpg
     dark: true
     large: true
   - name: Bowl-07.jpg
     dark: true
     large: true
+  - name: Bowl-02.jpg
+    dark: true
+    large: true
+  - name: Bowl-04.jpg
+    dark: true
+    large: true
+  - name: Bowl-03.jpg
+    dark: true
+    large: true
+order: 3
 ---

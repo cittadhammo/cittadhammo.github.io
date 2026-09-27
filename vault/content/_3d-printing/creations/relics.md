@@ -1,7 +1,7 @@
 ---
 title: "Relics"
 author: "Cittadhammo Bhikkhu"
-published: true
+published: false
 description: 3D printed relics based on an existing open model.
 techs:
 references:
@@ -16,4 +16,5 @@ images:
     home: true
   - name: relics-02.png
   - name: relics-03.png
+order: 6
 ---

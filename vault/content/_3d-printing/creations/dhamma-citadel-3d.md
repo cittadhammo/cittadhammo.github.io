@@ -14,9 +14,25 @@ sources:
 tags:
   - 3D
 images:
+  - name: Citadel-01.JPG
+    header: 3D Printed Model
+    dark: true
+    large: true
+  - name: Citadel-02.JPG
+    dark: true
+    large: true
+  - name: Citadel-03.JPG
+    home: true
+    dark: true
+    large: true
+  - name: Citadel-04.JPG
+    dark: true
+    large: true
+  - name: Citadel-05.JPG
+    dark: true
+    large: true
   - name: citadel17.png
     header: Renders
-    home: true
     large: true
   - name: citadel16.png
     large: true
@@ -26,20 +42,5 @@ images:
     large: true
   - name: citadel22.png
     large: true
-  - name: Citadel-01.JPG
-    header: 3D Printed Model
-    dark: true
-    large: true
-  - name: Citadel-02.JPG
-    dark: true
-    large: true
-  - name: Citadel-03.JPG
-    dark: true
-    large: true
-  - name: Citadel-04.JPG
-    dark: true
-    large: true
-  - name: Citadel-05.JPG
-    dark: true
-    large: true
+order: 4
 ---

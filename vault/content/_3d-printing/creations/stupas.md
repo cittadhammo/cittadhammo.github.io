@@ -39,4 +39,5 @@ images:
   - name: stupa-b-03.jpg
   - name: stupa-b-04.jpg
   - name: stupa-b-plan.png
+order: 7
 ---

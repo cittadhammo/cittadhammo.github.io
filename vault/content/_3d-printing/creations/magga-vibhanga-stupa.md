@@ -1,5 +1,5 @@
 ---
-title: "Magga Vibhaṅga Stupa"
+title: "Magga Vibhanga Stupa"
 author: "Cittadhammo Bhikkhu"
 year: 2024
 published: true
@@ -42,7 +42,6 @@ images:
   - name: stupa03.png
     header: Renders
     dark: true
-    home: true
     large: true
   - name: stupa04.png
     dark: true
@@ -103,6 +102,7 @@ images:
     dark: true
     large: true
   - name: stupa21.jpeg
+    home: true
     dark: true
     large: true
   - name: stupa22.jpeg
@@ -130,4 +130,5 @@ images:
     video: https://drive.google.com/file/d/1HGZ88MaBu-KQPUTMOjWzyY5CgSqaK5Hf/preview
   - name: printing_video3.mp4
     video: https://drive.google.com/file/d/1zBCIDdtD4k2cpZfYv4OgNC-Ah-EIpfPd/preview
+order: 5
 ---
