@@ -114,6 +114,16 @@ Obsidian still has limitations with nested properties/collections in frontmatter
 
 For images, you can use normal names or wikilink-style names in image fields (for example `image.png` or `[[image.png]]`), while keeping structured properties when options per image are needed.
 
+### Source Image Organization
+
+Source images live in `vault/assets/images`, organized in category subfolders (`charts/`, `drawings/`, `3d-printing/<project>/`, ...).
+
+- Asset scripts look images up **recursively by basename**, so frontmatter `name:` values stay bare filenames — no paths needed.
+- Keep basenames unique across all subfolders (case-insensitive — `Pic.jpg` and `pic.jpg` collide). `make assets` fails loudly with both paths if this rule is broken.
+- New vector outputs from `make images` still land flat in `vault/assets/images/`; move them into a category subfolder afterwards.
+- Obsidian is configured to paste new attachments into `assets/images` (move them into a subfolder afterwards).
+- Images not yet referenced by any page should still be categorized; unreferenced files are simply skipped by the build.
+
 ## Templates
 
 - Home Page

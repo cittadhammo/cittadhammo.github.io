@@ -273,19 +273,19 @@ normalize_image_name() {
 resolve_image_name() {
     local name="$1"
 
-    if [[ "$name" == *.* ]]; then
-        if [ -f "$SRC_IMAGE_DIR/$name" ]; then
-            echo "$name"
-            return
-        fi
+    if [ -f "$SRC_IMAGE_DIR/$name" ]; then
         echo "$name"
         return
     fi
 
+    # Not in the root; search category subfolders (recursive).
+    local pattern="$name"
+    [[ "$name" != *.* ]] && pattern="$name.*"
+
     local matches=()
     while IFS= read -r found; do
-        matches+=("$found")
-    done < <(find "$SRC_IMAGE_DIR" -maxdepth 1 -type f -iname "$name.*" -printf '%f\n' | sort)
+        matches+=("${found#"$SRC_IMAGE_DIR"/}")
+    done < <(find "$SRC_IMAGE_DIR" -type f -iname "$pattern" -printf '%p\n' | sort)
 
     if [ "${#matches[@]}" -eq 1 ]; then
         echo "${matches[0]}"
@@ -462,8 +462,18 @@ process_image_entry() {
 
     echo "Found image: $IMG_NAME (map: $MAP)"
 
-    # Resolve source path by searching vault/assets/ if not in default location
+    # Resolve source path; supports category subfolders inside vault/assets/images
     SRC_IMG_PATH="$SRC_IMAGE_DIR/$IMG_NAME"
+    if [ ! -f "$SRC_IMG_PATH" ]; then
+        local resolved
+        resolved=$(resolve_image_name "$IMG_NAME")
+        if [ -n "$resolved" ] && [ -f "$SRC_IMAGE_DIR/$resolved" ]; then
+            SRC_IMG_PATH="$SRC_IMAGE_DIR/$resolved"
+        fi
+    fi
+    # Identity is the basename: generated folders and data keys stay flat
+    # (assets/images/<basename>/) no matter where the source lives.
+    IMG_NAME=$(basename "$SRC_IMG_PATH")
 
     EXT="${IMG_NAME##*.}"
     IMG_BASE="${IMG_NAME%.*}"
@@ -753,6 +763,17 @@ EOF
     echo "Processed: $IMG_NAME (map: $MAP)"
 }
 
+# Guard: image basenames must be unique across the source tree (identity is
+# the basename; a duplicate would silently resolve to the first match).
+DUP_CHECK=$(find "$SRC_IMAGE_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" -o -iname "*.pdf" -o -iname "*.svg" \) -printf '%f\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -d)
+if [ -n "$DUP_CHECK" ]; then
+    echo "ERROR: duplicate image basenames found in $SRC_IMAGE_DIR (identity is the basename):"
+    echo "$DUP_CHECK" | while read -r dup; do
+        find "$SRC_IMAGE_DIR" -type f -iname "$dup" | sed 's/^/    /'
+    done
+    exit 1
+fi
+
 # Loop through all markdown files
 find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     YAML=$(awk '/^---/{flag=!flag; next} flag' "$MD_FILE")
@@ -834,7 +855,11 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
             continue
         fi
         if [ ! -f "$SRC_IMAGE_DIR/$IMG_NAME" ]; then
-            continue
+            RESOLVED_IMG=$(resolve_image_name "$IMG_NAME")
+            if [ -z "$RESOLVED_IMG" ] || [ ! -f "$SRC_IMAGE_DIR/$RESOLVED_IMG" ]; then
+                continue
+            fi
+            IMG_NAME="$RESOLVED_IMG"
         fi
 
         MAP="false"

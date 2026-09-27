@@ -16,7 +16,7 @@
 
 ## Key Structure
 - Content lives in `vault/content` (markdown with YAML frontmatter).
-- Source images live in `vault/assets/images` and generated assets go to `assets/images`.
+- Source images live in `vault/assets/images`, optionally organized in category subfolders (`charts/`, `drawings/`, `3d-printing/<project>/`, ...); lookups are recursive and match by basename, so frontmatter `name:` values stay bare filenames. Basenames must be unique across all subfolders (case-insensitive): `generate_assets.sh` aborts with an error listing the culprits if two source images share one. Generated assets go to `assets/images` (always flat, keyed by basename).
 - Map viewer pages are generated into `maps` from `scripts/map-template.html`.
 - Site layouts and includes are in `_layouts` and `_includes`.
 - Styles are in `assets/scss/_custom.scss` and pulled by `assets/css/style.scss`.
@@ -44,7 +44,7 @@
 
 ## Asset Generation
 - Main asset pipeline is `scripts/generate_assets.sh` and `make assets`.
-- It scans all markdown in `vault/content`, reads frontmatter `images`, and for each image:
+- It scans all markdown in `vault/content`, reads frontmatter `images`, and for each image (source may be anywhere under `vault/assets/images`, incl. category subfolders):
 - Copies the original to `assets/images/<basename>` only for `file: true` or `.gif` images.
 - Generates `small.webp` only for the image with `home: true` (homepage card).
 - Generates `medium.webp` for all displayable images (item gallery).

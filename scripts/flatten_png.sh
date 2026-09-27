@@ -18,8 +18,8 @@ if [ -f "$FILE_INPUT" ]; then
 elif [ -f "$SRC_DIR/$FILE_INPUT" ]; then
     SRC="$SRC_DIR/$FILE_INPUT"
 else
-    # Try fuzzy match
-    MATCH=$(find "$SRC_DIR" -maxdepth 1 -type f -iname "$FILE_INPUT*" | head -n 1)
+    # Try fuzzy match (recursive, so category subfolders work)
+    MATCH=$(find "$SRC_DIR" -type f -iname "$FILE_INPUT*" | head -n 1)
     if [ -n "$MATCH" ]; then
         SRC="$MATCH"
     else
