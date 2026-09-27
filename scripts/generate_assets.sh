@@ -270,42 +270,83 @@ normalize_image_name() {
     echo "$name"
 }
 
+# Index of every source image (lowercased basename -> path), built once and
+# consulted by resolve_image_name. This replaces a recursive find per lookup,
+# which was one of the dominant costs of a cached run. Resolution semantics
+# match the old lookup: case-sensitive direct hit in the root first, then a
+# case-insensitive exact match, then "<name>.*" matches with
+# png/jpg/jpeg/webp/gif preference, falling back to the first sorted match.
+NAME_INDEX_LINES=""
+declare -A RESOLVE_CACHE=()
+
+build_name_index() {
+    NAME_INDEX_LINES=$(find "$SRC_IMAGE_DIR" -type f -printf '%f\t%p\n' \
+        | awk -F'\t' -v OFS='\t' '{ $1 = tolower($1); print }' \
+        | sort -t$'\t' -k1,1 -k2,2)
+}
+
 resolve_image_name() {
     local name="$1"
 
+    # Case-sensitive hit directly in the root (mirrors the old -f check).
     if [ -f "$SRC_IMAGE_DIR/$name" ]; then
         echo "$name"
         return
     fi
 
-    # Not in the root; search category subfolders (recursive).
-    local pattern="$name"
-    [[ "$name" != *.* ]] && pattern="$name.*"
-
-    local matches=()
-    while IFS= read -r found; do
-        matches+=("${found#"$SRC_IMAGE_DIR"/}")
-    done < <(find "$SRC_IMAGE_DIR" -type f -iname "$pattern" -printf '%p\n' | sort)
-
-    if [ "${#matches[@]}" -eq 1 ]; then
-        echo "${matches[0]}"
+    if [ -z "$name" ]; then
+        echo ""
         return
     fi
 
-    if [ "${#matches[@]}" -gt 1 ]; then
-        for preferred_ext in png jpg jpeg webp gif; do
-            for candidate in "${matches[@]}"; do
-                if [[ "${candidate,,}" == "$name.$preferred_ext" ]]; then
-                    echo "$candidate"
-                    return
+    local cached="${RESOLVE_CACHE[$name]}"
+    if [ -n "$cached" ]; then
+        echo "$cached"
+        return
+    fi
+
+    local key="${name,,}"
+    local result="" base path
+
+    # Case-insensitive exact match anywhere in the source tree.
+    while IFS=$'\t' read -r base path; do
+        if [ "$base" = "$key" ]; then
+            result="$path"
+            break
+        fi
+    done <<< "$NAME_INDEX_LINES"
+
+    # Name without extension: try exact name + preferred extensions first.
+    if [ -z "$result" ] && [[ "$name" != *.* ]]; then
+        local ext
+        for ext in png jpg jpeg webp gif; do
+            while IFS=$'\t' read -r base path; do
+                if [ "$base" = "$key.$ext" ]; then
+                    result="$path"
+                    break 2
                 fi
-            done
+            done <<< "$NAME_INDEX_LINES"
         done
-        echo "${matches[0]}"
-        return
     fi
 
-    echo "$name"
+    # Still nothing: fall back to the first sorted "<name>.*" match.
+    if [ -z "$result" ] && [[ "$name" != *.* ]]; then
+        while IFS=$'\t' read -r base path; do
+            if [[ "$base" == "$key".* ]]; then
+                result="$path"
+                break
+            fi
+        done <<< "$NAME_INDEX_LINES"
+    fi
+
+    if [ -n "$result" ]; then
+        result="${result#"$SRC_IMAGE_DIR"/}"
+    else
+        result="$name"
+    fi
+
+    RESOLVE_CACHE[$name]="$result"
+    echo "$result"
 }
 
 file_checksum() {
@@ -781,50 +822,123 @@ if [ -n "$DUP_CHECK" ]; then
     exit 1
 fi
 
+# Parse every markdown file's frontmatter with ONE yq call per file. The old
+# code spawned ~15 yq processes per image, which dominated cached runs.
+# Output is flat TSV lines:
+#   META<published><title><page image>
+#   IMG<name><map>...<home><homedark>   (16 fields)
+# Rows are parsed with `mapfile -d $'\t'`, NOT `IFS=$'\t' read`: read treats
+# tabs as IFS whitespace and collapses runs of empty fields (pdf/svg/
+# invert_level are empty in most entries), shifting every later field.
+# mapfile -d splits on each delimiter and preserves empty fields; a trailing
+# tab is appended so @tsv's missing final delimiter can't merge the last two
+# fields, and the extra newline element it produces is ignored by the
+# positional field access below.
+# Notes on the expression:
+# - One UNIFORM row expression per entry, no select/map-branch: on this yq
+#   build, branching per item (comma or "//" between selects) makes yq stream
+#   the whole sequence per branch, silently reordering rows (all map entries
+#   first). Accessors here are type-tolerant (".name" on a string scalar
+#   yields the string, on null yields null), so "(.name // .)" covers string
+#   entries, empty entries, and map entries in source order.
+# - Rows are string-concatenated, not @tsv: @tsv rejects arrays containing
+#   maps and aborts mid-stream.
+# - Field count matters: IMG rows carry 16 tab-separated fields; the bash
+#   reader uses mapfile -d, so empty fields survive.
+# - A multi-line title would corrupt row alignment; titles are single-line in
+#   this vault, and a stray continuation line is skipped by the case-reader.
+PARSE_META_EXPR='
+(
+  (.images // []) | select(type == "!!seq") | .[] |
+    "IMG\t" +
+    (((.name // .) // "") | tostring) + "\t" +
+    ((.map // false)|tostring) + "\t" +
+    ((.background // "white")|tostring) + "\t" +
+    ((.dark // false)|tostring) + "\t" +
+    ((.display // true)|tostring) + "\t" +
+    ((.file // false)|tostring) + "\t" +
+    ((.pdf // "")|tostring) + "\t" +
+    ((.svg // "")|tostring) + "\t" +
+    ((.invert_level.default // "")|tostring) + "\t" +
+    ((.invert_level.small // "")|tostring) + "\t" +
+    ((.invert_level.medium // "")|tostring) + "\t" +
+    ((.invert_level.large // "")|tostring) + "\t" +
+    ((.large // false)|tostring) + "\t" +
+    ((.home // false)|tostring) + "\t" +
+    ((.homedark // false)|tostring)
+),
+(
+  "META\t" + ((.published // false)|tostring) + "\t" +
+  ((.title // "Untitled Map")|tostring) + "\t" +
+  ((.image // "")|tostring)
+)
+'
+
+# Index every source image once (lowercased basename -> path) for fast lookups.
+build_name_index
+
 # Loop through all markdown files
 find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
     YAML=$(awk '/^---/{flag=!flag; next} flag' "$MD_FILE")
-    PUBLISHED=$(echo "$YAML" | yq -r '.published // false')
+
+    declare -a ROWS=()
+    mapfile -t ROWS < <(printf '%s' "$YAML" | yq -r "$PARSE_META_EXPR")
+
+    PUBLISHED=""
+    PAGE_TITLE=""
+    PAGE_IMAGE=""
+    declare -a IMG_ROWS=()
+    for row in "${ROWS[@]}"; do
+        case "$row" in
+            "META"$'\t'*)
+                META_REST="${row#*$'\t'}"
+                PUBLISHED="${META_REST%%$'\t'*}"
+                META_REST="${META_REST#*$'\t'}"
+                PAGE_TITLE="${META_REST%%$'\t'*}"
+                PAGE_IMAGE="${META_REST#*$'\t'}"
+                ;;
+            "IMG"$'\t'*)
+                IMG_ROWS+=("$row")
+                ;;
+        esac
+    done
+
     if [ "$PUBLISHED" != "true" ]; then
         continue
     fi
-    PAGE_TITLE=$(echo "$YAML" | yq -r '.title // "Untitled Map"')
-    IS_SEQ=$(echo "$YAML" | yq '(.images | type) == "!!seq"')
-    if [ "$IS_SEQ" != "true" ]; then
-        IMG_COUNT=0
-    else
-        IMG_COUNT=$(echo "$YAML" | yq '.images | length')
-    fi
+
+    IMG_COUNT=${#IMG_ROWS[@]}
     declare -A PROCESSED_IMAGES=()
 
     HOME_IMG_IDX=0
     HOMEDARK_IMG_IDX=-1
     for ((i=0; i<IMG_COUNT; i++)); do
-        IS_HOME=$(echo "$YAML" | yq -r ".images[$i].home // false")
-        if [ "$IS_HOME" = "true" ]; then
+        mapfile -t -d $'\t' F <<< "${IMG_ROWS[$i]}"$'\t'
+        if [ "${F[14]}" = "true" ]; then
             HOME_IMG_IDX=$i
         fi
-        IS_HOMEDARK=$(echo "$YAML" | yq -r ".images[$i].homedark // false")
-        if [ "$IS_HOMEDARK" = "true" ]; then
+        if [ "${F[15]}" = "true" ]; then
             HOMEDARK_IMG_IDX=$i
         fi
     done
 
     for ((i=0; i<IMG_COUNT; i++)); do
-        RAW_IMG_NAME=$(echo "$YAML" | yq -r ".images[$i].name // .images[$i] // \"\"")
+        mapfile -t -d $'\t' F <<< "${IMG_ROWS[$i]}"$'\t'
+        RAW_IMG_NAME="${F[1]}"
+        MAP="${F[2]}"
+        BG="${F[3]}"
+        IMG_DARK="${F[4]}"
+        DISPLAY="${F[5]}"
+        FILE="${F[6]}"
+        IMG_PDF="${F[7]}"
+        IMG_SVG="${F[8]}"
+        IMG_DARKIFY_INVERT_LEVEL_DEFAULT="${F[9]}"
+        IMG_DARKIFY_INVERT_LEVEL_SMALL="${F[10]}"
+        IMG_DARKIFY_INVERT_LEVEL_MEDIUM="${F[11]}"
+        IMG_DARKIFY_INVERT_LEVEL_LARGE="${F[12]}"
+        LARGE="${F[13]}"
+        # F[14] home / F[15] homedark are consumed by the scan above.
         IMG_NAME=$(resolve_image_name "$(normalize_image_name "$RAW_IMG_NAME")")
-        MAP=$(echo "$YAML" | yq -r ".images[$i].map // false")
-        BG=$(echo "$YAML" | yq -r ".images[$i].background // \"white\"")
-        IMG_DARK=$(echo "$YAML" | yq -r ".images[$i].dark // false")
-        DISPLAY=$(echo "$YAML" | yq -r ".images[$i].display // true") # Default to true
-        FILE=$(echo "$YAML" | yq -r ".images[$i].file // false")     # Default to false
-        IMG_PDF=$(echo "$YAML" | yq -r ".images[$i].pdf // \"\"")
-        IMG_SVG=$(echo "$YAML" | yq -r ".images[$i].svg // \"\"")
-        IMG_DARKIFY_INVERT_LEVEL_DEFAULT=$(echo "$YAML" | yq -r ".images[$i].invert_level.default // \"\"")
-        IMG_DARKIFY_INVERT_LEVEL_SMALL=$(echo "$YAML" | yq -r ".images[$i].invert_level.small // \"\"")
-        IMG_DARKIFY_INVERT_LEVEL_MEDIUM=$(echo "$YAML" | yq -r ".images[$i].invert_level.medium // \"\"")
-        IMG_DARKIFY_INVERT_LEVEL_LARGE=$(echo "$YAML" | yq -r ".images[$i].invert_level.large // \"\"")
-        LARGE=$(echo "$YAML" | yq -r ".images[$i].large // false")
         HOME_IMAGE="false"
         if [ "$i" = "$HOME_IMG_IDX" ] || [ "$i" = "$HOMEDARK_IMG_IDX" ]; then
             HOME_IMAGE="true"
@@ -835,7 +949,7 @@ find "$MD_DIR" -type f -name "*.md" | while read -r MD_FILE; do
         fi
     done
 
-    RAW_PAGE_IMAGE=$(echo "$YAML" | yq -r '.image // ""')
+    RAW_PAGE_IMAGE="$PAGE_IMAGE"
     IMG_NAME=$(resolve_image_name "$(normalize_image_name "$RAW_PAGE_IMAGE")")
     if [ -n "$IMG_NAME" ] && [ "$IMG_NAME" != "null" ] && [ -z "${PROCESSED_IMAGES[$IMG_NAME]}" ]; then
         MAP="false"
