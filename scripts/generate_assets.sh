@@ -642,28 +642,35 @@ EOF
             fi
         fi
 
-        MEDIUM_WIDTH=$(vipsheader -f width "$DEST_FOLDER/medium.webp")
-        MEDIUM_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/medium.webp")
-        MEDIUM_RATIO=$(awk "BEGIN {printf \"%.3f\", $MEDIUM_WIDTH / $MEDIUM_HEIGHT}")
-
-        if [ "$HOME_IMAGE" = "true" ] && [ -f "$DEST_FOLDER/small.webp" ]; then
-            SMALL_WIDTH=$(vipsheader -f width "$DEST_FOLDER/small.webp")
-            SMALL_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/small.webp")
-            SMALL_RATIO=$(awk "BEGIN {printf \"%.3f\", $SMALL_WIDTH / $SMALL_HEIGHT}")
+        # Cached-run fast path: when the thumbnails are unchanged and size.yml
+        # already has an entry, skip the vipsheader probes and the size.yml
+        # merge — they dominate the wall time of a no-op run.
+        if [ "$THUMBS_UP_TO_DATE" = "true" ] && grep -q "^$IMG_BASE:" "$SIZE_DATA_FILE"; then
+            echo "Skipping aspect ratio update for $IMG_NAME (unchanged)"
         else
-            SMALL_RATIO="$MEDIUM_RATIO"
-        fi
+            MEDIUM_WIDTH=$(vipsheader -f width "$DEST_FOLDER/medium.webp")
+            MEDIUM_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/medium.webp")
+            MEDIUM_RATIO=$(awk "BEGIN {printf \"%.3f\", $MEDIUM_WIDTH / $MEDIUM_HEIGHT}")
 
-        if [ -f "$DEST_FOLDER/large.webp" ]; then
-            LARGE_WIDTH=$(vipsheader -f width "$DEST_FOLDER/large.webp")
-            LARGE_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/large.webp")
-            LARGE_RATIO=$(awk "BEGIN {printf \"%.3f\", $LARGE_WIDTH / $LARGE_HEIGHT}")
-        else
-            LARGE_RATIO="$MEDIUM_RATIO"
-        fi
+            if [ "$HOME_IMAGE" = "true" ] && [ -f "$DEST_FOLDER/small.webp" ]; then
+                SMALL_WIDTH=$(vipsheader -f width "$DEST_FOLDER/small.webp")
+                SMALL_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/small.webp")
+                SMALL_RATIO=$(awk "BEGIN {printf \"%.3f\", $SMALL_WIDTH / $SMALL_HEIGHT}")
+            else
+                SMALL_RATIO="$MEDIUM_RATIO"
+            fi
 
-        update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO" "$LARGE_RATIO"
-        echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO, large=$LARGE_RATIO"
+            if [ -f "$DEST_FOLDER/large.webp" ]; then
+                LARGE_WIDTH=$(vipsheader -f width "$DEST_FOLDER/large.webp")
+                LARGE_HEIGHT=$(vipsheader -f height "$DEST_FOLDER/large.webp")
+                LARGE_RATIO=$(awk "BEGIN {printf \"%.3f\", $LARGE_WIDTH / $LARGE_HEIGHT}")
+            else
+                LARGE_RATIO="$MEDIUM_RATIO"
+            fi
+
+            update_size_data "$IMG_BASE" "$SMALL_RATIO" "$MEDIUM_RATIO" "$LARGE_RATIO"
+            echo "Stored aspect ratios for $IMG_BASE: small=$SMALL_RATIO, medium=$MEDIUM_RATIO, large=$LARGE_RATIO"
+        fi
     else
         echo "Skipping thumbnail generation for non-displayable asset: $IMG_NAME"
     fi
