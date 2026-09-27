@@ -130,6 +130,18 @@ Thumbnail sizes defined in `scripts/generate_assets.sh` (standard: 400/800/1200;
 - Jekyll keeps generated assets via `keep_files` and a symlink trick in `make serve`.
 
 ## Gotchas
+- `order:` frontmatter renders **highest first**. Jekyll's collection `sort_by` only
+  sorts ascending and ignores `reverse: true` (that key is honoured for `posts` only,
+  see `site.rb`), while `itemsList.html` and `item-navigation.html` each apply
+  `| reverse`. So the item you want first in the grid needs the **largest** number.
+  Items with no `order:` fall back to alphabetical path order and log a
+  `Sort warning: '<key>' not defined` warning.
+- A category **is** the parent folder: `itemsList.html` and `item-navigation.html` both
+  derive it from `item.url | split: '/' | pop | last`. An area with no `categories:`
+  key in `areas.yml` renders nothing at all, and `make structure` regenerates
+  `categories` from the folders on disk. To change a category, rename the folder.
+- Moving a content file breaks the `doc.path` link baked into its generated map
+  viewer pages under `maps/`. Rerun `make assets` to regenerate them.
 - Do not use Liquid comments `{# #}` inside page code; they break parsing.
 - Generated files live under `assets/images` and `maps`; rerun `make assets` after content or image changes.
 - Do not run git commands; the user will handle git operations manually.
